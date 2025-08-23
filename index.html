@@ -2236,6 +2236,16 @@
                     <p style="margin-top: 15px; font-size: 1em;" id="scoreDescription"></p>
                 </div>
 
+                <!-- Print and Download Buttons -->
+                <div style="text-align: center; margin: 20px 0; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <button onclick="printResults()" style="background: #1e3a8a; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background 0.3s ease;">
+                        🖨️ Print Results
+                    </button>
+                    <button onclick="downloadResults()" style="background: #059669; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: background 0.3s ease;">
+                        📄 Download PDF
+                    </button>
+                </div>
+
                 <div class="leadership-insights" id="leadershipInsights">
                     <h3>🔍 Key Behavioral Insights</h3>
                     <div id="insightContent"></div>
@@ -2530,6 +2540,46 @@
             } else {
                 alert('Invalid company code. Please check the code and try again.');
             }
+        }
+
+        // Print Results Function
+        function printResults() {
+            const originalContents = document.body.innerHTML;
+            const resultsContent = document.getElementById('results').innerHTML;
+            
+            // Create print-friendly version
+            document.body.innerHTML = `
+                <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto;">
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <h1 style="color: #1e3a8a; margin-bottom: 10px;">TPEAINDEX Leadership Assessment</h1>
+                        <p style="color: #6b7280; font-size: 14px;">Advanced Positive Effect Leadership Results</p>
+                    </div>
+                    ${resultsContent}
+                </div>
+            `;
+            
+            window.print();
+            
+            // Restore original content after printing
+            setTimeout(() => {
+                document.body.innerHTML = originalContents;
+                // Reinitialize PayPal after restoring content
+                if (typeof paypal !== 'undefined') {
+                    initPayPal();
+                }
+            }, 1000);
+        }
+
+        // Download Results as PDF Function
+        function downloadResults() {
+            // For now, trigger print dialog - user can save as PDF from there
+            // In future, could integrate with jsPDF library for direct PDF generation
+            printResults();
+            
+            // Show helpful message
+            setTimeout(() => {
+                alert('Tip: In the print dialog, select "Save as PDF" to download your results as a PDF file.');
+            }, 1500);
         }
 
         // Initialize PayPal when page loads
