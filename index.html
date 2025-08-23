@@ -2267,13 +2267,13 @@
     </div>
 
     <script>
-        // Initialize EmailJS
-        emailjs.init("SAU17WFhPmeQLrng7");
+        // Email functionality handled by Supabase Edge Functions
 
         // Supabase Configuration
         const SUPABASE_URL = 'https://hjsocguqkvmddlkanyfl.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhqc29jZ3Vxa3ZtZGRsa2FueWZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU5ODk2NzEsImV4cCI6MjA3MTU2NTY3MX0.VAluC-nqFz79Z3N3ZBn_tlTg29VlrRHkSqZ3eRc8iQI';
-        const supabase = supabaseClient.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         let currentQuestion = 1;
         const totalQuestions = 35;
@@ -2398,7 +2398,7 @@
             purchaseData.companyCode = `${prefix}${timestamp}${random}`;
             
             try {
-                const { data, error } = await supabase.rpc('create_company_code', {
+                const { data, error } = await supabaseClient.rpc('create_company_code', {
                     code_input: purchaseData.companyCode,
                     purchase_type_input: purchaseData.type.toUpperCase(),
                     total_licenses_input: purchaseData.licenses,
@@ -2417,6 +2417,8 @@
                     }));
                 } else {
                     console.log('Company code created successfully:', data);
+                    // Send company code email to purchaser
+                    await sendCompanyCodeEmail();
                 }
             } catch (err) {
                 console.error('Supabase connection error:', err);
@@ -2444,6 +2446,28 @@
             document.getElementById('companyCodeInput').classList.remove('hidden');
         }
 
+        async function sendCompanyCodeEmail() {
+            try {
+                const response = await supabaseClient.functions.invoke('send-company-code-email', {
+                    body: {
+                        companyCode: purchaseData.companyCode,
+                        purchaserEmail: purchaseData.payerEmail,
+                        purchaseType: purchaseData.type.charAt(0).toUpperCase() + purchaseData.type.slice(1),
+                        totalLicenses: purchaseData.licenses,
+                        remainingUses: purchaseData.licenses
+                    }
+                });
+
+                if (response.error) {
+                    console.error('Error sending company code email:', response.error);
+                } else {
+                    console.log('Company code email sent successfully');
+                }
+            } catch (err) {
+                console.error('Error calling email function:', err);
+            }
+        }
+
         async function validateCompanyCode() {
             const code = document.getElementById('companyCode').value.trim();
             if (!code) {
@@ -2453,7 +2477,7 @@
 
             try {
                 // Try Supabase first
-                const { data, error } = await supabase.rpc('use_company_code', {
+                const { data, error } = await supabaseClient.rpc('use_company_code', {
                     code_input: code
                 });
 
