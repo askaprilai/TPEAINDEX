@@ -2252,7 +2252,6 @@
                     shape: 'rect',
                     label: 'paynow'
                 },
-                fundingSource: paypal.FUNDING.PAYPAL,
                 createOrder: function(data, actions) {
                     return actions.order.create({
                         purchase_units: [{
@@ -2440,12 +2439,22 @@
         }
 
         // Initialize PayPal when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof paypal !== 'undefined') {
-                initPayPal();
+        function tryInitPayPal() {
+            if (typeof paypal !== 'undefined' && paypal.Buttons) {
+                try {
+                    initPayPal();
+                    console.log('PayPal initialized successfully');
+                } catch (error) {
+                    console.error('PayPal initialization error:', error);
+                    setTimeout(tryInitPayPal, 1000); // Retry after 1 second
+                }
             } else {
-                console.error('PayPal SDK not loaded');
+                setTimeout(tryInitPayPal, 500); // Check again in 500ms
             }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            tryInitPayPal();
         });
 
         // Email form submission
