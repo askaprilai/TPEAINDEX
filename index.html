@@ -2246,12 +2246,6 @@
         function initPayPal() {
             // Individual Purchase - $29
             paypal.Buttons({
-                style: {
-                    layout: 'vertical',
-                    color: 'blue',
-                    shape: 'rect',
-                    label: 'paynow'
-                },
                 createOrder: function(data, actions) {
                     return actions.order.create({
                         purchase_units: [{
@@ -2277,13 +2271,6 @@
 
             // Team Pack - $99 (5 assessments)
             paypal.Buttons({
-                style: {
-                    layout: 'vertical',
-                    color: 'blue',
-                    shape: 'rect',
-                    label: 'pay'
-                },
-                fundingSource: paypal.FUNDING.PAYPAL,
                 createOrder: function(data, actions) {
                     return actions.order.create({
                         purchase_units: [{
@@ -2311,13 +2298,6 @@
 
             // Company Pack - $249 (15 assessments)
             paypal.Buttons({
-                style: {
-                    layout: 'vertical',
-                    color: 'blue',
-                    shape: 'rect',
-                    label: 'pay'
-                },
-                fundingSource: paypal.FUNDING.PAYPAL,
                 createOrder: function(data, actions) {
                     return actions.order.create({
                         purchase_units: [{
@@ -2345,13 +2325,6 @@
 
             // Enterprise Pack - $699 (50 assessments)
             paypal.Buttons({
-                style: {
-                    layout: 'vertical',
-                    color: 'blue',
-                    shape: 'rect',
-                    label: 'pay'
-                },
-                fundingSource: paypal.FUNDING.PAYPAL,
                 createOrder: function(data, actions) {
                     return actions.order.create({
                         purchase_units: [{
@@ -2438,25 +2411,13 @@
             }
         }
 
-        // Initialize PayPal when page loads - with timeout to ensure SDK loads
+        // Initialize PayPal when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(function() {
-                if (typeof paypal !== 'undefined') {
-                    console.log('Initializing PayPal...');
-                    initPayPal();
-                } else {
-                    console.error('PayPal SDK not loaded');
-                    // Try again in 2 seconds
-                    setTimeout(function() {
-                        if (typeof paypal !== 'undefined') {
-                            console.log('PayPal loaded on retry, initializing...');
-                            initPayPal();
-                        } else {
-                            console.error('PayPal SDK failed to load after retry');
-                        }
-                    }, 2000);
-                }
-            }, 1000);
+            if (typeof paypal !== 'undefined') {
+                initPayPal();
+            } else {
+                console.error('PayPal SDK not loaded');
+            }
         });
 
         // Email form submission
