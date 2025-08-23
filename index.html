@@ -856,12 +856,7 @@
                         <h4>Individual</h4>
                         <div class="price">$29</div>
                         <p>Single assessment with full report</p>
-                        <div id="paypal-individual">
-                            <div class="paypal-loading">
-                                <button style="background: #0070ba; color: white; border: none; padding: 12px 24px; border-radius: 6px; font-weight: 600; width: 100%; cursor: pointer;">Pay Now</button>
-                                <small style="display: block; text-align: center; color: #666; margin-top: 8px;">PayPal loading...</small>
-                            </div>
-                        </div>
+                        <div id="paypal-individual"></div>
                     </div>
                     
                     <div class="pricing-card popular">
@@ -869,36 +864,21 @@
                         <h4>Team Pack</h4>
                         <div class="price">$99</div>
                         <p>5 assessments • $20 each</p>
-                        <div id="paypal-team">
-                            <div class="paypal-loading">
-                                <button style="background: #0070ba; color: white; border: none; padding: 12px 24px; border-radius: 6px; font-weight: 600; width: 100%; cursor: pointer;">Pay Now</button>
-                                <small style="display: block; text-align: center; color: #666; margin-top: 8px;">PayPal loading...</small>
-                            </div>
-                        </div>
+                        <div id="paypal-team"></div>
                     </div>
                     
                     <div class="pricing-card">
                         <h4>Company Pack</h4>
                         <div class="price">$249</div>
                         <p>15 assessments • $16.60 each</p>
-                        <div id="paypal-company">
-                            <div class="paypal-loading">
-                                <button style="background: #0070ba; color: white; border: none; padding: 12px 24px; border-radius: 6px; font-weight: 600; width: 100%; cursor: pointer;">Pay Now</button>
-                                <small style="display: block; text-align: center; color: #666; margin-top: 8px;">PayPal loading...</small>
-                            </div>
-                        </div>
+                        <div id="paypal-company"></div>
                     </div>
                     
                     <div class="pricing-card">
                         <h4>Enterprise</h4>
                         <div class="price">$699</div>
                         <p>50 assessments • $14 each</p>
-                        <div id="paypal-enterprise">
-                            <div class="paypal-loading">
-                                <button style="background: #0070ba; color: white; border: none; padding: 12px 24px; border-radius: 6px; font-weight: 600; width: 100%; cursor: pointer;">Pay Now</button>
-                                <small style="display: block; text-align: center; color: #666; margin-top: 8px;">PayPal loading...</small>
-                            </div>
-                        </div>
+                        <div id="paypal-enterprise"></div>
                     </div>
                 </div>
                 
@@ -2264,11 +2244,6 @@
 
         // PayPal Integration
         function initPayPal() {
-            // Hide all loading buttons
-            document.querySelectorAll('.paypal-loading').forEach(function(el) {
-                el.style.display = 'none';
-            });
-            
             // Individual Purchase - $29
             paypal.Buttons({
                 style: {
@@ -2463,13 +2438,25 @@
             }
         }
 
-        // Initialize PayPal when page loads
+        // Initialize PayPal when page loads - with timeout to ensure SDK loads
         document.addEventListener('DOMContentLoaded', function() {
-            if (typeof paypal !== 'undefined') {
-                initPayPal();
-            } else {
-                console.error('PayPal SDK not loaded');
-            }
+            setTimeout(function() {
+                if (typeof paypal !== 'undefined') {
+                    console.log('Initializing PayPal...');
+                    initPayPal();
+                } else {
+                    console.error('PayPal SDK not loaded');
+                    // Try again in 2 seconds
+                    setTimeout(function() {
+                        if (typeof paypal !== 'undefined') {
+                            console.log('PayPal loaded on retry, initializing...');
+                            initPayPal();
+                        } else {
+                            console.error('PayPal SDK failed to load after retry');
+                        }
+                    }, 2000);
+                }
+            }, 1000);
         });
 
         // Email form submission
