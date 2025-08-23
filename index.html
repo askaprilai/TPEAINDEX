@@ -605,6 +605,12 @@
             min-height: 320px;
         }
 
+        /* PayPal buttons container */
+        .pricing-card [id^="paypal-"] {
+            margin-top: auto;
+            padding-top: 10px;
+        }
+
         .pricing-card:hover {
             border-color: #fbbf24;
             transform: translateY(-5px);
@@ -712,6 +718,11 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 15px;
             }
+            
+            .pricing-card {
+                min-height: 300px;
+                padding: 25px 18px;
+            }
         }
 
         /* Mobile optimization */
@@ -752,11 +763,24 @@
 
             .pricing-card {
                 min-height: auto;
-                padding: 30px 20px;
+                padding: 25px 20px;
+                margin-bottom: 20px;
             }
 
             .payment-section {
-                padding: 30px 20px;
+                padding: 20px 15px;
+            }
+            
+            .payment-section h3 {
+                font-size: 1.5rem;
+            }
+            
+            .pricing-card h4 {
+                font-size: 1.1rem;
+            }
+            
+            .price {
+                font-size: 2rem;
             }
 
             .company-code-input {
@@ -765,6 +789,16 @@
 
             .company-code-input input {
                 width: 100%;
+            }
+
+            /* PayPal button mobile optimization */
+            .pricing-card [id^="paypal-"] {
+                min-height: 50px;
+            }
+            
+            /* Ensure PayPal buttons are touch-friendly */
+            .paypal-buttons {
+                min-height: 44px; /* iOS minimum touch target */
             }
 
             .email-form {
