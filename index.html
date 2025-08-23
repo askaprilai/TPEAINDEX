@@ -2246,6 +2246,13 @@
         function initPayPal() {
             // Individual Purchase - $29
             paypal.Buttons({
+                style: {
+                    layout: 'vertical',
+                    color: 'blue',
+                    shape: 'rect',
+                    label: 'pay'
+                },
+                fundingSource: paypal.FUNDING.PAYPAL,
                 createOrder: function(data, actions) {
                     return actions.order.create({
                         purchase_units: [{
@@ -2271,6 +2278,13 @@
 
             // Team Pack - $99 (5 assessments)
             paypal.Buttons({
+                style: {
+                    layout: 'vertical',
+                    color: 'blue',
+                    shape: 'rect',
+                    label: 'pay'
+                },
+                fundingSource: paypal.FUNDING.PAYPAL,
                 createOrder: function(data, actions) {
                     return actions.order.create({
                         purchase_units: [{
@@ -2298,6 +2312,13 @@
 
             // Company Pack - $249 (15 assessments)
             paypal.Buttons({
+                style: {
+                    layout: 'vertical',
+                    color: 'blue',
+                    shape: 'rect',
+                    label: 'pay'
+                },
+                fundingSource: paypal.FUNDING.PAYPAL,
                 createOrder: function(data, actions) {
                     return actions.order.create({
                         purchase_units: [{
@@ -2325,6 +2346,13 @@
 
             // Enterprise Pack - $699 (50 assessments)
             paypal.Buttons({
+                style: {
+                    layout: 'vertical',
+                    color: 'blue',
+                    shape: 'rect',
+                    label: 'pay'
+                },
+                fundingSource: paypal.FUNDING.PAYPAL,
                 createOrder: function(data, actions) {
                     return actions.order.create({
                         purchase_units: [{
