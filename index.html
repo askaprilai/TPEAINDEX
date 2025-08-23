@@ -821,7 +821,7 @@
         }
     </style>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script src="https://www.paypal.com/sdk/js?client-id=AQomqOvU5YJuxweBCa-LqMHYqVkAUwszwtE9tKwO0p8XZXR3Ybo8L7xw7vg2IipgY2Pi-A-6yFYfjfbh&currency=USD"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R&currency=USD&disable-funding=credit,card,paylater"></script>
 </head>
 <body>
     <div class="container">
@@ -2463,45 +2463,42 @@
             }
         }
 
-        // Debug PayPal loading
-        console.log('PayPal script loading...');
+        // Simple PayPal initialization with timeout
+        let paypalRetries = 0;
+        const maxRetries = 10;
         
-        // Initialize PayPal when page loads
-        function tryInitPayPal() {
-            console.log('Checking PayPal availability...', typeof paypal);
+        function initPayPalButtons() {
+            console.log(`PayPal attempt ${paypalRetries + 1}/${maxRetries}...`);
             
             if (typeof paypal !== 'undefined' && paypal.Buttons) {
+                console.log('PayPal SDK loaded, initializing buttons...');
                 try {
-                    console.log('Initializing PayPal buttons...');
                     initPayPal();
-                    console.log('PayPal initialized successfully');
+                    console.log('PayPal buttons initialized successfully');
+                    return true;
                 } catch (error) {
-                    console.error('PayPal initialization error:', error);
-                    showPayPalError();
+                    console.error('PayPal button creation failed:', error);
+                    return false;
                 }
+            }
+            
+            paypalRetries++;
+            if (paypalRetries < maxRetries) {
+                console.log('PayPal not ready, trying again...');
+                setTimeout(initPayPalButtons, 1000);
             } else {
-                console.log('PayPal not ready, retrying...');
-                setTimeout(tryInitPayPal, 1000); // Check again in 1 second
+                console.error('PayPal failed to load after maximum retries');
+                // Keep the fallback buttons visible
+                document.querySelectorAll('.paypal-loading small').forEach(function(el) {
+                    el.textContent = 'PayPal unavailable - please contact support';
+                });
             }
+            return false;
         }
 
-        function showPayPalError() {
-            document.querySelectorAll('[id^="paypal-"]').forEach(function(el) {
-                el.innerHTML = '<div style="text-align: center; padding: 15px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px;"><p style="color: #1e3a8a; margin: 0;">Payment buttons loading...</p><small style="color: #6c757d;">Please refresh the page if buttons don\'t appear</small></div>';
-            });
-        }
-
+        // Start PayPal initialization
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM loaded, starting PayPal initialization...');
-            tryInitPayPal();
-        });
-
-        // Fallback: Try again when window loads
-        window.addEventListener('load', function() {
-            console.log('Window loaded, checking PayPal again...');
-            if (typeof paypal !== 'undefined' && !document.querySelector('.paypal-button')) {
-                setTimeout(tryInitPayPal, 2000);
-            }
+            setTimeout(initPayPalButtons, 500);
         });
 
         // Email form submission
