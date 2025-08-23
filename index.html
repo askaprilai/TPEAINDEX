@@ -856,6 +856,7 @@
     </style>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script src="https://www.paypal.com/sdk/js?client-id=AQomqOvU5YJuxweBCa-LqMHYqVkAUwszwtE9tKwO0p8XZXR3Ybo8L7xw7vg2IipgY2Pi-A-6yFYfjfbh&currency=USD&disable-funding=paylater"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <div class="container">
@@ -867,9 +868,9 @@
                     A 35-question assessment measuring leadership effectiveness across the four key dimensions of positive leadership.
                 </div>
                 <div class="framework-overview">
-                    <div class="framework-item accept-badge">ACCEPT</div>
-                    <div class="framework-item create-badge">CREATE</div>
-                    <div class="framework-item teach-badge">TEACH</div>
+                    <div class="framework-item accept-badge">SUPPORT</div>
+                    <div class="framework-item create-badge">RESPONSIBLE</div>
+                    <div class="framework-item teach-badge">SELFLESS</div>
                     <div class="framework-item accountability-badge">ACCOUNTABILITY</div>
                 </div>
                 <div class="assessment-warning">
@@ -888,7 +889,7 @@
                 <div class="pricing-grid">
                     <div class="pricing-card">
                         <h4>Individual</h4>
-                        <div class="price">$29</div>
+                        <div class="price">$49</div>
                         <p>Single assessment with full report</p>
                         <div id="paypal-individual"></div>
                     </div>
@@ -896,21 +897,21 @@
                     <div class="pricing-card popular">
                         <div class="popular-badge">Most Popular</div>
                         <h4>Team Pack</h4>
-                        <div class="price">$99</div>
+                        <div class="price">$129</div>
                         <p>5 assessments • $20 each</p>
                         <div id="paypal-team"></div>
                     </div>
                     
                     <div class="pricing-card">
                         <h4>Company Pack</h4>
-                        <div class="price">$249</div>
+                        <div class="price">$299</div>
                         <p>15 assessments • $16.60 each</p>
                         <div id="paypal-company"></div>
                     </div>
                     
                     <div class="pricing-card">
                         <h4>Enterprise</h4>
-                        <div class="price">$699</div>
+                        <div class="price">$799</div>
                         <p>50 assessments • $14 each</p>
                         <div id="paypal-enterprise"></div>
                     </div>
@@ -949,7 +950,7 @@
                 <div class="question active" data-question="1">
                     <h3>
                         <span class="question-number">1</span>
-                        <span class="question-category category-accept">ACCEPT</span>
+                        <span class="question-category category-accept">SUPPORT</span>
                         <span class="question-text">In the past month, when receiving concerning performance feedback about a team member, how often did you first seek to understand their perspective before forming conclusions?</span>
                     </h3>
                     <div class="answers">
@@ -1004,7 +1005,7 @@
                 <div class="question" data-question="2">
                     <h3>
                         <span class="question-number">2</span>
-                        <span class="question-category category-accept">ACCEPT</span>
+                        <span class="question-category category-accept">SUPPORT</span>
                         <span class="question-text">Think of recent team interactions. How often do you catch yourself making assumptions about why someone acted a certain way, rather than asking clarifying questions?</span>
                     </h3>
                     <div class="scenario-context">
@@ -1042,7 +1043,7 @@
                 <div class="question" data-question="3">
                     <h3>
                         <span class="question-number">3</span>
-                        <span class="question-category category-accept">ACCEPT</span>
+                        <span class="question-category category-accept">SUPPORT</span>
                         <span class="question-text">When you hear statements like "Harleigh's office is not always neat and tidy, she's so not organized, I wonder what her house looks like" - how often do you recognize this as personal judgment rather than performance measurement?</span>
                     </h3>
                     <div class="answers">
@@ -1077,7 +1078,7 @@
                 <div class="question" data-question="4">
                     <h3>
                         <span class="question-number">4</span>
-                        <span class="question-category category-accept">ACCEPT</span>
+                        <span class="question-category category-accept">SUPPORT</span>
                         <span class="question-text">During stressful periods or conflicts, how often do others comment that you remain calm and create a safe space for discussion?</span>
                     </h3>
                     <div class="answers">
@@ -1112,7 +1113,7 @@
                 <div class="question" data-question="5">
                     <h3>
                         <span class="question-number">5</span>
-                        <span class="question-category category-accept">ACCEPT</span>
+                        <span class="question-category category-accept">SUPPORT</span>
                         <span class="question-text">How often do you find yourself being intentional about connecting with someone (understanding their feelings/perspective) rather than just communicating information?</span>
                     </h3>
                     <div class="scenario-context">
@@ -1150,7 +1151,7 @@
                 <div class="question" data-question="6">
                     <h3>
                         <span class="question-number">6</span>
-                        <span class="question-category category-accept">ACCEPT</span>
+                        <span class="question-category category-accept">SUPPORT</span>
                         <span class="question-text">When someone doesn't follow through (like "When John doesn't call me back, it shows lack of care and follow up"), how often do you operate "above the line" by assuming responsibility rather than blaming?</span>
                     </h3>
                     <div class="scenario-context">
@@ -1188,7 +1189,7 @@
                 <div class="question" data-question="7">
                     <h3>
                         <span class="question-number">7</span>
-                        <span class="question-category category-accept">ACCEPT</span>
+                        <span class="question-category category-accept">SUPPORT</span>
                         <span class="question-text">How often do you catch yourself using limiting self-talk ("I can't," "I don't know how," "I will never be able to") versus positive self-talk ("I can," "I will learn how," "I am able to")?</span>
                     </h3>
                     <div class="answers">
@@ -1223,7 +1224,7 @@
                 <div class="question" data-question="8">
                     <h3>
                         <span class="question-number">8</span>
-                        <span class="question-category category-accept">ACCEPT</span>
+                        <span class="question-category category-accept">SUPPORT</span>
                         <span class="question-text">In difficult conversations, how often do you find yourself fully present (no multitasking, phone checking, or mental preparation of your response while they talk)?</span>
                     </h3>
                     <div class="answers">
@@ -1259,7 +1260,7 @@
                 <div class="question" data-question="9">
                     <h3>
                         <span class="question-number">9</span>
-                        <span class="question-category category-create">CREATE</span>
+                        <span class="question-category category-create">RESPONSIBLE</span>
                         <span class="question-text">Using the Eisenhower Matrix, how often do you find yourself working on "urgent but not important" tasks rather than "important but not urgent" strategic activities?</span>
                     </h3>
                     <div class="scenario-context">
@@ -1297,7 +1298,7 @@
                 <div class="question" data-question="10">
                     <h3>
                         <span class="question-number">10</span>
-                        <span class="question-category category-create">CREATE</span>
+                        <span class="question-category category-create">RESPONSIBLE</span>
                         <span class="question-text">How often do people comment that your energy and enthusiasm positively influences their motivation and engagement?</span>
                     </h3>
                     <div class="answers">
@@ -1332,7 +1333,7 @@
                 <div class="question" data-question="11">
                     <h3>
                         <span class="question-number">11</span>
-                        <span class="question-category category-create">CREATE</span>
+                        <span class="question-category category-create">RESPONSIBLE</span>
                         <span class="question-text">When delegating tasks, how often do you provide clear expectations, understand and validate their approach, and follow-up schedules without micromanaging the process?</span>
                     </h3>
                     <div class="answers">
@@ -1367,7 +1368,7 @@
                 <div class="question" data-question="12">
                     <h3>
                         <span class="question-number">12</span>
-                        <span class="question-category category-create">CREATE</span>
+                        <span class="question-category category-create">RESPONSIBLE</span>
                         <span class="question-text">How often do you actively challenge limiting beliefs in yourself and others (like "we've never done it that way" or "that won't work here")?</span>
                     </h3>
                     <div class="answers">
@@ -1402,7 +1403,7 @@
                 <div class="question" data-question="13">
                     <h3>
                         <span class="question-number">13</span>
-                        <span class="question-category category-create">CREATE</span>
+                        <span class="question-category category-create">RESPONSIBLE</span>
                         <span class="question-text">When things go wrong, how often do you immediately take ownership and focus on solutions rather than explaining external factors?</span>
                     </h3>
                     <div class="answers">
@@ -1437,7 +1438,7 @@
                 <div class="question" data-question="14">
                     <h3>
                         <span class="question-number">14</span>
-                        <span class="question-category category-create">CREATE</span>
+                        <span class="question-category category-create">RESPONSIBLE</span>
                         <span class="question-text">How often do you paint a compelling vision that connects individual work to broader organizational purpose and gets people excited about the future?</span>
                     </h3>
                     <div class="answers">
@@ -1472,7 +1473,7 @@
                 <div class="question" data-question="15">
                     <h3>
                         <span class="question-number">15</span>
-                        <span class="question-category category-create">CREATE</span>
+                        <span class="question-category category-create">RESPONSIBLE</span>
                         <span class="question-text">How often do you demonstrate emotional intelligence by reading situations and adapting your approach based on others' emotional states?</span>
                     </h3>
                     <div class="answers">
@@ -1507,7 +1508,7 @@
                 <div class="question" data-question="16">
                     <h3>
                         <span class="question-number">16</span>
-                        <span class="question-category category-create">CREATE</span>
+                        <span class="question-category category-create">RESPONSIBLE</span>
                         <span class="question-text">How often do you consider the broader impact of decisions on multiple stakeholders (not just your immediate team) before taking action?</span>
                     </h3>
                     <div class="answers">
@@ -1543,7 +1544,7 @@
                 <div class="question" data-question="17">
                     <h3>
                         <span class="question-number">17</span>
-                        <span class="question-category category-teach">TEACH</span>
+                        <span class="question-category category-teach">SELFLESS</span>
                         <span class="question-text">When team members come to you with problems, how often do you use coaching questions to help them find solutions rather than immediately directing them what to do?</span>
                     </h3>
                     <div class="scenario-context">
@@ -1581,7 +1582,7 @@
                 <div class="question" data-question="18">
                     <h3>
                         <span class="question-number">18</span>
-                        <span class="question-category category-teach">TEACH</span>
+                        <span class="question-category category-teach">SELFLESS</span>
                         <span class="question-text">How often do you approach interactions with a coaching mindset (curious, positive, flexible) rather than just focusing on the technical skills of asking and listening?</span>
                     </h3>
                     <div class="scenario-context">
@@ -1619,7 +1620,7 @@
                 <div class="question" data-question="19">
                     <h3>
                         <span class="question-number">19</span>
-                        <span class="question-category category-teach">TEACH</span>
+                        <span class="question-category category-teach">SELFLESS</span>
                         <span class="question-text">When sharing knowledge or training others, how often do you focus on sharing wisdom and developing understanding rather than just "telling" information?</span>
                     </h3>
                     <div class="scenario-context">
@@ -1657,7 +1658,7 @@
                 <div class="question" data-question="20">
                     <h3>
                         <span class="question-number">20</span>
-                        <span class="question-category category-teach">TEACH</span>
+                        <span class="question-category category-teach">SELFLESS</span>
                         <span class="question-text">How often do you actively seek to learn from team members regardless of their position or experience level?</span>
                     </h3>
                     <div class="answers">
@@ -1692,7 +1693,7 @@
                 <div class="question" data-question="21">
                     <h3>
                         <span class="question-number">21</span>
-                        <span class="question-category category-teach">TEACH</span>
+                        <span class="question-category category-teach">SELFLESS</span>
                         <span class="question-text">How often do you give specific, actionable feedback that includes both what they did well and how they can improve?</span>
                     </h3>
                     <div class="answers">
@@ -1727,7 +1728,7 @@
                 <div class="question" data-question="22">
                     <h3>
                         <span class="question-number">22</span>
-                        <span class="question-category category-teach">TEACH</span>
+                        <span class="question-category category-teach">SELFLESS</span>
                         <span class="question-text">How often do you create stretch assignments or challenging opportunities that push team members beyond their current comfort zone?</span>
                     </h3>
                     <div class="answers">
@@ -1762,7 +1763,7 @@
                 <div class="question" data-question="23">
                     <h3>
                         <span class="question-number">23</span>
-                        <span class="question-category category-teach">TEACH</span>
+                        <span class="question-category category-teach">SELFLESS</span>
                         <span class="question-text">How often do you model continuous learning by visibly pursuing your own development and sharing your learning journey with others?</span>
                     </h3>
                     <div class="answers">
@@ -2269,6 +2270,11 @@
         // Initialize EmailJS
         emailjs.init("SAU17WFhPmeQLrng7");
 
+        // Supabase Configuration
+        const SUPABASE_URL = 'https://hjsocguqkvmddlkanyfl.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhqc29jZ3Vxa3ZtZGRsa2FueWZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU5ODk2NzEsImV4cCI6MjA3MTU2NTY3MX0.VAluC-nqFz79Z3N3ZBn_tlTg29VlrRHkSqZ3eRc8iQI';
+        const supabase = supabaseClient.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
         let currentQuestion = 1;
         const totalQuestions = 35;
         let userAnswers = {};
@@ -2278,13 +2284,13 @@
 
         // PayPal Integration
         function initPayPal() {
-            // Individual Purchase - $29
+            // Individual Purchase - $49
             paypal.Buttons({
                 createOrder: function(data, actions) {
                     return actions.order.create({
                         purchase_units: [{
                             amount: {
-                                value: '29.00'
+                                value: '49.00'
                             },
                             description: 'Individual Leadership Assessment'
                         }]
@@ -2295,7 +2301,7 @@
                         purchaseData = {
                             type: 'individual',
                             transactionId: details.id,
-                            amount: '29.00',
+                            amount: '49.00',
                             payerEmail: details.payer.email_address
                         };
                         grantAccess();
@@ -2303,100 +2309,124 @@
                 }
             }).render('#paypal-individual');
 
-            // Team Pack - $99 (5 assessments)
+            // Team Pack - $129 (5 assessments)
             paypal.Buttons({
                 createOrder: function(data, actions) {
                     return actions.order.create({
                         purchase_units: [{
                             amount: {
-                                value: '99.00'
+                                value: '129.00'
                             },
                             description: 'Team Pack - 5 Leadership Assessments'
                         }]
                     });
                 },
                 onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
+                    return actions.order.capture().then(async function(details) {
                         purchaseData = {
                             type: 'team',
                             transactionId: details.id,
-                            amount: '99.00',
+                            amount: '129.00',
                             payerEmail: details.payer.email_address,
                             licenses: 5
                         };
-                        generateCompanyCode();
+                        await generateCompanyCode();
                         grantAccess();
                     });
                 }
             }).render('#paypal-team');
 
-            // Company Pack - $249 (15 assessments)
+            // Company Pack - $299 (15 assessments)
             paypal.Buttons({
                 createOrder: function(data, actions) {
                     return actions.order.create({
                         purchase_units: [{
                             amount: {
-                                value: '249.00'
+                                value: '299.00'
                             },
                             description: 'Company Pack - 15 Leadership Assessments'
                         }]
                     });
                 },
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
+                onApprove: async function(data, actions) {
+                    return actions.order.capture().then(async function(details) {
                         purchaseData = {
                             type: 'company',
                             transactionId: details.id,
-                            amount: '249.00',
+                            amount: '299.00',
                             payerEmail: details.payer.email_address,
                             licenses: 15
                         };
-                        generateCompanyCode();
+                        await generateCompanyCode();
                         grantAccess();
                     });
                 }
             }).render('#paypal-company');
 
-            // Enterprise Pack - $699 (50 assessments)
+            // Enterprise Pack - $799 (50 assessments)
             paypal.Buttons({
                 createOrder: function(data, actions) {
                     return actions.order.create({
                         purchase_units: [{
                             amount: {
-                                value: '699.00'
+                                value: '799.00'
                             },
                             description: 'Enterprise Pack - 50 Leadership Assessments'
                         }]
                     });
                 },
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
+                onApprove: async function(data, actions) {
+                    return actions.order.capture().then(async function(details) {
                         purchaseData = {
                             type: 'enterprise',
                             transactionId: details.id,
-                            amount: '699.00',
+                            amount: '799.00',
                             payerEmail: details.payer.email_address,
                             licenses: 50
                         };
-                        generateCompanyCode();
+                        await generateCompanyCode();
                         grantAccess();
                     });
                 }
             }).render('#paypal-enterprise');
         }
 
-        function generateCompanyCode() {
+        async function generateCompanyCode() {
             const prefix = purchaseData.type.toUpperCase().substring(0, 3);
             const timestamp = Date.now().toString().slice(-6);
             const random = Math.random().toString(36).substring(2, 5).toUpperCase();
             purchaseData.companyCode = `${prefix}${timestamp}${random}`;
             
-            // Store company code (in production, this would be sent to your server)
-            localStorage.setItem('companyCode_' + purchaseData.companyCode, JSON.stringify({
-                ...purchaseData,
-                remainingUses: purchaseData.licenses,
-                createdDate: new Date().toISOString()
-            }));
+            try {
+                const { data, error } = await supabase.rpc('create_company_code', {
+                    code_input: purchaseData.companyCode,
+                    purchase_type_input: purchaseData.type.toUpperCase(),
+                    total_licenses_input: purchaseData.licenses,
+                    price_paid_input: parseFloat(purchaseData.amount),
+                    purchaser_email_input: purchaseData.payerEmail,
+                    company_name_input: purchaseData.companyName || null
+                });
+
+                if (error) {
+                    console.error('Error creating company code:', error);
+                    // Fallback to localStorage for backward compatibility
+                    localStorage.setItem('companyCode_' + purchaseData.companyCode, JSON.stringify({
+                        ...purchaseData,
+                        remainingUses: purchaseData.licenses,
+                        createdDate: new Date().toISOString()
+                    }));
+                } else {
+                    console.log('Company code created successfully:', data);
+                }
+            } catch (err) {
+                console.error('Supabase connection error:', err);
+                // Fallback to localStorage
+                localStorage.setItem('companyCode_' + purchaseData.companyCode, JSON.stringify({
+                    ...purchaseData,
+                    remainingUses: purchaseData.licenses,
+                    createdDate: new Date().toISOString()
+                }));
+            }
         }
 
         function grantAccess() {
@@ -2414,14 +2444,47 @@
             document.getElementById('companyCodeInput').classList.remove('hidden');
         }
 
-        function validateCompanyCode() {
+        async function validateCompanyCode() {
             const code = document.getElementById('companyCode').value.trim();
             if (!code) {
                 alert('Please enter a company code.');
                 return;
             }
 
-            // Check if code exists and has remaining uses
+            try {
+                // Try Supabase first
+                const { data, error } = await supabase.rpc('use_company_code', {
+                    code_input: code
+                });
+
+                if (error) {
+                    console.error('Supabase error:', error);
+                    // Fallback to localStorage
+                    validateWithLocalStorage(code);
+                    return;
+                }
+
+                if (data && data.length > 0 && data[0].success) {
+                    purchaseData = {
+                        type: 'company_code',
+                        companyCode: code,
+                        originalPurchase: data[0].code_data.purchase_type,
+                        remainingUses: data[0].code_data.remaining_uses
+                    };
+                    accessGranted = true;
+                    grantAccess();
+                } else {
+                    const message = data && data.length > 0 ? data[0].message : 'Invalid or expired company code';
+                    alert(message);
+                }
+            } catch (err) {
+                console.error('Supabase connection error:', err);
+                // Fallback to localStorage
+                validateWithLocalStorage(code);
+            }
+        }
+
+        function validateWithLocalStorage(code) {
             const codeData = localStorage.getItem('companyCode_' + code);
             if (codeData) {
                 const data = JSON.parse(codeData);
