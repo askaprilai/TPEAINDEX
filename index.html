@@ -821,7 +821,7 @@
         }
     </style>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script src="https://www.paypal.com/sdk/js?client-id=AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R&currency=USD&disable-funding=credit,card,paylater"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AQomqOvU5YJuxweBCa-LqMHYqVkAUwszwtE9tKwO0p8XZXR3Ybo8L7xw7vg2IipgY2Pi-A-6yFYfjfbh&currency=USD"></script>
 </head>
 <body>
     <div class="container">
@@ -2463,42 +2463,13 @@
             }
         }
 
-        // Simple PayPal initialization with timeout
-        let paypalRetries = 0;
-        const maxRetries = 10;
-        
-        function initPayPalButtons() {
-            console.log(`PayPal attempt ${paypalRetries + 1}/${maxRetries}...`);
-            
-            if (typeof paypal !== 'undefined' && paypal.Buttons) {
-                console.log('PayPal SDK loaded, initializing buttons...');
-                try {
-                    initPayPal();
-                    console.log('PayPal buttons initialized successfully');
-                    return true;
-                } catch (error) {
-                    console.error('PayPal button creation failed:', error);
-                    return false;
-                }
-            }
-            
-            paypalRetries++;
-            if (paypalRetries < maxRetries) {
-                console.log('PayPal not ready, trying again...');
-                setTimeout(initPayPalButtons, 1000);
-            } else {
-                console.error('PayPal failed to load after maximum retries');
-                // Keep the fallback buttons visible
-                document.querySelectorAll('.paypal-loading small').forEach(function(el) {
-                    el.textContent = 'PayPal unavailable - please contact support';
-                });
-            }
-            return false;
-        }
-
-        // Start PayPal initialization
+        // Initialize PayPal when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(initPayPalButtons, 500);
+            if (typeof paypal !== 'undefined') {
+                initPayPal();
+            } else {
+                console.error('PayPal SDK not loaded');
+            }
         });
 
         // Email form submission
