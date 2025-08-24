@@ -1065,6 +1065,17 @@
                     </div>
                 </div>
 
+                <!-- Development Recommendations Section -->
+                <div class="response-summary">
+                    <h3>Development Recommendations</h3>
+                    <p style="color: #6b7280; margin-bottom: 20px; font-size: 0.95rem;">
+                        Based on your responses, here are specific areas to focus on for even greater leadership effectiveness:
+                    </p>
+                    <div id="developmentRecommendations">
+                        <!-- Development recommendations will be populated here -->
+                    </div>
+                </div>
+
                 <!-- Demo CTA -->
                 <div class="demo-cta">
                     <h3>Ready for Your Complete Leadership Profile?</h3>
@@ -1190,6 +1201,7 @@
             // Display framework scores and response summary
             displayFrameworkScores(scores);
             displayResponseSummary();
+            displayDevelopmentRecommendations(scores);
         }
 
         function calculateDemoScores() {
@@ -1310,6 +1322,126 @@
                     summaryContainer.appendChild(categoryDiv);
                 }
             });
+        }
+
+        function displayDevelopmentRecommendations(scores) {
+            const recommendationsContainer = document.getElementById('developmentRecommendations');
+            
+            // Find the lowest scoring areas for development focus
+            const sortedScores = Object.entries(scores).sort((a, b) => a[1] - b[1]);
+            const lowestScore = sortedScores[0];
+            const secondLowest = sortedScores[1];
+            
+            // Development recommendations based on scores and specific responses
+            const recommendations = {
+                support: {
+                    title: "Enhance Supportive Leadership",
+                    items: [
+                        "Practice active listening - Ask more clarifying questions before offering solutions",
+                        "Schedule regular one-on-ones to understand individual challenges and motivations",
+                        "Develop empathy skills - Try to see situations from your team members' perspectives",
+                        "Create psychological safety - Make it easier for people to share concerns without judgment"
+                    ]
+                },
+                responsible: {
+                    title: "Strengthen Responsible Decision-Making",
+                    items: [
+                        "Gather diverse perspectives before making important decisions",
+                        "Consider long-term impacts on all stakeholders, not just immediate results",
+                        "Practice transparent communication about your decision-making process",
+                        "Build consensus-building skills to get buy-in from affected parties"
+                    ]
+                },
+                selfless: {
+                    title: "Develop Others-Focused Leadership",
+                    items: [
+                        "Shift from giving answers to asking questions that help others think",
+                        "Focus on developing others' capabilities rather than just completing tasks",
+                        "Create opportunities for team members to shine and get recognition",
+                        "Practice coaching skills - help people discover solutions themselves"
+                    ]
+                },
+                accountability: {
+                    title: "Improve Recognition and Follow-Through",
+                    items: [
+                        "Make recognition more frequent and specific - celebrate small wins publicly",
+                        "Develop better follow-up systems to track commitments and progress",
+                        "Learn to give constructive feedback that motivates rather than discourages",
+                        "Create clear expectations and check-in regularly on progress"
+                    ]
+                }
+            };
+
+            // Show top 2 development areas
+            [lowestScore, secondLowest].forEach((scoreData, index) => {
+                const [framework, score] = scoreData;
+                const rec = recommendations[framework];
+                
+                if (rec && score < 80) { // Only show if there's room for improvement
+                    const recDiv = document.createElement('div');
+                    recDiv.className = 'response-category';
+                    
+                    const title = document.createElement('h4');
+                    title.textContent = `${index + 1}. ${rec.title}`;
+                    title.style.color = '#1e3a8a';
+                    title.style.marginBottom = '12px';
+                    recDiv.appendChild(title);
+                    
+                    const recList = document.createElement('div');
+                    recList.className = `response-list ${framework}`;
+                    
+                    rec.items.forEach(item => {
+                        const recItem = document.createElement('div');
+                        recItem.className = 'response-item';
+                        recItem.textContent = `• ${item}`;
+                        recList.appendChild(recItem);
+                    });
+                    
+                    recDiv.appendChild(recList);
+                    recommendationsContainer.appendChild(recDiv);
+                }
+            });
+
+            // Add mindset-specific recommendations based on responses
+            addMindsetRecommendations(recommendationsContainer);
+        }
+
+        function addMindsetRecommendations(container) {
+            // Check mindset responses (questions 22, 24, 25)
+            const mindsetResponses = [22, 24, 25].map(q => answers[q]).filter(Boolean);
+            const avgMindsetScore = mindsetResponses.length > 0 ? 
+                mindsetResponses.reduce((sum, score) => sum + score, 0) / mindsetResponses.length : 3;
+
+            if (avgMindsetScore < 4) {
+                const mindsetDiv = document.createElement('div');
+                mindsetDiv.className = 'response-category';
+                
+                const title = document.createElement('h4');
+                title.textContent = '3. Develop Growth Mindset and Resilience';
+                title.style.color = '#1e3a8a';
+                title.style.marginBottom = '12px';
+                mindsetDiv.appendChild(title);
+                
+                const mindsetList = document.createElement('div');
+                mindsetList.className = 'response-list support';
+                
+                const mindsetItems = [
+                    "Practice reframing challenges as opportunities for growth and learning",
+                    "Develop stress management techniques for high-pressure situations",
+                    "Focus on what you can control rather than worrying about uncertainties",
+                    "Build optimism by celebrating small wins and learning from setbacks"
+                ];
+
+                mindsetItems.forEach(item => {
+                    const mindsetItem = document.createElement('div');
+                    mindsetItem.className = 'response-item';
+                    mindsetItem.textContent = `• ${item}`;
+                    mindsetList.appendChild(mindsetItem);
+                });
+                
+                mindsetDiv.appendChild(mindsetList);
+                container.appendChild(mindsetDiv);
+            }
         }
 
         // Initialize
