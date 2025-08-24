@@ -156,43 +156,39 @@
         }
 
         .answers {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
         .answer-option {
             background: #f9fafb;
             border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 8px;
+            padding: 16px 20px;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+            width: 100%;
+            text-align: left;
         }
 
         .answer-option:hover {
             border-color: #fbbf24;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background: #fefbf3;
         }
 
         .answer-option.selected {
             border-color: #1e3a8a;
             background: #eff6ff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.2);
+            box-shadow: 0 2px 8px rgba(30, 58, 138, 0.15);
         }
 
         .answer-text {
-            font-weight: 600;
+            font-weight: 500;
             color: #374151;
             font-size: 1rem;
-            line-height: 1.4;
+            line-height: 1.5;
+            margin: 0;
         }
 
         .navigation {
@@ -405,8 +401,7 @@
             }
             
             .answers {
-                grid-template-columns: 1fr;
-                gap: 12px;
+                gap: 6px;
             }
             
             .answer-option {
