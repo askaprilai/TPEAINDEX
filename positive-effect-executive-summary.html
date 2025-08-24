@@ -446,8 +446,23 @@
             }
         }
     </style>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
 <body>
+    <!-- Company Code Authentication Modal -->
+    <div id="authModal" style="display: block; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8);">
+        <div style="background-color: white; margin: 10% auto; padding: 40px; width: 90%; max-width: 500px; border-radius: 12px; text-align: center;">
+            <h2 style="color: #1e3a8a; margin-bottom: 20px;">Executive Dashboard Access</h2>
+            <p style="color: #6b7280; margin-bottom: 30px;">Enter your company code to view your team's leadership assessment dashboard.</p>
+            <div style="margin-bottom: 20px;">
+                <input type="text" id="dashboardCompanyCode" placeholder="Enter Company Code" style="width: 100%; padding: 15px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; text-align: center; text-transform: uppercase;">
+            </div>
+            <button onclick="authenticateCompanyCode()" style="background: #1e3a8a; color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%;">
+                Access Dashboard
+            </button>
+            <div id="authError" style="color: #ef4444; margin-top: 15px; font-size: 14px; display: none;"></div>
+        </div>
+    </div>
     <div class="print-controls">
         <button class="control-btn" onclick="window.print()">📄 Print Report</button>
         <button class="control-btn" onclick="generatePDF()">📊 Export PDF</button>
@@ -484,7 +499,7 @@
             <div class="section">
                 <h2>Executive Summary</h2>
                 <div class="executive-summary">
-                    <p><strong>The Positive Effect Leadership System Index</strong> provides a comprehensive evaluation of leadership effectiveness across four critical dimensions: Accept, Create, Teach, and Accountability. This report summarizes the organizational leadership assessment results and provides strategic recommendations for enhancing positive leadership impact.</p>
+                    <p><strong>The Positive Effect Leadership System Index</strong> provides a comprehensive evaluation of leadership effectiveness across four critical dimensions: Support, Responsible, Selfless, and Accountability. This report summarizes the organizational leadership assessment results and provides strategic recommendations for enhancing positive leadership impact.</p>
                     
                     <p style="margin-top: 15px;"><strong>Key Insight:</strong> Organizations implementing the ACT methodology see an average 34% improvement in employee engagement, 28% increase in team productivity, and 42% reduction in leadership-related turnover within 90 days.</p>
                 </div>
@@ -500,15 +515,15 @@
                     </div>
                     <div class="metric-card">
                         <div class="metric-value" id="acceptScore">68%</div>
-                        <div class="metric-label">ACCEPT Dimension</div>
+                        <div class="metric-label">SUPPORT Dimension</div>
                     </div>
                     <div class="metric-card">
                         <div class="metric-value" id="createScore">75%</div>
-                        <div class="metric-label">CREATE Dimension</div>
+                        <div class="metric-label">RESPONSIBLE Dimension</div>
                     </div>
                     <div class="metric-card">
                         <div class="metric-value" id="teachScore">71%</div>
-                        <div class="metric-label">TEACH Dimension</div>
+                        <div class="metric-label">SELFLESS Dimension</div>
                     </div>
                     <div class="metric-card">
                         <div class="metric-value" id="accountabilityScore">78%</div>
@@ -526,21 +541,21 @@
                 <h2>Key Findings by Leadership Pillar</h2>
                 <div class="key-findings">
                     <div class="finding-card accept">
-                        <h4>ACCEPT <span class="score-badge needs-improvement">68% - Needs Focus</span></h4>
+                        <h4>SUPPORT <span class="score-badge needs-improvement">68% - Needs Focus</span></h4>
                         <p><strong>Strength:</strong> Leaders show good composure under pressure (74% average).</p>
                         <p><strong>Opportunity:</strong> Only 62% consistently face difficult realities and challenging conversations.</p>
                         <p><strong>Impact:</strong> Teams report 23% higher stress levels when leaders avoid difficult conversations.</p>
                     </div>
                     
                     <div class="finding-card create">
-                        <h4>CREATE <span class="score-badge good">75% - Strong Foundation</span></h4>
+                        <h4>RESPONSIBLE <span class="score-badge good">75% - Strong Foundation</span></h4>
                         <p><strong>Strength:</strong> Excellent strategic thinking and vision alignment (81% average).</p>
                         <p><strong>Opportunity:</strong> Mindfulness of others' perspectives could improve (69% average).</p>
                         <p><strong>Impact:</strong> Teams with highly mindful leaders show 31% better collaboration scores.</p>
                     </div>
                     
                     <div class="finding-card teach">
-                        <h4>TEACH <span class="score-badge good">71% - Developing Well</span></h4>
+                        <h4>SELFLESS <span class="score-badge good">71% - Developing Well</span></h4>
                         <p><strong>Strength:</strong> Leaders demonstrate openness to learning (76% average).</p>
                         <p><strong>Opportunity:</strong> Coaching and mentoring skills need development (66% average).</p>
                         <p><strong>Impact:</strong> Leaders with strong coaching skills see 45% faster team skill development.</p>
@@ -610,13 +625,13 @@
                 <h2>Strategic Recommendations</h2>
                 <div class="recommendations">
                     <div class="recommendation-item priority-high">
-                        <h5>🎯 Priority 1: ACCEPT Dimension Focus (Next 60 Days)</h5>
-                        <p>Implement "Courageous Conversations" training program for all leaders. Establish peer coaching partnerships to practice difficult conversation skills. Expected outcome: 20% improvement in ACCEPT scores.</p>
+                        <h5>🎯 Priority 1: SUPPORT Dimension Focus (Next 60 Days)</h5>
+                        <p>Implement "Supportive Leadership" training program for all leaders. Establish peer coaching partnerships to practice supportive conversation skills. Expected outcome: 20% improvement in SUPPORT scores.</p>
                     </div>
                     
                     <div class="recommendation-item priority-medium">
-                        <h5>📈 Priority 2: Coaching Skills Development (60-120 Days)</h5>
-                        <p>Launch internal coaching certification program using TEACH pillar methodology. Pair high-performing coaches with developing leaders. Expected outcome: 30% improvement in team development metrics.</p>
+                        <h5>📈 Priority 2: Selfless Leadership Development (60-120 Days)</h5>
+                        <p>Launch internal coaching certification program using SELFLESS pillar methodology. Pair high-performing coaches with developing leaders. Expected outcome: 30% improvement in team development metrics.</p>
                     </div>
                     
                     <div class="recommendation-item priority-medium">
@@ -638,7 +653,7 @@
                     <div class="action-card">
                         <h4>30 Days - Foundation</h4>
                         <ul>
-                            <li>Launch ACCEPT pillar development workshops</li>
+                            <li>Launch SUPPORT pillar development workshops</li>
                             <li>Establish coaching partnerships</li>
                             <li>Begin weekly check-ins with lowest-scoring leaders</li>
                             <li>Implement digital recognition platform</li>
@@ -723,12 +738,220 @@
     </div>
 
     <script>
+        // Supabase Configuration
+        const SUPABASE_URL = 'https://hjsocguqkvmddlkanyfl.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhqc29jZ3Vxa3ZtZGRsa2FueWZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU5ODk2NzEsImV4cCI6MjA3MTU2NTY3MX0.VAluC-nqFz79Z3N3ZBn_tlTg29VlrRHkSqZ3eRc8iQI';
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        let companyData = null;
+        let teamResults = [];
+
         // Set current date
         document.getElementById('reportDate').textContent = new Date().toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
             day: 'numeric'
         });
+
+        // Authenticate company code and load dashboard
+        async function authenticateCompanyCode() {
+            const code = document.getElementById('dashboardCompanyCode').value.trim().toUpperCase();
+            const errorDiv = document.getElementById('authError');
+            
+            if (!code) {
+                showError('Please enter a company code.');
+                return;
+            }
+
+            try {
+                // Check if company code exists and get company info
+                const { data: companyInfo, error: companyError } = await supabaseClient
+                    .from('company_codes')
+                    .select('*')
+                    .eq('code', code)
+                    .eq('is_active', true)
+                    .single();
+
+                if (companyError || !companyInfo) {
+                    showError('Invalid company code. Please check and try again.');
+                    return;
+                }
+
+                // Get anonymous assessment results for this company code
+                const { data: results, error: resultsError } = await supabaseClient
+                    .from('assessment_results')
+                    .select('responses, scores, archetype, framework_scores, completed_at')
+                    .eq('company_code_id', companyInfo.id);
+
+                if (resultsError) {
+                    console.error('Error fetching results:', resultsError);
+                    showError('Error loading dashboard data. Please try again.');
+                    return;
+                }
+
+                // Store data globally
+                companyData = companyInfo;
+                teamResults = results || [];
+
+                // Hide auth modal and load dashboard
+                document.getElementById('authModal').style.display = 'none';
+                
+                // Populate dashboard with real data
+                loadDashboardData();
+                
+            } catch (err) {
+                console.error('Authentication error:', err);
+                showError('Connection error. Please try again.');
+            }
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('authError');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        // Load and display dashboard data
+        function loadDashboardData() {
+            if (!companyData || !teamResults) return;
+
+            // Update company information
+            document.getElementById('organizationName').textContent = companyData.company_name || 'Your Organization';
+            document.getElementById('leadersAssessed').textContent = teamResults.length;
+            
+            // Calculate assessment period
+            if (teamResults.length > 0) {
+                const dates = teamResults.map(r => new Date(r.completed_at));
+                const earliest = new Date(Math.min(...dates));
+                const latest = new Date(Math.max(...dates));
+                document.getElementById('assessmentPeriod').textContent = 
+                    `${earliest.toLocaleDateString()} - ${latest.toLocaleDateString()}`;
+            }
+
+            // Calculate anonymous team metrics
+            calculateTeamMetrics();
+        }
+
+        // Calculate anonymous aggregated team metrics
+        function calculateTeamMetrics() {
+            if (teamResults.length === 0) {
+                // Show no data message
+                populateWithNoData();
+                return;
+            }
+
+            let totalSupport = 0, totalResponsible = 0, totalSelfless = 0, totalAccountability = 0;
+            let overallTotal = 0;
+            let archetypeCount = {};
+
+            teamResults.forEach(result => {
+                if (result.framework_scores) {
+                    // Assuming framework_scores structure matches: {support: X, responsible: X, selfless: X, accountability: X}
+                    const scores = result.framework_scores;
+                    totalSupport += scores.support || scores.accept || 0; // backward compatibility
+                    totalResponsible += scores.responsible || scores.create || 0;
+                    totalSelfless += scores.selfless || scores.teach || 0;
+                    totalAccountability += scores.accountability || 0;
+                }
+
+                // Count archetypes anonymously
+                if (result.archetype) {
+                    archetypeCount[result.archetype] = (archetypeCount[result.archetype] || 0) + 1;
+                }
+            });
+
+            const teamSize = teamResults.length;
+            
+            // Calculate averages (convert to percentages)
+            const avgSupport = Math.round((totalSupport / teamSize) * 20); // assuming 5-point scale
+            const avgResponsible = Math.round((totalResponsible / teamSize) * 20);
+            const avgSelfless = Math.round((totalSelfless / teamSize) * 20);
+            const avgAccountability = Math.round((totalAccountability / teamSize) * 20);
+            const overallAvg = Math.round((avgSupport + avgResponsible + avgSelfless + avgAccountability) / 4);
+
+            // Update dashboard displays
+            document.getElementById('overallScore').textContent = `${overallAvg}%`;
+            document.getElementById('acceptScore').textContent = `${avgSupport}%`; // Support
+            document.getElementById('createScore').textContent = `${avgResponsible}%`; // Responsible
+            document.getElementById('teachScore').textContent = `${avgSelfless}%`; // Selfless
+            document.getElementById('accountabilityScore').textContent = `${avgAccountability}%`;
+
+            // Calculate improvement estimate based on baseline
+            const improvementEstimate = Math.max(15, Math.min(45, 50 - overallAvg));
+            document.getElementById('engagementImprovement').textContent = `+${improvementEstimate}%`;
+
+            // Update key findings with real data
+            updateKeyFindings(avgSupport, avgResponsible, avgSelfless, avgAccountability);
+
+            // Show most common archetypes (anonymous)
+            updateArchetypeDistribution(archetypeCount);
+        }
+
+        function updateKeyFindings(support, responsible, selfless, accountability) {
+            // Update finding cards with actual team scores
+            const findings = [
+                { score: support, element: 'accept' },
+                { score: responsible, element: 'create' },
+                { score: selfless, element: 'teach' },
+                { score: accountability, element: 'accountability' }
+            ];
+
+            findings.forEach(finding => {
+                const card = document.querySelector(`.finding-card.${finding.element}`);
+                if (card) {
+                    const badge = card.querySelector('.score-badge');
+                    let badgeClass = 'needs-improvement';
+                    let badgeText = 'Needs Focus';
+                    
+                    if (finding.score >= 80) {
+                        badgeClass = 'excellent';
+                        badgeText = 'Excellent';
+                    } else if (finding.score >= 70) {
+                        badgeClass = 'good';
+                        badgeText = 'Strong Foundation';
+                    }
+                    
+                    badge.className = `score-badge ${badgeClass}`;
+                    badge.textContent = `${finding.score}% - ${badgeText}`;
+                }
+            });
+        }
+
+        function updateArchetypeDistribution(archetypeCount) {
+            // Show anonymous archetype distribution
+            const totalCount = Object.values(archetypeCount).reduce((a, b) => a + b, 0);
+            let distributionText = 'Team Leadership Archetypes:<br>';
+            
+            Object.entries(archetypeCount)
+                .sort((a, b) => b[1] - a[1])
+                .forEach(([archetype, count]) => {
+                    const percentage = Math.round((count / totalCount) * 100);
+                    distributionText += `${archetype}: ${percentage}% (${count} leaders)<br>`;
+                });
+
+            // Update the organizational overview chart placeholder
+            const chartPlaceholder = document.querySelector('.chart-placeholder');
+            if (chartPlaceholder) {
+                chartPlaceholder.innerHTML = distributionText;
+            }
+        }
+
+        function populateWithNoData() {
+            // Show appropriate message when no assessment data is available
+            document.getElementById('overallScore').textContent = '0%';
+            document.getElementById('acceptScore').textContent = '0%';
+            document.getElementById('createScore').textContent = '0%';
+            document.getElementById('teachScore').textContent = '0%';
+            document.getElementById('accountabilityScore').textContent = '0%';
+            document.getElementById('engagementImprovement').textContent = 'N/A';
+            
+            // Show message in insights
+            const insightsSection = document.querySelector('.key-findings');
+            if (insightsSection) {
+                insightsSection.innerHTML = '<div style="text-align: center; padding: 40px; color: #6b7280;"><h3>No Assessment Data Available</h3><p>Team members haven\'t completed their assessments yet. Once they start using the company code, their anonymous results will appear here.</p></div>';
+            }
+        }
 
         function generatePDF() {
             // In a real implementation, this would use a library like jsPDF or html2pdf

@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leadership Behavior Assessment - TPEAINDEX (New Format)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
+            min-height: 100vh;
+            padding: 15px;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(251, 191, 36, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(251, 191, 36, 0.2) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header h1 {
+            font-size: clamp(1.5rem, 5vw, 2.1rem);
+            margin-bottom: 15px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .header .subtitle {
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .quiz-content {
+            padding: clamp(20px, 5vw, 35px);
+        }
+
+        .progress-bar {
+            background: #e2e8f0;
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question {
+            display: none;
+            margin-bottom: 30px;
+        }
+
+        .question.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-number {
+            color: #fbbf24;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+
+        .question-category {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 15px;
+            margin-bottom: 10px;
+        }
+
+        .category-accept { background: #fce7f3; color: #be185d; }
+        .category-create { background: #ddd6fe; color: #7c3aed; }
+        .category-teach { background: #dbeafe; color: #1d4ed8; }
+        .category-accountability { background: #fef3c7; color: #d97706; }
+
+        .question h3 {
+            color: #1e3a8a;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .question-text {
+            font-weight: 600;
+        }
+
+        .scenario-context {
+            background: #f8fafc;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-style: italic;
+            color: #6b7280;
+            border-left: 4px solid #fbbf24;
+        }
+
+        .answers {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .answer-option {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .answer-option:hover {
+            border-color: #fbbf24;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .answer-option input[type="radio"]:checked + .answer-text {
+            color: #1e3a8a;
+        }
+
+        .answer-option:has(input[type="radio"]:checked) {
+            border-color: #1e3a8a;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.2);
+        }
+
+        .answer-text {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        .answer-description {
+            color: #6b7280;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .nav-btn {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #1e40af;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+        }
+
+        .nav-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .progress-indicator {
+            text-align: center;
+            color: #6b7280;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .progress-indicator .current {
+            color: #1e3a8a;
+            font-weight: 700;
+        }
+
+        .results {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .results h2 {
+            color: #1e3a8a;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .score-display {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 30px;
+            border-radius: 16px;
+            margin: 20px 0;
+            border: 2px solid #fbbf24;
+        }
+
+        .framework-scores {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .framework-score {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid;
+        }
+
+        .framework-score.support { border-top-color: #be185d; }
+        .framework-score.responsible { border-top-color: #7c3aed; }
+        .framework-score.selfless { border-top-color: #1d4ed8; }
+        .framework-score.accountability { border-top-color: #d97706; }
+
+        .framework-score h3 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .answers {
+                gap: 12px;
+            }
+            
+            .answer-option {
+                padding: 15px;
+            }
+
+            .nav-btn {
+                padding: 12px 20px;
+                min-width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Leadership Behavior Assessment</h1>
+            <p class="subtitle">Choose the response that sounds most like you</p>
+        </div>
+
+        <div class="quiz-content">
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <!-- Questions -->
+            <!-- SUPPORT Questions -->
+            <div class="question active" data-question="1">
+                <h3>
+                    <span class="question-number">1</span>
+                    <span class="question-category category-accept">SUPPORT</span>
+                    <span class="question-text">When a team member seems frustrated or upset, which approach sounds more like you?</span>
+                </h3>
+                <div class="scenario-context">
+                    You notice someone on your team appears stressed during a meeting
+                </div>
+                <div class="answers">
+                    <label class="answer-option">
+                        <input type="radio" name="q1" value="5" style="display: none;">
+                        <div class="answer-text">I make a mental note to check in with them privately later</div>
+                        <div class="answer-description">I want to understand what's happening and see how I can help</div>
+                    </label>
+                    <label class="answer-option">
+                        <input type="radio" name="q1" value="2" style="display: none;">
+                        <div class="answer-text">I focus on keeping the meeting productive and moving forward</div>
+                        <div class="answer-description">I believe it's best to address personal issues outside of team time</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="2">
+                <h3>
+                    <span class="question-number">2</span>
+                    <span class="question-category category-accept">SUPPORT</span>
+                    <span class="question-text">When someone makes a mistake that affects the team, which response sounds more like you?</span>
+                </h3>
+                <div class="scenario-context">
+                    A team member's error caused a delay in project delivery
+                </div>
+                <div class="answers">
+                    <label class="answer-option">
+                        <input type="radio" name="q2" value="5" style="display: none;">
+                        <div class="answer-text">"Let's figure out how to fix this and prevent it next time"</div>
+                        <div class="answer-description">I focus on learning from the situation and moving forward together</div>
+                    </label>
+                    <label class="answer-option">
+                        <input type="radio" name="q2" value="2" style="display: none;">
+                        <div class="answer-text">"We need to understand why this happened and ensure accountability"</div>
+                        <div class="answer-description">I believe in clear responsibility and understanding root causes</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="3">
+                <h3>
+                    <span class="question-number">3</span>
+                    <span class="question-category category-accept">SUPPORT</span>
+                    <span class="question-text">When giving feedback to someone, which approach sounds more like you?</span>
+                </h3>
+                <div class="scenario-context">
+                    You need to address a recurring issue with a team member
+                </div>
+                <div class="answers">
+                    <label class="answer-option">
+                        <input type="radio" name="q3" value="5" style="display: none;">
+                        <div class="answer-text">I start by asking about their perspective and challenges first</div>
+                        <div class="answer-description">I want to understand their side before sharing my observations</div>
+                    </label>
+                    <label class="answer-option">
+                        <input type="radio" name="q3" value="2" style="display: none;">
+                        <div class="answer-text">I present the facts and explain what needs to change</div>
+                        <div class="answer-description">I believe clear, direct feedback is most helpful</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- RESPONSIBLE Questions -->
+            <div class="question" data-question="4">
+                <h3>
+                    <span class="question-number">4</span>
+                    <span class="question-category category-create">RESPONSIBLE</span>
+                    <span class="question-text">When making a decision that affects multiple departments, which approach sounds more like you?</span>
+                </h3>
+                <div class="scenario-context">
+                    You need to implement a new process that will change how several teams work
+                </div>
+                <div class="answers">
+                    <label class="answer-option">
+                        <input type="radio" name="q4" value="5" style="display: none;">
+                        <div class="answer-text">I gather input from all affected teams before deciding</div>
+                        <div class="answer-description">I want to understand the impact on everyone involved</div>
+                    </label>
+                    <label class="answer-option">
+                        <input type="radio" name="q4" value="2" style="display: none;">
+                        <div class="answer-text">I make the decision based on what's best for the overall goal</div>
+                        <div class="answer-description">I focus on what will drive the best results for the organization</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="5">
+                <h3>
+                    <span class="question-number">5</span>
+                    <span class="question-category category-create">RESPONSIBLE</span>
+                    <span class="question-text">When you realize you made an error in judgment, which sounds more like you?</span>
+                </h3>
+                <div class="scenario-context">
+                    You discover that a decision you made last week wasn't the best choice
+                </div>
+                <div class="answers">
+                    <label class="answer-option">
+                        <input type="radio" name="q5" value="5" style="display: none;">
+                        <div class="answer-text">I address it directly with the team and explain what I learned</div>
+                        <div class="answer-description">I believe owning mistakes builds trust and shows growth</div>
+                    </label>
+                    <label class="answer-option">
+                        <input type="radio" name="q5" value="2" style="display: none;">
+                        <div class="answer-text">I quietly adjust course and implement the better approach</div>
+                        <div class="answer-description">I focus on fixing the issue without creating unnecessary discussion</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- SELFLESS Questions -->
+            <div class="question" data-question="6">
+                <h3>
+                    <span class="question-number">6</span>
+                    <span class="question-category category-teach">SELFLESS</span>
+                    <span class="question-text">When someone asks for your help with a problem, which sounds more like you?</span>
+                </h3>
+                <div class="scenario-context">
+                    A colleague comes to you with a challenge they're trying to solve
+                </div>
+                <div class="answers">
+                    <label class="answer-option">
+                        <input type="radio" name="q6" value="5" style="display: none;">
+                        <div class="answer-text">I ask questions to help them think through it themselves</div>
+                        <div class="answer-description">I want to help them develop their own problem-solving skills</div>
+                    </label>
+                    <label class="answer-option">
+                        <input type="radio" name="q6" value="2" style="display: none;">
+                        <div class="answer-text">I share my experience and suggest what has worked for me</div>
+                        <div class="answer-description">I want to save them time by sharing proven solutions</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="7">
+                <h3>
+                    <span class="question-number">7</span>
+                    <span class="question-category category-teach">SELFLESS</span>
+                    <span class="question-text">When you don't know the answer to someone's question, which sounds more like you?</span>
+                </h3>
+                <div class="scenario-context">
+                    Someone asks you something you're not sure about
+                </div>
+                <div class="answers">
+                    <label class="answer-option">
+                        <input type="radio" name="q7" value="5" style="display: none;">
+                        <div class="answer-text">"I don't know that one - let's figure it out together"</div>
+                        <div class="answer-description">I'm comfortable admitting when I don't know something</div>
+                    </label>
+                    <label class="answer-option">
+                        <input type="radio" name="q7" value="2" style="display: none;">
+                        <div class="answer-text">I offer what I do know and suggest where they might find more information</div>
+                        <div class="answer-description">I try to be as helpful as possible with what I can provide</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- ACCOUNTABILITY Questions -->
+            <div class="question" data-question="8">
+                <h3>
+                    <span class="question-number">8</span>
+                    <span class="question-category category-accountability">ACCOUNTABILITY</span>
+                    <span class="question-text">When someone achieves a goal, which sounds more like you?</span>
+                </h3>
+                <div class="scenario-context">
+                    A team member successfully completes an important project
+                </div>
+                <div class="answers">
+                    <label class="answer-option">
+                        <input type="radio" name="q8" value="5" style="display: none;">
+                        <div class="answer-text">I acknowledge their effort and celebrate their success publicly</div>
+                        <div class="answer-description">I want to recognize their hard work and share their achievement</div>
+                    </label>
+                    <label class="answer-option">
+                        <input type="radio" name="q8" value="2" style="display: none;">
+                        <div class="answer-text">I thank them privately and move on to the next priority</div>
+                        <div class="answer-description">I appreciate their work and focus on maintaining momentum</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="9">
+                <h3>
+                    <span class="question-number">9</span>
+                    <span class="question-category category-accountability">ACCOUNTABILITY</span>
+                    <span class="question-text">When following up on commitments, which sounds more like you?</span>
+                </h3>
+                <div class="scenario-context">
+                    Someone said they'd have something done by today, but you haven't heard from them
+                </div>
+                <div class="answers">
+                    <label class="answer-option">
+                        <input type="radio" name="q9" value="5" style="display: none;">
+                        <div class="answer-text">I check in to see how things are going and if they need support</div>
+                        <div class="answer-description">I want to understand their situation and offer help if needed</div>
+                    </label>
+                    <label class="answer-option">
+                        <input type="radio" name="q9" value="2" style="display: none;">
+                        <div class="answer-text">I send a reminder about the deadline and ask for an update</div>
+                        <div class="answer-description">I want to ensure commitments are tracked and met</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="10">
+                <h3>
+                    <span class="question-number">10</span>
+                    <span class="question-category category-accountability">ACCOUNTABILITY</span>
+                    <span class="question-text">When recognizing team achievements, which sounds more like you?</span>
+                </h3>
+                <div class="scenario-context">
+                    Your team just delivered an important project successfully
+                </div>
+                <div class="answers">
+                    <label class="answer-option">
+                        <input type="radio" name="q10" value="5" style="display: none;">
+                        <div class="answer-text">I highlight specific contributions and celebrate individual strengths</div>
+                        <div class="answer-description">I want each person to feel valued for their unique contribution</div>
+                    </label>
+                    <label class="answer-option">
+                        <input type="radio" name="q10" value="2" style="display: none;">
+                        <div class="answer-text">I celebrate the team's collective achievement and shared success</div>
+                        <div class="answer-description">I want to reinforce the power of working together</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results" id="results">
+                <h2>Your Leadership Behavior Profile</h2>
+                <div class="score-display">
+                    <p>Thank you for completing the assessment! This new format provides more authentic insights into your leadership style.</p>
+                </div>
+                <div class="framework-scores" id="frameworkScores">
+                    <!-- Scores will be populated here -->
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="navigation">
+                <button class="nav-btn" id="prevBtn" onclick="previousQuestion()" disabled>Previous</button>
+                <div class="progress-indicator">
+                    Question <span class="current" id="currentQ">1</span> of <span id="totalQ">10</span>
+                </div>
+                <button class="nav-btn" id="nextBtn" onclick="nextQuestion()" disabled>Next</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = 1;
+        let totalQuestions = 10;
+        let answers = {};
+
+        function selectChoice(element, questionName, value) {
+            // Find the radio input and check it
+            const radio = element.querySelector('input[type="radio"]');
+            radio.checked = true;
+            
+            // Store answer
+            answers[questionName] = value;
+            
+            // Enable next button
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        // Add click handlers to answer options
+        document.addEventListener('DOMContentLoaded', function() {
+            const answerOptions = document.querySelectorAll('.answer-option');
+            answerOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const radio = this.querySelector('input[type="radio"]');
+                    const questionName = radio.name;
+                    const value = radio.value;
+                    
+                    selectChoice(this, questionName, value);
+                });
+            });
+            
+            updateProgress();
+        });
+
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions) {
+                // Hide current question
+                document.querySelector(`.question[data-question="${currentQuestion}"]`).classList.remove('active');
+                
+                // Show next question
+                currentQuestion++;
+                const nextQ = document.querySelector(`.question[data-question="${currentQuestion}"]`);
+                if (nextQ) {
+                    nextQ.classList.add('active');
+                }
+                
+                updateNavigation();
+                updateProgress();
+            } else {
+                // Show results
+                showResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 1) {
+                // Hide current question
+                document.querySelector(`.question[data-question="${currentQuestion}"]`).classList.remove('active');
+                
+                // Show previous question
+                currentQuestion--;
+                document.querySelector(`.question[data-question="${currentQuestion}"]`).classList.add('active');
+                
+                updateNavigation();
+                updateProgress();
+            }
+        }
+
+        function updateNavigation() {
+            // Update progress indicator
+            document.getElementById('currentQ').textContent = currentQuestion;
+            
+            // Update button states
+            document.getElementById('prevBtn').disabled = (currentQuestion === 1);
+            
+            // Check if current question is answered
+            const currentAnswer = answers[`q${currentQuestion}`];
+            document.getElementById('nextBtn').disabled = !currentAnswer;
+            
+            // Change to "Complete" on last question
+            if (currentQuestion === totalQuestions) {
+                document.getElementById('nextBtn').textContent = 'Complete Assessment';
+            } else {
+                document.getElementById('nextBtn').textContent = 'Next';
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion - 1) / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function showResults() {
+            // Hide all questions and navigation
+            document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
+            document.querySelector('.navigation').style.display = 'none';
+            document.querySelector('.progress-bar').style.display = 'none';
+            
+            // Calculate scores
+            const scores = calculateScores();
+            
+            // Show results
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.classList.add('active');
+            
+            // Display framework scores
+            displayFrameworkScores(scores);
+        }
+
+        function calculateScores() {
+            const scores = {
+                support: 0,
+                responsible: 0,
+                selfless: 0,
+                accountability: 0
+            };
+
+            // Map questions to frameworks
+            const questionMapping = {
+                1: 'support', 2: 'support', 3: 'support',
+                4: 'responsible', 5: 'responsible',
+                6: 'selfless', 7: 'selfless',
+                8: 'accountability', 9: 'accountability', 10: 'accountability'
+            };
+
+            Object.keys(answers).forEach(questionKey => {
+                const questionNum = parseInt(questionKey.replace('q', ''));
+                const framework = questionMapping[questionNum];
+                const score = parseInt(answers[questionKey]);
+                
+                scores[framework] += score;
+            });
+
+            // Convert to percentages (assuming max possible is 5 * number of questions per framework)
+            const questionCounts = { support: 3, responsible: 2, selfless: 2, accountability: 3 };
+            
+            Object.keys(scores).forEach(framework => {
+                const maxPossible = questionCounts[framework] * 5;
+                scores[framework] = Math.round((scores[framework] / maxPossible) * 100);
+            });
+
+            return scores;
+        }
+
+        function displayFrameworkScores(scores) {
+            const scoresContainer = document.getElementById('frameworkScores');
+            scoresContainer.innerHTML = '';
+
+            const frameworks = [
+                { key: 'support', name: 'SUPPORT', class: 'support' },
+                { key: 'responsible', name: 'RESPONSIBLE', class: 'responsible' },
+                { key: 'selfless', name: 'SELFLESS', class: 'selfless' },
+                { key: 'accountability', name: 'ACCOUNTABILITY', class: 'accountability' }
+            ];
+
+            frameworks.forEach(framework => {
+                const scoreDiv = document.createElement('div');
+                scoreDiv.className = `framework-score ${framework.class}`;
+                scoreDiv.innerHTML = `
+                    <h3>${framework.name}</h3>
+                    <div class="score-value">${scores[framework.key]}%</div>
+                `;
+                scoresContainer.appendChild(scoreDiv);
+            });
+        }
+
+        // Initialize
+        updateNavigation();
+    </script>
+</body>
+</html>
