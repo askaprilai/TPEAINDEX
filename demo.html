@@ -449,11 +449,10 @@
                 <div class="progress-fill" id="progressFill"></div>
             </div>
 
-            <!-- Questions - Demo version with first 8 questions -->
+            <!-- All 25 Questions - Demo version without framework labels -->
             <div class="question active" data-question="1">
                 <h3>
                     <span class="question-number">1</span>
-                    <span class="question-category category-support">SUPPORT</span>
                     <span class="question-text">When a team member appears stressed during a meeting, what's your typical response?</span>
                 </h3>
                 <div class="scenario-context">
@@ -478,7 +477,6 @@
             <div class="question" data-question="2">
                 <h3>
                     <span class="question-number">2</span>
-                    <span class="question-category category-support">SUPPORT</span>
                     <span class="question-text">When someone makes a mistake that impacts team deliverables, how do you typically respond?</span>
                 </h3>
                 <div class="scenario-context">
@@ -503,24 +501,23 @@
             <div class="question" data-question="3">
                 <h3>
                     <span class="question-number">3</span>
-                    <span class="question-category category-responsible">RESPONSIBLE</span>
-                    <span class="question-text">When making a decision that affects multiple departments, what's your typical process?</span>
+                    <span class="question-text">When you hear someone criticizing a colleague's work style, what do you typically do?</span>
                 </h3>
                 <div class="scenario-context">
-                    You need to implement a new process that will change how several teams work
+                    "Sarah's always disorganized - I don't know how she gets anything done"
                 </div>
                 <div class="answers">
-                    <label class="answer-option" onclick="selectAnswer(3, 5, this, 'I gather input from all affected teams before deciding')">
-                        <div class="answer-text">I gather input from all affected teams before deciding</div>
+                    <label class="answer-option" onclick="selectAnswer(3, 5, this, '\"Sarah has different strengths - she delivers excellent results\"')">
+                        <div class="answer-text">"Sarah has different strengths - she delivers excellent results"</div>
                     </label>
-                    <label class="answer-option" onclick="selectAnswer(3, 4, this, 'I consult with key representatives from each affected area')">
-                        <div class="answer-text">I consult with key representatives from each affected area</div>
+                    <label class="answer-option" onclick="selectAnswer(3, 4, this, '\"Everyone has different work styles that work for them\"')">
+                        <div class="answer-text">"Everyone has different work styles that work for them"</div>
                     </label>
-                    <label class="answer-option" onclick="selectAnswer(3, 3, this, 'I research the impacts and make the decision based on overall needs')">
-                        <div class="answer-text">I research the impacts and make the decision based on overall needs</div>
+                    <label class="answer-option" onclick="selectAnswer(3, 3, this, 'I listen but don\'t engage in the criticism')">
+                        <div class="answer-text">I listen but don't engage in the criticism</div>
                     </label>
-                    <label class="answer-option" onclick="selectAnswer(3, 2, this, 'I make the decision based on what\'s best for the overall goal')">
-                        <div class="answer-text">I make the decision based on what's best for the overall goal</div>
+                    <label class="answer-option" onclick="selectAnswer(3, 2, this, '\"Have you talked to Sarah about your concerns?\"')">
+                        <div class="answer-text">"Have you talked to Sarah about your concerns?"</div>
                     </label>
                 </div>
             </div>
@@ -528,24 +525,23 @@
             <div class="question" data-question="4">
                 <h3>
                     <span class="question-number">4</span>
-                    <span class="question-category category-selfless">SELFLESS</span>
-                    <span class="question-text">When someone asks for your help with a problem, which sounds more like you?</span>
+                    <span class="question-text">When giving feedback about a recurring issue, what's your usual approach?</span>
                 </h3>
                 <div class="scenario-context">
-                    A colleague comes to you with a challenge they're trying to solve
+                    You need to address a pattern you've noticed with a team member
                 </div>
                 <div class="answers">
-                    <label class="answer-option" onclick="selectAnswer(4, 5, this, 'I ask questions to help them think through it themselves')">
-                        <div class="answer-text">I ask questions to help them think through it themselves</div>
+                    <label class="answer-option" onclick="selectAnswer(4, 5, this, '\"Help me understand what challenges you\'re facing with this\"')">
+                        <div class="answer-text">"Help me understand what challenges you're facing with this"</div>
                     </label>
-                    <label class="answer-option" onclick="selectAnswer(4, 4, this, 'I help them identify their strengths and development areas')">
-                        <div class="answer-text">I help them identify their strengths and development areas</div>
+                    <label class="answer-option" onclick="selectAnswer(4, 4, this, '\"I\'ve noticed X happening - what\'s your perspective?\"')">
+                        <div class="answer-text">"I've noticed X happening - what's your perspective?"</div>
                     </label>
-                    <label class="answer-option" onclick="selectAnswer(4, 3, this, 'I share resources and connections that might help them')">
-                        <div class="answer-text">I share resources and connections that might help them</div>
+                    <label class="answer-option" onclick="selectAnswer(4, 3, this, '\"We need to address X - here\'s what I\'ve observed\"')">
+                        <div class="answer-text">"We need to address X - here's what I've observed"</div>
                     </label>
-                    <label class="answer-option" onclick="selectAnswer(4, 2, this, 'I share my experience and suggest specific steps they could take')">
-                        <div class="answer-text">I share my experience and suggest specific steps they could take</div>
+                    <label class="answer-option" onclick="selectAnswer(4, 2, this, '\"This pattern needs to change - here\'s what must happen\"')">
+                        <div class="answer-text">"This pattern needs to change - here's what must happen"</div>
                     </label>
                 </div>
             </div>
@@ -553,24 +549,503 @@
             <div class="question" data-question="5">
                 <h3>
                     <span class="question-number">5</span>
-                    <span class="question-category category-accountability">ACCOUNTABILITY</span>
-                    <span class="question-text">When someone achieves a goal, which sounds more like you?</span>
+                    <span class="question-text">When someone disagrees with your idea in a meeting, how do you typically respond?</span>
                 </h3>
                 <div class="scenario-context">
-                    A team member successfully completes an important project
+                    A colleague openly challenges your proposed solution
                 </div>
                 <div class="answers">
-                    <label class="answer-option" onclick="selectAnswer(5, 5, this, 'I acknowledge their effort and celebrate their success publicly')">
-                        <div class="answer-text">I acknowledge their effort and celebrate their success publicly</div>
+                    <label class="answer-option" onclick="selectAnswer(5, 5, this, '\"That\'s interesting - tell me more about your thinking\"')">
+                        <div class="answer-text">"That's interesting - tell me more about your thinking"</div>
                     </label>
-                    <label class="answer-option" onclick="selectAnswer(5, 4, this, 'I thank them specifically and ask what motivated the extra effort')">
+                    <label class="answer-option" onclick="selectAnswer(5, 4, this, '\"I\'d like to understand your concerns - can you elaborate?\"')">
+                        <div class="answer-text">"I'd like to understand your concerns - can you elaborate?"</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(5, 3, this, '\"Let me explain my reasoning, then I\'d like to hear yours\"')">
+                        <div class="answer-text">"Let me explain my reasoning, then I'd like to hear yours"</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(5, 2, this, 'I explain my reasoning and why I believe my approach is best')">
+                        <div class="answer-text">I explain my reasoning and why I believe my approach is best</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="6">
+                <h3>
+                    <span class="question-number">6</span>
+                    <span class="question-text">When a team member is struggling with their workload, what do you typically do?</span>
+                </h3>
+                <div class="scenario-context">
+                    Someone mentions feeling overwhelmed with their current projects
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(6, 5, this, '\"What specific support do you need? How can I help?\"')">
+                        <div class="answer-text">"What specific support do you need? How can I help?"</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(6, 4, this, '\"Let\'s review your priorities and see what we can adjust\"')">
+                        <div class="answer-text">"Let's review your priorities and see what we can adjust"</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(6, 3, this, '\"Let me know if you need help prioritizing or delegating\"')">
+                        <div class="answer-text">"Let me know if you need help prioritizing or delegating"</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(6, 2, this, 'I suggest time management strategies and prioritization techniques')">
+                        <div class="answer-text">I suggest time management strategies and prioritization techniques</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="7">
+                <h3>
+                    <span class="question-number">7</span>
+                    <span class="question-text">When you notice tension between two team members, what's your approach?</span>
+                </h3>
+                <div class="scenario-context">
+                    Two colleagues are avoiding each other and communication has become strained
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(7, 5, this, 'I speak with each person privately to understand both perspectives')">
+                        <div class="answer-text">I speak with each person privately to understand both perspectives</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(7, 4, this, 'I bring them together for a facilitated conversation')">
+                        <div class="answer-text">I bring them together for a facilitated conversation</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(7, 3, this, 'I watch to see if it affects work before intervening')">
+                        <div class="answer-text">I watch to see if it affects work before intervening</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(7, 2, this, 'I address it directly and establish ground rules for professional behavior')">
+                        <div class="answer-text">I address it directly and establish ground rules for professional behavior</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="8">
+                <h3>
+                    <span class="question-number">8</span>
+                    <span class="question-text">When making a decision that affects multiple departments, what's your typical process?</span>
+                </h3>
+                <div class="scenario-context">
+                    You need to implement a new process that will change how several teams work
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(8, 5, this, 'I gather input from all affected teams before deciding')">
+                        <div class="answer-text">I gather input from all affected teams before deciding</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(8, 4, this, 'I consult with key representatives from each affected area')">
+                        <div class="answer-text">I consult with key representatives from each affected area</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(8, 3, this, 'I research the impacts and make the decision based on overall needs')">
+                        <div class="answer-text">I research the impacts and make the decision based on overall needs</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(8, 2, this, 'I make the decision based on what\'s best for the overall goal')">
+                        <div class="answer-text">I make the decision based on what's best for the overall goal</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="9">
+                <h3>
+                    <span class="question-number">9</span>
+                    <span class="question-text">When you realize you made an error in judgment, what's your typical response?</span>
+                </h3>
+                <div class="scenario-context">
+                    You discover that a decision you made last week wasn't the best choice
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(9, 5, this, 'I address it directly with the team and explain what I learned')">
+                        <div class="answer-text">I address it directly with the team and explain what I learned</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(9, 4, this, 'I acknowledge the mistake and involve others in finding a better solution')">
+                        <div class="answer-text">I acknowledge the mistake and involve others in finding a better solution</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(9, 3, this, 'I quietly adjust course and implement the better approach')">
+                        <div class="answer-text">I quietly adjust course and implement the better approach</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(9, 2, this, 'I focus on fixing the issue without drawing unnecessary attention')">
+                        <div class="answer-text">I focus on fixing the issue without drawing unnecessary attention</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="10">
+                <h3>
+                    <span class="question-number">10</span>
+                    <span class="question-text">When planning a project with tight deadlines, how do you typically approach it?</span>
+                </h3>
+                <div class="scenario-context">
+                    You have a critical project that needs to be completed in less time than usual
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(10, 5, this, 'I break it down and involve the team in realistic planning')">
+                        <div class="answer-text">I break it down and involve the team in realistic planning</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(10, 4, this, 'I identify risks and create contingency plans with stakeholders')">
+                        <div class="answer-text">I identify risks and create contingency plans with stakeholders</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(10, 3, this, 'I focus on the critical path and essential deliverables')">
+                        <div class="answer-text">I focus on the critical path and essential deliverables</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(10, 2, this, 'I set clear expectations and push for maximum efficiency')">
+                        <div class="answer-text">I set clear expectations and push for maximum efficiency</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="11">
+                <h3>
+                    <span class="question-number">11</span>
+                    <span class="question-text">When someone challenges your decision in a meeting, what's your typical response?</span>
+                </h3>
+                <div class="scenario-context">
+                    A team member openly questions a choice you made
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(11, 5, this, 'I welcome their perspective and explore their concerns')">
+                        <div class="answer-text">I welcome their perspective and explore their concerns</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(11, 4, this, 'I ask them to explain their thinking and consider alternatives')">
+                        <div class="answer-text">I ask them to explain their thinking and consider alternatives</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(11, 3, this, 'I explain my reasoning and remain open to discussion')">
+                        <div class="answer-text">I explain my reasoning and remain open to discussion</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(11, 2, this, 'I stand by my decision and explain why it\'s the right choice')">
+                        <div class="answer-text">I stand by my decision and explain why it's the right choice</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="12">
+                <h3>
+                    <span class="question-number">12</span>
+                    <span class="question-text">When communicating bad news to your team, how do you typically approach it?</span>
+                </h3>
+                <div class="scenario-context">
+                    You need to tell the team about budget cuts that will affect their projects
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(12, 5, this, 'I present the facts clearly and invite questions and concerns')">
+                        <div class="answer-text">I present the facts clearly and invite questions and concerns</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(12, 4, this, 'I explain the situation and work with them on solutions')">
+                        <div class="answer-text">I explain the situation and work with them on solutions</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(12, 3, this, 'I deliver the message directly and focus on moving forward')">
+                        <div class="answer-text">I deliver the message directly and focus on moving forward</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(12, 2, this, 'I present the decision and outline the next steps')">
+                        <div class="answer-text">I present the decision and outline the next steps</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="13">
+                <h3>
+                    <span class="question-number">13</span>
+                    <span class="question-text">When someone asks for career advice, what's your typical approach?</span>
+                </h3>
+                <div class="scenario-context">
+                    A team member wants guidance on their professional development
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(13, 5, this, 'I ask about their goals and help them explore their own path')">
+                        <div class="answer-text">I ask about their goals and help them explore their own path</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(13, 4, this, 'I help them identify their strengths and development areas')">
+                        <div class="answer-text">I help them identify their strengths and development areas</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(13, 3, this, 'I share resources and connections that might help them')">
+                        <div class="answer-text">I share resources and connections that might help them</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(13, 2, this, 'I share my experience and suggest specific steps they could take')">
+                        <div class="answer-text">I share my experience and suggest specific steps they could take</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="14">
+                <h3>
+                    <span class="question-number">14</span>
+                    <span class="question-text">When you don't know the answer to someone's question, what's your typical response?</span>
+                </h3>
+                <div class="scenario-context">
+                    Someone asks you something you're not sure about
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(14, 5, this, '\"I don\'t know that one - let\'s figure it out together\"')">
+                        <div class="answer-text">"I don't know that one - let's figure it out together"</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(14, 4, this, '\"Let me find out and get back to you with a good answer\"')">
+                        <div class="answer-text">"Let me find out and get back to you with a good answer"</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(14, 3, this, 'I offer what I do know and suggest where they might find more')">
+                        <div class="answer-text">I offer what I do know and suggest where they might find more</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(14, 2, this, 'I connect them with someone who would know better')">
+                        <div class="answer-text">I connect them with someone who would know better</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="15">
+                <h3>
+                    <span class="question-number">15</span>
+                    <span class="question-text">When training someone new, what's your typical approach?</span>
+                </h3>
+                <div class="scenario-context">
+                    A new team member needs to learn a complex process
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(15, 5, this, 'I guide them through it step by step, letting them do the work')">
+                        <div class="answer-text">I guide them through it step by step, letting them do the work</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(15, 4, this, 'I show them once, then watch as they try it themselves')">
+                        <div class="answer-text">I show them once, then watch as they try it themselves</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(15, 3, this, 'I demonstrate the process and provide detailed documentation')">
+                        <div class="answer-text">I demonstrate the process and provide detailed documentation</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(15, 2, this, 'I explain the key points and let them practice on their own')">
+                        <div class="answer-text">I explain the key points and let them practice on their own</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="16">
+                <h3>
+                    <span class="question-number">16</span>
+                    <span class="question-text">When someone is struggling with a skill they need to develop, how do you typically help?</span>
+                </h3>
+                <div class="scenario-context">
+                    A team member is having difficulty with presentation skills
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(16, 5, this, 'I offer to practice with them and provide constructive feedback')">
+                        <div class="answer-text">I offer to practice with them and provide constructive feedback</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(16, 4, this, 'I help them break down what they want to improve and create a plan')">
+                        <div class="answer-text">I help them break down what they want to improve and create a plan</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(16, 3, this, 'I recommend training resources and check in on their progress')">
+                        <div class="answer-text">I recommend training resources and check in on their progress</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(16, 2, this, 'I share tips that have worked for me in similar situations')">
+                        <div class="answer-text">I share tips that have worked for me in similar situations</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="17">
+                <h3>
+                    <span class="question-number">17</span>
+                    <span class="question-text">When you see someone with potential who isn't being recognized, what's your typical response?</span>
+                </h3>
+                <div class="scenario-context">
+                    You notice a talented person whose contributions are being overlooked
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(17, 5, this, 'I look for opportunities to showcase their work to others')">
+                        <div class="answer-text">I look for opportunities to showcase their work to others</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(17, 4, this, 'I speak with them about their goals and how to increase visibility')">
+                        <div class="answer-text">I speak with them about their goals and how to increase visibility</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(17, 3, this, 'I mention their contributions in appropriate settings')">
+                        <div class="answer-text">I mention their contributions in appropriate settings</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(17, 2, this, 'I encourage them to speak up more about their achievements')">
+                        <div class="answer-text">I encourage them to speak up more about their achievements</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="18">
+                <h3>
+                    <span class="question-number">18</span>
+                    <span class="question-text">When following up on commitments, what's your typical approach?</span>
+                </h3>
+                <div class="scenario-context">
+                    Someone said they'd have something done by today, but you haven't heard from them
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(18, 5, this, 'I check in to see how things are going and if they need support')">
+                        <div class="answer-text">I check in to see how things are going and if they need support</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(18, 4, this, 'I ask about the status and if there are any obstacles')">
+                        <div class="answer-text">I ask about the status and if there are any obstacles</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(18, 3, this, 'I send a friendly reminder about the deadline')">
+                        <div class="answer-text">I send a friendly reminder about the deadline</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(18, 2, this, 'I ask for a status update and new timeline if needed')">
+                        <div class="answer-text">I ask for a status update and new timeline if needed</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="19">
+                <h3>
+                    <span class="question-number">19</span>
+                    <span class="question-text">When recognizing team achievements, what's your typical approach?</span>
+                </h3>
+                <div class="scenario-context">
+                    Your team just delivered an important project successfully
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(19, 5, this, 'I highlight specific contributions and celebrate individual strengths')">
+                        <div class="answer-text">I highlight specific contributions and celebrate individual strengths</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(19, 4, this, 'I acknowledge both individual efforts and team collaboration')">
+                        <div class="answer-text">I acknowledge both individual efforts and team collaboration</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(19, 3, this, 'I celebrate the team\'s collective achievement and shared success')">
+                        <div class="answer-text">I celebrate the team's collective achievement and shared success</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(19, 2, this, 'I focus on the results achieved and lessons learned')">
+                        <div class="answer-text">I focus on the results achieved and lessons learned</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="20">
+                <h3>
+                    <span class="question-number">20</span>
+                    <span class="question-text">When someone exceeds expectations, how do you typically respond?</span>
+                </h3>
+                <div class="scenario-context">
+                    A team member delivers work that's significantly better than required
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(20, 5, this, 'I acknowledge their excellence publicly and personally')">
+                        <div class="answer-text">I acknowledge their excellence publicly and personally</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(20, 4, this, 'I thank them specifically and ask what motivated the extra effort')">
                         <div class="answer-text">I thank them specifically and ask what motivated the extra effort</div>
                     </label>
-                    <label class="answer-option" onclick="selectAnswer(5, 3, this, 'I make sure their manager and peers know about their great work')">
+                    <label class="answer-option" onclick="selectAnswer(20, 3, this, 'I make sure their manager and peers know about their great work')">
                         <div class="answer-text">I make sure their manager and peers know about their great work</div>
                     </label>
-                    <label class="answer-option" onclick="selectAnswer(5, 2, this, 'I thank them privately and move on to the next priority')">
-                        <div class="answer-text">I thank them privately and move on to the next priority</div>
+                    <label class="answer-option" onclick="selectAnswer(20, 2, this, 'I thank them privately and note it for future reference')">
+                        <div class="answer-text">I thank them privately and note it for future reference</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="21">
+                <h3>
+                    <span class="question-number">21</span>
+                    <span class="question-text">When providing feedback on someone's development, what's your typical focus?</span>
+                </h3>
+                <div class="scenario-context">
+                    During a regular check-in, you want to help someone grow professionally
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(21, 5, this, 'I focus on their strengths and how to leverage them further')">
+                        <div class="answer-text">I focus on their strengths and how to leverage them further</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(21, 4, this, 'I balance recognition of progress with areas for growth')">
+                        <div class="answer-text">I balance recognition of progress with areas for growth</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(21, 3, this, 'I identify specific skills they could develop for advancement')">
+                        <div class="answer-text">I identify specific skills they could develop for advancement</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(21, 2, this, 'I give clear, actionable feedback on areas needing improvement')">
+                        <div class="answer-text">I give clear, actionable feedback on areas needing improvement</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="22">
+                <h3>
+                    <span class="question-number">22</span>
+                    <span class="question-text">When setting goals with your team, what's your typical approach?</span>
+                </h3>
+                <div class="scenario-context">
+                    You're planning objectives for the next quarter
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(22, 5, this, 'I involve the team in setting challenging but achievable goals')">
+                        <div class="answer-text">I involve the team in setting challenging but achievable goals</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(22, 4, this, 'I collaborate with them to align personal and team objectives')">
+                        <div class="answer-text">I collaborate with them to align personal and team objectives</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(22, 3, this, 'I set clear targets and work with them on the plan to achieve them')">
+                        <div class="answer-text">I set clear targets and work with them on the plan to achieve them</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(22, 2, this, 'I establish specific, measurable objectives with defined timelines')">
+                        <div class="answer-text">I establish specific, measurable objectives with defined timelines</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="23">
+                <h3>
+                    <span class="question-number">23</span>
+                    <span class="question-text">When someone is facing a personal challenge that affects their work, how do you typically respond?</span>
+                </h3>
+                <div class="scenario-context">
+                    A team member mentions they're dealing with a difficult family situation
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(23, 5, this, 'I ask how I can support them and what flexibility they might need')">
+                        <div class="answer-text">I ask how I can support them and what flexibility they might need</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(23, 4, this, 'I express concern and offer to adjust their workload temporarily')">
+                        <div class="answer-text">I express concern and offer to adjust their workload temporarily</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(23, 3, this, 'I acknowledge their situation and remind them of available resources')">
+                        <div class="answer-text">I acknowledge their situation and remind them of available resources</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(23, 2, this, 'I thank them for letting me know and ask what adjustments we need to make')">
+                        <div class="answer-text">I thank them for letting me know and ask what adjustments we need to make</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="24">
+                <h3>
+                    <span class="question-number">24</span>
+                    <span class="question-text">When mediating a conflict between team members, what's your typical approach?</span>
+                </h3>
+                <div class="scenario-context">
+                    Two colleagues have different views on how to approach a project
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(24, 5, this, 'I facilitate a conversation where both can share their perspectives')">
+                        <div class="answer-text">I facilitate a conversation where both can share their perspectives</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(24, 4, this, 'I listen to each side separately first, then bring them together')">
+                        <div class="answer-text">I listen to each side separately first, then bring them together</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(24, 3, this, 'I focus on finding common ground and shared objectives')">
+                        <div class="answer-text">I focus on finding common ground and shared objectives</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(24, 2, this, 'I review the facts and help them reach a practical solution')">
+                        <div class="answer-text">I review the facts and help them reach a practical solution</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="25">
+                <h3>
+                    <span class="question-number">25</span>
+                    <span class="question-text">When someone shares a new idea with you, what's your typical initial response?</span>
+                </h3>
+                <div class="scenario-context">
+                    A colleague presents a creative solution to an ongoing problem
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(25, 5, this, '\"That\'s interesting - tell me more about how you see this working\"')">
+                        <div class="answer-text">"That's interesting - tell me more about how you see this working"</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(25, 4, this, 'I ask questions to understand their thinking and explore possibilities')">
+                        <div class="answer-text">I ask questions to understand their thinking and explore possibilities</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(25, 3, this, 'I consider the merits and potential challenges they might face')">
+                        <div class="answer-text">I consider the merits and potential challenges they might face</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(25, 2, this, 'I evaluate it against our current approach and constraints')">
+                        <div class="answer-text">I evaluate it against our current approach and constraints</div>
                     </label>
                 </div>
             </div>
@@ -625,7 +1100,7 @@
             <div class="navigation">
                 <button class="nav-btn" id="prevBtn" onclick="previousQuestion()" disabled>Previous</button>
                 <div class="progress-indicator">
-                    Question <span class="current" id="currentQ">1</span> of <span id="totalQ">5</span>
+                    Question <span class="current" id="currentQ">1</span> of <span id="totalQ">25</span>
                 </div>
                 <button class="nav-btn" id="nextBtn" onclick="nextQuestion()" disabled>Next</button>
             </div>
@@ -634,7 +1109,7 @@
 
     <script>
         let currentQuestion = 1;
-        let totalQuestions = 5; // Demo version with 5 questions
+        let totalQuestions = 25; // Full demo version with all 25 questions
         let answers = {};
         let responseTexts = {}; // Store the actual response text for summary
 
@@ -736,13 +1211,13 @@
                 accountability: 0
             };
 
-            // Demo question mapping to frameworks
+            // Full question mapping to frameworks
             const questionMapping = {
-                1: 'support',
-                2: 'support', 
-                3: 'responsible',
-                4: 'selfless',
-                5: 'accountability'
+                1: 'support', 2: 'support', 3: 'support', 4: 'support', 5: 'support', 6: 'support', 7: 'support',
+                8: 'responsible', 9: 'responsible', 10: 'responsible', 11: 'responsible', 12: 'responsible',
+                13: 'selfless', 14: 'selfless', 15: 'selfless', 16: 'selfless', 17: 'selfless',
+                18: 'accountability', 19: 'accountability', 20: 'accountability', 21: 'accountability', 22: 'accountability',
+                23: 'support', 24: 'support', 25: 'support'
             };
 
             // Calculate raw scores
@@ -755,15 +1230,11 @@
                 }
             });
 
-            // Convert to demo percentages (simplified for demo)
+            // Convert to percentages
+            const questionCounts = { support: 10, responsible: 5, selfless: 5, accountability: 5 };
             Object.keys(scores).forEach(framework => {
-                if (framework === 'support') {
-                    scores[framework] = Math.round((scores[framework] / 10) * 100); // 2 questions max 10
-                } else {
-                    scores[framework] = Math.round((scores[framework] / 5) * 100); // 1 question max 5
-                }
-                // Ensure minimum score for demo
-                if (scores[framework] === 0) scores[framework] = 20;
+                const maxPossible = questionCounts[framework] * 5;
+                scores[framework] = Math.round((scores[framework] / maxPossible) * 100);
             });
 
             return scores;
@@ -795,13 +1266,13 @@
         function displayResponseSummary() {
             const summaryContainer = document.getElementById('responseSummary');
             
-            // Demo question mapping to frameworks
+            // Full question mapping to frameworks
             const questionMapping = {
-                1: 'support',
-                2: 'support',
-                3: 'responsible',
-                4: 'selfless',
-                5: 'accountability'
+                1: 'support', 2: 'support', 3: 'support', 4: 'support', 5: 'support', 6: 'support', 7: 'support',
+                8: 'responsible', 9: 'responsible', 10: 'responsible', 11: 'responsible', 12: 'responsible',
+                13: 'selfless', 14: 'selfless', 15: 'selfless', 16: 'selfless', 17: 'selfless',
+                18: 'accountability', 19: 'accountability', 20: 'accountability', 21: 'accountability', 22: 'accountability',
+                23: 'support', 24: 'support', 25: 'support'
             };
 
             // Group responses by framework
