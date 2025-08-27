@@ -400,12 +400,19 @@
             
             .answer-option {
                 padding: 15px;
-                min-height: 70px;
             }
             
             .nav-btn {
                 padding: 12px 20px;
                 min-width: 90px;
+            }
+
+            /* Make strengths/opportunities stack on mobile */
+            .response-summary div[style*="grid-template-columns"] {
+                display: block !important;
+            }
+            .response-summary div[style*="grid-template-columns"] > div {
+                margin-bottom: 20px;
             }
         }
     </style>
@@ -1065,11 +1072,41 @@
                     </div>
                 </div>
 
+                <!-- Leadership Insights Section -->
+                <div class="response-summary">
+                    <h3>Your Leadership Profile Analysis</h3>
+                    <p style="color: #6b7280; margin-bottom: 20px; font-size: 0.95rem;">
+                        Based on your behavioral choices, here's what your responses reveal about your leadership approach:
+                    </p>
+                    <div id="leadershipInsights">
+                        <!-- Leadership insights will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Strengths & Development Areas -->
+                <div class="response-summary">
+                    <h3>Strengths & Development Opportunities</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                        <div>
+                            <h4 style="color: #059669; margin-bottom: 12px; font-size: 1.1rem;">🎯 Your Leadership Strengths</h4>
+                            <div id="leadershipStrengths" class="response-list support">
+                                <!-- Strengths will be populated here -->
+                            </div>
+                        </div>
+                        <div>
+                            <h4 style="color: #dc2626; margin-bottom: 12px; font-size: 1.1rem;">⚡ Growth Opportunities</h4>
+                            <div id="growthOpportunities" class="response-list responsible">
+                                <!-- Growth opportunities will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Development Recommendations Section -->
                 <div class="response-summary">
-                    <h3>Development Recommendations</h3>
+                    <h3>Personalized Development Plan</h3>
                     <p style="color: #6b7280; margin-bottom: 20px; font-size: 0.95rem;">
-                        Based on your responses, here are specific areas to focus on for even greater leadership effectiveness:
+                        Specific actions you can take immediately to enhance your leadership effectiveness:
                     </p>
                     <div id="developmentRecommendations">
                         <!-- Development recommendations will be populated here -->
@@ -1078,12 +1115,15 @@
 
                 <!-- Demo CTA -->
                 <div class="demo-cta">
-                    <h3>Ready for Your Complete Leadership Profile?</h3>
+                    <h3>Transform Your Leadership Impact</h3>
                     <p>
-                        This demo shows just 5 of our 25 comprehensive questions. Get your complete behavioral analysis with detailed insights, development recommendations, and a comprehensive skill development plan.
+                        This demo revealed key insights about your leadership style. Imagine the impact of a complete 25-question assessment with advanced behavioral analysis, team dynamics insights, situational leadership adaptability, and a customized 90-day development roadmap.
+                    </p>
+                    <p style="margin-top: 15px; font-weight: 600;">
+                        Ready to unlock your full leadership potential?
                     </p>
                     <a href="https://calendly.com/aprilcoaching/askaprilcourses" class="cta-button" target="_blank">
-                        Get Your Complete Assessment
+                        Schedule Your Complete Leadership Assessment
                     </a>
                 </div>
 
@@ -1198,9 +1238,11 @@
             const resultsDiv = document.getElementById('results');
             resultsDiv.classList.add('active');
             
-            // Display framework scores and response summary
+            // Display framework scores and comprehensive analysis
             displayFrameworkScores(scores);
             displayResponseSummary();
+            displayLeadershipInsights(scores);
+            displayStrengthsAndOpportunities(scores);
             displayDevelopmentRecommendations(scores);
         }
 
@@ -1320,6 +1362,111 @@
                     
                     categoryDiv.appendChild(responseList);
                     summaryContainer.appendChild(categoryDiv);
+                }
+            });
+        }
+
+        function displayLeadershipInsights(scores) {
+            const insightsContainer = document.getElementById('leadershipInsights');
+            
+            // Analyze the leadership profile based on scores
+            const sortedScores = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+            const dominant = sortedScores[0][0];
+            const secondary = sortedScores[1][0];
+            
+            const insights = {
+                support: {
+                    high: "You lead with empathy and care, creating psychological safety where team members feel heard and valued. Your approach builds trust and loyalty.",
+                    moderate: "You balance supportive leadership with other priorities, showing care while maintaining focus on results and accountability."
+                },
+                responsible: {
+                    high: "You're a thoughtful decision-maker who considers multiple perspectives and long-term impacts. Your team trusts your judgment because you think things through.",
+                    moderate: "You make responsible decisions when needed but may sometimes prioritize speed or other factors over comprehensive analysis."
+                },
+                selfless: {
+                    high: "You're a developmental leader who prioritizes growing others over personal recognition. Your team develops strong capabilities because you invest in their growth.",
+                    moderate: "You balance developing others with achieving immediate results, knowing when to coach and when to direct."
+                },
+                accountability: {
+                    high: "You excel at recognition and follow-through, creating clear expectations and celebrating achievements. Your team knows where they stand and feels valued.",
+                    moderate: "You provide recognition and accountability when appropriate, balancing praise with constructive feedback."
+                }
+            };
+
+            // Create insight based on dominant style
+            const insight = insights[dominant]?.[scores[dominant] > 75 ? 'high' : 'moderate'] || 
+                           "Your leadership style shows a balanced approach across multiple dimensions.";
+            
+            const insightDiv = document.createElement('div');
+            insightDiv.className = 'response-item';
+            insightDiv.innerHTML = `
+                <div style="background: #f0f9ff; padding: 20px; border-radius: 10px; border-left: 4px solid #0284c7;">
+                    <h4 style="color: #0284c7; margin-bottom: 10px;">Your Leadership Signature</h4>
+                    <p style="color: #374151; line-height: 1.6; margin: 0;">${insight}</p>
+                </div>
+            `;
+            insightsContainer.appendChild(insightDiv);
+
+            // Add behavioral pattern insight
+            const mindsetScores = [22, 24, 25].map(q => answers[q]).filter(Boolean);
+            const avgMindset = mindsetScores.length > 0 ? 
+                mindsetScores.reduce((sum, score) => sum + score, 0) / mindsetScores.length : 3;
+
+            const mindsetInsight = avgMindset >= 4 ? 
+                "You demonstrate a growth mindset and optimistic approach to challenges, which helps your team stay resilient during difficult times." :
+                "You may tend toward caution or worry in challenging situations, which can sometimes limit your team's willingness to take risks or innovate.";
+
+            const mindsetDiv = document.createElement('div');
+            mindsetDiv.className = 'response-item';
+            mindsetDiv.innerHTML = `
+                <div style="background: #f9fafb; padding: 20px; border-radius: 10px; border-left: 4px solid #6b7280; margin-top: 15px;">
+                    <h4 style="color: #374151; margin-bottom: 10px;">Your Mindset Pattern</h4>
+                    <p style="color: #374151; line-height: 1.6; margin: 0;">${mindsetInsight}</p>
+                </div>
+            `;
+            insightsContainer.appendChild(mindsetDiv);
+        }
+
+        function displayStrengthsAndOpportunities(scores) {
+            const strengthsContainer = document.getElementById('leadershipStrengths');
+            const opportunitiesContainer = document.getElementById('growthOpportunities');
+            
+            // Sort scores to identify strengths (top 2) and opportunities (bottom 2)
+            const sortedScores = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+            const strengths = sortedScores.slice(0, 2);
+            const opportunities = sortedScores.slice(-2).reverse();
+
+            const strengthDescriptions = {
+                support: "Creating psychological safety and showing genuine care for team members' wellbeing and growth",
+                responsible: "Making thoughtful decisions that consider long-term impacts on all stakeholders", 
+                selfless: "Prioritizing others' development and success over personal recognition or credit",
+                accountability: "Providing clear expectations, regular feedback, and meaningful recognition"
+            };
+
+            const opportunityDescriptions = {
+                support: "Building stronger emotional connections and empathy with team members",
+                responsible: "Gathering more diverse perspectives before making important decisions",
+                selfless: "Focusing more on developing others' capabilities rather than just completing tasks",
+                accountability: "Improving recognition systems and follow-through on commitments"
+            };
+
+            // Display strengths
+            strengths.forEach(([framework, score]) => {
+                if (score > 60) { // Only show as strength if reasonably high
+                    const strengthItem = document.createElement('div');
+                    strengthItem.className = 'response-item';
+                    strengthItem.innerHTML = `• ${strengthDescriptions[framework]} (${score}%)`;
+                    strengthsContainer.appendChild(strengthItem);
+                }
+            });
+
+            // Display opportunities
+            opportunities.forEach(([framework, score]) => {
+                if (score < 75) { // Only show as opportunity if there's room for growth
+                    const opportunityItem = document.createElement('div');
+                    opportunityItem.className = 'response-item';
+                    opportunityItem.innerHTML = `• ${opportunityDescriptions[framework]}`;
+                    opportunitiesContainer.appendChild(opportunityItem);
                 }
             });
         }
