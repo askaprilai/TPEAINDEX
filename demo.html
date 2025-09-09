@@ -665,23 +665,23 @@
             <div class="question" data-question="10">
                 <h3>
                     <span class="question-number">10</span>
-                    <span class="question-text">When planning a project with tight deadlines, how do you typically approach it?</span>
+                    <span class="question-text">When team members come to you with concerns about workload or stress, how do you help them reframe their mindset?</span>
                 </h3>
                 <div class="scenario-context">
-                    You have a critical project that needs to be completed in less time than usual
+                    Several team members are feeling overwhelmed and losing confidence
                 </div>
                 <div class="answers">
                     <label class="answer-option" onclick="selectAnswer(10, 5, this)">
-                        <div class="answer-text">I break it down and involve the team in realistic planning</div>
+                        <div class="answer-text">I help them see challenges as growth opportunities and celebrate their progress</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(10, 4, this)">
-                        <div class="answer-text">I identify risks and create contingency plans with stakeholders</div>
+                        <div class="answer-text">I remind them of past successes and build their confidence in their abilities</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(10, 3, this)">
-                        <div class="answer-text">I focus on the critical path and essential deliverables</div>
+                        <div class="answer-text">I acknowledge their feelings and help them focus on solutions</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(10, 2, this)">
-                        <div class="answer-text">I set clear expectations and push for maximum efficiency</div>
+                        <div class="answer-text">I tell them this is normal and they need to push through it</div>
                     </label>
                 </div>
             </div>
@@ -905,23 +905,23 @@
             <div class="question" data-question="20">
                 <h3>
                     <span class="question-number">20</span>
-                    <span class="question-text">When someone exceeds expectations, how do you typically respond?</span>
+                    <span class="question-text">When your team faces a significant setback, what's your first instinct?</span>
                 </h3>
                 <div class="scenario-context">
-                    A team member delivers work that's significantly better than required
+                    A major project has failed to meet its deadline despite everyone's best efforts
                 </div>
                 <div class="answers">
                     <label class="answer-option" onclick="selectAnswer(20, 5, this)">
-                        <div class="answer-text">I acknowledge their excellence publicly and personally</div>
+                        <div class="answer-text">I focus on what we learned and how this makes us stronger for next time</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(20, 4, this)">
-                        <div class="answer-text">I thank them specifically and ask what motivated the extra effort</div>
+                        <div class="answer-text">I look for the silver lining and help the team see new opportunities</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(20, 3, this)">
-                        <div class="answer-text">I make sure their manager and peers know about their great work</div>
+                        <div class="answer-text">I acknowledge the disappointment but keep us focused on moving forward</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(20, 2, this)">
-                        <div class="answer-text">I thank them privately and note it for future reference</div>
+                        <div class="answer-text">I feel frustrated and worry about how this affects our team's reputation</div>
                     </label>
                 </div>
             </div>
@@ -929,23 +929,23 @@
             <div class="question" data-question="21">
                 <h3>
                     <span class="question-number">21</span>
-                    <span class="question-text">When providing feedback on someone's development, what's your typical focus?</span>
+                    <span class="question-text">When you're feeling overwhelmed by multiple priorities, how do you typically reframe the situation?</span>
                 </h3>
                 <div class="scenario-context">
-                    During a regular check-in, you want to help someone grow professionally
+                    Everything feels urgent and you're not sure how you'll get it all done
                 </div>
                 <div class="answers">
                     <label class="answer-option" onclick="selectAnswer(21, 5, this)">
-                        <div class="answer-text">I focus on their strengths and how to leverage them further</div>
+                        <div class="answer-text">I see it as an opportunity to practice prioritization and build resilience</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(21, 4, this)">
-                        <div class="answer-text">I balance recognition of progress with areas for growth</div>
+                        <div class="answer-text">I remind myself that I've handled tough situations before and can do it again</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(21, 3, this)">
-                        <div class="answer-text">I identify specific skills they could develop for advancement</div>
+                        <div class="answer-text">I focus on what I can control and take things one step at a time</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(21, 2, this)">
-                        <div class="answer-text">I give clear, actionable feedback on areas needing improvement</div>
+                        <div class="answer-text">I feel stressed and worry that I'm letting people down</div>
                     </label>
                 </div>
             </div>
@@ -1248,19 +1248,21 @@
 
         function calculateDemoScores() {
             const scores = {
-                support: 0,
-                responsible: 0,
-                selfless: 0,
-                accountability: 0
+                performance: 0,
+                relationship: 0,
+                communication: 0,
+                coaching: 0,
+                ownership: 0,
+                mindset: 0
             };
 
-            // Full question mapping to frameworks
+            // Updated question mapping to new Positive Effect Leaders framework with enhanced mindset focus
             const questionMapping = {
-                1: 'support', 2: 'support', 3: 'support', 4: 'support', 5: 'support', 6: 'support', 7: 'support',
-                8: 'responsible', 9: 'responsible', 10: 'responsible', 11: 'responsible', 12: 'responsible',
-                13: 'selfless', 14: 'selfless', 15: 'selfless', 16: 'selfless', 17: 'selfless',
-                18: 'accountability', 19: 'accountability', 20: 'accountability', 21: 'accountability', 22: 'accountability',
-                23: 'support', 24: 'support', 25: 'support'
+                1: 'relationship', 2: 'relationship', 3: 'relationship', 4: 'communication', 5: 'communication',
+                6: 'relationship', 7: 'relationship', 8: 'ownership', 9: 'performance', 10: 'mindset',
+                11: 'communication', 12: 'communication', 13: 'coaching', 14: 'coaching', 15: 'coaching',
+                16: 'coaching', 17: 'coaching', 18: 'ownership', 19: 'performance', 20: 'mindset',
+                21: 'mindset', 22: 'mindset', 23: 'performance', 24: 'mindset', 25: 'mindset'
             };
 
             // Calculate raw scores
@@ -1273,8 +1275,15 @@
                 }
             });
 
-            // Convert to percentages
-            const questionCounts = { support: 10, responsible: 5, selfless: 5, accountability: 5 };
+            // Convert to percentages - distribute questions with enhanced mindset focus
+            const questionCounts = { 
+                performance: 3, 
+                relationship: 5, 
+                communication: 4, 
+                coaching: 5, 
+                ownership: 2, 
+                mindset: 6 
+            };
             Object.keys(scores).forEach(framework => {
                 const maxPossible = questionCounts[framework] * 5;
                 scores[framework] = Math.round((scores[framework] / maxPossible) * 100);
@@ -1288,10 +1297,12 @@
             scoresContainer.innerHTML = '';
 
             const frameworks = [
-                { key: 'support', name: 'SUPPORT', class: 'support', desc: 'Empathy and care for others' },
-                { key: 'responsible', name: 'RESPONSIBLE', class: 'responsible', desc: 'Thoughtful decision-making' },
-                { key: 'selfless', name: 'SELFLESS', class: 'selfless', desc: 'Focus on developing others' },
-                { key: 'accountability', name: 'ACCOUNTABILITY', class: 'accountability', desc: 'Recognition and follow-through' }
+                { key: 'performance', name: 'PERFORMANCE & GROWTH MANAGER', class: 'performance', desc: 'Aligns goals to KPIs, runs performance conversations' },
+                { key: 'relationship', name: 'RELATIONSHIP BUILDER', class: 'relationship', desc: 'Creates psychological safety and belonging' },
+                { key: 'communication', name: 'POSITIVE-INTENT COMMUNICATOR', class: 'communication', desc: 'Deepens connection skills with empathy' },
+                { key: 'coaching', name: 'COACH & PEOPLE DEVELOPER', class: 'coaching', desc: 'Listens to learn, asks profound questions' },
+                { key: 'ownership', name: 'OWNERSHIP & ACCOUNTABILITY DRIVER', class: 'ownership', desc: 'Sets crystal-clear expectations and standards' },
+                { key: 'mindset', name: 'MINDSET & ENERGY STEWARD', class: 'mindset', desc: 'Models calm under pressure, manages energy' }
             ];
 
             frameworks.forEach(framework => {
@@ -1299,7 +1310,7 @@
                 scoreDiv.className = `framework-score ${framework.class}`;
                 scoreDiv.innerHTML = `
                     <h3>${framework.name}</h3>
-                    <div class="score-value">${scores[framework.key]}%</div>
+                    <div class="score-value">${scores[framework.key] || 0}%</div>
                     <div class="score-description">${framework.desc}</div>
                 `;
                 scoresContainer.appendChild(scoreDiv);
@@ -1309,21 +1320,23 @@
         function displayResponseSummary() {
             const summaryContainer = document.getElementById('responseSummary');
             
-            // Full question mapping to frameworks
+            // Updated question mapping to new framework
             const questionMapping = {
-                1: 'support', 2: 'support', 3: 'support', 4: 'support', 5: 'support', 6: 'support', 7: 'support',
-                8: 'responsible', 9: 'responsible', 10: 'responsible', 11: 'responsible', 12: 'responsible',
-                13: 'selfless', 14: 'selfless', 15: 'selfless', 16: 'selfless', 17: 'selfless',
-                18: 'accountability', 19: 'accountability', 20: 'accountability', 21: 'accountability', 22: 'accountability',
-                23: 'support', 24: 'support', 25: 'support'
+                1: 'relationship', 2: 'relationship', 3: 'relationship', 4: 'communication', 5: 'communication',
+                6: 'relationship', 7: 'relationship', 8: 'ownership', 9: 'ownership', 10: 'performance',
+                11: 'communication', 12: 'communication', 13: 'coaching', 14: 'coaching', 15: 'coaching',
+                16: 'coaching', 17: 'coaching', 18: 'ownership', 19: 'ownership', 20: 'performance',
+                21: 'performance', 22: 'mindset', 23: 'relationship', 24: 'mindset', 25: 'mindset'
             };
 
             // Group responses by framework
             const responsesByFramework = {
-                support: [],
-                responsible: [],
-                selfless: [],
-                accountability: []
+                performance: [],
+                relationship: [],
+                communication: [],
+                coaching: [],
+                ownership: [],
+                mindset: []
             };
 
             Object.keys(responseTexts).forEach(questionNum => {
@@ -1335,10 +1348,12 @@
 
             // Display responses for each framework that has responses
             const frameworkNames = {
-                support: 'SUPPORT',
-                responsible: 'RESPONSIBLE', 
-                selfless: 'SELFLESS',
-                accountability: 'ACCOUNTABILITY'
+                performance: 'PERFORMANCE & GROWTH MANAGER',
+                relationship: 'RELATIONSHIP BUILDER',
+                communication: 'POSITIVE-INTENT COMMUNICATOR',
+                coaching: 'COACH & PEOPLE DEVELOPER',
+                ownership: 'OWNERSHIP & ACCOUNTABILITY DRIVER',
+                mindset: 'MINDSET & ENERGY STEWARD'
             };
 
             Object.keys(responsesByFramework).forEach(framework => {
@@ -1375,21 +1390,29 @@
             const secondary = sortedScores[1][0];
             
             const insights = {
-                support: {
-                    high: "You lead with empathy and care, creating psychological safety where team members feel heard and valued. Your approach builds trust and loyalty.",
-                    moderate: "You balance supportive leadership with other priorities, showing care while maintaining focus on results and accountability."
+                performance: {
+                    high: "You excel as a Performance & Growth Manager, linking behavior to outcomes and building development plans. Your team knows how their work connects to bigger goals.",
+                    moderate: "You balance performance management with other leadership priorities, addressing development when needed."
                 },
-                responsible: {
-                    high: "You're a thoughtful decision-maker who considers multiple perspectives and long-term impacts. Your team trusts your judgment because you think things through.",
-                    moderate: "You make responsible decisions when needed but may sometimes prioritize speed or other factors over comprehensive analysis."
+                relationship: {
+                    high: "You're a natural Relationship Builder who creates psychological safety and deep connections. Your team feels safe to take risks and share ideas.",
+                    moderate: "You build relationships while balancing other demands, creating connection when situations require it."
                 },
-                selfless: {
-                    high: "You're a developmental leader who prioritizes growing others over personal recognition. Your team develops strong capabilities because you invest in their growth.",
-                    moderate: "You balance developing others with achieving immediate results, knowing when to coach and when to direct."
+                communication: {
+                    high: "You're a Positive-Intent Communicator who assumes best intentions and creates belonging. Your team feels heard and valued in interactions.",
+                    moderate: "You communicate with positive intent when possible, balancing directness with empathy based on the situation."
                 },
-                accountability: {
-                    high: "You excel at recognition and follow-through, creating clear expectations and celebrating achievements. Your team knows where they stand and feels valued.",
-                    moderate: "You provide recognition and accountability when appropriate, balancing praise with constructive feedback."
+                coaching: {
+                    high: "You're a skilled Coach & People Developer who asks profound questions and unlocks thinking. Your team develops strong problem-solving capabilities.",
+                    moderate: "You balance coaching with directing, knowing when to guide thinking and when to provide answers."
+                },
+                ownership: {
+                    high: "You're an Ownership & Accountability Driver who sets crystal-clear expectations and follows through reliably. Your team knows exactly what's expected.",
+                    moderate: "You drive ownership and accountability when needed, balancing clear expectations with flexibility."
+                },
+                mindset: {
+                    high: "You're a Mindset & Energy Steward who stays calm under pressure and reframes setbacks as learning. Your team stays resilient and future-focused.",
+                    moderate: "You manage mindset and energy reasonably well, staying relatively calm while working to maintain team morale."
                 }
             };
 
@@ -1437,17 +1460,21 @@
             const opportunities = sortedScores.slice(-2).reverse();
 
             const strengthDescriptions = {
-                support: "Creating psychological safety and showing genuine care for team members' wellbeing and growth",
-                responsible: "Making thoughtful decisions that consider long-term impacts on all stakeholders", 
-                selfless: "Prioritizing others' development and success over personal recognition or credit",
-                accountability: "Providing clear expectations, regular feedback, and meaningful recognition"
+                performance: "Aligning goals to KPIs and running effective performance conversations that drive growth",
+                relationship: "Creating psychological safety and building cross-functional alliances through genuine connection",
+                communication: "Communicating with positive intent and deepening connection through curiosity and empathy",
+                coaching: "Listening to learn and asking profound questions that unlock team members' thinking",
+                ownership: "Setting crystal-clear expectations and using systems to transfer ownership to the team",
+                mindset: "Modeling calm under pressure and reframing setbacks as learning opportunities"
             };
 
             const opportunityDescriptions = {
-                support: "Building stronger emotional connections and empathy with team members",
-                responsible: "Gathering more diverse perspectives before making important decisions",
-                selfless: "Focusing more on developing others' capabilities rather than just completing tasks",
-                accountability: "Improving recognition systems and follow-through on commitments"
+                performance: "Strengthening the connection between individual goals and organizational KPIs",
+                relationship: "Building deeper psychological safety and cross-functional working relationships",
+                communication: "Developing stronger positive-intent communication and empathy skills",
+                coaching: "Enhancing coaching skills to better unlock team members' problem-solving abilities",
+                ownership: "Improving expectation-setting and accountability systems for better follow-through",
+                mindset: "Developing resilience and energy management skills for sustained high performance"
             };
 
             // Display strengths
@@ -1479,42 +1506,60 @@
             const lowestScore = sortedScores[0];
             const secondLowest = sortedScores[1];
             
-            // Development recommendations based on scores and specific responses
+            // Development recommendations based on new Positive Effect Leaders framework
             const recommendations = {
-                support: {
-                    title: "Enhance Supportive Leadership",
+                performance: {
+                    title: "Strengthen Performance & Growth Management",
                     items: [
-                        "Practice active listening - Ask more clarifying questions before offering solutions",
-                        "Schedule regular one-on-ones to understand individual challenges and motivations",
-                        "Develop empathy skills - Try to see situations from your team members' perspectives",
-                        "Create psychological safety - Make it easier for people to share concerns without judgment"
+                        "Connect individual goals more clearly to team and organizational KPIs",
+                        "Schedule regular performance conversations that focus on growth, not just evaluation",
+                        "Build development plans with clear succession pipelines for your team",
+                        "Document agreements and track progress against measurable outcomes"
                     ]
                 },
-                responsible: {
-                    title: "Strengthen Responsible Decision-Making",
+                relationship: {
+                    title: "Enhance Relationship Building Skills",
                     items: [
-                        "Gather diverse perspectives before making important decisions",
-                        "Consider long-term impacts on all stakeholders, not just immediate results",
-                        "Practice transparent communication about your decision-making process",
-                        "Build consensus-building skills to get buy-in from affected parties"
+                        "Create more psychological safety by asking 'What haven't we considered?' in meetings",
+                        "Build cross-functional alliances by understanding other departments' challenges",
+                        "Deepen connection skills through curiosity, empathy, and genuine recognition",
+                        "Practice vulnerability - share your own learning experiences with the team"
                     ]
                 },
-                selfless: {
-                    title: "Develop Others-Focused Leadership",
+                communication: {
+                    title: "Develop Positive-Intent Communication",
                     items: [
-                        "Shift from giving answers to asking questions that help others think",
-                        "Focus on developing others' capabilities rather than just completing tasks",
-                        "Create opportunities for team members to shine and get recognition",
-                        "Practice coaching skills - help people discover solutions themselves"
+                        "Assume positive intent in all interactions - ask 'What might they be trying to achieve?'",
+                        "Create more belonging by using 'we' language instead of 'you' when addressing issues",
+                        "Build empathy by reflecting back what you heard before responding",
+                        "Strengthen recognition skills - be specific about what behaviors you want to see more of"
                     ]
                 },
-                accountability: {
-                    title: "Improve Recognition and Follow-Through",
+                coaching: {
+                    title: "Enhance Coaching & People Development",
                     items: [
-                        "Make recognition more frequent and specific - celebrate small wins publicly",
-                        "Develop better follow-up systems to track commitments and progress",
-                        "Learn to give constructive feedback that motivates rather than discourages",
-                        "Create clear expectations and check-in regularly on progress"
+                        "Ask more profound questions that unlock thinking instead of giving answers",
+                        "Use the 5-step coaching formula: Listen → Clarify → Explore → Plan → Commit",
+                        "Provide more feed-forward and stretch assignments that celebrate growth",
+                        "Focus on developing capabilities rather than just completing tasks"
+                    ]
+                },
+                ownership: {
+                    title: "Improve Ownership & Accountability Systems",
+                    items: [
+                        "Set crystal-clear expectations about who/what/when for all major decisions",
+                        "Delegate with guardrails - give autonomy within defined boundaries",
+                        "Build simple systems for accountability that team members can use reliably",
+                        "Transfer ownership gradually rather than dumping responsibility all at once"
+                    ]
+                },
+                mindset: {
+                    title: "Develop Mindset & Energy Stewardship",
+                    items: [
+                        "Practice calm under pressure - take 3 deep breaths before responding to stress",
+                        "Reframe setbacks as learning opportunities for the entire team",
+                        "Keep teams future-focused by discussing possibilities rather than dwelling on problems",
+                        "Manage your energy intentionally - model the energy you want to see"
                     ]
                 }
             };
