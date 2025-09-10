@@ -587,11 +587,15 @@
                 padding: 6px 10px;
             }
             
-            /* Pricing grid mobile */
-            div[style*="grid-template-columns: 1fr 1fr"] {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 15px !important;
+            /* Individual and group options mobile */
+            div[style*="max-width: 400px"] {
+                max-width: 100% !important;
+                margin: 0 auto 30px auto !important;
+            }
+            
+            div[style*="max-width: 800px"] {
+                max-width: 100% !important;
+                margin: 0 auto 30px auto !important;
             }
             
             /* Navigation mobile */
@@ -668,13 +672,12 @@
                     Get immediate access to your comprehensive leadership assessment and personalized development plan.
                 </p>
                 
-                <!-- Pricing Options -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                    <!-- Individual Option -->
+                <!-- Individual Option -->
+                <div style="max-width: 400px; margin: 0 auto 40px auto;">
                     <div style="background: #f8fafc; padding: 30px; border-radius: 15px; border: 2px solid #e5e7eb;">
-                        <h3 style="color: #0f172a; margin-bottom: 15px;">Individual Access</h3>
-                        <div style="font-size: 2.5rem; font-weight: bold; color: #0f172a; margin-bottom: 10px;">$97</div>
-                        <div style="margin-bottom: 20px;">
+                        <h3 style="color: #0f172a; margin-bottom: 15px; text-align: center;">Individual Access</h3>
+                        <div style="font-size: 2.5rem; font-weight: bold; color: #0f172a; margin-bottom: 10px; text-align: center;">$97</div>
+                        <div style="margin-bottom: 20px; text-align: center;">
                             <p style="color: #6b7280; margin-bottom: 10px;">Complete 25-question assessment with:</p>
                             <div style="color: #10b981; font-size: 0.9rem; line-height: 1.6;">
                                 ✓ Detailed leadership analysis report<br>
@@ -685,8 +688,10 @@
                         </div>
                         <div id="paypal-button-container" style="margin-top: 20px;"></div>
                     </div>
-                    
-                    <!-- Group Options -->
+                </div>
+                
+                <!-- Group Options -->
+                <div style="max-width: 800px; margin: 0 auto 40px auto;">
                     <div style="background: linear-gradient(135deg, #fbbf24, #f59e0b); padding: 30px; border-radius: 15px; border: 2px solid #fbbf24;">
                         <div style="text-align: center; margin-bottom: 25px;">
                             <h3 style="color: #0f172a; margin-bottom: 10px;">Team & Company Packages</h3>
