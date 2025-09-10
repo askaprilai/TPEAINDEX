@@ -1740,7 +1740,9 @@
 
         // Initialize PayPal buttons
         function initializePayPal() {
+            console.log('Initializing PayPal buttons...');
             if (typeof paypal !== 'undefined') {
+                console.log('PayPal SDK loaded successfully');
                 paypal.Buttons({
                     createOrder: function(data, actions) {
                         return actions.order.create({
@@ -1763,16 +1765,29 @@
                         console.error('PayPal error:', err);
                         alert('Payment failed. Please try again or contact support.');
                     }
-                }).render('#paypal-button-container');
+                }).render('#paypal-button-container').then(function() {
+                    console.log('PayPal button rendered successfully');
+                }).catch(function(err) {
+                    console.error('PayPal button render error:', err);
+                });
+            } else {
+                console.error('PayPal SDK not loaded');
             }
         }
 
         // Initialize PayPal when page loads
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('Loading PayPal SDK...');
             // Load PayPal SDK
             const script = document.createElement('script');
             script.src = 'https://www.paypal.com/sdk/js?client-id=AeVL5ZxfA2KzQOYz_0PnXVZQTXYWqnBrY7kJ8rMzQn9OPqNKsRpHvzQNX5f-cE&currency=USD';
-            script.onload = initializePayPal;
+            script.onload = function() {
+                console.log('PayPal SDK loaded, initializing buttons...');
+                initializePayPal();
+            };
+            script.onerror = function() {
+                console.error('Failed to load PayPal SDK');
+            };
             document.head.appendChild(script);
         });
 
