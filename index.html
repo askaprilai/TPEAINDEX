@@ -650,12 +650,12 @@
                     A comprehensive 25-question assessment measuring leadership effectiveness across six key dimensions
                 </div>
                 <div class="framework-overview">
-                    <div class="framework-item">PERFORMANCE</div>
-                    <div class="framework-item">RELATIONSHIP</div>
-                    <div class="framework-item">CONNECTING</div>
-                    <div class="framework-item">COACHING</div>
-                    <div class="framework-item">OWNERSHIP</div>
-                    <div class="framework-item">MINDSET</div>
+                    <div class="framework-item">RELATIONSHIP BUILDER</div>
+                    <div class="framework-item">POSITIVE INTENT COMMUNICATOR</div>
+                    <div class="framework-item">MINDSET & ENERGY STEWARD</div>
+                    <div class="framework-item">OWNERSHIP & ACCOUNTABILITY DRIVER</div>
+                    <div class="framework-item">COACH & PEOPLE DEVELOPER</div>
+                    <div class="framework-item">PERFORMANCE & GROWTH MANAGER</div>
                 </div>
             </div>
         </div>
@@ -678,15 +678,53 @@
                         <div id="paypal-button-container" style="margin-top: 20px;"></div>
                     </div>
                     
-                    <!-- Group Option -->
+                    <!-- Group Options -->
                     <div style="background: linear-gradient(135deg, #fbbf24, #f59e0b); padding: 30px; border-radius: 15px; border: 2px solid #fbbf24;">
-                        <h3 style="color: #1e3a8a; margin-bottom: 15px;">Group/Company Access</h3>
-                        <div style="font-size: 1.8rem; font-weight: bold; color: #1e3a8a; margin-bottom: 10px;">Contact for Pricing</div>
-                        <p style="color: #1e3a8a; margin-bottom: 20px; font-weight: 500;">Volume discounts available for teams</p>
-                        <a href="https://calendly.com/aprilcoaching/askaprilcourses" 
-                           style="display: inline-block; background: #1e3a8a; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600;">
-                            Get Group Quote
-                        </a>
+                        <h3 style="color: #0f172a; margin-bottom: 20px; text-align: center;">Group/Company Access</h3>
+                        
+                        <!-- Group Size Options -->
+                        <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px;">
+                            <div style="background: rgba(15, 23, 42, 0.1); padding: 15px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-weight: bold; color: #0f172a;">5-10 Team Members</div>
+                                    <div style="font-size: 0.9rem; color: #0f172a; opacity: 0.8;">Includes 5 unique access codes</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 1.4rem; font-weight: bold; color: #0f172a;">$350</div>
+                                    <div id="paypal-group-5" style="margin-top: 10px;"></div>
+                                </div>
+                            </div>
+                            
+                            <div style="background: rgba(15, 23, 42, 0.1); padding: 15px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-weight: bold; color: #0f172a;">11-20 Team Members</div>
+                                    <div style="font-size: 0.9rem; color: #0f172a; opacity: 0.8;">Includes 10 unique access codes</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 1.4rem; font-weight: bold; color: #0f172a;">$650</div>
+                                    <div id="paypal-group-10" style="margin-top: 10px;"></div>
+                                </div>
+                            </div>
+                            
+                            <div style="background: rgba(15, 23, 42, 0.1); padding: 15px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-weight: bold; color: #0f172a;">21-50 Team Members</div>
+                                    <div style="font-size: 0.9rem; color: #0f172a; opacity: 0.8;">Includes 25 unique access codes</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 1.4rem; font-weight: bold; color: #0f172a;">$1,400</div>
+                                    <div id="paypal-group-25" style="margin-top: 10px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; padding-top: 15px; border-top: 1px solid rgba(15, 23, 42, 0.2);">
+                            <p style="color: #0f172a; margin-bottom: 10px; font-size: 0.9rem;">Need more than 50 licenses?</p>
+                            <a href="https://calendly.com/aprilcoaching/askaprilcourses" 
+                               style="display: inline-block; background: #0f172a; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem;">
+                                Get Enterprise Quote
+                            </a>
+                        </div>
                     </div>
                 </div>
                 
@@ -1950,15 +1988,63 @@
             }
         }
 
-        function onPaymentSuccess() {
+        function onPaymentSuccess(type = 'individual') {
             // Grant access to assessment after successful payment
             document.getElementById('paymentGateway').style.display = 'none';
             document.getElementById('assessmentContent').style.display = 'block';
             
             // Update banner for paid access
-            document.querySelector('.demo-banner').innerHTML = '🎯 PREMIUM ACCESS - Your Paid Leadership Assessment';
+            document.querySelector('.demo-banner').innerHTML = 'PREMIUM ACCESS - Your Paid Leadership Assessment';
             
             alert('Payment successful! Welcome to your comprehensive leadership assessment.');
+        }
+
+        // Generate unique access codes
+        function generateAccessCode() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let code = '';
+            for (let i = 0; i < 8; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return code;
+        }
+
+        // Handle group payment success and generate codes
+        function onGroupPaymentSuccess(codeCount, email) {
+            const codes = [];
+            for (let i = 0; i < codeCount; i++) {
+                codes.push(generateAccessCode());
+            }
+            
+            // Display the generated codes to the user
+            const codeDisplay = codes.map((code, index) => `${index + 1}. ${code}`).join('\n');
+            
+            alert(`Group purchase successful!\n\nYour ${codeCount} access codes:\n\n${codeDisplay}\n\nThese codes have been generated for your team. Each code provides one assessment access. Please save these codes and distribute them to your team members.\n\nNote: In a production system, these would be emailed to: ${email}`);
+            
+            // Hide payment section
+            document.getElementById('paymentGateway').style.display = 'none';
+            
+            // Show a success message with codes
+            const successDiv = document.createElement('div');
+            successDiv.style.cssText = 'background: #f0f9ff; padding: 30px; border-radius: 15px; margin: 20px 0; border: 2px solid #0284c7;';
+            successDiv.innerHTML = `
+                <h3 style="color: #0284c7; margin-bottom: 20px; text-align: center;">Group Purchase Complete!</h3>
+                <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                    <h4 style="color: #0f172a; margin-bottom: 15px;">Your Team Access Codes:</h4>
+                    <div style="font-family: monospace; background: #f8fafc; padding: 15px; border-radius: 8px; border-left: 4px solid #0284c7;">
+                        ${codes.map((code, index) => `<div style="margin-bottom: 8px;"><strong>Code ${index + 1}:</strong> ${code}</div>`).join('')}
+                    </div>
+                </div>
+                <p style="color: #6b7280; text-align: center; margin: 0;">
+                    Please save these codes and share them with your team members. Each code provides access to one complete assessment.
+                </p>
+            `;
+            
+            // Insert after the container
+            document.querySelector('.container').appendChild(successDiv);
+            
+            // Update banner
+            document.querySelector('.demo-banner').innerHTML = `GROUP PURCHASE COMPLETE - ${codeCount} Access Codes Generated`;
         }
 
         // Initialize PayPal buttons
@@ -1966,6 +2052,8 @@
             console.log('Initializing PayPal buttons...');
             if (typeof paypal !== 'undefined') {
                 console.log('PayPal SDK loaded successfully');
+                
+                // Individual PayPal button
                 paypal.Buttons({
                     createOrder: function(data, actions) {
                         return actions.order.create({
@@ -1981,21 +2069,50 @@
                     onApprove: function(data, actions) {
                         return actions.order.capture().then(function(details) {
                             console.log('Payment completed by:', details.payer.name.given_name);
-                            onPaymentSuccess();
+                            onPaymentSuccess('individual');
                         });
                     },
                     onError: function(err) {
                         console.error('PayPal error:', err);
                         alert('Payment failed. Please try again or contact support.');
                     }
-                }).render('#paypal-button-container').then(function() {
-                    console.log('PayPal button rendered successfully');
-                }).catch(function(err) {
-                    console.error('PayPal button render error:', err);
-                });
+                }).render('#paypal-button-container');
+
+                // Group PayPal buttons
+                createGroupPayPalButton('paypal-group-5', '350.00', 'Group Access - 5 Codes', 5);
+                createGroupPayPalButton('paypal-group-10', '650.00', 'Group Access - 10 Codes', 10);
+                createGroupPayPalButton('paypal-group-25', '1400.00', 'Group Access - 25 Codes', 25);
+                
             } else {
                 console.error('PayPal SDK not loaded');
             }
+        }
+
+        // Create group PayPal buttons
+        function createGroupPayPalButton(containerId, price, description, codeCount) {
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: price,
+                                currency_code: 'USD'
+                            },
+                            description: description
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        console.log('Group payment completed by:', details.payer.name.given_name);
+                        onGroupPaymentSuccess(codeCount, details.payer.email_address);
+                    });
+                },
+                onError: function(err) {
+                    console.error('PayPal error:', err);
+                    alert('Payment failed. Please try again or contact support.');
+                }
+            }).render('#' + containerId);
         }
 
         // Initialize PayPal when page loads
