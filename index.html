@@ -626,6 +626,14 @@
             div[style*="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%)"] {
                 padding: 20px 15px !important;
             }
+            
+            /* PayPal button mobile styling */
+            #paypal-button-container,
+            div[id^="paypal-group-"] {
+                width: 100% !important;
+                max-width: 300px !important;
+                margin: 0 auto !important;
+            }
         }
     </style>
 </head>
@@ -2108,12 +2116,12 @@
                 
                 // Individual PayPal button
                 paypal.Buttons({
-                    fundingSource: paypal.FUNDING.PAYPAL,
                     style: {
                         layout: 'vertical',
                         color: 'gold',
                         shape: 'rect',
-                        label: 'paypal'
+                        label: 'paypal',
+                        height: 50
                     },
                     createOrder: function(data, actions) {
                         return actions.order.create({
@@ -2151,12 +2159,12 @@
         // Create group PayPal buttons
         function createGroupPayPalButton(containerId, price, description, codeCount) {
             paypal.Buttons({
-                fundingSource: paypal.FUNDING.PAYPAL,
                 style: {
                     layout: 'vertical',
                     color: 'gold',
                     shape: 'rect',
-                    label: 'paypal'
+                    label: 'paypal',
+                    height: 50
                 },
                 createOrder: function(data, actions) {
                     return actions.order.create({
