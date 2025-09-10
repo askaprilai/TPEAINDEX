@@ -42,9 +42,14 @@
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     
     <style>
-        /* FORCE BLUE COLORS - OVERRIDE ALL CACHE */
-        p, div, span, .text, [style*="color: #6b7280"], [style*="color: #374151"], [style*="color: #4b5563"] {
-            color: #3b82f6 !important;
+        /* FORCE BLACK TEXT FOR BETTER READABILITY */
+        p, div, span, .text, [style*="color: #6b7280"], [style*="color: #374151"], [style*="color: #4b5563"], [style*="color: #3b82f6"] {
+            color: #1f2937 !important;
+        }
+        
+        /* LIGHTER BACKGROUNDS FOR BETTER CONTRAST */
+        .container, .payment-gateway, [style*="background: #f8fafc"], [style*="background: #f9fafb"] {
+            background: #ffffff !important;
         }
         
         * {
