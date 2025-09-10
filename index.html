@@ -563,6 +563,65 @@
             .header h1 {
                 font-size: 1.5rem !important;
             }
+            
+            /* Better mobile layout */
+            body {
+                padding: 8px;
+            }
+            
+            .container {
+                margin: 5px;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+            
+            /* Logo and title mobile layout */
+            .header > div:first-of-type {
+                flex-direction: column !important;
+                text-align: center;
+            }
+            
+            /* Framework items mobile */
+            .framework-item {
+                font-size: 0.75rem;
+                padding: 6px 10px;
+            }
+            
+            /* Pricing grid mobile */
+            div[style*="grid-template-columns: 1fr 1fr"] {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 15px !important;
+            }
+            
+            /* Navigation mobile */
+            .navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .navigation > div {
+                display: flex;
+                gap: 8px;
+                justify-content: center;
+            }
+            
+            /* Answer options mobile */
+            .answer-text {
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+            
+            /* Demo banner mobile */
+            .demo-banner {
+                font-size: 0.95rem;
+                padding: 10px;
+            }
+            
+            /* Footer mobile */
+            div[style*="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%)"] {
+                padding: 20px 15px !important;
+            }
         }
     </style>
 </head>
@@ -1368,7 +1427,7 @@
                 </p>
                 <a href="mailto:april@aprilsabral.com" 
                    style="display: inline-block; background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #0f172a; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);">
-                    ✉️ Contact April
+                    ✉️ Contact Us
                 </a>
             </div>
             
