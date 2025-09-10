@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Positive Effect Leaders Assessment - FREE</title>
+    <title>Positive Effect Leaders Assessment - $97</title>
     <style>
         * {
             margin: 0;
@@ -433,7 +433,7 @@
 </head>
 <body>
     <div class="demo-banner">
-        🎯 FREE COMPLETE ASSESSMENT - Full 25-Question Leadership Analysis
+        🎯 PREMIUM LEADERSHIP ASSESSMENT - Complete Analysis for $97
     </div>
 
     <div class="container">
@@ -450,7 +450,7 @@
                 <div class="framework-overview">
                     <div class="framework-item">PERFORMANCE</div>
                     <div class="framework-item">RELATIONSHIP</div>
-                    <div class="framework-item">COMMUNICATION</div>
+                    <div class="framework-item">CONNECTING</div>
                     <div class="framework-item">COACHING</div>
                     <div class="framework-item">OWNERSHIP</div>
                     <div class="framework-item">MINDSET</div>
@@ -458,7 +458,55 @@
             </div>
         </div>
 
-        <div class="quiz-content">
+        <!-- Payment Gateway Section -->
+        <div class="payment-gateway" id="paymentGateway">
+            <div style="text-align: center; padding: 40px 30px;">
+                <h2 style="color: #1e3a8a; margin-bottom: 20px; font-size: 2rem;">Complete Your Purchase</h2>
+                <p style="color: #6b7280; margin-bottom: 30px; font-size: 1.1rem;">
+                    Get immediate access to your comprehensive leadership assessment and personalized development plan.
+                </p>
+                
+                <!-- Pricing Options -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    <!-- Individual Option -->
+                    <div style="background: #f8fafc; padding: 30px; border-radius: 15px; border: 2px solid #e5e7eb;">
+                        <h3 style="color: #1e3a8a; margin-bottom: 15px;">Individual Access</h3>
+                        <div style="font-size: 2.5rem; font-weight: bold; color: #1e3a8a; margin-bottom: 10px;">$97</div>
+                        <p style="color: #6b7280; margin-bottom: 20px;">Complete 25-question assessment with detailed analysis</p>
+                        <div id="paypal-button-container" style="margin-top: 20px;"></div>
+                    </div>
+                    
+                    <!-- Group Option -->
+                    <div style="background: linear-gradient(135deg, #fbbf24, #f59e0b); padding: 30px; border-radius: 15px; border: 2px solid #fbbf24;">
+                        <h3 style="color: #1e3a8a; margin-bottom: 15px;">Group/Company Access</h3>
+                        <div style="font-size: 1.8rem; font-weight: bold; color: #1e3a8a; margin-bottom: 10px;">Contact for Pricing</div>
+                        <p style="color: #1e3a8a; margin-bottom: 20px; font-weight: 500;">Volume discounts available for teams</p>
+                        <a href="https://calendly.com/aprilcoaching/askaprilcourses" target="_blank" 
+                           style="display: inline-block; background: #1e3a8a; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+                            Get Group Quote
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Company Code Section -->
+                <div style="background: #f0f9ff; padding: 25px; border-radius: 12px; border-left: 4px solid #0284c7;">
+                    <h4 style="color: #0284c7; margin-bottom: 15px;">Have a Company Code?</h4>
+                    <div style="display: flex; gap: 10px; justify-content: center; align-items: center;">
+                        <input type="text" id="companyCode" placeholder="Enter your company code" 
+                               style="padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 16px; width: 250px;">
+                        <button onclick="validateCompanyCode()" 
+                                style="background: #0284c7; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                            Access Assessment
+                        </button>
+                    </div>
+                    <p style="color: #6b7280; margin-top: 10px; font-size: 0.9rem;">
+                        Company codes are provided with group purchases for team assessments.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="quiz-content" id="assessmentContent" style="display: none;">
             <!-- Progress Bar -->
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
@@ -1417,9 +1465,9 @@
                     high: "You're a natural Relationship Builder who creates psychological safety and deep connections. Your team feels safe to take risks and share ideas.",
                     moderate: "You build relationships while balancing other demands, creating connection when situations require it."
                 },
-                communication: {
-                    high: "You're a Positive-Intent Communicator who assumes best intentions and creates belonging. Your team feels heard and valued in interactions.",
-                    moderate: "You communicate with positive intent when possible, balancing directness with empathy based on the situation."
+                connecting: {
+                    high: "You're a master Connector who builds bridges and creates belonging. Your team feels deeply heard and valued in all interactions.",
+                    moderate: "You connect with positive intent when possible, balancing directness with empathy based on the situation."
                 },
                 coaching: {
                     high: "You're a skilled Coach & People Developer who asks profound questions and unlocks thinking. Your team develops strong problem-solving capabilities.",
@@ -1654,6 +1702,79 @@
                 container.appendChild(mindsetDiv);
             }
         }
+
+        // Initialize
+        updateNavigation();
+        updateProgress();
+        // PayPal and Company Code Functions
+        function validateCompanyCode() {
+            const code = document.getElementById('companyCode').value.trim().toUpperCase();
+            
+            // Valid company codes (you can manage these)
+            const validCodes = ['DEMO2024', 'CORPORATE', 'LEADERSHIP', 'TEAM2024', 'COMPANY'];
+            
+            if (validCodes.includes(code)) {
+                // Grant access to assessment
+                document.getElementById('paymentGateway').style.display = 'none';
+                document.getElementById('assessmentContent').style.display = 'block';
+                
+                // Update banner for company access
+                document.querySelector('.demo-banner').innerHTML = '🎯 COMPANY ACCESS - Authorized Leadership Assessment';
+                
+                alert('Company code validated! Welcome to your leadership assessment.');
+            } else {
+                alert('Invalid company code. Please check your code or contact your administrator.');
+            }
+        }
+
+        function onPaymentSuccess() {
+            // Grant access to assessment after successful payment
+            document.getElementById('paymentGateway').style.display = 'none';
+            document.getElementById('assessmentContent').style.display = 'block';
+            
+            // Update banner for paid access
+            document.querySelector('.demo-banner').innerHTML = '🎯 PREMIUM ACCESS - Your Paid Leadership Assessment';
+            
+            alert('Payment successful! Welcome to your comprehensive leadership assessment.');
+        }
+
+        // Initialize PayPal buttons
+        function initializePayPal() {
+            if (typeof paypal !== 'undefined') {
+                paypal.Buttons({
+                    createOrder: function(data, actions) {
+                        return actions.order.create({
+                            purchase_units: [{
+                                amount: {
+                                    value: '97.00',
+                                    currency_code: 'USD'
+                                },
+                                description: 'Positive Effect Leaders Assessment - Individual Access'
+                            }]
+                        });
+                    },
+                    onApprove: function(data, actions) {
+                        return actions.order.capture().then(function(details) {
+                            console.log('Payment completed by:', details.payer.name.given_name);
+                            onPaymentSuccess();
+                        });
+                    },
+                    onError: function(err) {
+                        console.error('PayPal error:', err);
+                        alert('Payment failed. Please try again or contact support.');
+                    }
+                }).render('#paypal-button-container');
+            }
+        }
+
+        // Initialize PayPal when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load PayPal SDK
+            const script = document.createElement('script');
+            script.src = 'https://www.paypal.com/sdk/js?client-id=AeVL5ZxfA2KzQOYz_0PnXVZQTXYWqnBrY7kJ8rMzQn9OPqNKsRpHvzQNX5f-cE&currency=USD';
+            script.onload = initializePayPal;
+            document.head.appendChild(script);
+        });
 
         // Initialize
         updateNavigation();
