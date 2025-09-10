@@ -2099,8 +2099,8 @@
                 // Show professional success page
                 showProfessionalSuccess(purchaseData, codes, pdfDoc);
                 
-                // If email is configured, send email notification
-                // (This would require setting up EmailJS credentials)
+                // Send email notification if EmailJS is configured
+                await sendCodesEmail(purchaseData, codes);
                 
                 console.log('Group purchase completed successfully:', {
                     purchaseData,
@@ -2423,6 +2423,103 @@
                     document.body.removeChild(textArea);
                     alert('All codes copied to clipboard!');
                 });
+            }
+        }
+
+        // Send codes via email using EmailJS
+        async function sendCodesEmail(purchaseData, codes) {
+            if (typeof emailjs === 'undefined' || EMAILJS_SERVICE_ID === 'YOUR_EMAILJS_SERVICE_ID') {
+                console.log('EmailJS not configured - skipping email send');
+                return false;
+            }
+            
+            try {
+                // Generate formatted codes list
+                const codesList = codes.map((code, index) => `${index + 1}. ${code}`).join('\n');
+                
+                // Create complete email content
+                const emailContent = `Dear ${purchaseData.name},
+
+Thank you for your purchase! Your team assessment codes are ready.
+
+Package Details:
+• Team Size: ${purchaseData.codeCount} members
+• Amount Paid: $${purchaseData.amount}
+• Purchase Date: ${new Date().toLocaleDateString()}
+• Transaction ID: ${purchaseData.transactionId}
+
+Your Team Access Codes:
+${codesList}
+
+Instructions:
+1. Share these codes with your team members
+2. Each person visits: https://www.thepositiveeffectindex.com/
+3. Enter their unique code when prompted
+4. Complete the 25-question leadership assessment
+5. Receive their personalized analysis report
+
+Each code can only be used once and expires in 1 year.
+
+Need to access your codes again? 
+Visit: https://www.thepositiveeffectindex.com/my-codes
+
+Best regards,
+April Sabral
+Positive Effect Leaders Assessment
+
+---
+This is an automated email confirming your purchase.
+For support, contact: support@thepositiveeffectindex.com`;
+
+                // Send email via EmailJS
+                const response = await emailjs.send(
+                    EMAILJS_SERVICE_ID,
+                    EMAILJS_TEMPLATE_ID,
+                    {
+                        to_name: purchaseData.name,
+                        to_email: purchaseData.email,
+                        subject: `Your Team Assessment Codes - ${purchaseData.codeCount} Members`,
+                        message: emailContent,
+                        package_size: purchaseData.codeCount,
+                        amount_paid: purchaseData.amount,
+                        codes_list: codesList,
+                        purchase_date: new Date().toLocaleDateString()
+                    }
+                );
+                
+                // Log email delivery to database if available
+                if (supabaseClient) {
+                    await supabaseClient
+                        .from('email_logs')
+                        .insert([{
+                            purchase_id: purchaseData.purchaseId,
+                            recipient_email: purchaseData.email,
+                            email_type: 'purchase_confirmation',
+                            status: 'sent',
+                            email_content: emailContent
+                        }]);
+                }
+                
+                console.log('Email sent successfully:', response);
+                return true;
+                
+            } catch (error) {
+                console.error('Failed to send email:', error);
+                
+                // Log failed email attempt
+                if (supabaseClient) {
+                    await supabaseClient
+                        .from('email_logs')
+                        .insert([{
+                            purchase_id: purchaseData.purchaseId,
+                            recipient_email: purchaseData.email,
+                            email_type: 'purchase_confirmation',
+                            status: 'failed',
+                            email_content: 'Email delivery failed: ' + error.message
+                        }]);
+                }
+                
+                return false;
             }
         }
     </script>
