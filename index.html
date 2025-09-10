@@ -2120,7 +2120,6 @@
                         layout: 'vertical',
                         color: 'gold',
                         shape: 'rect',
-                        label: 'paypal',
                         height: 50
                     },
                     createOrder: function(data, actions) {
@@ -2163,7 +2162,6 @@
                     layout: 'vertical',
                     color: 'gold',
                     shape: 'rect',
-                    label: 'paypal',
                     height: 50
                 },
                 createOrder: function(data, actions) {
@@ -2195,7 +2193,7 @@
             console.log('Loading PayPal SDK...');
             // Load PayPal SDK
             const script = document.createElement('script');
-            script.src = 'https://www.paypal.com/sdk/js?client-id=AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R&currency=USD&disable-funding=credit,paylater';
+            script.src = 'https://www.paypal.com/sdk/js?client-id=AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R&currency=USD&disable-funding=paylater';
             script.onload = function() {
                 console.log('PayPal SDK loaded, initializing buttons...');
                 initializePayPal();
