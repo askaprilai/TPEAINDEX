@@ -2535,22 +2535,62 @@ For support, contact: support@thepositiveeffectindex.com`;
             downloadSection.style.cssText = 'background: linear-gradient(135deg, #0284c7, #0369a1); padding: 30px; border-radius: 15px; margin: 30px 0; text-align: center; color: white;';
             
             downloadSection.innerHTML = `
-                <h3 style="margin-bottom: 15px; font-size: 1.5rem;">📄 Download Your Complete Report</h3>
-                <p style="margin-bottom: 20px; opacity: 0.9;">Get your personalized leadership assessment and development plan as a professional PDF document.</p>
-                <button onclick="downloadAssessmentPDF()" style="
-                    background: white; 
-                    color: #0284c7; 
-                    border: none; 
-                    padding: 15px 30px; 
-                    border-radius: 8px; 
-                    font-weight: 600; 
-                    font-size: 1.1rem;
-                    cursor: pointer;
-                    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-                    transition: transform 0.2s;
-                " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    📄 Download PDF Report
-                </button>
+                <h3 style="margin-bottom: 15px; font-size: 1.5rem;">📄 Get Your Complete Report</h3>
+                <p style="margin-bottom: 20px; opacity: 0.9;">Enter your email to receive your personalized leadership assessment and development plan.</p>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                    <input type="email" id="reportEmail" placeholder="Enter your email address" style="
+                        width: 100%; 
+                        max-width: 300px; 
+                        padding: 12px 16px; 
+                        border: none; 
+                        border-radius: 8px; 
+                        font-size: 1rem;
+                        margin-bottom: 15px;
+                        box-sizing: border-box;
+                    ">
+                    <input type="text" id="reportName" placeholder="Your full name (optional)" style="
+                        width: 100%; 
+                        max-width: 300px; 
+                        padding: 12px 16px; 
+                        border: none; 
+                        border-radius: 8px; 
+                        font-size: 1rem;
+                        margin-bottom: 15px;
+                        box-sizing: border-box;
+                    ">
+                </div>
+                
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <button onclick="sendAssessmentEmail()" style="
+                        background: #10b981; 
+                        color: white; 
+                        border: none; 
+                        padding: 15px 30px; 
+                        border-radius: 8px; 
+                        font-weight: 600; 
+                        font-size: 1.1rem;
+                        cursor: pointer;
+                        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                        transition: transform 0.2s;
+                    " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                        📧 Email My Report
+                    </button>
+                    <button onclick="downloadAssessmentPDF()" style="
+                        background: white; 
+                        color: #0284c7; 
+                        border: none; 
+                        padding: 15px 30px; 
+                        border-radius: 8px; 
+                        font-weight: 600; 
+                        font-size: 1.1rem;
+                        cursor: pointer;
+                        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                        transition: transform 0.2s;
+                    " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                        📄 Download PDF
+                    </button>
+                </div>
             `;
             
             // Store scores globally for PDF generation
@@ -2720,6 +2760,138 @@ For support, contact: support@thepositiveeffectindex.com`;
             
             // Save the PDF
             doc.save('positive-effect-leadership-report.pdf');
+        }
+
+        // Send individual assessment report via email
+        async function sendAssessmentEmail() {
+            const email = document.getElementById('reportEmail').value.trim();
+            const name = document.getElementById('reportName').value.trim() || 'Assessment Participant';
+            
+            if (!email) {
+                alert('Please enter your email address to receive your report.');
+                return;
+            }
+            
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            if (typeof emailjs === 'undefined' || EMAILJS_SERVICE_ID === 'YOUR_EMAILJS_SERVICE_ID') {
+                alert('Email service is not configured. Please use the PDF download option.');
+                return;
+            }
+            
+            try {
+                // Show loading state
+                const button = event.target;
+                const originalText = button.innerHTML;
+                button.innerHTML = '📤 Sending...';
+                button.disabled = true;
+                
+                const scores = window.currentAssessmentScores;
+                const frameworkNames = {
+                    performance: 'Performance & Growth Manager',
+                    relationship: 'Relationship Builder', 
+                    communication: 'Connecting Communicator',
+                    coaching: 'Coach & People Developer',
+                    ownership: 'Ownership & Accountability Driver',
+                    mindset: 'Mindset & Energy Steward'
+                };
+                
+                // Generate scores summary
+                const scoresText = Object.keys(scores).map(framework => {
+                    const score = Math.round((scores[framework] / 25) * 100);
+                    const level = score >= 80 ? 'Excellent' : score >= 60 ? 'Good' : score >= 40 ? 'Developing' : 'Needs Focus';
+                    return `• ${frameworkNames[framework]}: ${score}% - ${level}`;
+                }).join('\\n');
+                
+                // Find strongest and development areas
+                const maxScore = Math.max(...Object.values(scores));
+                const minScore = Math.min(...Object.values(scores));
+                const strongestArea = Object.keys(scores).find(key => scores[key] === maxScore);
+                const developmentArea = Object.keys(scores).find(key => scores[key] === minScore);
+                
+                // Create email content
+                const emailContent = `Dear ${name},
+
+Thank you for completing the Positive Effect Leaders Assessment!
+
+Your Leadership Assessment Results:
+${scoresText}
+
+Key Insights:
+✅ Your strongest leadership dimension is ${frameworkNames[strongestArea]}
+🎯 Your primary development opportunity is ${frameworkNames[developmentArea]}
+
+Your Personalized 30/60/90 Day Development Plan:
+
+30-DAY PRIORITY ACTIONS:
+• Focus on strengthening your ${frameworkNames[developmentArea]} skills through daily practice
+• Seek feedback from team members on your leadership approach
+• Schedule regular one-on-one meetings with direct reports
+• Begin implementing one new leadership technique each week
+
+60-DAY DEVELOPMENT GOALS:
+• Demonstrate measurable improvement in ${frameworkNames[developmentArea]}
+• Establish a regular feedback loop with your manager and peers
+• Complete a relevant leadership development course or workshop
+• Mentor or coach another team member to develop your people skills
+
+90-DAY MASTERY OBJECTIVES:
+• Achieve consistent high performance across all six leadership dimensions
+• Become a recognized leader and positive influence in your organization
+• Successfully lead a significant project or initiative demonstrating your growth
+• Help develop other emerging leaders using your enhanced capabilities
+
+For your complete detailed report with comprehensive analysis, visit:
+https://www.thepositiveeffectindex.com/ and use the PDF download feature.
+
+Best regards,
+April Sabral
+Positive Effect Leaders Assessment
+
+---
+This assessment was completed on ${new Date().toLocaleDateString()}
+For support: support@thepositiveeffectindex.com`;
+
+                // Send email via EmailJS
+                const response = await emailjs.send(
+                    EMAILJS_SERVICE_ID,
+                    EMAILJS_TEMPLATE_ID,
+                    {
+                        to_name: name,
+                        to_email: email,
+                        subject: 'Your Positive Effect Leadership Assessment Results',
+                        message: emailContent
+                    }
+                );
+                
+                // Show success message
+                button.innerHTML = '✅ Email Sent!';
+                button.style.background = '#10b981';
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                    button.style.background = '#10b981';
+                }, 3000);
+                
+                alert(`Your leadership assessment results have been sent to ${email}! Check your inbox (and spam folder) for your personalized development plan.`);
+                
+                console.log('Assessment email sent successfully:', response);
+                
+            } catch (error) {
+                console.error('Failed to send assessment email:', error);
+                
+                // Reset button
+                const button = event.target;
+                button.innerHTML = originalText;
+                button.disabled = false;
+                
+                alert('Sorry, there was an issue sending your email. Please try the PDF download option instead.');
+            }
         }
     </script>
 </body>
