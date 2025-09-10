@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leadership Positivity Assessment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3a8a, #1e40af);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .question-section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid #fbbf24;
+        }
+
+        .question {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            border-color: #fbbf24;
+            background: #fefce8;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+            accent-color: #fbbf24;
+        }
+
+        .option label {
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 40px auto 0;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(251, 191, 36, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(251, 191, 36, 0.4);
+        }
+
+        .results {
+            display: none;
+            margin-top: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .score {
+            font-size: 3em;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .level {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .description {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .development-plan {
+            background: #f8fafc;
+            border: 2px solid #fbbf24;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .development-plan h3 {
+            color: #1e3a8a;
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .plan-section {
+            margin-bottom: 25px;
+        }
+
+        .plan-section h4 {
+            color: #1e3a8a;
+            font-size: 1.1em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .plan-icon {
+            background: #fbbf24;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .plan-items {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .plan-items li {
+            background: white;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            border-left: 4px solid #fbbf24;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .timeframe {
+            background: #1e3a8a;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            transition: width 1s ease;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .question-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Leadership Positivity Assessment</h1>
+            <p>Evaluate your leadership positivity across key dimensions</p>
+        </div>
+
+        <div class="content">
+            <form id="assessmentForm">
+                <div class="question-section">
+                    <div class="question">1. How do you typically respond when facing team challenges?</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q1" value="4" id="q1a">
+                            <label for="q1a">I see challenges as opportunities and inspire my team to find creative solutions</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" value="3" id="q1b">
+                            <label for="q1b">I maintain optimism and help the team focus on what we can control</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" value="2" id="q1c">
+                            <label for="q1c">I acknowledge the difficulty but try to stay positive</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" value="1" id="q1d">
+                            <label for="q1d">I tend to focus on the problems and potential negative outcomes</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-section">
+                    <div class="question">2. When giving feedback to team members, you:</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q2" value="4" id="q2a">
+                            <label for="q2a">Always lead with strengths and frame improvement areas as growth opportunities</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q2" value="3" id="q2b">
+                            <label for="q2b">Balance constructive criticism with encouragement and support</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q2" value="2" id="q2c">
+                            <label for="q2c">Give honest feedback but sometimes focus more on what needs fixing</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q2" value="1" id="q2d">
+                            <label for="q2d">Primarily point out mistakes and areas that need improvement</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-section">
+                    <div class="question">3. How do you handle team meetings and discussions?</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q3" value="4" id="q3a">
+                            <label for="q3a">I actively encourage participation, celebrate ideas, and maintain an energetic atmosphere</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" value="3" id="q3b">
+                            <label for="q3b">I create a welcoming environment and show appreciation for contributions</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" value="2" id="q3c">
+                            <label for="q3c">I run efficient meetings but may not always highlight positive contributions</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" value="1" id="q3d">
+                            <label for="q3d">I focus mainly on agenda items and may overlook team member engagement</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-section">
+                    <div class="question">4. When a team member makes a mistake, your first instinct is to:</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q4" value="4" id="q4a">
+                            <label for="q4a">Focus on learning opportunities and how we can prevent similar issues together</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" value="3" id="q4b">
+                            <label for="q4b">Address the issue calmly and constructively while maintaining their confidence</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" value="2" id="q4c">
+                            <label for="q4c">Point out the mistake but try to be understanding</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" value="1" id="q4d">
+                            <label for="q4d">Express disappointment and ensure they understand the consequences</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-section">
+                    <div class="question">5. How do you communicate your vision and goals to your team?</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q5" value="4" id="q5a">
+                            <label for="q5a">I paint an inspiring picture of success and help each person see their valuable role</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" value="3" id="q5b">
+                            <label for="q5b">I clearly explain goals and connect them to positive outcomes for the team</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" value="2" id="q5c">
+                            <label for="q5c">I communicate expectations clearly but may not emphasize the positive impact</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" value="1" id="q5d">
+                            <label for="q5d">I focus on what needs to be done and potential consequences of not meeting goals</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-section">
+                    <div class="question">6. During stressful periods, team members would describe your demeanor as:</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q6" value="4" id="q6a">
+                            <label for="q6a">A calming, confident presence who helps everyone stay focused and motivated</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q6" value="3" id="q6b">
+                            <label for="q6b">Steady and supportive, helping to maintain team morale</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q6" value="2" id="q6c">
+                            <label for="q6c">Professional and composed, though perhaps less encouraging than usual</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q6" value="1" id="q6d">
+                            <label for="q6d">Noticeably stressed and focused primarily on problems that need solving</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-section">
+                    <div class="question">7. How do you recognize and celebrate team achievements?</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q7" value="4" id="q7a">
+                            <label for="q7a">I consistently highlight successes, both big and small, and make celebrations meaningful</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q7" value="3" id="q7b">
+                            <label for="q7b">I regularly acknowledge achievements and show genuine appreciation</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q7" value="2" id="q7c">
+                            <label for="q7c">I recognize major accomplishments but may miss smaller wins</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q7" value="1" id="q7d">
+                            <label for="q7d">I acknowledge results when asked but don't make recognition a priority</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-section">
+                    <div class="question">8. When discussing future projects or changes, you tend to:</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q8" value="4" id="q8a">
+                            <label for="q8a">Emphasize exciting possibilities and how the team will grow and succeed</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q8" value="3" id="q8b">
+                            <label for="q8b">Present a balanced view with emphasis on positive potential outcomes</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q8" value="2" id="q8c">
+                            <label for="q8c">Provide factual information about what's coming without much emotional framing</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q8" value="1" id="q8d">
+                            <label for="q8d">Focus on potential challenges and what could go wrong</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-section">
+                    <div class="question">9. Your approach to developing team members involves:</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q9" value="4" id="q9a">
+                            <label for="q9a">Actively seeking opportunities to stretch their abilities and celebrating their progress</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q9" value="3" id="q9b">
+                            <label for="q9b">Providing encouragement and support for their professional growth</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q9" value="2" id="q9c">
+                            <label for="q9c">Offering development opportunities when they arise</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q9" value="1" id="q9d">
+                            <label for="q9d">Focusing mainly on current performance rather than future development</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-section">
+                    <div class="question">10. When communicating with stakeholders about your team's work, you:</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q10" value="4" id="q10a">
+                            <label for="q10a">Enthusiastically highlight team strengths, achievements, and positive contributions</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q10" value="3" id="q10b">
+                            <label for="q10b">Present your team's work in a positive light and advocate for them</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q10" value="2" id="q10c">
+                            <label for="q10c">Give honest, balanced reports without particular positive emphasis</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q10" value="1" id="q10d">
+                            <label for="q10d">Focus primarily on deliverables and any issues that need attention</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Get My Leadership Positivity Score</button>
+            </form>
+
+            <div id="results" class="results">
+                <div class="score" id="scoreDisplay"></div>
+                <div class="level" id="levelDisplay"></div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="description" id="descriptionDisplay"></div>
+                
+                <div class="development-plan" id="developmentPlan">
+                    <h3>Your Personalized Development Plan</h3>
+                    <div class="plan-content" id="planContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('assessmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            let totalScore = 0;
+            let questionsAnswered = 0;
+            
+            for (let i = 1; i <= 10; i++) {
+                const answer = formData.get(`q${i}`);
+                if (answer) {
+                    totalScore += parseInt(answer);
+                    questionsAnswered++;
+                }
+            }
+            
+            if (questionsAnswered < 10) {
+                alert('Please answer all questions before submitting.');
+                return;
+            }
+            
+            const percentage = Math.round((totalScore / 40) * 100);
+            let level = '';
+            let description = '';
+            let developmentPlan = '';
+            
+            if (percentage >= 85) {
+                level = 'Highly Positive Leader';
+                description = 'Exceptional! You consistently demonstrate positive leadership behaviors that inspire and energize your team. Your approach creates an environment where people thrive, feel valued, and are motivated to achieve their best. You naturally see opportunities in challenges and help others develop a growth mindset.';
+                developmentPlan = `
+                    <div class="plan-section">
+                        <h4><span class="plan-icon">🎯</span>Refinement Focus</h4>
+                        <ul class="plan-items">
+                            <li>Mentor other leaders in positive leadership techniques</li>
+                            <li>Document and share your successful positivity practices</li>
+                            <li>Seek feedback from team members on maintaining authenticity while staying positive</li>
+                            <li>Explore advanced leadership development programs to further enhance skills</li>
+                        </ul>
+                        <span class="timeframe">Ongoing Development</span>
+                    </div>
+                    <div class="plan-section">
+                        <h4><span class="plan-icon">📈</span>Next Level Actions</h4>
+                        <ul class="plan-items">
+                            <li>Create a positive leadership workshop for your organization</li>
+                            <li>Establish a peer coaching network with other positive leaders</li>
+                            <li>Measure team engagement metrics to quantify your positive impact</li>
+                            <li>Consider obtaining leadership coaching certification</li>
+                        </ul>
+                        <span class="timeframe">3-6 Months</span>
+                    </div>`;
+            } else if (percentage >= 70) {
+                level = 'Strong Positive Leader';
+                description = 'Great work! You demonstrate strong positive leadership qualities most of the time. Your team likely feels supported and valued under your leadership. You handle challenges well and generally maintain an optimistic outlook.';
+                developmentPlan = `
+                    <div class="plan-section">
+                        <h4><span class="plan-icon">🔄</span>Consistency Building</h4>
+                        <ul class="plan-items">
+                            <li>Create a daily positive leadership checklist to maintain consistency</li>
+                            <li>Schedule weekly one-on-one appreciation conversations with team members</li>
+                            <li>Practice reframing challenges as opportunities in real-time</li>
+                            <li>Set up monthly self-reflection sessions on your leadership positivity</li>
+                        </ul>
+                        <span class="timeframe">1-2 Months</span>
+                    </div>
+                    <div class="plan-section">
+                        <h4><span class="plan-icon">🎉</span>Recognition Systems</h4>
+                        <ul class="plan-items">
+                            <li>Implement a structured team recognition program</li>
+                            <li>Create celebration rituals for both small and large wins</li>
+                            <li>Establish peer-to-peer recognition opportunities</li>
+                            <li>Track and celebrate individual team member growth milestones</li>
+                        </ul>
+                        <span class="timeframe">2-3 Months</span>
+                    </div>`;
+            } else if (percentage >= 55) {
+                level = 'Developing Positive Leader';
+                description = 'Good foundation! You show positive leadership tendencies but have room to grow. Sometimes you may default to focusing on problems rather than solutions, or miss opportunities to encourage and celebrate your team.';
+                developmentPlan = `
+                    <div class="plan-section">
+                        <h4><span class="plan-icon">🧠</span>Mindset Shift</h4>
+                        <ul class="plan-items">
+                            <li>Practice the "3-to-1 rule": Give 3 positive comments for every constructive feedback</li>
+                            <li>End each team meeting by highlighting one person's contribution</li>
+                            <li>Use "What's working well?" as your default starting question in discussions</li>
+                            <li>Keep a daily journal of team member strengths you observed</li>
+                        </ul>
+                        <span class="timeframe">4-6 Weeks</span>
+                    </div>
+                    <div class="plan-section">
+                        <h4><span class="plan-icon">💬</span>Communication Enhancement</h4>
+                        <ul class="plan-items">
+                            <li>Practice solution-focused language in all team communications</li>
+                            <li>Replace "problem" with "challenge" or "opportunity" in your vocabulary</li>
+                            <li>Start meetings with a positive team accomplishment from the past week</li>
+                            <li>Ask "How can we..." instead of "Why didn't we..." when addressing issues</li>
+                        </ul>
+                        <span class="timeframe">6-8 Weeks</span>
+                    </div>`;
+            } else if (percentage >= 40) {
+                level = 'Emerging Positive Leader';
+                description = 'You have potential! Your leadership style may tend toward problem-focused rather than solution-focused approaches. Your team might benefit from more encouragement, recognition, and positive communication from you.';
+                developmentPlan = `
+                    <div class="plan-section">
+                        <h4><span class="plan-icon">🌱</span>Foundation Building</h4>
+                        <ul class="plan-items">
+                            <li>Commit to giving one genuine compliment to a team member daily</li>
+                            <li>Practice active listening without immediately jumping to solutions</li>
+                            <li>Set a phone reminder to check your tone and energy twice daily</li>
+                            <li>Read one positive leadership article or book chapter weekly</li>
+                        </ul>
+                        <span class="timeframe">2-3 Weeks</span>
+                    </div>
+                    <div class="plan-section">
+                        <h4><span class="plan-icon">🛠️</span>Skill Development</h4>
+                        <ul class="plan-items">
+                            <li>Attend a positive leadership or emotional intelligence workshop</li>
+                            <li>Find a leadership mentor who demonstrates positive leadership</li>
+                            <li>Practice the "Yes, and..." approach instead of "But..." in conversations</li>
+                            <li>Create a weekly team wins board or communication channel</li>
+                        </ul>
+                        <span class="timeframe">1-2 Months</span>
+                    </div>`;
+            } else {
+                level = 'Opportunity for Growth';
+                description = 'Significant development opportunity exists. Your current approach may be creating stress or low morale within your team. Focus on shifting from a deficit-based to a strength-based leadership style.';
+                developmentPlan = `
+                    <div class="plan-section">
+                        <h4><span class="plan-icon">🚀</span>Immediate Actions</h4>
+                        <ul class="plan-items">
+                            <li>Schedule individual conversations with each team member to understand their perspective</li>
+                            <li>Commit to catching someone doing something right at least once per day</li>
+                            <li>Before addressing any issue, ask yourself "How can I frame this positively?"</li>
+                            <li>Enroll in a leadership development program focused on emotional intelligence</li>
+                        </ul>
+                        <span class="timeframe">1-2 Weeks</span>
+                    </div>
+                    <div class="plan-section">
+                        <h4><span class="plan-icon">📚</span>Learning Priority</h4>
+                        <ul class="plan-items">
+                            <li>Work with an executive coach specializing in positive leadership</li>
+                            <li>Read "The Power of Positive Leadership" by Jon Gordon</li>
+                            <li>Practice daily gratitude - write down 3 things your team did well</li>
+                            <li>Observe and learn from a positive leader in your organization</li>
+                        </ul>
+                        <span class="timeframe">1 Month</span>
+                    </div>`;
+            }
+            
+            document.getElementById('scoreDisplay').textContent = `${percentage}%`;
+            document.getElementById('levelDisplay').textContent = level;
+            document.getElementById('descriptionDisplay').textContent = description;
+            document.getElementById('planContent').innerHTML = developmentPlan;
+            document.getElementById('progressFill').style.width = `${percentage}%`;
+            document.getElementById('results').style.display = 'block';
+            
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

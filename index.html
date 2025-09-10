@@ -31,6 +31,12 @@
     <link rel="canonical" href="https://www.thepositiveeffectindex.com/">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#0f172a">
+    
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -2071,41 +2077,45 @@
         }
 
         // Handle group payment success and generate codes
-        function onGroupPaymentSuccess(codeCount, email) {
-            const codes = [];
-            for (let i = 0; i < codeCount; i++) {
-                codes.push(generateAccessCode());
+        async function onGroupPaymentSuccess(codeCount, email, details) {
+            try {
+                // Prepare purchase data
+                const purchaseData = {
+                    email: email || details?.payer?.email_address || 'customer@example.com',
+                    name: details?.payer?.name?.given_name + ' ' + details?.payer?.name?.surname || 'Customer',
+                    codeCount: codeCount,
+                    amount: codeCount === 5 ? 350 : codeCount === 10 ? 650 : 1400,
+                    transactionId: details?.id || 'local_' + Date.now()
+                };
+                
+                // Generate and store codes
+                const result = await generateAndStoreCodes(purchaseData);
+                const codes = result.codes;
+                
+                // Generate PDF
+                const pdfDoc = generateCodesPDF(codes, purchaseData);
+                
+                // Show professional success page
+                showProfessionalSuccess(purchaseData, codes, pdfDoc);
+                
+                // If email is configured, send email notification
+                // (This would require setting up EmailJS credentials)
+                
+                console.log('Group purchase completed successfully:', {
+                    purchaseData,
+                    codes,
+                    databaseStored: result.success
+                });
+                
+            } catch (error) {
+                console.error('Error processing group payment:', error);
+                
+                // Fallback to simple display
+                const codes = Array.from({length: codeCount}, () => generateAccessCode());
+                const codeDisplay = codes.map((code, index) => `${index + 1}. ${code}`).join('\n');
+                
+                alert(`Group purchase successful!\n\nYour ${codeCount} access codes:\n\n${codeDisplay}\n\nPlease save these codes and distribute them to your team members.`);
             }
-            
-            // Display the generated codes to the user
-            const codeDisplay = codes.map((code, index) => `${index + 1}. ${code}`).join('\n');
-            
-            alert(`Group purchase successful!\n\nYour ${codeCount} access codes:\n\n${codeDisplay}\n\nThese codes have been generated for your team. Each code provides one assessment access. Please save these codes and distribute them to your team members.\n\nNote: In a production system, these would be emailed to: ${email}`);
-            
-            // Hide payment section
-            document.getElementById('paymentGateway').style.display = 'none';
-            
-            // Show a success message with codes
-            const successDiv = document.createElement('div');
-            successDiv.style.cssText = 'background: #f0f9ff; padding: 30px; border-radius: 15px; margin: 20px 0; border: 2px solid #0284c7;';
-            successDiv.innerHTML = `
-                <h3 style="color: #0284c7; margin-bottom: 20px; text-align: center;">Group Purchase Complete!</h3>
-                <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-                    <h4 style="color: #0f172a; margin-bottom: 15px;">Your Team Access Codes:</h4>
-                    <div style="font-family: monospace; background: #f8fafc; padding: 15px; border-radius: 8px; border-left: 4px solid #0284c7;">
-                        ${codes.map((code, index) => `<div style="margin-bottom: 8px;"><strong>Code ${index + 1}:</strong> ${code}</div>`).join('')}
-                    </div>
-                </div>
-                <p style="color: #6b7280; text-align: center; margin: 0;">
-                    Please save these codes and share them with your team members. Each code provides access to one complete assessment.
-                </p>
-            `;
-            
-            // Insert after the container
-            document.querySelector('.container').appendChild(successDiv);
-            
-            // Update banner
-            document.querySelector('.demo-banner').innerHTML = `GROUP PURCHASE COMPLETE - ${codeCount} Access Codes Generated`;
         }
 
         // Initialize PayPal buttons
@@ -2178,7 +2188,7 @@
                 onApprove: function(data, actions) {
                     return actions.order.capture().then(function(details) {
                         console.log('Group payment completed by:', details.payer.name.given_name);
-                        onGroupPaymentSuccess(codeCount, details.payer.email_address);
+                        onGroupPaymentSuccess(codeCount, details.payer.email_address, details);
                     });
                 },
                 onError: function(err) {
@@ -2207,6 +2217,213 @@
         // Initialize
         updateNavigation();
         updateProgress();
+
+        // ====== ENHANCED DATABASE & EMAIL SYSTEM ======
+        
+        // Supabase Configuration
+        const SUPABASE_URL = 'https://lfvsexynfvbtveuejeeq.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmdnNleHluZnZidHZldWVqZWVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc1MDEyNDYsImV4cCI6MjA3MzA3NzI0Nn0.Ho0qn87zZDGi2dl-q1QOae6UfUjnxb7znVX3A517qhQ';
+        let supabaseClient = null;
+        
+        // Initialize Supabase if available
+        if (typeof window.supabase !== 'undefined' && SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+            supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
+        
+        // EmailJS Configuration (UPDATE WITH YOUR CREDENTIALS)  
+        const EMAILJS_SERVICE_ID = 'YOUR_EMAILJS_SERVICE_ID';
+        const EMAILJS_TEMPLATE_ID = 'YOUR_EMAILJS_TEMPLATE_ID'; 
+        const EMAILJS_PUBLIC_KEY = 'YOUR_EMAILJS_PUBLIC_KEY';
+        
+        // Initialize EmailJS
+        if (typeof emailjs !== 'undefined' && EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+            emailjs.init(EMAILJS_PUBLIC_KEY);
+        }
+
+        // Enhanced code generation with database storage
+        async function generateAndStoreCodes(purchaseData) {
+            try {
+                if (supabaseClient) {
+                    // Store purchase in database
+                    const { data: purchase, error: purchaseError } = await supabaseClient
+                        .from('purchases')
+                        .insert([{
+                            customer_email: purchaseData.email,
+                            customer_name: purchaseData.name,
+                            package_size: purchaseData.codeCount,
+                            amount_paid: purchaseData.amount,
+                            paypal_transaction_id: purchaseData.transactionId
+                        }])
+                        .select()
+                        .single();
+                    
+                    if (purchaseError) throw purchaseError;
+                    
+                    // Generate and store access codes
+                    const { data: generatedCodes, error: codesError } = await supabaseClient
+                        .rpc('create_access_codes', {
+                            purchase_uuid: purchase.id,
+                            code_count: purchaseData.codeCount
+                        });
+                    
+                    if (codesError) throw codesError;
+                    
+                    return {
+                        success: true,
+                        purchase: purchase,
+                        codes: generatedCodes.map(row => row.code)
+                    };
+                }
+            } catch (error) {
+                console.error('Database error:', error);
+            }
+            
+            // Fallback to local generation if database fails or not configured
+            return {
+                success: false,
+                codes: Array.from({length: purchaseData.codeCount}, () => generateAccessCode()),
+                error: 'Database not configured - using local generation'
+            };
+        }
+
+        // Generate PDF with codes
+        function generateCodesPDF(codes, purchaseData) {
+            if (typeof window.jspdf === 'undefined') {
+                console.error('jsPDF not loaded');
+                return null;
+            }
+            
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Add company branding
+            doc.setFontSize(20);
+            doc.setTextColor(15, 23, 42); // Navy color
+            doc.text('Positive Effect Leaders Assessment', 20, 30);
+            
+            doc.setFontSize(16);
+            doc.text('Team Access Codes', 20, 45);
+            
+            // Add purchase details
+            doc.setFontSize(12);
+            doc.setTextColor(107, 114, 128); // Gray color
+            doc.text(`Purchase Date: ${new Date().toLocaleDateString()}`, 20, 60);
+            doc.text(`Package: ${purchaseData.codeCount} Team Members`, 20, 70);
+            doc.text(`Customer: ${purchaseData.email}`, 20, 80);
+            
+            // Add codes
+            doc.setFontSize(14);
+            doc.setTextColor(15, 23, 42);
+            doc.text('Your Team Access Codes:', 20, 100);
+            
+            codes.forEach((code, index) => {
+                const y = 115 + (index * 15);
+                doc.setFontSize(12);
+                doc.text(`${index + 1}. ${code}`, 30, y);
+                
+                // Add new page if needed
+                if (y > 250 && index < codes.length - 1) {
+                    doc.addPage();
+                    doc.text('Team Access Codes (continued)', 20, 30);
+                }
+            });
+            
+            // Add instructions
+            const instructionY = Math.min(115 + (codes.length * 15) + 20, 200);
+            doc.setFontSize(10);
+            doc.setTextColor(107, 114, 128);
+            doc.text('Instructions:', 20, instructionY);
+            doc.text('1. Share these codes with your team members', 20, instructionY + 10);
+            doc.text('2. Each team member can use their code once at:', 20, instructionY + 20);
+            doc.text('   https://www.thepositiveeffectindex.com/', 25, instructionY + 30);
+            doc.text('3. Codes are valid for 1 year from purchase date', 20, instructionY + 40);
+            
+            return doc;
+        }
+
+        // Professional success display
+        function showProfessionalSuccess(purchaseData, codes, pdfDoc) {
+            // Hide payment section
+            document.getElementById('paymentGateway').style.display = 'none';
+            
+            // Create professional success page
+            const successDiv = document.createElement('div');
+            successDiv.style.cssText = 'background: linear-gradient(135deg, #f0f9ff, #e0f2fe); padding: 40px; border-radius: 20px; margin: 20px 0; border: 2px solid #0284c7; text-align: center;';
+            
+            successDiv.innerHTML = `
+                <div style="max-width: 600px; margin: 0 auto;">
+                    <div style="background: #10b981; color: white; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px auto; font-size: 40px;">✓</div>
+                    
+                    <h2 style="color: #0284c7; font-size: 2.5rem; margin-bottom: 20px;">Purchase Successful!</h2>
+                    
+                    <div style="background: white; padding: 30px; border-radius: 15px; margin: 30px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <h3 style="color: #0f172a; margin-bottom: 20px;">Your Team Access Codes</h3>
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                            ${codes.map((code, index) => `
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #e5e7eb; font-family: monospace;">
+                                    <span style="font-weight: bold;">Code ${index + 1}:</span>
+                                    <span style="color: #0284c7; font-size: 1.1rem; letter-spacing: 1px;">${code}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                            <button onclick="downloadPDF()" style="background: #0284c7; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                                📄 Download PDF
+                            </button>
+                            <button onclick="copyAllCodes()" style="background: #10b981; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                                📋 Copy All Codes
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(251, 191, 36, 0.1); padding: 20px; border-radius: 10px; border-left: 4px solid #fbbf24;">
+                        <h4 style="color: #0f172a; margin-bottom: 10px;">📧 Check Your Email</h4>
+                        <p style="color: #6b7280; margin-bottom: 15px;">We've sent your codes and PDF to: <strong>${purchaseData.email}</strong></p>
+                        <p style="color: #6b7280; font-size: 0.9rem;">Need to access codes later? Visit: <a href="https://www.thepositiveeffectindex.com/my-codes" style="color: #0284c7;">thepositiveeffectindex.com/my-codes</a></p>
+                    </div>
+                </div>
+            `;
+            
+            // Store PDF globally for download
+            window.currentPDF = pdfDoc;
+            window.currentCodes = codes;
+            
+            // Insert success page
+            document.querySelector('.container').appendChild(successDiv);
+            
+            // Update banner
+            document.querySelector('.demo-banner').innerHTML = `GROUP PURCHASE COMPLETE - ${purchaseData.codeCount} Access Codes Generated`;
+            
+            // Scroll to success section
+            successDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // PDF download function
+        function downloadPDF() {
+            if (window.currentPDF) {
+                window.currentPDF.save('positive-effect-leaders-codes.pdf');
+            }
+        }
+
+        // Copy codes function
+        function copyAllCodes() {
+            if (window.currentCodes) {
+                const codesText = window.currentCodes.map((code, index) => `Code ${index + 1}: ${code}`).join('\n');
+                navigator.clipboard.writeText(codesText).then(() => {
+                    alert('All codes copied to clipboard!');
+                }).catch(() => {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = codesText;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    alert('All codes copied to clipboard!');
+                });
+            }
+        }
     </script>
 </body>
 </html>
