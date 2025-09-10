@@ -1640,6 +1640,9 @@
             displayLeadershipInsights(scores);
             displayStrengthsAndOpportunities(scores);
             displayDevelopmentRecommendations(scores);
+            
+            // Add PDF download button
+            addPDFDownloadButton(scores);
         }
 
         function calculateDemoScores() {
@@ -2521,6 +2524,202 @@ For support, contact: support@thepositiveeffectindex.com`;
                 
                 return false;
             }
+        }
+
+        // Add PDF download button to results
+        function addPDFDownloadButton(scores) {
+            const resultsDiv = document.getElementById('results');
+            
+            // Create download section
+            const downloadSection = document.createElement('div');
+            downloadSection.style.cssText = 'background: linear-gradient(135deg, #0284c7, #0369a1); padding: 30px; border-radius: 15px; margin: 30px 0; text-align: center; color: white;';
+            
+            downloadSection.innerHTML = `
+                <h3 style="margin-bottom: 15px; font-size: 1.5rem;">📄 Download Your Complete Report</h3>
+                <p style="margin-bottom: 20px; opacity: 0.9;">Get your personalized leadership assessment and development plan as a professional PDF document.</p>
+                <button onclick="downloadAssessmentPDF()" style="
+                    background: white; 
+                    color: #0284c7; 
+                    border: none; 
+                    padding: 15px 30px; 
+                    border-radius: 8px; 
+                    font-weight: 600; 
+                    font-size: 1.1rem;
+                    cursor: pointer;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                    transition: transform 0.2s;
+                " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    📄 Download PDF Report
+                </button>
+            `;
+            
+            // Store scores globally for PDF generation
+            window.currentAssessmentScores = scores;
+            window.currentAssessmentAnswers = answers;
+            
+            // Insert download section at the end of results
+            resultsDiv.appendChild(downloadSection);
+        }
+
+        // Generate comprehensive assessment PDF
+        function downloadAssessmentPDF() {
+            if (typeof window.jspdf === 'undefined') {
+                alert('PDF generation is temporarily unavailable. Please try again later.');
+                return;
+            }
+            
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const scores = window.currentAssessmentScores;
+            const pageWidth = 210; // A4 width in mm
+            const margin = 20;
+            let yPosition = 30;
+            
+            // Helper function to add text with word wrap
+            function addText(text, y, fontSize = 12, isBold = false) {
+                doc.setFontSize(fontSize);
+                if (isBold) {
+                    doc.setFont(undefined, 'bold');
+                } else {
+                    doc.setFont(undefined, 'normal');
+                }
+                
+                const splitText = doc.splitTextToSize(text, pageWidth - 2 * margin);
+                doc.text(splitText, margin, y);
+                return y + (splitText.length * fontSize * 0.5);
+            }
+            
+            // Add header and branding
+            doc.setFillColor(15, 23, 42); // Navy blue
+            doc.rect(0, 0, pageWidth, 25, 'F');
+            
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(20);
+            doc.setFont(undefined, 'bold');
+            doc.text('Positive Effect Leaders Assessment', margin, 16);
+            
+            doc.setFontSize(12);
+            doc.setFont(undefined, 'normal');
+            doc.text('Personal Leadership Development Report', margin, 22);
+            
+            // Reset text color
+            doc.setTextColor(0, 0, 0);
+            yPosition = 40;
+            
+            // Assessment Summary
+            yPosition = addText('LEADERSHIP ASSESSMENT SUMMARY', yPosition, 16, true);
+            yPosition += 5;
+            yPosition = addText(`Assessment Date: ${new Date().toLocaleDateString()}`, yPosition, 10);
+            yPosition += 10;
+            
+            // Framework Scores
+            yPosition = addText('YOUR LEADERSHIP DIMENSIONS', yPosition, 14, true);
+            yPosition += 5;
+            
+            const frameworkNames = {
+                performance: 'Performance & Growth Manager',
+                relationship: 'Relationship Builder', 
+                communication: 'Connecting Communicator',
+                coaching: 'Coach & People Developer',
+                ownership: 'Ownership & Accountability Driver',
+                mindset: 'Mindset & Energy Steward'
+            };
+            
+            Object.keys(scores).forEach(framework => {
+                const score = Math.round((scores[framework] / 25) * 100);
+                const level = score >= 80 ? 'Excellent' : score >= 60 ? 'Good' : score >= 40 ? 'Developing' : 'Needs Focus';
+                yPosition = addText(`${frameworkNames[framework]}: ${score}% - ${level}`, yPosition, 11);
+                yPosition += 2;
+            });
+            
+            yPosition += 10;
+            
+            // Leadership Insights
+            yPosition = addText('YOUR LEADERSHIP PROFILE', yPosition, 14, true);
+            yPosition += 5;
+            
+            // Find strongest and weakest areas
+            const maxScore = Math.max(...Object.values(scores));
+            const minScore = Math.min(...Object.values(scores));
+            const strongestArea = Object.keys(scores).find(key => scores[key] === maxScore);
+            const developmentArea = Object.keys(scores).find(key => scores[key] === minScore);
+            
+            yPosition = addText(`Your strongest leadership dimension is ${frameworkNames[strongestArea]}, where you demonstrate excellent capabilities. This is a key strength you can leverage to influence and inspire your team.`, yPosition, 11);
+            yPosition += 8;
+            
+            yPosition = addText(`Your primary development opportunity is in ${frameworkNames[developmentArea]}. Focusing on this area will have the greatest positive impact on your overall leadership effectiveness.`, yPosition, 11);
+            yPosition += 15;
+            
+            // Development Recommendations
+            yPosition = addText('PERSONALIZED DEVELOPMENT PLAN', yPosition, 14, true);
+            yPosition += 5;
+            
+            // 30/60/90 Day Plan
+            yPosition = addText('30-DAY PRIORITY ACTIONS', yPosition, 12, true);
+            yPosition += 3;
+            
+            const day30Actions = [
+                `Focus on strengthening your ${frameworkNames[developmentArea]} skills through daily practice`,
+                'Seek feedback from team members on your leadership approach',
+                'Schedule regular one-on-one meetings with direct reports',
+                'Begin implementing one new leadership technique each week'
+            ];
+            
+            day30Actions.forEach(action => {
+                yPosition = addText(`• ${action}`, yPosition, 10);
+                yPosition += 2;
+            });
+            
+            yPosition += 8;
+            yPosition = addText('60-DAY DEVELOPMENT GOALS', yPosition, 12, true);
+            yPosition += 3;
+            
+            const day60Actions = [
+                `Demonstrate measurable improvement in ${frameworkNames[developmentArea]}`,
+                'Establish a regular feedback loop with your manager and peers',
+                'Complete a relevant leadership development course or workshop',
+                'Mentor or coach another team member to develop your people skills'
+            ];
+            
+            day60Actions.forEach(action => {
+                yPosition = addText(`• ${action}`, yPosition, 10);
+                yPosition += 2;
+            });
+            
+            // Check if we need a new page
+            if (yPosition > 250) {
+                doc.addPage();
+                yPosition = 30;
+            }
+            
+            yPosition += 8;
+            yPosition = addText('90-DAY MASTERY OBJECTIVES', yPosition, 12, true);
+            yPosition += 3;
+            
+            const day90Actions = [
+                'Achieve consistent high performance across all six leadership dimensions',
+                'Become a recognized leader and positive influence in your organization',
+                'Successfully lead a significant project or initiative demonstrating your growth',
+                'Help develop other emerging leaders using your enhanced capabilities'
+            ];
+            
+            day90Actions.forEach(action => {
+                yPosition = addText(`• ${action}`, yPosition, 10);
+                yPosition += 2;
+            });
+            
+            // Footer
+            yPosition = Math.max(yPosition + 20, 270);
+            doc.setFillColor(15, 23, 42);
+            doc.rect(0, yPosition, pageWidth, 15, 'F');
+            
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(10);
+            doc.text('© Positive Effect Leaders Assessment - Confidential Leadership Development Report', margin, yPosition + 8);
+            doc.text(`Generated: ${new Date().toLocaleDateString()} | www.thepositiveeffectindex.com`, margin, yPosition + 12);
+            
+            // Save the PDF
+            doc.save('positive-effect-leadership-report.pdf');
         }
     </script>
 </body>
