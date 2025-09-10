@@ -1585,6 +1585,9 @@
                 
                 updateNavigation();
                 updateProgress();
+                
+                // Scroll to top on mobile
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 // Show results
                 showResults();
@@ -1602,6 +1605,9 @@
                 
                 updateNavigation();
                 updateProgress();
+                
+                // Scroll to top on mobile
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
@@ -1634,6 +1640,9 @@
             document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
             document.querySelector('.navigation').style.display = 'none';
             document.querySelector('.progress-bar').style.display = 'none';
+            
+            // Scroll to top for results view
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             
             // Calculate demo scores
             const scores = calculateDemoScores();
@@ -2061,6 +2070,9 @@
                 // Update banner for company access
                 document.querySelector('.demo-banner').innerHTML = '🎯 COMPANY ACCESS - Authorized Leadership Assessment';
                 
+                // Scroll to top of assessment
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
                 alert('Company code validated! Welcome to your leadership assessment.');
             } else {
                 alert('Invalid company code. Please check your code or contact your administrator.');
@@ -2074,6 +2086,9 @@
             
             // Update banner for paid access
             document.querySelector('.demo-banner').innerHTML = 'PREMIUM ACCESS - Your Paid Leadership Assessment';
+            
+            // Scroll to top of assessment
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             
             alert('Payment successful! Welcome to your comprehensive leadership assessment.');
         }
