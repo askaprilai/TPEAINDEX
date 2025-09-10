@@ -414,6 +414,20 @@
             .response-summary div[style*="grid-template-columns"] > div {
                 margin-bottom: 20px;
             }
+
+            /* Logo responsive design */
+            .header div[style*="flex"] {
+                flex-direction: row !important;
+                flex-wrap: wrap;
+            }
+            .header img {
+                height: 50px !important;
+                margin-right: 15px !important;
+                margin-bottom: 10px;
+            }
+            .header h1 {
+                font-size: 1.5rem !important;
+            }
         }
     </style>
 </head>
@@ -424,7 +438,10 @@
 
     <div class="container">
         <div class="header">
-            <h1>Positive Effect Leaders Assessment</h1>
+            <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                <img src="logo (1).png" alt="Company Logo" style="height: 60px; margin-right: 20px;">
+                <h1 style="margin: 0;">Positive Effect Leaders Assessment</h1>
+            </div>
             <p class="subtitle">Select the response that best describes how you actually behave</p>
             <div class="value-prop">
                 <div style="color: rgba(255,255,255,0.9); margin-bottom: 15px;">
