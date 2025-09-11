@@ -571,11 +571,15 @@
             display: none !important;
         }
         
-        /* Make question text white in assessment mode */
+        /* Make ALL text white in assessment mode */
+        .container.assessment-mode *,
         .container.assessment-mode .question h3,
         .container.assessment-mode .question p,
         .container.assessment-mode .navigation,
-        .container.assessment-mode {
+        .container.assessment-mode .navigation p,
+        .container.assessment-mode #currentQ,
+        .container.assessment-mode #totalQ,
+        .container.assessment-mode .current {
             color: #ffffff !important;
         }
         
