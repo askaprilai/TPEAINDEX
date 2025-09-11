@@ -566,6 +566,19 @@
             display: none !important;
         }
         
+        /* Hide footer coach section in assessment mode */
+        .container.assessment-mode ~ div[style*="background: linear-gradient(135deg, #0f172a"] {
+            display: none !important;
+        }
+        
+        /* Make question text white in assessment mode */
+        .container.assessment-mode .question h3,
+        .container.assessment-mode .question p,
+        .container.assessment-mode .navigation,
+        .container.assessment-mode {
+            color: #ffffff !important;
+        }
+        
         @media (max-width: 768px) {
             .container {
                 margin: 10px;
@@ -2106,6 +2119,10 @@
                 // Add assessment mode class for mobile styling
                 document.querySelector('.container').classList.add('assessment-mode');
                 
+                // Hide footer coach section
+                const footer = document.querySelector('div[style*="background: linear-gradient(135deg, #0f172a"]');
+                if (footer) footer.style.display = 'none';
+                
                 // Update banner for company access
                 document.querySelector('.demo-banner').innerHTML = '🎯 COMPANY ACCESS - Authorized Leadership Assessment';
                 
@@ -2125,6 +2142,10 @@
             
             // Add assessment mode class for mobile styling
             document.querySelector('.container').classList.add('assessment-mode');
+            
+            // Hide footer coach section
+            const footer = document.querySelector('div[style*="background: linear-gradient(135deg, #0f172a"]');
+            if (footer) footer.style.display = 'none';
             
             // Update banner for paid access
             document.querySelector('.demo-banner').innerHTML = 'PREMIUM ACCESS - Your Paid Leadership Assessment';
