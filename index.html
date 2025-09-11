@@ -545,20 +545,21 @@
             box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
         }
 
+        /* Remove container styling when assessment mode is active - ALL DEVICES */
+        .container.assessment-mode {
+            background: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+            backdrop-filter: none !important;
+            border-radius: 0 !important;
+            margin: 0 !important;
+            max-width: 100% !important;
+        }
+        
         @media (max-width: 768px) {
             .container {
                 margin: 10px;
                 border-radius: 15px;
-            }
-            
-            /* Remove container styling when assessment mode is active */
-            .container.assessment-mode {
-                background: transparent !important;
-                box-shadow: none !important;
-                border: none !important;
-                backdrop-filter: none !important;
-                border-radius: 0 !important;
-                margin: 0 !important;
             }
             
             .header {
