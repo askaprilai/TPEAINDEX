@@ -551,15 +551,14 @@
                 border-radius: 15px;
             }
             
-            /* Remove container styling when in assessment mode for cleaner mobile UX */
-            #assessmentContent .container {
+            /* Remove container styling when assessment mode is active */
+            .container.assessment-mode {
                 background: transparent !important;
                 box-shadow: none !important;
                 border: none !important;
                 backdrop-filter: none !important;
                 border-radius: 0 !important;
                 margin: 0 !important;
-                padding: 0 !important;
             }
             
             .header {
@@ -2093,6 +2092,9 @@
                 document.getElementById('paymentGateway').style.display = 'none';
                 document.getElementById('assessmentContent').style.display = 'block';
                 
+                // Add assessment mode class for mobile styling
+                document.querySelector('.container').classList.add('assessment-mode');
+                
                 // Update banner for company access
                 document.querySelector('.demo-banner').innerHTML = '🎯 COMPANY ACCESS - Authorized Leadership Assessment';
                 
@@ -2109,6 +2111,9 @@
             // Grant access to assessment after successful payment
             document.getElementById('paymentGateway').style.display = 'none';
             document.getElementById('assessmentContent').style.display = 'block';
+            
+            // Add assessment mode class for mobile styling
+            document.querySelector('.container').classList.add('assessment-mode');
             
             // Update banner for paid access
             document.querySelector('.demo-banner').innerHTML = 'PREMIUM ACCESS - Your Paid Leadership Assessment';
