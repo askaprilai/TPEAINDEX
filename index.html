@@ -551,6 +551,17 @@
                 border-radius: 15px;
             }
             
+            /* Remove container styling when in assessment mode for cleaner mobile UX */
+            #assessmentContent .container {
+                background: transparent !important;
+                box-shadow: none !important;
+                border: none !important;
+                backdrop-filter: none !important;
+                border-radius: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            
             .header {
                 padding: 30px 20px;
             }
