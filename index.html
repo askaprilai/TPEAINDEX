@@ -373,7 +373,8 @@
         }
 
         .nav-btn:hover:not(:disabled) {
-            background: #1e293b;
+            background: #fbbf24;
+            color: #0f172a;
             transform: translateY(-2px);
         }
 
@@ -1687,7 +1688,7 @@
             
             // Change to "Complete" on last question
             if (currentQuestion === totalQuestions) {
-                document.getElementById('nextBtn').textContent = 'Complete Demo';
+                document.getElementById('nextBtn').textContent = 'Complete Assessment';
             } else {
                 document.getElementById('nextBtn').textContent = 'Next';
             }
@@ -2138,7 +2139,7 @@
                 if (footer) footer.style.display = 'none';
                 
                 // Update banner for company access
-                document.querySelector('.demo-banner').innerHTML = '🎯 COMPANY ACCESS - Authorized Leadership Assessment';
+                document.querySelector('.demo-banner').innerHTML = '🎯 COMPANY ACCESS - Positive Leadership Assessment';
                 
                 // Scroll to top of assessment
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2162,7 +2163,7 @@
             if (footer) footer.style.display = 'none';
             
             // Update banner for paid access
-            document.querySelector('.demo-banner').innerHTML = 'PREMIUM ACCESS - Your Paid Leadership Assessment';
+            document.querySelector('.demo-banner').innerHTML = 'PREMIUM ACCESS - Positive Leadership Assessment';
             
             // Scroll to top of assessment
             window.scrollTo({ top: 0, behavior: 'smooth' });
