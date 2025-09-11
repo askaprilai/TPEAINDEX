@@ -571,8 +571,7 @@
             display: none !important;
         }
         
-        /* Make ALL text white in assessment mode */
-        .container.assessment-mode *,
+        /* Make question titles and navigation white in assessment mode */
         .container.assessment-mode .question h3,
         .container.assessment-mode .question p,
         .container.assessment-mode .navigation,
@@ -581,6 +580,13 @@
         .container.assessment-mode #totalQ,
         .container.assessment-mode .current {
             color: #ffffff !important;
+        }
+        
+        /* Keep answer text black for readability on white backgrounds */
+        .container.assessment-mode .answer,
+        .container.assessment-mode .answers label,
+        .container.assessment-mode .answers input + label {
+            color: #1f2937 !important;
         }
         
         @media (max-width: 768px) {
