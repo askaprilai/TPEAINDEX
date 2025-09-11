@@ -42,7 +42,15 @@
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     
     <style>
-        /* FORCE BLACK TEXT FOR BETTER READABILITY */
+        /* FORCE READABLE TEXT COLORS BASED ON BACKGROUND */
+        /* White text on dark backgrounds */
+        .header p, .header div, .header span, .demo-banner p, .demo-banner div, .demo-banner span,
+        .header .subtitle, .header .framework-item, .framework-overview .framework-item {
+            color: #ffffff !important;
+        }
+        
+        /* Dark text on light backgrounds */
+        .container p, .container div, .container span, .payment-gateway p, .payment-gateway div, .payment-gateway span,
         p, div, span, .text, [style*="color: #6b7280"], [style*="color: #374151"], [style*="color: #4b5563"], [style*="color: #3b82f6"] {
             color: #1f2937 !important;
         }
