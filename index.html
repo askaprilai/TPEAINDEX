@@ -34,7 +34,7 @@
     <!-- Additional SEO -->
     <link rel="canonical" href="https://www.thepositiveeffectindex.com/">
     <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#10b981">
+    <meta name="theme-color" content="#1e3a8a">
     
     <!-- External Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -70,7 +70,7 @@
 
         body {
             font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 30%, #bae6fd 70%, #7dd3fc 100%);
+            background: #ffffff;
             min-height: 100vh;
             padding: 15px;
             line-height: 1.6;
@@ -86,9 +86,8 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(254, 240, 138, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(239, 68, 68, 0.15) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(251, 191, 36, 0.03) 0%, transparent 70%),
+                radial-gradient(circle at 80% 20%, rgba(251, 191, 36, 0.02) 0%, transparent 70%);
             pointer-events: none;
             z-index: -1;
         }
@@ -106,7 +105,7 @@
         .circle {
             position: absolute;
             border-radius: 50%;
-            background: linear-gradient(135deg, rgba(254, 240, 138, 0.2), rgba(16, 185, 129, 0.15));
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.08), rgba(251, 191, 36, 0.04));
             animation: float 20s infinite ease-in-out;
         }
 
@@ -176,16 +175,15 @@
         .container {
             max-width: 900px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.98);
+            background: #ffffff;
             border-radius: 24px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(30, 58, 138, 0.1);
             overflow: hidden;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(251, 191, 36, 0.2);
         }
 
         .header {
-            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #10b981 100%);
+            background: #1e3a8a;
             color: white;
             padding: 50px 30px;
             text-align: center;
@@ -260,12 +258,12 @@
         }
 
         .progress-fill {
-            background: linear-gradient(90deg, #10b981, #22c55e);
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
             height: 100%;
             width: 4%;
             transition: width 0.3s ease;
             border-radius: 4px;
-            box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
         }
 
         .question {
@@ -284,7 +282,7 @@
         }
 
         .question h3 {
-            color: #0f172a;
+            color: #1e3a8a;
             font-size: 1.3rem;
             margin-bottom: 20px;
             line-height: 1.4;
@@ -322,34 +320,34 @@
         }
 
         .answer-option {
-            background: linear-gradient(145deg, #ffffff, #f0fdf4);
-            border: 2px solid #22c55e;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
             border-radius: 12px;
             padding: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
             width: 100%;
             text-align: left;
-            box-shadow: 0 2px 8px rgba(34, 197, 94, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
         .answer-option:hover {
-            border-color: #16a34a;
-            background: linear-gradient(145deg, #f0fdf4, #bbf7d0);
+            border-color: #fbbf24;
+            background: #fffbeb;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.25);
+            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.25);
         }
 
         .answer-option.selected {
-            background: linear-gradient(145deg, #10b981, #059669);
-            border-color: #047857;
-            color: #ffffff;
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+            background: linear-gradient(145deg, #fbbf24, #f59e0b);
+            border-color: #d97706;
+            color: #1e3a8a;
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
         }
 
         .answer-text {
             font-weight: 500;
-            color: #3b82f6 !important;
+            color: #1e3a8a !important;
             font-size: 1rem;
             line-height: 1.5;
             margin: 0;
@@ -365,8 +363,8 @@
         }
 
         .nav-btn {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #1e3a8a;
             border: none;
             padding: 14px 28px;
             border-radius: 10px;
@@ -375,21 +373,23 @@
             cursor: pointer;
             transition: all 0.3s ease;
             min-width: 110px;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
         }
 
         .nav-btn:hover:not(:disabled) {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
+            background: linear-gradient(135deg, #f59e0b, #d97706);
             color: #ffffff;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
         }
 
         .nav-btn:disabled {
-            background: linear-gradient(135deg, #9ca3af, #6b7280);
+            background: #e5e7eb;
+            color: #9ca3af;
             cursor: not-allowed;
             transform: none;
             opacity: 0.6;
+            box-shadow: none;
         }
 
         .progress-indicator {
@@ -414,21 +414,20 @@
         }
 
         .results h2 {
-            color: #059669;
+            color: #1e3a8a;
             font-size: 2.2rem;
             margin-bottom: 20px;
             text-align: center;
-            text-shadow: 0 2px 4px rgba(5, 150, 105, 0.2);
         }
 
         .score-display {
-            background: linear-gradient(135deg, #ecfccb 0%, #d9f99d 100%);
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
             padding: 30px;
             border-radius: 15px;
             margin: 25px 0;
-            border: 2px solid #22c55e;
+            border: 2px solid #fbbf24;
             text-align: center;
-            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.15);
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.15);
         }
 
         .framework-scores {
@@ -439,21 +438,21 @@
         }
 
         .framework-score {
-            background: linear-gradient(145deg, #ffffff, #f0fdf4);
+            background: #ffffff;
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
             border-top: 5px solid;
             text-align: center;
         }
 
-        .framework-score.support { border-top-color: #10b981; }
-        .framework-score.responsible { border-top-color: #06b6d4; }
-        .framework-score.selfless { border-top-color: #3b82f6; }
-        .framework-score.accountability { border-top-color: #fde047; }
+        .framework-score.support { border-top-color: #fbbf24; }
+        .framework-score.responsible { border-top-color: #fbbf24; }
+        .framework-score.selfless { border-top-color: #fbbf24; }
+        .framework-score.accountability { border-top-color: #fbbf24; }
 
         .framework-score h3 {
-            color: #047857;
+            color: #1e3a8a;
             margin-bottom: 12px;
             font-size: 1.1rem;
             font-weight: 700;
@@ -462,9 +461,8 @@
         .score-value {
             font-size: 2.2rem;
             font-weight: bold;
-            color: #059669;
+            color: #1e3a8a;
             margin-bottom: 8px;
-            text-shadow: 0 1px 2px rgba(5, 150, 105, 0.2);
         }
 
         .score-description {
@@ -473,16 +471,16 @@
         }
 
         .response-summary {
-            background: linear-gradient(145deg, #f0fdf4, #ecfccb);
+            background: #ffffff;
             padding: 25px;
             border-radius: 12px;
             margin-top: 30px;
-            border-left: 4px solid #22c55e;
-            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.1);
+            border-left: 4px solid #fbbf24;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
 
         .response-summary h3 {
-            color: #047857;
+            color: #1e3a8a;
             margin-bottom: 20px;
             font-size: 1.3rem;
             font-weight: 700;
@@ -500,21 +498,21 @@
         }
 
         .response-list {
-            background: linear-gradient(145deg, #ffffff, #f9fffe);
+            background: #f9fafb;
             padding: 15px;
-            box-shadow: 0 2px 8px rgba(34, 197, 94, 0.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             border-radius: 8px;
             border-left: 3px solid;
         }
 
-        .response-list.support { border-left-color: #10b981; }
-        .response-list.responsible { border-left-color: #06b6d4; }
-        .response-list.selfless { border-left-color: #3b82f6; }
-        .response-list.accountability { border-left-color: #fde047; }
+        .response-list.support { border-left-color: #fbbf24; }
+        .response-list.responsible { border-left-color: #fbbf24; }
+        .response-list.selfless { border-left-color: #fbbf24; }
+        .response-list.accountability { border-left-color: #fbbf24; }
 
         .response-item {
             margin-bottom: 8px;
-            color: #3b82f6 !important;
+            color: #1e3a8a !important;
             font-size: 0.9rem;
             line-height: 1.4;
         }
@@ -524,13 +522,13 @@
         }
 
         .demo-cta {
-            background: linear-gradient(135deg, #22c55e, #10b981);
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
             padding: 30px;
             border-radius: 15px;
             margin-top: 30px;
             text-align: center;
-            color: #ffffff;
-            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.25);
+            color: #1e3a8a;
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.25);
         }
 
         .demo-cta h3 {
@@ -545,22 +543,23 @@
 
         .cta-button {
             display: inline-block;
-            background: linear-gradient(135deg, #ffffff, #f0fdf4);
-            color: #047857;
+            background: #ffffff;
+            color: #1e3a8a;
             text-decoration: none;
             padding: 15px 30px;
             border-radius: 10px;
             font-weight: 600;
             font-size: 1.1rem;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #1e3a8a;
         }
 
         .cta-button:hover {
-            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            background: #1e3a8a;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
-            color: #065f46;
+            box-shadow: 0 6px 20px rgba(30, 58, 138, 0.3);
+            color: #ffffff;
         }
 
         /* Remove container styling when assessment mode is active - ALL DEVICES */
@@ -757,7 +756,7 @@
         <div class="circle"></div>
     </div>
 
-    <div class="demo-banner" style="background: linear-gradient(135deg, #22c55e, #10b981); color: #ffffff; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);">
+    <div class="demo-banner" style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #1e3a8a; box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);">
         PREMIUM LEADERSHIP ASSESSMENT - Complete Analysis for $97
     </div>
 
