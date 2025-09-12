@@ -906,7 +906,18 @@
                         <input type="text" id="companyCode" placeholder="Enter your company code" 
                                style="padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 16px; width: 250px;"
                                onkeypress="if(event.key==='Enter') validateCompanyCode()">
-                        <button onclick="validateCompanyCode()" 
+                        <button onclick="
+                            alert('Button clicked directly!'); 
+                            const code = document.getElementById('companyCode').value.trim().toUpperCase();
+                            if (code === 'TEST123') {
+                                document.getElementById('paymentGateway').style.display = 'none';
+                                document.getElementById('assessmentContent').style.display = 'block';
+                                document.querySelector('.demo-banner').innerHTML = '🎯 WORKING - TEST123 VALIDATED';
+                                alert('Should be working now!');
+                            } else {
+                                alert('Enter TEST123');
+                            }
+                        " 
                                 style="background: #0284c7; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;"
                                 onmouseover="this.style.background='#0369a1'"
                                 onmouseout="this.style.background='#0284c7'">
