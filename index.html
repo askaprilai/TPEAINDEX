@@ -1953,40 +1953,96 @@
             const strengths = sortedScores.slice(0, 2);
             const opportunities = sortedScores.slice(-2).reverse();
 
-            const strengthDescriptions = {
-                performance: "Aligning goals to KPIs and running effective performance conversations that drive growth",
-                relationship: "Creating psychological safety and building cross-functional alliances through genuine connection",
-                communication: "Communicating with positive intent and deepening connection through curiosity and empathy",
-                coaching: "Listening to learn and asking profound questions that unlock team members' thinking",
-                ownership: "Setting crystal-clear expectations and using systems to transfer ownership to the team",
-                mindset: "Modeling calm under pressure and reframing setbacks as learning opportunities"
+            const strengthLeverage = {
+                performance: [
+                    "Mentor other leaders on goal-setting frameworks",
+                    "Lead performance improvement initiatives",
+                    "Share your KPI alignment strategies company-wide"
+                ],
+                relationship: [
+                    "Facilitate cross-departmental collaboration projects", 
+                    "Train others on psychological safety techniques",
+                    "Lead team-building initiatives across the organization"
+                ],
+                communication: [
+                    "Present at leadership meetings on positive communication",
+                    "Mentor managers on empathy and connection skills",
+                    "Lead difficult conversations as a neutral facilitator"
+                ],
+                coaching: [
+                    "Become the go-to person for developing others",
+                    "Lead coaching training sessions for other managers",
+                    "Take on high-potential employees as mentees"
+                ],
+                ownership: [
+                    "Design accountability systems for other teams",
+                    "Lead projects requiring clear ownership structures",
+                    "Train other leaders on delegation best practices"
+                ],
+                mindset: [
+                    "Lead change management initiatives", 
+                    "Mentor stressed team members through challenges",
+                    "Model resilience during organizational transitions"
+                ]
             };
 
-            const opportunityDescriptions = {
-                performance: "Strengthening the connection between individual goals and organizational KPIs",
-                relationship: "Building deeper psychological safety and cross-functional working relationships",
-                communication: "Developing stronger positive-intent communication and empathy skills",
-                coaching: "Enhancing coaching skills to better unlock team members' problem-solving abilities",
-                ownership: "Improving expectation-setting and accountability systems for better follow-through",
-                mindset: "Developing resilience and energy management skills for sustained high performance"
+            const quickWins = {
+                performance: [
+                    "Set 3 measurable goals this week",
+                    "Schedule monthly 1:1s with each team member", 
+                    "Create a simple performance tracking system"
+                ],
+                relationship: [
+                    "Ask 'What haven't we considered?' in your next meeting",
+                    "Grab coffee with someone from another department",
+                    "Share a personal learning experience with your team"
+                ],
+                communication: [
+                    "Use 'we' instead of 'you' when addressing team issues",
+                    "Ask 'What are you trying to achieve?' before responding",
+                    "Give one specific recognition this week"
+                ],
+                coaching: [
+                    "Ask 'What do you think?' before giving your opinion",
+                    "Give one stretch assignment to a team member",
+                    "Practice the 5-step coaching model in your next 1:1"
+                ],
+                ownership: [
+                    "Write out clear who/what/when for one major decision",
+                    "Delegate one task with specific boundaries this week",
+                    "Create one simple accountability check-in"
+                ],
+                mindset: [
+                    "Take 3 deep breaths before your next stressful response",
+                    "Reframe one setback as a learning opportunity",
+                    "Start one meeting by discussing possibilities, not problems"
+                ]
             };
 
-            // Display strengths
+            // Display strengths with leverage actions
             strengths.forEach(([framework, score]) => {
-                if (score > 60) { // Only show as strength if reasonably high
+                if (score > 60) {
                     const strengthItem = document.createElement('div');
-                    strengthItem.className = 'response-item';
-                    strengthItem.innerHTML = `• ${strengthDescriptions[framework]} (${score}%)`;
+                    strengthItem.className = 'response-category';
+                    strengthItem.innerHTML = `
+                        <h4 style="color: #10b981; margin-bottom: 8px;">💪 ${framework.charAt(0).toUpperCase() + framework.slice(1)} Strength (${Math.round(score)}%)</h4>
+                        <div style="margin-bottom: 10px; font-weight: 600;">Leverage this strength:</div>
+                        ${strengthLeverage[framework].map(item => `<div class="response-item">• ${item}</div>`).join('')}
+                    `;
                     strengthsContainer.appendChild(strengthItem);
                 }
             });
 
-            // Display opportunities
+            // Display opportunities with quick wins
             opportunities.forEach(([framework, score]) => {
-                if (score < 75) { // Only show as opportunity if there's room for growth
+                if (score < 75) {
                     const opportunityItem = document.createElement('div');
-                    opportunityItem.className = 'response-item';
-                    opportunityItem.innerHTML = `• ${opportunityDescriptions[framework]}`;
+                    opportunityItem.className = 'response-category';
+                    opportunityItem.innerHTML = `
+                        <h4 style="color: #f59e0b; margin-bottom: 8px;">🎯 ${framework.charAt(0).toUpperCase() + framework.slice(1)} Growth Area (${Math.round(score)}%)</h4>
+                        <div style="margin-bottom: 10px; font-weight: 600;">Quick wins this week:</div>
+                        ${quickWins[framework].map(item => `<div class="response-item">• ${item}</div>`).join('')}
+                    `;
                     opportunitiesContainer.appendChild(opportunityItem);
                 }
             });
