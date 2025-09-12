@@ -2683,6 +2683,8 @@
         // PayPal and Company Code Functions
         function validateCompanyCode() {
             try {
+                alert('validateCompanyCode function started');
+                
                 const codeInput = document.getElementById('companyCode');
                 if (!codeInput) {
                     alert('Error: Company code input not found. Please refresh the page.');
@@ -2690,6 +2692,7 @@
                 }
                 
                 const code = codeInput.value.trim().toUpperCase();
+                alert('Code entered: ' + code);
                 
                 if (!code) {
                     alert('Please enter a company code.');
@@ -2700,9 +2703,13 @@
                 const validCodes = ['DEMO2024', 'CORPORATE', 'LEADERSHIP', 'TEAM2024', 'COMPANY', 'TEST123', 'SAMPLE99', 'TRIAL2024'];
                 
                 if (validCodes.includes(code)) {
+                    alert('Code is valid, proceeding with access...');
+                    
                     // Grant access - start with personalization questions
                     const paymentGateway = document.getElementById('paymentGateway');
                     const personalizationContent = document.getElementById('personalizationContent');
+                    
+                    alert('Found elements: paymentGateway=' + !!paymentGateway + ', personalizationContent=' + !!personalizationContent);
                     
                     if (!personalizationContent) {
                         alert('Error: Personalization content not found. Please refresh the page.');
@@ -2711,6 +2718,8 @@
                     
                     if (paymentGateway) paymentGateway.style.display = 'none';
                     personalizationContent.style.display = 'block';
+                    
+                    alert('Content should now be visible');
                     
                     // Add assessment mode class for mobile styling  
                     const container = document.querySelector('.container');
@@ -2725,8 +2734,13 @@
                     if (banner) banner.innerHTML = '🎯 PERSONALIZED LEADERSHIP ASSESSMENT - Tell Us About Your Context';
                     
                     // Initialize personalization progress
-                    updatePersonalizationProgress();
-                    updatePersonalizationNavigation();
+                    try {
+                        updatePersonalizationProgress();
+                        updatePersonalizationNavigation();
+                        alert('Personalization functions called successfully');
+                    } catch (navError) {
+                        alert('Error calling personalization functions: ' + navError.message);
+                    }
                     
                     // Scroll to top
                     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2737,7 +2751,7 @@
                 }
             } catch (error) {
                 console.error('Error in validateCompanyCode:', error);
-                alert('An error occurred. Please refresh the page and try again.');
+                alert('An error occurred: ' + error.message);
             }
         }
 
