@@ -906,7 +906,7 @@
                         <input type="text" id="companyCode" placeholder="Enter your company code" 
                                style="padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 16px; width: 250px;"
                                onkeypress="if(event.key==='Enter') validateCompanyCode()">
-                        <button onclick="alert('Button clicked!'); validateCompanyCode();" 
+                        <button onclick="validateCompanyCode()" 
                                 style="background: #0284c7; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;"
                                 onmouseover="this.style.background='#0369a1'"
                                 onmouseout="this.style.background='#0284c7'">
@@ -2683,8 +2683,6 @@
         // PayPal and Company Code Functions
         function validateCompanyCode() {
             try {
-                alert('validateCompanyCode function started');
-                
                 const codeInput = document.getElementById('companyCode');
                 if (!codeInput) {
                     alert('Error: Company code input not found. Please refresh the page.');
@@ -2692,7 +2690,6 @@
                 }
                 
                 const code = codeInput.value.trim().toUpperCase();
-                alert('Code entered: ' + code);
                 
                 if (!code) {
                     alert('Please enter a company code.');
@@ -2703,13 +2700,9 @@
                 const validCodes = ['DEMO2024', 'CORPORATE', 'LEADERSHIP', 'TEAM2024', 'COMPANY', 'TEST123', 'SAMPLE99', 'TRIAL2024'];
                 
                 if (validCodes.includes(code)) {
-                    alert('Code is valid, proceeding with access...');
-                    
                     // Grant access - start with personalization questions
                     const paymentGateway = document.getElementById('paymentGateway');
                     const personalizationContent = document.getElementById('personalizationContent');
-                    
-                    alert('Found elements: paymentGateway=' + !!paymentGateway + ', personalizationContent=' + !!personalizationContent);
                     
                     if (!personalizationContent) {
                         alert('Error: Personalization content not found. Please refresh the page.');
@@ -2719,11 +2712,8 @@
                     if (paymentGateway) paymentGateway.style.display = 'none';
                     personalizationContent.style.display = 'block';
                     
-                    alert('Content should now be visible');
-                    
-                    // Add assessment mode class for mobile styling  
-                    const container = document.querySelector('.container');
-                    if (container) container.classList.add('assessment-mode');
+                    // DON'T add assessment-mode class yet - wait until personalization is complete
+                    // This was causing the header to be hidden during personalization
                     
                     // Hide footer coach section
                     const footer = document.querySelector('div[style*="background: linear-gradient(135deg, #0f172a"]');
@@ -2734,13 +2724,8 @@
                     if (banner) banner.innerHTML = '🎯 PERSONALIZED LEADERSHIP ASSESSMENT - Tell Us About Your Context';
                     
                     // Initialize personalization progress
-                    try {
-                        updatePersonalizationProgress();
-                        updatePersonalizationNavigation();
-                        alert('Personalization functions called successfully');
-                    } catch (navError) {
-                        alert('Error calling personalization functions: ' + navError.message);
-                    }
+                    updatePersonalizationProgress();
+                    updatePersonalizationNavigation();
                     
                     // Scroll to top
                     window.scrollTo({ top: 0, behavior: 'smooth' });
