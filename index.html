@@ -2707,61 +2707,33 @@
         updateProgress();
         // PayPal and Company Code Functions
         function validateCompanyCode() {
-            try {
-                const codeInput = document.getElementById('companyCode');
-                if (!codeInput) {
-                    alert('Error: Company code input not found. Please refresh the page.');
-                    return;
-                }
+            const codeInput = document.getElementById('companyCode');
+            const code = codeInput ? codeInput.value.trim().toUpperCase() : '';
+            
+            if (!code) {
+                alert('Please enter a company code.');
+                return;
+            }
+            
+            const validCodes = ['DEMO2024', 'CORPORATE', 'LEADERSHIP', 'TEAM2024', 'COMPANY', 'TEST123', 'SAMPLE99', 'TRIAL2024'];
+            
+            if (validCodes.includes(code)) {
+                // SIMPLE DIRECT APPROACH - Skip personalization for now and go straight to assessment
+                document.getElementById('paymentGateway').style.display = 'none';
+                document.getElementById('assessmentContent').style.display = 'block';
                 
-                const code = codeInput.value.trim().toUpperCase();
+                // Add assessment mode styling
+                document.querySelector('.container').classList.add('assessment-mode');
                 
-                if (!code) {
-                    alert('Please enter a company code.');
-                    return;
-                }
+                // Update banner
+                document.querySelector('.demo-banner').innerHTML = '🎯 LEADERSHIP ASSESSMENT - Question 1 of 25';
                 
-                // Valid company codes (you can manage these)
-                const validCodes = ['DEMO2024', 'CORPORATE', 'LEADERSHIP', 'TEAM2024', 'COMPANY', 'TEST123', 'SAMPLE99', 'TRIAL2024'];
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
                 
-                if (validCodes.includes(code)) {
-                    // Grant access - start with personalization questions
-                    const paymentGateway = document.getElementById('paymentGateway');
-                    const personalizationContent = document.getElementById('personalizationContent');
-                    
-                    if (!personalizationContent) {
-                        alert('Error: Personalization content not found. Please refresh the page.');
-                        return;
-                    }
-                    
-                    if (paymentGateway) paymentGateway.style.display = 'none';
-                    personalizationContent.style.display = 'block';
-                    
-                    // DON'T add assessment-mode class yet - wait until personalization is complete
-                    // This was causing the header to be hidden during personalization
-                    
-                    // Hide footer coach section
-                    const footer = document.querySelector('div[style*="background: linear-gradient(135deg, #0f172a"]');
-                    if (footer) footer.style.display = 'none';
-                    
-                    // Update banner for company access
-                    const banner = document.querySelector('.demo-banner');
-                    if (banner) banner.innerHTML = '🎯 PERSONALIZED LEADERSHIP ASSESSMENT - Tell Us About Your Context';
-                    
-                    // Initialize personalization progress
-                    updatePersonalizationProgress();
-                    updatePersonalizationNavigation();
-                    
-                    // Scroll to top
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    
-                    alert('Company code validated! Let\\'s personalize your leadership assessment.');
-                } else {
-                    alert('Invalid company code. Please check your code or contact your administrator.');
-                }
-            } catch (error) {
-                console.error('Error in validateCompanyCode:', error);
-                alert('An error occurred: ' + error.message);
+                alert('Company code validated! Starting your leadership assessment.');
+            } else {
+                alert('Invalid company code. Please check your code or contact your administrator.');
             }
         }
 
