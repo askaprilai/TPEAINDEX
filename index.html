@@ -2707,8 +2707,16 @@
         updateProgress();
         // PayPal and Company Code Functions
         function validateCompanyCode() {
+            alert('Function called!');
+            
             const codeInput = document.getElementById('companyCode');
-            const code = codeInput ? codeInput.value.trim().toUpperCase() : '';
+            if (!codeInput) {
+                alert('Code input not found');
+                return;
+            }
+            
+            const code = codeInput.value.trim().toUpperCase();
+            alert('Code: ' + code);
             
             if (!code) {
                 alert('Please enter a company code.');
@@ -2718,20 +2726,35 @@
             const validCodes = ['DEMO2024', 'CORPORATE', 'LEADERSHIP', 'TEAM2024', 'COMPANY', 'TEST123', 'SAMPLE99', 'TRIAL2024'];
             
             if (validCodes.includes(code)) {
-                // SIMPLE DIRECT APPROACH - Skip personalization for now and go straight to assessment
-                document.getElementById('paymentGateway').style.display = 'none';
-                document.getElementById('assessmentContent').style.display = 'block';
+                alert('Code is valid!');
                 
-                // Add assessment mode styling
-                document.querySelector('.container').classList.add('assessment-mode');
+                // First test - just hide payment gateway
+                const paymentGateway = document.getElementById('paymentGateway');
+                if (paymentGateway) {
+                    paymentGateway.style.display = 'none';
+                    alert('Payment gateway hidden');
+                } else {
+                    alert('Payment gateway not found');
+                }
                 
-                // Update banner
-                document.querySelector('.demo-banner').innerHTML = '🎯 LEADERSHIP ASSESSMENT - Question 1 of 25';
+                // Second test - show assessment content
+                const assessmentContent = document.getElementById('assessmentContent');
+                if (assessmentContent) {
+                    assessmentContent.style.display = 'block';
+                    alert('Assessment content shown');
+                } else {
+                    alert('Assessment content not found');
+                }
                 
-                // Scroll to top
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                // Third test - update banner
+                const banner = document.querySelector('.demo-banner');
+                if (banner) {
+                    banner.innerHTML = '🎯 TEST WORKING - CODE VALIDATED';
+                    alert('Banner updated');
+                } else {
+                    alert('Banner not found');
+                }
                 
-                alert('Company code validated! Starting your leadership assessment.');
             } else {
                 alert('Invalid company code. Please check your code or contact your administrator.');
             }
