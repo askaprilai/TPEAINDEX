@@ -904,9 +904,12 @@
                     <h4 style="color: #0284c7; margin-bottom: 15px;">Have a Company Code?</h4>
                     <div style="display: flex; gap: 10px; justify-content: center; align-items: center;">
                         <input type="text" id="companyCode" placeholder="Enter your company code" 
-                               style="padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 16px; width: 250px;">
+                               style="padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 16px; width: 250px;"
+                               onkeypress="if(event.key==='Enter') validateCompanyCode()">
                         <button onclick="validateCompanyCode()" 
-                                style="background: #0284c7; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                                style="background: #0284c7; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;"
+                                onmouseover="this.style.background='#0369a1'"
+                                onmouseout="this.style.background='#0284c7'">
                             Access Assessment
                         </button>
                     </div>
@@ -2679,36 +2682,62 @@
         updateProgress();
         // PayPal and Company Code Functions
         function validateCompanyCode() {
-            const code = document.getElementById('companyCode').value.trim().toUpperCase();
-            
-            // Valid company codes (you can manage these)
-            const validCodes = ['DEMO2024', 'CORPORATE', 'LEADERSHIP', 'TEAM2024', 'COMPANY', 'TEST123', 'SAMPLE99', 'TRIAL2024'];
-            
-            if (validCodes.includes(code)) {
-                // Grant access - start with personalization questions
-                document.getElementById('paymentGateway').style.display = 'none';
-                document.getElementById('personalizationContent').style.display = 'block';
+            try {
+                const codeInput = document.getElementById('companyCode');
+                if (!codeInput) {
+                    alert('Error: Company code input not found. Please refresh the page.');
+                    return;
+                }
                 
-                // Add assessment mode class for mobile styling  
-                document.querySelector('.container').classList.add('assessment-mode');
+                const code = codeInput.value.trim().toUpperCase();
                 
-                // Hide footer coach section
-                const footer = document.querySelector('div[style*="background: linear-gradient(135deg, #0f172a"]');
-                if (footer) footer.style.display = 'none';
+                if (!code) {
+                    alert('Please enter a company code.');
+                    return;
+                }
                 
-                // Update banner for company access
-                document.querySelector('.demo-banner').innerHTML = '🎯 PERSONALIZED LEADERSHIP ASSESSMENT - Tell Us About Your Context';
+                // Valid company codes (you can manage these)
+                const validCodes = ['DEMO2024', 'CORPORATE', 'LEADERSHIP', 'TEAM2024', 'COMPANY', 'TEST123', 'SAMPLE99', 'TRIAL2024'];
                 
-                // Initialize personalization progress
-                updatePersonalizationProgress();
-                updatePersonalizationNavigation();
-                
-                // Scroll to top
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                
-                alert('Company code validated! Let\\'s personalize your leadership assessment.');
-            } else {
-                alert('Invalid company code. Please check your code or contact your administrator.');
+                if (validCodes.includes(code)) {
+                    // Grant access - start with personalization questions
+                    const paymentGateway = document.getElementById('paymentGateway');
+                    const personalizationContent = document.getElementById('personalizationContent');
+                    
+                    if (!personalizationContent) {
+                        alert('Error: Personalization content not found. Please refresh the page.');
+                        return;
+                    }
+                    
+                    if (paymentGateway) paymentGateway.style.display = 'none';
+                    personalizationContent.style.display = 'block';
+                    
+                    // Add assessment mode class for mobile styling  
+                    const container = document.querySelector('.container');
+                    if (container) container.classList.add('assessment-mode');
+                    
+                    // Hide footer coach section
+                    const footer = document.querySelector('div[style*="background: linear-gradient(135deg, #0f172a"]');
+                    if (footer) footer.style.display = 'none';
+                    
+                    // Update banner for company access
+                    const banner = document.querySelector('.demo-banner');
+                    if (banner) banner.innerHTML = '🎯 PERSONALIZED LEADERSHIP ASSESSMENT - Tell Us About Your Context';
+                    
+                    // Initialize personalization progress
+                    updatePersonalizationProgress();
+                    updatePersonalizationNavigation();
+                    
+                    // Scroll to top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    
+                    alert('Company code validated! Let\\'s personalize your leadership assessment.');
+                } else {
+                    alert('Invalid company code. Please check your code or contact your administrator.');
+                }
+            } catch (error) {
+                console.error('Error in validateCompanyCode:', error);
+                alert('An error occurred. Please refresh the page and try again.');
             }
         }
 
