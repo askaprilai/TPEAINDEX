@@ -1901,7 +1901,13 @@
             personalizationData[category] = value;
             
             // Enable next button
-            document.getElementById('nextPersonalizationBtn').disabled = false;
+            const nextBtn = document.getElementById('nextPersonalizationBtn');
+            if (nextBtn) {
+                nextBtn.disabled = false;
+                console.log('Next button enabled for personalization question', currentPersonalizationQ);
+            } else {
+                console.log('Next button not found!');
+            }
         }
 
         function selectPersonalizationMultiple(category, value, element) {
@@ -1998,19 +2004,38 @@
         }
 
         function completePersonalization() {
+            console.log('completePersonalization called');
             personalizationComplete = true;
             
             // Hide personalization content
-            document.getElementById('personalizationContent').style.display = 'none';
+            const personalizationContent = document.getElementById('personalizationContent');
+            const assessmentContent = document.getElementById('assessmentContent');
+            
+            console.log('Elements found:', {
+                personalizationContent: !!personalizationContent,
+                assessmentContent: !!assessmentContent
+            });
+            
+            if (personalizationContent) personalizationContent.style.display = 'none';
             
             // Show main assessment
-            document.getElementById('assessmentContent').style.display = 'block';
+            if (assessmentContent) assessmentContent.style.display = 'block';
             
             // Add assessment mode styling
-            document.querySelector('.container').classList.add('assessment-mode');
+            const container = document.querySelector('.container');
+            if (container) {
+                container.classList.add('assessment-mode');
+                console.log('Assessment mode class added');
+            }
+            
+            // Update banner
+            const banner = document.querySelector('.demo-banner');
+            if (banner) banner.innerHTML = '🎯 LEADERSHIP ASSESSMENT - Question 1 of 25';
             
             // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            console.log('Personalization completed, assessment should now be visible');
         }
 
         function nextQuestion() {
