@@ -917,6 +917,215 @@
             </div>
         </div>
 
+        <!-- Personalization Questions -->
+        <div class="quiz-content" id="personalizationContent" style="display: none;">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h2 style="color: #1e3a8a; font-size: 1.8rem; margin-bottom: 10px;">Tell Us About Your Leadership Context</h2>
+                <p style="color: #1e3a8a; font-size: 1rem; opacity: 0.8;">Help us personalize your assessment and recommendations</p>
+            </div>
+
+            <!-- Progress indicator for personalization -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="personalizationProgress" style="width: 0%;"></div>
+            </div>
+
+            <!-- Personalization Question 1: Current Role -->
+            <div class="question active" data-personalization="1">
+                <h3>
+                    <span class="question-number">1 of 6</span>
+                    <span class="question-text">What best describes your current leadership role?</span>
+                </h3>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectPersonalization('role', 'aspiring', this)">
+                        <div class="answer-text">Aspiring Leader - Not yet in formal leadership but want to be</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('role', 'first-time', this)">
+                        <div class="answer-text">First-time Leader - New to managing people (0-1 year)</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('role', 'mid-level', this)">
+                        <div class="answer-text">Mid-level Manager - Managing teams and other managers</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('role', 'senior', this)">
+                        <div class="answer-text">Senior Leader - Leading multiple departments or functions</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('role', 'executive', this)">
+                        <div class="answer-text">Executive - C-suite or organization-wide leadership</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Personalization Question 2: Sphere of Impact -->
+            <div class="question" data-personalization="2">
+                <h3>
+                    <span class="question-number">2 of 6</span>
+                    <span class="question-text">How many people do you currently lead or directly influence?</span>
+                </h3>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectPersonalization('impact', '0', this)">
+                        <div class="answer-text">Individual Contributor - No direct reports yet</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('impact', '1-5', this)">
+                        <div class="answer-text">Small Team - 1 to 5 people</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('impact', '6-15', this)">
+                        <div class="answer-text">Medium Team - 6 to 15 people</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('impact', '16-50', this)">
+                        <div class="answer-text">Large Team - 16 to 50 people</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('impact', '50+', this)">
+                        <div class="answer-text">Organization - 50+ people across multiple teams</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Personalization Question 3: Experience -->
+            <div class="question" data-personalization="3">
+                <h3>
+                    <span class="question-number">3 of 6</span>
+                    <span class="question-text">How long have you been in leadership roles overall?</span>
+                </h3>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectPersonalization('experience', 'new', this)">
+                        <div class="answer-text">New - Less than 1 year in any leadership role</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('experience', 'developing', this)">
+                        <div class="answer-text">Developing - 1 to 3 years of leadership experience</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('experience', 'experienced', this)">
+                        <div class="answer-text">Experienced - 3 to 7 years of leadership experience</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('experience', 'seasoned', this)">
+                        <div class="answer-text">Seasoned - 7+ years of leadership experience</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Personalization Question 4: Recent Feedback -->
+            <div class="question" data-personalization="4">
+                <h3>
+                    <span class="question-number">4 of 6</span>
+                    <span class="question-text">What leadership feedback have you received in the past year? (Select all that apply)</span>
+                </h3>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectPersonalizationMultiple('feedback', 'communication', this)">
+                        <div class="answer-text">Need to improve communication skills</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalizationMultiple('feedback', 'decisions', this)">
+                        <div class="answer-text">Could make decisions more quickly/confidently</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalizationMultiple('feedback', 'team-building', this)">
+                        <div class="answer-text">Should focus more on team building and culture</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalizationMultiple('feedback', 'strategic', this)">
+                        <div class="answer-text">Need to think more strategically</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalizationMultiple('feedback', 'delegation', this)">
+                        <div class="answer-text">Should delegate more effectively</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalizationMultiple('feedback', 'emotional', this)">
+                        <div class="answer-text">Could improve emotional intelligence</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalizationMultiple('feedback', 'none', this)">
+                        <div class="answer-text">Haven't received specific leadership feedback yet</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Personalization Question 5: Growth Aspirations -->
+            <div class="question" data-personalization="5">
+                <h3>
+                    <span class="question-number">5 of 6</span>
+                    <span class="question-text">Where do you want to take your leadership in the next 2 years?</span>
+                </h3>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectPersonalization('growth', 'promote', this)">
+                        <div class="answer-text">Get promoted to the next leadership level</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('growth', 'expand', this)">
+                        <div class="answer-text">Expand my current team and responsibilities</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('growth', 'strategic', this)">
+                        <div class="answer-text">Lead strategic initiatives and transformation</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('growth', 'develop', this)">
+                        <div class="answer-text">Become better at developing other leaders</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('growth', 'entrepreneur', this)">
+                        <div class="answer-text">Start my own business or venture</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('growth', 'effectiveness', this)">
+                        <div class="answer-text">Simply be more effective in my current role</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Personalization Question 6: Biggest Challenge -->
+            <div class="question" data-personalization="6">
+                <h3>
+                    <span class="question-number">6 of 7</span>
+                    <span class="question-text">What's your biggest leadership challenge right now?</span>
+                </h3>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectPersonalization('challenge', 'credibility', this)">
+                        <div class="answer-text">Building credibility and earning respect as a leader</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('challenge', 'performance', this)">
+                        <div class="answer-text">Managing underperformance and difficult conversations</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('challenge', 'time', this)">
+                        <div class="answer-text">Time management and prioritization</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('challenge', 'strategy', this)">
+                        <div class="answer-text">Strategic planning and long-term thinking</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('challenge', 'change', this)">
+                        <div class="answer-text">Leading change and getting buy-in</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('challenge', 'balance', this)">
+                        <div class="answer-text">Balancing competing priorities and stakeholder needs</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Personalization Question 7: Mental Mindset & Energy -->
+            <div class="question" data-personalization="7">
+                <h3>
+                    <span class="question-number">7 of 7</span>
+                    <span class="question-text">How do you typically maintain your mental energy and positive mindset as a leader?</span>
+                </h3>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectPersonalization('mindset', 'struggle', this)">
+                        <div class="answer-text">I often struggle to stay positive - stress and pressure get to me</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('mindset', 'inconsistent', this)">
+                        <div class="answer-text">It varies - some days I'm energized, others I feel drained</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('mindset', 'routines', this)">
+                        <div class="answer-text">I have some routines that help but need better strategies</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('mindset', 'good-systems', this)">
+                        <div class="answer-text">I have good systems for self-care and mental resilience</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('mindset', 'natural', this)">
+                        <div class="answer-text">I naturally stay optimistic and energized most of the time</div>
+                    </label>
+                    <label class="answer-option" onclick="selectPersonalization('mindset', 'help-others', this)">
+                        <div class="answer-text">I not only manage my own energy well but help others stay positive too</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Navigation for personalization -->
+            <div class="navigation">
+                <button class="nav-btn" id="prevPersonalizationBtn" onclick="previousPersonalization()" disabled>Previous</button>
+                <div class="progress-indicator">
+                    <span class="current" id="currentPersonalizationQ">1</span> of <span id="totalPersonalizationQ">7</span> questions
+                </div>
+                <button class="nav-btn" id="nextPersonalizationBtn" onclick="nextPersonalization()" disabled>Next</button>
+            </div>
+        </div>
+
         <div class="quiz-content" id="assessmentContent" style="display: none;">
             <!-- Progress Bar -->
             <div class="progress-bar">
@@ -1647,6 +1856,12 @@
     </div>
 
     <script>
+        // Personalization variables
+        let currentPersonalizationQ = 1;
+        let totalPersonalizationQ = 7;
+        let personalizationData = {};
+        let personalizationComplete = false;
+        
         let currentQuestion = 1;
         let totalQuestions = 25; // Full demo version with all 25 questions
         let answers = {};
@@ -1667,6 +1882,132 @@
             
             // Enable next button
             document.getElementById('nextBtn').disabled = false;
+        }
+
+        // Personalization functions
+        function selectPersonalization(category, value, element) {
+            // Remove selection from other options in this question
+            const questionDiv = document.querySelector(`[data-personalization="${currentPersonalizationQ}"]`);
+            const allOptions = questionDiv.querySelectorAll('.answer-option');
+            allOptions.forEach(option => option.classList.remove('selected'));
+            
+            // Select this option
+            element.classList.add('selected');
+            
+            // Store personalization data
+            personalizationData[category] = value;
+            
+            // Enable next button
+            document.getElementById('nextPersonalizationBtn').disabled = false;
+        }
+
+        function selectPersonalizationMultiple(category, value, element) {
+            // Initialize array if it doesn't exist
+            if (!personalizationData[category]) {
+                personalizationData[category] = [];
+            }
+            
+            // Toggle selection
+            if (element.classList.contains('selected')) {
+                element.classList.remove('selected');
+                // Remove from array
+                const index = personalizationData[category].indexOf(value);
+                if (index > -1) {
+                    personalizationData[category].splice(index, 1);
+                }
+            } else {
+                element.classList.add('selected');
+                // Add to array
+                personalizationData[category].push(value);
+            }
+            
+            // Enable next button if at least one option is selected
+            const questionDiv = document.querySelector(`[data-personalization="${currentPersonalizationQ}"]`);
+            const selectedOptions = questionDiv.querySelectorAll('.answer-option.selected');
+            document.getElementById('nextPersonalizationBtn').disabled = selectedOptions.length === 0;
+        }
+
+        function nextPersonalization() {
+            if (currentPersonalizationQ < totalPersonalizationQ) {
+                // Hide current question
+                document.querySelector(`[data-personalization="${currentPersonalizationQ}"]`).classList.remove('active');
+                
+                // Show next question
+                currentPersonalizationQ++;
+                document.querySelector(`[data-personalization="${currentPersonalizationQ}"]`).classList.add('active');
+                
+                updatePersonalizationNavigation();
+                updatePersonalizationProgress();
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                // Complete personalization and start main assessment
+                completePersonalization();
+            }
+        }
+
+        function previousPersonalization() {
+            if (currentPersonalizationQ > 1) {
+                // Hide current question
+                document.querySelector(`[data-personalization="${currentPersonalizationQ}"]`).classList.remove('active');
+                
+                // Show previous question
+                currentPersonalizationQ--;
+                document.querySelector(`[data-personalization="${currentPersonalizationQ}"]`).classList.add('active');
+                
+                updatePersonalizationNavigation();
+                updatePersonalizationProgress();
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function updatePersonalizationNavigation() {
+            const prevBtn = document.getElementById('prevPersonalizationBtn');
+            const nextBtn = document.getElementById('nextPersonalizationBtn');
+            const currentQ = document.getElementById('currentPersonalizationQ');
+            
+            // Update question counter
+            currentQ.textContent = currentPersonalizationQ;
+            
+            // Update button states
+            prevBtn.disabled = currentPersonalizationQ === 1;
+            
+            // Check if current question is answered
+            const currentQuestionDiv = document.querySelector(`[data-personalization="${currentPersonalizationQ}"]`);
+            const selectedOptions = currentQuestionDiv.querySelectorAll('.answer-option.selected');
+            nextBtn.disabled = selectedOptions.length === 0;
+            
+            // Update button text for last question
+            if (currentPersonalizationQ === totalPersonalizationQ) {
+                nextBtn.textContent = 'Start Assessment';
+            } else {
+                nextBtn.textContent = 'Next';
+            }
+        }
+
+        function updatePersonalizationProgress() {
+            const progressFill = document.getElementById('personalizationProgress');
+            const percentage = (currentPersonalizationQ / totalPersonalizationQ) * 100;
+            progressFill.style.width = percentage + '%';
+        }
+
+        function completePersonalization() {
+            personalizationComplete = true;
+            
+            // Hide personalization content
+            document.getElementById('personalizationContent').style.display = 'none';
+            
+            // Show main assessment
+            document.getElementById('assessmentContent').style.display = 'block';
+            
+            // Add assessment mode styling
+            document.querySelector('.container').classList.add('assessment-mode');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function nextQuestion() {
@@ -2067,6 +2408,122 @@
             });
         }
 
+        function getPersonalizedContext() {
+            if (!personalizationComplete || Object.keys(personalizationData).length === 0) {
+                return '';
+            }
+            
+            let context = '';
+            
+            // Add role context
+            if (personalizationData.role) {
+                const roleContexts = {
+                    'aspiring': 'As an aspiring leader preparing for your first formal role',
+                    'first-time': 'As a new leader (0-1 year) building your foundation',
+                    'mid-level': 'As a mid-level manager leading teams and other managers',
+                    'senior': 'As a senior leader overseeing multiple departments',
+                    'executive': 'As an executive with organization-wide influence'
+                };
+                context += roleContexts[personalizationData.role] || '';
+            }
+            
+            // Add impact scope
+            if (personalizationData.impact) {
+                const impactContexts = {
+                    '0': ' with no direct reports yet',
+                    '1-5': ' leading a small team of 1-5 people',
+                    '6-15': ' managing 6-15 team members',
+                    '16-50': ' overseeing a large team of 16-50 people',
+                    '50+': ' leading an organization of 50+ people'
+                };
+                context += impactContexts[personalizationData.impact] || '';
+            }
+            
+            // Add experience level
+            if (personalizationData.experience) {
+                const experienceContexts = {
+                    'new': ' (with less than 1 year of leadership experience)',
+                    'developing': ' (with 1-3 years of leadership experience)', 
+                    'experienced': ' (with 3-7 years of leadership experience)',
+                    'seasoned': ' (with 7+ years of leadership experience)'
+                };
+                context += experienceContexts[personalizationData.experience] || '';
+            }
+            
+            return context + ', here are specific recommendations tailored to your situation:';
+        }
+
+        function getPersonalizedRecommendations(framework, baseRecommendations) {
+            if (!personalizationComplete || Object.keys(personalizationData).length === 0) {
+                return baseRecommendations;
+            }
+            
+            const personalizedRecs = [...baseRecommendations];
+            
+            // Add role-specific recommendations
+            const roleSpecificRecs = {
+                'aspiring': {
+                    performance: ['Volunteer to lead small projects to demonstrate leadership potential', 'Document your contributions to build a leadership portfolio'],
+                    relationship: ['Build influence by becoming a go-to person for collaboration', 'Practice active listening in team meetings to demonstrate leadership qualities'],
+                    communication: ['Practice presenting ideas confidently in meetings', 'Seek feedback on your communication style from trusted colleagues'],
+                    coaching: ['Offer to mentor junior team members or new hires', 'Ask your manager for coaching opportunities within your current role'],
+                    ownership: ['Take initiative on process improvements without being asked', 'Volunteer for cross-functional projects that demonstrate accountability'],
+                    mindset: ['Develop a growth mindset about leadership challenges', 'Stay positive and solution-focused when discussing workplace issues']
+                },
+                'first-time': {
+                    performance: ['Set clear expectations in your first 90 days with each direct report', 'Learn your company\\'s performance management systems and processes'],
+                    relationship: ['Schedule one-on-ones with each team member to understand their motivations', 'Build relationships with peer managers for support and collaboration'],
+                    communication: ['Practice difficult conversations with HR or your manager first', 'Develop your authentic leadership voice - don\\'t try to copy other leaders'],
+                    coaching: ['Focus on asking questions rather than giving all the answers', 'Practice the skill of helping team members solve their own problems'],
+                    ownership: ['Clarify decision-making authority with your own manager', 'Start with small delegation wins before giving larger responsibilities'],
+                    mindset: ['Remind yourself that making mistakes is part of learning leadership', 'Build confidence by celebrating small wins with your team']
+                }
+            };
+            
+            if (personalizationData.role && roleSpecificRecs[personalizationData.role] && roleSpecificRecs[personalizationData.role][framework]) {
+                personalizedRecs.unshift(...roleSpecificRecs[personalizationData.role][framework]);
+            }
+            
+            // Add feedback-based recommendations
+            if (personalizationData.feedback && personalizationData.feedback.includes('communication')) {
+                if (framework === 'communication') {
+                    personalizedRecs.unshift('Address the communication feedback you\\'ve received by practicing clear, concise messaging');
+                }
+            }
+            
+            // Add challenge-based recommendations
+            const challengeRecs = {
+                'credibility': {
+                    relationship: ['Build credibility through consistent follow-through on commitments'],
+                    performance: ['Demonstrate expertise by sharing insights and asking thoughtful questions']
+                },
+                'performance': {
+                    coaching: ['Learn to have direct but supportive conversations about underperformance'],
+                    ownership: ['Create clear performance expectations and accountability systems']
+                }
+            };
+            
+            if (personalizationData.challenge && challengeRecs[personalizationData.challenge] && challengeRecs[personalizationData.challenge][framework]) {
+                personalizedRecs.unshift(...challengeRecs[personalizationData.challenge][framework]);
+            }
+            
+            // Add mindset-specific recommendations based on their mental energy approach
+            if (framework === 'mindset' && personalizationData.mindset) {
+                const mindsetRecs = {
+                    'struggle': ['Start with one small daily practice: 5-minute morning intention setting', 'Identify your stress triggers and create a response plan'],
+                    'inconsistent': ['Track your energy patterns for a week to identify what drains vs. energizes you', 'Create 2-3 go-to strategies for low-energy days'],
+                    'routines': ['Expand your current routines to include team energy management practices', 'Share what works for you with struggling team members'],
+                    'natural': ['Leverage your natural optimism by helping others reframe challenges', 'Document your mindset practices to teach other leaders']
+                };
+                
+                if (mindsetRecs[personalizationData.mindset]) {
+                    personalizedRecs.unshift(...mindsetRecs[personalizationData.mindset]);
+                }
+            }
+            
+            return personalizedRecs.slice(0, 5); // Keep top 5 most relevant
+        }
+
         function displayDevelopmentRecommendations(scores) {
             const recommendationsContainer = document.getElementById('developmentRecommendations');
             
@@ -2133,7 +2590,16 @@
                 }
             };
 
-            // Show top 2 development areas
+            // Add personalized context if available
+            const personalizedContext = getPersonalizedContext();
+            if (personalizedContext) {
+                const contextDiv = document.createElement('div');
+                contextDiv.style.cssText = 'background: linear-gradient(135deg, #fffbeb, #fef3c7); padding: 20px; border-radius: 12px; margin-bottom: 25px; border-left: 4px solid #fbbf24;';
+                contextDiv.innerHTML = `<p style="color: #1e3a8a; font-size: 1rem; font-weight: 500; margin: 0;">${personalizedContext}</p>`;
+                recommendationsContainer.appendChild(contextDiv);
+            }
+
+            // Show top 2 development areas with personalized recommendations
             [lowestScore, secondLowest].forEach((scoreData, index) => {
                 const [framework, score] = scoreData;
                 const rec = recommendations[framework];
@@ -2151,7 +2617,10 @@
                     const recList = document.createElement('div');
                     recList.className = `response-list ${framework}`;
                     
-                    rec.items.forEach(item => {
+                    // Get personalized recommendations
+                    const personalizedItems = getPersonalizedRecommendations(framework, rec.items);
+                    
+                    personalizedItems.forEach(item => {
                         const recItem = document.createElement('div');
                         recItem.className = 'response-item';
                         recItem.textContent = `• ${item}`;
@@ -2216,11 +2685,11 @@
             const validCodes = ['DEMO2024', 'CORPORATE', 'LEADERSHIP', 'TEAM2024', 'COMPANY', 'TEST123', 'SAMPLE99', 'TRIAL2024'];
             
             if (validCodes.includes(code)) {
-                // Grant access to assessment
+                // Grant access - start with personalization questions
                 document.getElementById('paymentGateway').style.display = 'none';
-                document.getElementById('assessmentContent').style.display = 'block';
+                document.getElementById('personalizationContent').style.display = 'block';
                 
-                // Add assessment mode class for mobile styling
+                // Add assessment mode class for mobile styling  
                 document.querySelector('.container').classList.add('assessment-mode');
                 
                 // Hide footer coach section
@@ -2228,12 +2697,16 @@
                 if (footer) footer.style.display = 'none';
                 
                 // Update banner for company access
-                document.querySelector('.demo-banner').innerHTML = '🎯 COMPANY ACCESS - Positive Leadership Assessment';
+                document.querySelector('.demo-banner').innerHTML = '🎯 PERSONALIZED LEADERSHIP ASSESSMENT - Tell Us About Your Context';
                 
-                // Scroll to top of assessment
+                // Initialize personalization progress
+                updatePersonalizationProgress();
+                updatePersonalizationNavigation();
+                
+                // Scroll to top
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 
-                alert('Company code validated! Welcome to your leadership assessment.');
+                alert('Company code validated! Let\\'s personalize your leadership assessment.');
             } else {
                 alert('Invalid company code. Please check your code or contact your administrator.');
             }
