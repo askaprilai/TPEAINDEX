@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Success - Positive Effect Leaders Assessment</title>
+    
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -119,6 +124,20 @@
                 <li><strong>Results:</strong> Complete analysis and development plans will be available immediately after assessment completion</li>
             </ul>
         </div>
+        
+        <!-- Access Codes Display -->
+        <div id="accessCodesSection" style="display: none;">
+            <div style="background: #f0f9ff; padding: 25px; border-radius: 12px; border-left: 4px solid #3b82f6; margin: 20px 0;">
+                <h3 style="color: #1e3a8a; margin-bottom: 15px;">🎯 Your Access Codes</h3>
+                <div id="accessCodesList" style="font-family: monospace; font-size: 1.1rem; color: #1e40af; line-height: 1.6;"></div>
+                <p style="color: #4b5563; font-size: 0.9rem; margin-top: 15px;">Save these codes! Each person needs their own unique code to access the assessment.</p>
+            </div>
+        </div>
+        
+        <!-- Processing Status -->
+        <div id="processingStatus" style="background: #fffbeb; padding: 20px; border-radius: 8px; border-left: 4px solid #fbbf24; margin: 20px 0;">
+            <p style="color: #92400e;">🔄 Processing your purchase and generating access codes...</p>
+        </div>
 
         <a href="/" class="cta-button">
             Access Your Assessment
@@ -132,22 +151,209 @@
     </div>
 
     <script>
-        // Handle URL parameters for different purchase types
-        const urlParams = new URLSearchParams(window.location.search);
-        const sessionId = urlParams.get('session_id');
+        // Configuration - same as index.html
+        const SUPABASE_URL = 'https://lfvsexynfvbtveuejeeq.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmdnNleHluZnZidHZldWVqZWVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc1MDEyNDYsImV4cCI6MjA3MzA3NzI0Nn0.Ho0qn87zZDGi2dl-q1QOae6UfUjnxb7znVX3A517qhQ';
         
-        if (sessionId) {
-            console.log('Payment session ID:', sessionId);
-            // You could make an API call here to retrieve purchase details
-            // and customize the success message based on the package purchased
+        const EMAILJS_SERVICE_ID = 'service_vntq4ai';
+        const EMAILJS_TEMPLATE_ID = 'template_s1qs194'; 
+        const EMAILJS_PUBLIC_KEY = 'SAU17WFhPmeQLrng7';
+        
+        let supabaseClient;
+        
+        // Initialize services
+        if (typeof window.supabase !== 'undefined') {
+            supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         }
-
-        // Auto-redirect to main site after 30 seconds
+        
+        if (typeof emailjs !== 'undefined') {
+            emailjs.init(EMAILJS_PUBLIC_KEY);
+        }
+        
+        // Package pricing and details
+        const PACKAGE_DETAILS = {
+            'bJe5kD1Et4AX3QX7VVenS03': { size: 1, amount: 97, name: 'Individual Assessment' },
+            '4gM6oHbf3ffBgDJccbenS02': { size: 5, amount: 400, name: '5-Person Team Package' },
+            '4gMdR93MBebx0EL2BBenS01': { size: 10, amount: 750, name: '10-Person Team Package' },
+            'fZucN53MBffBdrxdgfenS00': { size: 25, amount: 1400, name: '25-Person Team Package' }
+        };
+        
+        async function processPurchase() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('session_id');
+            
+            if (!sessionId) {
+                console.log('No session ID found');
+                document.getElementById('processingStatus').innerHTML = 
+                    '<p style="color: #dc2626;">❌ No payment session found. Please contact support.</p>';
+                return;
+            }
+            
+            // Try to determine package from session ID (last part before session identifier)
+            let packageDetails = null;
+            for (const [key, details] of Object.entries(PACKAGE_DETAILS)) {
+                if (sessionId.includes(key.substring(0, 8))) {
+                    packageDetails = details;
+                    break;
+                }
+            }
+            
+            if (!packageDetails) {
+                // Default to individual if we can't determine
+                packageDetails = PACKAGE_DETAILS['bJe5kD1Et4AX3QX7VVenS03'];
+            }
+            
+            console.log('Processing purchase:', packageDetails);
+            
+            try {
+                // Get customer info from localStorage (stored during payment)
+                let customerEmail = localStorage.getItem('customerEmail') || 'customer@example.com';
+                let customerName = localStorage.getItem('customerName') || 'Customer';
+                
+                if (!customerEmail || customerEmail === 'customer@example.com') {
+                    // Fallback to prompt if localStorage is empty
+                    const promptedEmail = prompt('Please enter your email for access code delivery:');
+                    const promptedName = prompt('Please enter your name:');
+                    if (promptedEmail) {
+                        localStorage.setItem('customerEmail', promptedEmail);
+                        customerEmail = promptedEmail;
+                    }
+                    if (promptedName) {
+                        localStorage.setItem('customerName', promptedName);
+                        customerName = promptedName;
+                    }
+                }
+                
+                // Store purchase in database
+                const { data: purchase, error: purchaseError } = await supabaseClient
+                    .from('purchases')
+                    .insert({
+                        customer_email: customerEmail,
+                        customer_name: customerName,
+                        package_size: packageDetails.size,
+                        amount_paid: packageDetails.amount,
+                        paypal_transaction_id: sessionId, // Using session_id as transaction ID
+                        status: 'completed'
+                    })
+                    .select()
+                    .single();
+                
+                if (purchaseError) {
+                    throw new Error('Failed to store purchase: ' + purchaseError.message);
+                }
+                
+                console.log('Purchase stored:', purchase);
+                
+                // Generate access codes
+                const { data: codes, error: codesError } = await supabaseClient
+                    .rpc('create_access_codes', {
+                        purchase_uuid: purchase.id,
+                        code_count: packageDetails.size
+                    });
+                
+                if (codesError) {
+                    throw new Error('Failed to generate codes: ' + codesError.message);
+                }
+                
+                console.log('Codes generated:', codes);
+                
+                // Display codes on page
+                displayAccessCodes(codes, packageDetails);
+                
+                // Send email with codes
+                await sendEmailWithCodes(customerEmail, customerName, codes, packageDetails);
+                
+                // Hide processing status
+                document.getElementById('processingStatus').style.display = 'none';
+                
+            } catch (error) {
+                console.error('Error processing purchase:', error);
+                document.getElementById('processingStatus').innerHTML = 
+                    '<p style="color: #dc2626;">❌ Error processing purchase: ' + error.message + '</p>';
+            }
+        }
+        
+        function displayAccessCodes(codes, packageDetails) {
+            const codesList = document.getElementById('accessCodesList');
+            const codesSection = document.getElementById('accessCodesSection');
+            
+            let codesHtml = '<strong>Your Access Codes:</strong><br><br>';
+            codes.forEach((codeData, index) => {
+                const code = typeof codeData === 'string' ? codeData : codeData.code;
+                codesHtml += `<div style="background: white; padding: 10px; margin: 5px 0; border-radius: 6px; border: 1px solid #d1d5db;">
+                    Code ${index + 1}: <strong>${code}</strong>
+                </div>`;
+            });
+            
+            if (packageDetails.size > 1) {
+                codesHtml += '<br><strong>Instructions:</strong><br>';
+                codesHtml += '• Share each code with a different team member<br>';
+                codesHtml += '• Each person uses their code at: thepositiveeffectindex.com<br>';
+                codesHtml += '• Codes expire in 1 year from purchase date';
+            }
+            
+            codesList.innerHTML = codesHtml;
+            codesSection.style.display = 'block';
+        }
+        
+        async function sendEmailWithCodes(customerEmail, customerName, codes, packageDetails) {
+            if (typeof emailjs === 'undefined') {
+                console.log('EmailJS not available, skipping email');
+                return;
+            }
+            
+            try {
+                const codesList = codes.map((codeData, index) => {
+                    const code = typeof codeData === 'string' ? codeData : codeData.code;
+                    return `Code ${index + 1}: ${code}`;
+                }).join('\n');
+                
+                const templateParams = {
+                    to_name: customerName,
+                    to_email: customerEmail,
+                    package_size: packageDetails.size,
+                    amount_paid: packageDetails.amount,
+                    codes_list: codesList,
+                    purchase_date: new Date().toLocaleDateString(),
+                    portal_link: 'https://www.thepositiveeffectindex.com/'
+                };
+                
+                const response = await emailjs.send(
+                    EMAILJS_SERVICE_ID,
+                    EMAILJS_TEMPLATE_ID,
+                    templateParams
+                );
+                
+                console.log('Email sent successfully:', response);
+                
+                // Log email delivery
+                if (supabaseClient) {
+                    await supabaseClient
+                        .from('email_logs')
+                        .insert({
+                            recipient_email: customerEmail,
+                            email_type: 'purchase_confirmation',
+                            status: 'sent'
+                        });
+                }
+                
+            } catch (error) {
+                console.error('Failed to send email:', error);
+                // Don't fail the whole process if email fails
+            }
+        }
+        
+        // Start processing when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            processPurchase();
+        });
+        
+        // Auto-redirect after 2 minutes if user doesn't manually navigate
         setTimeout(() => {
             if (confirm('Would you like to go to your assessment now?')) {
                 window.location.href = '/';
             }
-        }, 30000);
+        }, 120000); // 2 minutes
     </script>
 </body>
 </html>

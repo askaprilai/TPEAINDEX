@@ -817,6 +817,24 @@
                     Get immediate access to your comprehensive leadership assessment and personalized development plan.
                 </p>
                 
+                <!-- Email Collection for Seamless Code Delivery -->
+                <div id="emailCollection" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); padding: 25px; border-radius: 12px; border: 2px solid #3b82f6; margin-bottom: 30px; max-width: 500px; margin-left: auto; margin-right: auto; margin-bottom: 30px;">
+                    <h3 style="color: #1e3a8a; margin-bottom: 15px; font-size: 1.3rem;">📧 Access Code Delivery</h3>
+                    <p style="color: #4b5563; margin-bottom: 20px; font-size: 0.95rem;">Enter your email to receive instant access codes after purchase</p>
+                    <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
+                        <input type="email" id="customerEmail" placeholder="Enter your email address" required 
+                               style="width: 100%; max-width: 350px; padding: 12px 15px; border: 2px solid #d1d5db; border-radius: 8px; font-size: 1rem; background: white; color: #1f2937;" />
+                        <input type="text" id="customerName" placeholder="Enter your full name" required 
+                               style="width: 100%; max-width: 350px; padding: 12px 15px; border: 2px solid #d1d5db; border-radius: 8px; font-size: 1rem; background: white; color: #1f2937;" />
+                        <div style="color: #10b981; font-size: 0.85rem; text-align: center; margin-top: 5px;">
+                            ✓ Secure delivery ✓ No spam ✓ Instant access codes
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Payment Buttons (initially hidden) -->
+                <div id="paymentButtons" style="display: none;">
+                
                 <!-- Individual Option -->
                 <div style="max-width: 400px; margin: 0 auto 40px auto;">
                     <div style="background: #f8fafc; padding: 30px; border-radius: 15px; border: 2px solid #e5e7eb;">
@@ -963,6 +981,7 @@
                         Company codes are provided with group purchases for team assessments.
                     </p>
                 </div>
+                </div> <!-- Close paymentButtons div -->
             </div>
         </div>
 
@@ -3420,6 +3439,51 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Initializing Stripe payments...');
             initializeStripePayments();
+        });
+
+        // ====== EMAIL COLLECTION FOR SEAMLESS PAYMENT ======
+        function setupEmailValidation() {
+            const emailInput = document.getElementById('customerEmail');
+            const nameInput = document.getElementById('customerName');
+            const paymentButtons = document.getElementById('paymentButtons');
+            
+            function validateAndShowPayments() {
+                const email = emailInput.value.trim();
+                const name = nameInput.value.trim();
+                
+                if (email && name && isValidEmail(email)) {
+                    // Store customer info for later use
+                    localStorage.setItem('customerEmail', email);
+                    localStorage.setItem('customerName', name);
+                    
+                    // Show payment buttons
+                    paymentButtons.style.display = 'block';
+                    
+                    // Scroll to payment options
+                    paymentButtons.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                    paymentButtons.style.display = 'none';
+                }
+            }
+            
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+            
+            // Add event listeners
+            emailInput.addEventListener('input', validateAndShowPayments);
+            nameInput.addEventListener('input', validateAndShowPayments);
+            emailInput.addEventListener('blur', validateAndShowPayments);
+            nameInput.addEventListener('blur', validateAndShowPayments);
+            
+            // Check on page load if values already exist
+            validateAndShowPayments();
+        }
+        
+        // Initialize email validation when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEmailValidation();
         });
 
         // Initialize
