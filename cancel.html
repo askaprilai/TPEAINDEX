@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Cancelled - Positive Effect Leaders Assessment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .cancel-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .cancel-icon {
+            font-size: 4rem;
+            color: #f59e0b;
+            margin-bottom: 20px;
+        }
+
+        .cancel-title {
+            font-size: 2rem;
+            color: #1e3a8a;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .cancel-message {
+            color: #4b5563;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .reassurance {
+            background: #fffbeb;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #fbbf24;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .reassurance h3 {
+            color: #92400e;
+            margin-bottom: 15px;
+        }
+
+        .reassurance ul {
+            color: #78350f;
+            padding-left: 20px;
+        }
+
+        .reassurance li {
+            margin-bottom: 8px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .primary-button {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: white;
+        }
+
+        .primary-button:hover {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            transform: translateY(-2px);
+        }
+
+        .secondary-button {
+            background: #f3f4f6;
+            color: #4b5563;
+            border: 2px solid #d1d5db;
+        }
+
+        .secondary-button:hover {
+            background: #e5e7eb;
+            border-color: #9ca3af;
+        }
+
+        .support-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 8px;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="cancel-container">
+        <div class="cancel-icon">⚠️</div>
+        <h1 class="cancel-title">Payment Cancelled</h1>
+        
+        <p class="cancel-message">
+            No worries! Your payment was cancelled and no charges were made to your account.
+        </p>
+
+        <div class="reassurance">
+            <h3>No Problem at All:</h3>
+            <ul>
+                <li><strong>No Charges:</strong> Your card was not charged</li>
+                <li><strong>No Time Limit:</strong> You can return anytime to purchase your assessment</li>
+                <li><strong>Same Pricing:</strong> All pricing and packages remain the same</li>
+                <li><strong>Secure Checkout:</strong> Your payment information is always protected</li>
+            </ul>
+        </div>
+
+        <div class="cta-buttons">
+            <a href="/" class="cta-button primary-button">
+                Try Again
+            </a>
+            <a href="https://calendly.com/aprilcoaching/askaprilcourses" class="cta-button secondary-button" target="_blank">
+                Schedule Consultation
+            </a>
+        </div>
+
+        <div class="support-info">
+            <strong>Questions About Pricing or Packages?</strong><br>
+            Contact us at april@aprilsabral.com or schedule a consultation to discuss your leadership development needs.<br>
+            We're here to help you find the perfect assessment solution for your team.
+        </div>
+    </div>
+
+    <script>
+        // Auto-redirect to main site after 60 seconds
+        setTimeout(() => {
+            if (confirm('Would you like to return to the assessment page?')) {
+                window.location.href = '/';
+            }
+        }, 60000);
+    </script>
+</body>
+</html>

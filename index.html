@@ -37,6 +37,7 @@
     <meta name="theme-color" content="#1e3a8a">
     
     <!-- External Libraries -->
+    <script src="https://js.stripe.com/v3/"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
@@ -737,12 +738,28 @@
                 padding: 20px 15px !important;
             }
             
-            /* PayPal button mobile styling */
-            #paypal-button-container,
-            div[id^="paypal-group-"] {
-                width: 100% !important;
-                max-width: 300px !important;
-                margin: 0 auto !important;
+            /* Stripe button styling */
+            .stripe-button,
+            .stripe-group-button {
+                background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+                color: white;
+                border: none;
+                padding: 15px 30px;
+                border-radius: 8px;
+                font-size: 1.1rem;
+                font-weight: 600;
+                cursor: pointer;
+                width: 100%;
+                max-width: 300px;
+                margin: 10px auto;
+                display: block;
+                transition: all 0.3s ease;
+            }
+            
+            .stripe-button:hover,
+            .stripe-group-button:hover {
+                background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+                transform: translateY(-2px);
             }
         }
     </style>
@@ -804,7 +821,9 @@
                                 ✓ Personalized recommendations
                             </div>
                         </div>
-                        <div id="paypal-button-container" style="margin-top: 20px;"></div>
+                        <button id="individual-payment-btn" class="stripe-button" style="margin-top: 20px;">
+                            Purchase Individual Assessment - $97
+                        </button>
                     </div>
                 </div>
                 
@@ -841,7 +860,9 @@
                                 <div style="text-align: center;">
                                     <div style="font-size: 2.5rem; font-weight: bold; color: #0f172a; margin-bottom: 5px;">$350</div>
                                     <div style="font-size: 0.9rem; color: #3b82f6 !important; text-decoration: line-through; margin-bottom: 15px;">$485 individual</div>
-                                    <div id="paypal-group-5"></div>
+                                    <button id="group-5-payment-btn" class="stripe-group-button">
+                                        Purchase 5-Person Team Package - $350
+                                    </button>
                                 </div>
                             </div>
 
@@ -862,7 +883,9 @@
                                 <div style="text-align: center;">
                                     <div style="font-size: 2.5rem; font-weight: bold; color: #0f172a; margin-bottom: 5px;">$650</div>
                                     <div style="font-size: 0.9rem; color: #3b82f6 !important; text-decoration: line-through; margin-bottom: 15px;">$970 individual</div>
-                                    <div id="paypal-group-10"></div>
+                                    <button id="group-10-payment-btn" class="stripe-group-button">
+                                        Purchase 10-Person Team Package - $650
+                                    </button>
                                 </div>
                             </div>
 
@@ -883,7 +906,9 @@
                                 <div style="text-align: center;">
                                     <div style="font-size: 2.5rem; font-weight: bold; color: #0f172a; margin-bottom: 5px;">$1,400</div>
                                     <div style="font-size: 0.9rem; color: #3b82f6 !important; text-decoration: line-through; margin-bottom: 15px;">$2,425 individual</div>
-                                    <div id="paypal-group-25"></div>
+                                    <button id="group-25-payment-btn" class="stripe-group-button">
+                                        Purchase 25-Person Team Package - $1,400
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -1150,23 +1175,23 @@
             <div class="question active" data-question="1">
                 <h3>
                     <span class="question-number">1</span>
-                    <span class="question-text">When a team member appears stressed during a meeting, what's your typical response?</span>
+                    <span class="question-text">During a major organizational restructuring, how do you maintain trust and connection with stakeholders across all levels?</span>
                 </h3>
                 <div class="scenario-context">
-                    You notice someone seems overwhelmed and is unusually quiet
+                    [RELATIONSHIP BUILDER] Significant changes are creating anxiety and uncertainty among employees, board members, and key partners
                 </div>
                 <div class="answers">
                     <label class="answer-option" onclick="selectAnswer(1, 5, this)">
-                        <div class="answer-text">I pause the meeting to check if they're okay and need support</div>
+                        <div class="answer-text">Create multiple touchpoints for authentic dialogue, listen deeply to concerns, and build bridges between diverse stakeholder groups</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(1, 4, this)">
-                        <div class="answer-text">I make a mental note to speak with them privately after the meeting</div>
+                        <div class="answer-text">Host town halls and one-on-one sessions to maintain transparency while building personal connections with key influencers</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(1, 3, this)">
-                        <div class="answer-text">I continue the meeting but keep an eye on them</div>
+                        <div class="answer-text">Communicate regularly through formal channels while being available for informal conversations when approached</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(1, 2, this)">
-                        <div class="answer-text">I focus on keeping the meeting productive and moving forward</div>
+                        <div class="answer-text">Focus on delivering clear, consistent messaging about the changes and their business rationale</div>
                     </label>
                 </div>
             </div>
@@ -1174,23 +1199,23 @@
             <div class="question" data-question="2">
                 <h3>
                     <span class="question-number">2</span>
-                    <span class="question-text">When someone makes a mistake that impacts team deliverables, how do you typically respond?</span>
+                    <span class="question-text">A key partnership is failing due to misaligned expectations and poor communication. How do you rebuild the relationship?</span>
                 </h3>
                 <div class="scenario-context">
-                    A team member's error has caused a project delay
+                    [RELATIONSHIP BUILDER] A strategic alliance critical to your business success has deteriorated due to unmet commitments and trust issues
                 </div>
                 <div class="answers">
                     <label class="answer-option" onclick="selectAnswer(2, 5, this)">
-                        <div class="answer-text">Let me work together with them to fix this and learn from it</div>
+                        <div class="answer-text">Personally invest in understanding their perspective, acknowledge missteps, and co-create a renewed partnership framework with clear mutual commitments</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(2, 4, this)">
-                        <div class="answer-text">I ask what support they need to prevent this in the future</div>
+                        <div class="answer-text">Facilitate direct conversations between key stakeholders to address concerns and establish new operating agreements</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(2, 3, this)">
-                        <div class="answer-text">I focus on fixing it now and discussing prevention later</div>
+                        <div class="answer-text">Propose structured quarterly business reviews and clearer performance metrics to improve alignment going forward</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(2, 2, this)">
-                        <div class="answer-text">I focus on understanding why this happened and ensuring accountability</div>
+                        <div class="answer-text">Focus on renegotiating contract terms and establishing firmer legal protections for both parties</div>
                     </label>
                 </div>
             </div>
@@ -1198,23 +1223,23 @@
             <div class="question" data-question="3">
                 <h3>
                     <span class="question-number">3</span>
-                    <span class="question-text">When you hear someone criticizing a colleague's work style, what do you typically do?</span>
+                    <span class="question-text">You discover a senior leader has been undermining team cohesion through negative comments about other executives. How do you approach building stronger relationships?</span>
                 </h3>
                 <div class="scenario-context">
-                    "Sarah's always disorganized - I don't know how she gets anything done"
+                    [RELATIONSHIP BUILDER] Toxic behavior from a key leader is damaging trust and collaboration across the executive team
                 </div>
                 <div class="answers">
                     <label class="answer-option" onclick="selectAnswer(3, 5, this)">
-                        <div class="answer-text">I defend Sarah by highlighting her different strengths and results</div>
+                        <div class="answer-text">Address the behavior privately, understand their underlying concerns, and work together to rebuild trust while modeling positive relationship behaviors</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(3, 4, this)">
-                        <div class="answer-text">I redirect the conversation to focus on work style differences being normal</div>
+                        <div class="answer-text">Facilitate team-building sessions and create structured opportunities for positive collaboration and mutual understanding</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(3, 3, this)">
-                        <div class="answer-text">I listen but don't engage in the criticism</div>
+                        <div class="answer-text">Set clear expectations about professional behavior and implement regular team effectiveness reviews</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(3, 2, this)">
-                        <div class="answer-text">I agree with them - it's easier than challenging their perspective</div>
+                        <div class="answer-text">Document the behavior and begin performance management process with clear consequences if it continues</div>
                     </label>
                 </div>
             </div>
@@ -1222,23 +1247,23 @@
             <div class="question" data-question="4">
                 <h3>
                     <span class="question-number">4</span>
-                    <span class="question-text">When giving feedback about a recurring issue, what's your usual approach?</span>
+                    <span class="question-text">During a heated board discussion, how do you communicate when stakeholders have conflicting priorities and emotions are running high?</span>
                 </h3>
                 <div class="scenario-context">
-                    You need to address a pattern you've noticed with a team member
+                    [POSITIVE INTENT COMMUNICATOR] Board members are strongly divided on a critical decision, with personal agendas and frustrations affecting the dialogue
                 </div>
                 <div class="answers">
                     <label class="answer-option" onclick="selectAnswer(4, 5, this)">
-                        <div class="answer-text">I ask them to help me understand what challenges they're facing</div>
+                        <div class="answer-text">Acknowledge all perspectives, reframe the discussion around shared values and common goals, and facilitate solution-focused dialogue</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(4, 4, this)">
-                        <div class="answer-text">I share what I've noticed and ask for their perspective</div>
+                        <div class="answer-text">Pause the emotional reactions, summarize each viewpoint with respect, and guide the conversation toward collaborative problem-solving</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(4, 3, this)">
-                        <div class="answer-text">I address what needs to change and share what I've observed</div>
+                        <div class="answer-text">Present factual information clearly and suggest taking time to consider all options before making the decision</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(4, 2, this)">
-                        <div class="answer-text">I tell them this pattern needs to change and what must happen</div>
+                        <div class="answer-text">Make the decision based on your executive judgment and communicate the rationale to bring closure to the discussion</div>
                     </label>
                 </div>
             </div>
@@ -1318,23 +1343,23 @@
             <div class="question" data-question="8">
                 <h3>
                     <span class="question-number">8</span>
-                    <span class="question-text">When making a decision that affects multiple departments, what's your typical process?</span>
+                    <span class="question-text">Your organization faces a potential PR crisis that could damage reputation and stock price. How do you lead the response?</span>
                 </h3>
                 <div class="scenario-context">
-                    You need to implement a new process that will change how several teams work
+                    A product issue, leadership scandal, or operational failure has emerged that threatens brand reputation and stakeholder confidence
                 </div>
                 <div class="answers">
                     <label class="answer-option" onclick="selectAnswer(8, 5, this)">
-                        <div class="answer-text">I gather input from all affected teams before deciding</div>
+                        <div class="answer-text">Immediately convene crisis team, assess facts transparently, and develop authentic communication strategy with stakeholder-specific messaging</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(8, 4, this)">
-                        <div class="answer-text">I consult with key representatives from each affected area</div>
+                        <div class="answer-text">Take personal accountability, outline corrective actions, and proactively communicate with media and key stakeholders</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(8, 3, this)">
-                        <div class="answer-text">I research the impacts and make the decision based on overall needs</div>
+                        <div class="answer-text">Focus on internal damage control while carefully crafting external communication through legal and PR teams</div>
                     </label>
                     <label class="answer-option" onclick="selectAnswer(8, 2, this)">
-                        <div class="answer-text">I make the decision based on what's best for the overall goal</div>
+                        <div class="answer-text">Minimize public statements and let the legal team handle all external communications until the situation stabilizes</div>
                     </label>
                 </div>
             </div>
@@ -1747,6 +1772,252 @@
                 </div>
             </div>
 
+            <!-- 360-Degree Organizational Feedback Section -->
+            <div class="organizational-feedback" id="organizationalFeedback" style="display: none;">
+                <div class="section-header">
+                    <h2>360° Organizational Feedback</h2>
+                    <p class="section-subtitle">Share your perspective on team and organizational effectiveness</p>
+                    <div class="progress-info">
+                        <span id="orgProgressText">Organization Question <span id="orgCurrentQuestion">1</span> of 10</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="orgProgressFill" style="width: 10%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Organizational Question 1: Team Collaboration -->
+                <div data-org-question="1" style="display: block;">
+                    <span class="question-text">How effectively does your team collaborate and share information across departments and levels?</span>
+                    <div class="scenario-context">
+                        [TEAM COLLABORATION] Consider cross-functional projects, information flow, and collective problem-solving within your organization
+                    </div>
+                    <div class="answer-options">
+                        <label class="answer-option" onclick="selectOrgAnswer(1, 5, this)">
+                            <div class="answer-text">Information flows seamlessly, teams collaborate naturally, and silos are virtually non-existent</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(1, 4, this)">
+                            <div class="answer-text">Good collaboration with occasional communication gaps that we actively work to address</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(1, 3, this)">
+                            <div class="answer-text">Moderate collaboration with some departmental silos affecting information sharing</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(1, 2, this)">
+                            <div class="answer-text">Limited collaboration with significant silos and poor information flow</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Organizational Question 2: Trust & Psychological Safety -->
+                <div data-org-question="2" style="display: none;">
+                    <span class="question-text">How safe do team members feel to voice concerns, share ideas, or admit mistakes?</span>
+                    <div class="scenario-context">
+                        [PSYCHOLOGICAL SAFETY] Consider whether people speak up, take risks, and feel supported when things go wrong
+                    </div>
+                    <div class="answer-options">
+                        <label class="answer-option" onclick="selectOrgAnswer(2, 5, this)">
+                            <div class="answer-text">People openly share ideas and concerns, mistakes are learning opportunities, and everyone feels heard</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(2, 4, this)">
+                            <div class="answer-text">Generally safe environment with most people comfortable speaking up</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(2, 3, this)">
+                            <div class="answer-text">Mixed environment - some feel safe to speak up while others remain guarded</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(2, 2, this)">
+                            <div class="answer-text">Fear-based culture where people avoid taking risks or admitting mistakes</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Organizational Question 3: Decision Making -->
+                <div data-org-question="3" style="display: none;">
+                    <span class="question-text">How effective and timely is decision-making at all levels of your organization?</span>
+                    <div class="scenario-context">
+                        [DECISION EFFECTIVENESS] Consider speed of decisions, quality of outcomes, and clarity of decision-making processes
+                    </div>
+                    <div class="answer-options">
+                        <label class="answer-option" onclick="selectOrgAnswer(3, 5, this)">
+                            <div class="answer-text">Decisions are made quickly with clear processes, good input, and strong execution</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(3, 4, this)">
+                            <div class="answer-text">Generally good decision-making with occasional delays or unclear processes</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(3, 3, this)">
+                            <div class="answer-text">Inconsistent decision-making - sometimes fast and clear, sometimes slow and confusing</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(3, 2, this)">
+                            <div class="answer-text">Slow, unclear decision-making that creates bottlenecks and confusion</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Organizational Question 4: Change Adaptability -->
+                <div data-org-question="4" style="display: none;">
+                    <span class="question-text">How well does your organization adapt to change and embrace innovation?</span>
+                    <div class="scenario-context">
+                        [CHANGE ADAPTABILITY] Consider response to market changes, new technologies, and internal transformations
+                    </div>
+                    <div class="answer-options">
+                        <label class="answer-option" onclick="selectOrgAnswer(4, 5, this)">
+                            <div class="answer-text">We proactively embrace change, innovate continuously, and adapt quickly to new realities</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(4, 4, this)">
+                            <div class="answer-text">Good at adapting to change with strong support systems for transitions</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(4, 3, this)">
+                            <div class="answer-text">Mixed response to change - some areas adapt well while others struggle</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(4, 2, this)">
+                            <div class="answer-text">Resistance to change is common and adaptation is slow and difficult</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Organizational Question 5: Performance Standards -->
+                <div data-org-question="5" style="display: none;">
+                    <span class="question-text">How clear are performance expectations and how consistently are high standards maintained?</span>
+                    <div class="scenario-context">
+                        [PERFORMANCE CULTURE] Consider clarity of goals, accountability systems, and consistency of expectations
+                    </div>
+                    <div class="answer-options">
+                        <label class="answer-option" onclick="selectOrgAnswer(5, 5, this)">
+                            <div class="answer-text">Crystal clear expectations with consistent high standards and strong accountability</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(5, 4, this)">
+                            <div class="answer-text">Generally clear expectations with good accountability systems</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(5, 3, this)">
+                            <div class="answer-text">Somewhat clear expectations but inconsistent enforcement of standards</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(5, 2, this)">
+                            <div class="answer-text">Unclear expectations with inconsistent standards and weak accountability</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Organizational Question 6: Learning & Development -->
+                <div data-org-question="6" style="display: none;">
+                    <span class="question-text">How committed is your organization to developing people and building capabilities?</span>
+                    <div class="scenario-context">
+                        [GROWTH CULTURE] Consider investment in training, mentoring, career development, and skill building
+                    </div>
+                    <div class="answer-options">
+                        <label class="answer-option" onclick="selectOrgAnswer(6, 5, this)">
+                            <div class="answer-text">Strong commitment to development with excellent programs, mentoring, and growth opportunities</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(6, 4, this)">
+                            <div class="answer-text">Good development opportunities with solid support for learning and growth</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(6, 3, this)">
+                            <div class="answer-text">Some development opportunities but inconsistent or limited in scope</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(6, 2, this)">
+                            <div class="answer-text">Limited development opportunities with little investment in people growth</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Organizational Question 7: Communication Effectiveness -->
+                <div data-org-question="7" style="display: none;">
+                    <span class="question-text">How effective is communication from leadership to all levels of the organization?</span>
+                    <div class="scenario-context">
+                        [COMMUNICATION FLOW] Consider transparency, frequency, clarity, and two-way communication channels
+                    </div>
+                    <div class="answer-options">
+                        <label class="answer-option" onclick="selectOrgAnswer(7, 5, this)">
+                            <div class="answer-text">Excellent communication - transparent, regular, clear, and encouraging feedback from all levels</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(7, 4, this)">
+                            <div class="answer-text">Good communication with occasional gaps but generally clear and transparent</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(7, 3, this)">
+                            <div class="answer-text">Inconsistent communication - sometimes clear, sometimes confusing or missing</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(7, 2, this)">
+                            <div class="answer-text">Poor communication with limited transparency and unclear messages</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Organizational Question 8: Resource Allocation -->
+                <div data-org-question="8" style="display: none;">
+                    <span class="question-text">How effectively are resources (time, budget, people) allocated to support strategic priorities?</span>
+                    <div class="scenario-context">
+                        [RESOURCE MANAGEMENT] Consider alignment between resources and priorities, efficiency, and strategic focus
+                    </div>
+                    <div class="answer-options">
+                        <label class="answer-option" onclick="selectOrgAnswer(8, 5, this)">
+                            <div class="answer-text">Resources are strategically allocated with clear priorities and minimal waste</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(8, 4, this)">
+                            <div class="answer-text">Generally good resource allocation with occasional misalignment</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(8, 3, this)">
+                            <div class="answer-text">Mixed resource allocation - some strategic areas well-supported, others lacking</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(8, 2, this)">
+                            <div class="answer-text">Poor resource allocation with significant waste and misalignment with priorities</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Organizational Question 9: Recognition & Appreciation -->
+                <div data-org-question="9" style="display: none;">
+                    <span class="question-text">How well does your organization recognize and appreciate good work and achievements?</span>
+                    <div class="scenario-context">
+                        [RECOGNITION CULTURE] Consider both formal and informal recognition, appreciation frequency, and value alignment
+                    </div>
+                    <div class="answer-options">
+                        <label class="answer-option" onclick="selectOrgAnswer(9, 5, this)">
+                            <div class="answer-text">Excellent recognition culture with regular, meaningful appreciation at all levels</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(9, 4, this)">
+                            <div class="answer-text">Good recognition with regular appreciation and acknowledgment of contributions</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(9, 3, this)">
+                            <div class="answer-text">Inconsistent recognition - some good efforts but often people feel underappreciated</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(9, 2, this)">
+                            <div class="answer-text">Poor recognition culture where good work often goes unnoticed or unappreciated</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Organizational Question 10: Strategic Clarity -->
+                <div data-org-question="10" style="display: none;">
+                    <span class="question-text">How clear and aligned is everyone on the organization's vision, strategy, and direction?</span>
+                    <div class="scenario-context">
+                        [STRATEGIC ALIGNMENT] Consider vision communication, strategy understanding, and directional clarity across all levels
+                    </div>
+                    <div class="answer-options">
+                        <label class="answer-option" onclick="selectOrgAnswer(10, 5, this)">
+                            <div class="answer-text">Everyone understands and is aligned on our vision, strategy, and how their work contributes</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(10, 4, this)">
+                            <div class="answer-text">Good strategic clarity with most people understanding direction and their role</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(10, 3, this)">
+                            <div class="answer-text">Some strategic clarity but confusion about priorities or how work connects to bigger picture</div>
+                        </label>
+                        <label class="answer-option" onclick="selectOrgAnswer(10, 2, this)">
+                            <div class="answer-text">Limited strategic clarity with widespread confusion about direction and priorities</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question-navigation">
+                    <button class="nav-button" id="orgPrevButton" onclick="previousOrgQuestion()" style="display: none;">
+                        ← Previous
+                    </button>
+                    <button class="nav-button" id="orgNextButton" onclick="nextOrgQuestion()">
+                        Next →
+                    </button>
+                    <button class="nav-button submit-button" id="orgCompleteButton" onclick="completeOrgFeedback()" style="display: none;">
+                        Complete Assessment
+                    </button>
+                </div>
+            </div>
+
             <!-- Results Section -->
             <div class="results" id="results">
                 <h2>Your Leadership Behavior Profile - Demo Results</h2>
@@ -1814,14 +2085,67 @@
                     </div>
                 </div>
 
+                <!-- Organizational Feedback Results Section -->
+                <div class="organizational-results" id="organizationalResults" style="display: none;">
+                    <h3>360° Organizational Health Assessment</h3>
+                    <p style="color: #3b82f6 !important; margin-bottom: 20px; font-size: 0.95rem;">
+                        Your perspective on organizational effectiveness and team performance across 10 key dimensions:
+                    </p>
+                    
+                    <!-- Organizational Health Radar Chart Placeholder -->
+                    <div style="background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%); padding: 25px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #e1f5fe;">
+                        <h4 style="color: #1e3a8a; margin-bottom: 15px; text-align: center;">Organizational Health Radar</h4>
+                        <div id="organizationalRadar" style="text-align: center; padding: 20px; color: #64748b;">
+                            <!-- Radar chart visualization will be populated here -->
+                        </div>
+                    </div>
+
+                    <!-- Organizational Scores Grid -->
+                    <div class="organizational-scores" id="organizationalScores">
+                        <!-- Organizational framework scores will be populated here -->
+                    </div>
+                    
+                    <!-- Top Organizational Strengths & Challenges -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 25px;">
+                        <div>
+                            <h4 style="color: #059669; margin-bottom: 12px; font-size: 1.1rem;">🏆 Organizational Strengths</h4>
+                            <div id="orgStrengths" class="response-list support">
+                                <!-- Top organizational strengths will be populated here -->
+                            </div>
+                        </div>
+                        <div>
+                            <h4 style="color: #dc2626; margin-bottom: 12px; font-size: 1.1rem;">🎯 Improvement Opportunities</h4>
+                            <div id="orgChallenges" class="response-list responsible">
+                                <!-- Organizational challenges will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Organizational Development Recommendations -->
+                    <div style="margin-top: 25px;">
+                        <h4 style="color: #1e3a8a; margin-bottom: 15px; font-size: 1.1rem;">🚀 Recommended Organizational Improvements</h4>
+                        <div id="orgRecommendations" style="background: #f0f9ff; padding: 20px; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                            <!-- Organizational improvement recommendations will be populated here -->
+                        </div>
+                    </div>
+
+                    <!-- Team vs Individual Leadership Comparison -->
+                    <div style="margin-top: 25px; background: #fffbeb; padding: 20px; border-radius: 12px; border-left: 4px solid #fbbf24;">
+                        <h4 style="color: #92400e; margin-bottom: 15px; font-size: 1.1rem;">💡 Leadership Impact Insights</h4>
+                        <div id="leadershipImpactComparison">
+                            <!-- Comparison between individual leadership strengths and organizational needs will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Demo CTA -->
                 <div class="demo-cta">
                     <h3>Ready to Transform Your Leadership Impact?</h3>
                     <p>
-                        You've just completed the full Positive Effect Leaders Assessment - 25 comprehensive questions that revealed key insights about your leadership style across all 6 dimensions of effective leadership.
+                        You've just completed the comprehensive Positive Effect Leaders Assessment with 360° Organizational Feedback - combining 25 individual leadership questions across 6 key dimensions with 10 organizational effectiveness questions. This gives you both personal leadership insights and organizational context.
                     </p>
                     <p style="margin-top: 15px; font-weight: 600;">
-                        Want to dive deeper into your results and create a personalized 90-day development plan?
+                        Want to create a personalized leadership development plan that addresses both your individual growth and organizational impact?
                     </p>
                     <a href="https://calendly.com/aprilcoaching/askaprilcourses" class="cta-button" target="_blank">
                         Schedule Your Leadership Development Consultation
@@ -1831,8 +2155,7 @@
                 <div style="background: #f8fafc; padding: 25px; border-radius: 12px; margin-top: 30px; border-left: 4px solid #fbbf24;">
                     <h3 style="color: #1e3a8a; margin-bottom: 15px;">About This Assessment</h3>
                     <p style="color: #3b82f6 !important; line-height: 1.6;">
-                        This behavioral leadership assessment uses scenario-based questions to provide authentic insights into your natural leadership tendencies. 
-                        The full version includes deeper analysis, personalized development recommendations, and comprehensive skill development planning.
+                        This comprehensive leadership assessment combines individual behavioral analysis with 360° organizational feedback. The individual assessment uses scenario-based questions to reveal your natural leadership tendencies across 6 key dimensions, while the organizational feedback component captures your perspective on team effectiveness, culture, and systemic performance factors. Together, these provide a complete picture of leadership effectiveness in context.
                     </p>
                 </div>
             </div>
@@ -1844,6 +2167,103 @@
                     Question <span class="current" id="currentQ">1</span> of <span id="totalQ">25</span>
                 </div>
                 <button class="nav-btn" id="nextBtn" onclick="nextQuestion()" disabled>Next</button>
+            </div>
+        </div>
+
+        <!-- Executive Team Dashboard -->
+        <div class="executive-dashboard" id="executiveDashboard" style="display: none;">
+            <div class="container" style="margin-top: 40px;">
+                <div class="header">
+                    <h1>Executive Team Leadership Assessment</h1>
+                    <p class="subtitle">Comprehensive analysis of your senior leadership team's collective strengths and development opportunities</p>
+                </div>
+                
+                <div style="padding: 40px;">
+                    <!-- Team Overview Section -->
+                    <div class="team-overview" style="margin-bottom: 40px;">
+                        <h2 style="color: #1e3a8a; margin-bottom: 25px; font-size: 2rem;">Team Leadership Profile</h2>
+                        
+                        <!-- Team Heat Map -->
+                        <div class="team-heatmap" style="background: #ffffff; padding: 30px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);">
+                            <h3 style="color: #1e3a8a; margin-bottom: 20px;">Leadership Competency Heat Map</h3>
+                            <div class="heatmap-container" id="teamHeatmap">
+                                <!-- Heat map will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <!-- Team Statistics -->
+                        <div class="team-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                            <div class="stat-card" style="background: linear-gradient(135deg, #fffbeb, #fef3c7); padding: 25px; border-radius: 15px; border-left: 4px solid #fbbf24;">
+                                <h4 style="color: #1e3a8a; margin-bottom: 10px;">Team Average Score</h4>
+                                <div class="stat-value" id="teamAverageScore" style="font-size: 2rem; font-weight: bold; color: #1e3a8a;">--</div>
+                                <p style="color: #1e3a8a; font-size: 0.9rem; margin: 0;">Across all 6 leadership dimensions</p>
+                            </div>
+                            <div class="stat-card" style="background: linear-gradient(135deg, #f0fdf4, #dcfce7); padding: 25px; border-radius: 15px; border-left: 4px solid #22c55e;">
+                                <h4 style="color: #1e3a8a; margin-bottom: 10px;">Strongest Dimension</h4>
+                                <div class="stat-value" id="strongestDimension" style="font-size: 1.2rem; font-weight: bold; color: #1e3a8a;">--</div>
+                                <p style="color: #1e3a8a; font-size: 0.9rem; margin: 0;">Team's collective strength</p>
+                            </div>
+                            <div class="stat-card" style="background: linear-gradient(135deg, #fef2f2, #fee2e2); padding: 25px; border-radius: 15px; border-left: 4px solid #ef4444;">
+                                <h4 style="color: #1e3a8a; margin-bottom: 10px;">Development Priority</h4>
+                                <div class="stat-value" id="developmentPriority" style="font-size: 1.2rem; font-weight: bold; color: #1e3a8a;">--</div>
+                                <p style="color: #1e3a8a; font-size: 0.9rem; margin: 0;">Primary focus area for team growth</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Individual Executive Profiles -->
+                    <div class="executive-profiles" style="margin-bottom: 40px;">
+                        <h2 style="color: #1e3a8a; margin-bottom: 25px; font-size: 2rem;">Individual Executive Profiles</h2>
+                        <div class="profiles-container" id="executiveProfiles">
+                            <!-- Individual profiles will be populated here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Team Development Recommendations -->
+                    <div class="team-recommendations" style="margin-bottom: 40px;">
+                        <h2 style="color: #1e3a8a; margin-bottom: 25px; font-size: 2rem;">Team Development Strategy</h2>
+                        
+                        <!-- Priority Development Areas -->
+                        <div class="priority-areas" style="background: #ffffff; padding: 30px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);">
+                            <h3 style="color: #1e3a8a; margin-bottom: 20px;">Priority Development Areas</h3>
+                            <div id="teamPriorities">
+                                <!-- Team priorities will be populated here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Succession Planning -->
+                        <div class="succession-planning" style="background: #ffffff; padding: 30px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);">
+                            <h3 style="color: #1e3a8a; margin-bottom: 20px;">Succession Readiness Matrix</h3>
+                            <div id="successionMatrix">
+                                <!-- Succession matrix will be populated here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Cultural Alignment -->
+                        <div class="cultural-alignment" style="background: #ffffff; padding: 30px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);">
+                            <h3 style="color: #1e3a8a; margin-bottom: 20px;">Team Dynamics & Cultural Alignment</h3>
+                            <div id="culturalAlignment">
+                                <!-- Cultural alignment analysis will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Executive Summary for Board -->
+                    <div class="executive-summary" style="background: linear-gradient(135deg, #fffbeb, #fef3c7); padding: 40px; border-radius: 15px; border: 2px solid #fbbf24;">
+                        <h2 style="color: #1e3a8a; margin-bottom: 25px; font-size: 2rem;">📊 Executive Summary for Board Review</h2>
+                        <div id="boardSummary">
+                            <!-- Executive summary will be populated here -->
+                        </div>
+                        
+                        <!-- Download Report Button -->
+                        <div style="text-align: center; margin-top: 30px;">
+                            <button onclick="downloadExecutiveReport()" 
+                                    style="background: linear-gradient(135deg, #1e3a8a, #1e40af); color: white; border: none; padding: 15px 40px; border-radius: 10px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);">
+                                📄 Download Executive Team Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -2135,6 +2555,35 @@
             
             // Add PDF download button
             addPDFDownloadButton(scores);
+            
+            // Automatically transition to organizational feedback after showing individual results
+            setTimeout(() => {
+                // Hide individual results
+                document.getElementById('results').style.display = 'none';
+                
+                // Show organizational feedback section
+                document.getElementById('organizationalFeedback').style.display = 'block';
+                
+                // Scroll to organizational feedback
+                document.getElementById('organizationalFeedback').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Add transition message
+                const orgSection = document.getElementById('organizationalFeedback');
+                const transitionMessage = document.createElement('div');
+                transitionMessage.style.cssText = 'background: #fbbf24; color: #92400e; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; font-weight: 600;';
+                transitionMessage.innerHTML = '🎯 Now let\'s get your perspective on organizational effectiveness and team performance';
+                orgSection.insertBefore(transitionMessage, orgSection.firstChild.nextSibling);
+                
+                // Remove the message after 3 seconds
+                setTimeout(() => {
+                    if (transitionMessage.parentNode) {
+                        transitionMessage.remove();
+                    }
+                }, 3000);
+            }, 3000); // 3 second delay to let user see their individual results
         }
 
         function calculateDemoScores() {
@@ -2844,100 +3293,98 @@
             }
         }
 
-        // Initialize PayPal buttons
-        function initializePayPal() {
-            console.log('Initializing PayPal buttons...');
-            if (typeof paypal !== 'undefined') {
-                console.log('PayPal SDK loaded successfully');
-                
-                // Individual PayPal button
-                paypal.Buttons({
-                    style: {
-                        layout: 'vertical',
-                        color: 'gold',
-                        shape: 'rect',
-                        height: 50
-                    },
-                    createOrder: function(data, actions) {
-                        return actions.order.create({
-                            purchase_units: [{
-                                amount: {
-                                    value: '97.00',
-                                    currency_code: 'USD'
-                                },
-                                description: 'Positive Effect Leaders Assessment - Individual Access'
-                            }]
-                        });
-                    },
-                    onApprove: function(data, actions) {
-                        return actions.order.capture().then(function(details) {
-                            console.log('Payment completed by:', details.payer.name.given_name);
-                            onPaymentSuccess('individual');
-                        });
-                    },
-                    onError: function(err) {
-                        console.error('PayPal error:', err);
-                        alert('Payment failed. Please try again or contact support.');
-                    }
-                }).render('#paypal-button-container');
+        // Initialize Stripe payment buttons
+        function initializeStripePayments() {
+            console.log('Initializing Stripe payment buttons...');
+            
+            // Individual payment button
+            document.getElementById('individual-payment-btn').addEventListener('click', function() {
+                handleStripePayment('individual', 9700, 'Positive Effect Leaders Assessment - Individual Access');
+            });
+            
+            // Group payment buttons
+            document.getElementById('group-5-payment-btn').addEventListener('click', function() {
+                handleStripePayment('group', 35000, 'Positive Effect Leaders Assessment - 5 Team Members', 5);
+            });
+            
+            document.getElementById('group-10-payment-btn').addEventListener('click', function() {
+                handleStripePayment('group', 65000, 'Positive Effect Leaders Assessment - 10 Team Members', 10);
+            });
+            
+            document.getElementById('group-25-payment-btn').addEventListener('click', function() {
+                handleStripePayment('group', 140000, 'Positive Effect Leaders Assessment - 25 Team Members', 25);
+            });
+        }
 
-                // Group PayPal buttons
-                createGroupPayPalButton('paypal-group-5', '350.00', 'Group Access - 5 Codes', 5);
-                createGroupPayPalButton('paypal-group-10', '650.00', 'Group Access - 10 Codes', 10);
-                createGroupPayPalButton('paypal-group-25', '1400.00', 'Group Access - 25 Codes', 25);
+        // Stripe Payment Links (to be updated with real URLs)
+        const STRIPE_PAYMENT_LINKS = {
+            individual: 'YOUR_INDIVIDUAL_PAYMENT_LINK',
+            group5: 'YOUR_GROUP_5_PAYMENT_LINK', 
+            group10: 'YOUR_GROUP_10_PAYMENT_LINK',
+            group25: 'YOUR_GROUP_25_PAYMENT_LINK'
+        };
+
+        // Handle Stripe payments via Payment Links
+        function handleStripePayment(type, amount, description, teamSize = 1) {
+            let paymentLink;
+            
+            switch(teamSize) {
+                case 1:
+                    paymentLink = STRIPE_PAYMENT_LINKS.individual;
+                    break;
+                case 5:
+                    paymentLink = STRIPE_PAYMENT_LINKS.group5;
+                    break;
+                case 10:
+                    paymentLink = STRIPE_PAYMENT_LINKS.group10;
+                    break;
+                case 25:
+                    paymentLink = STRIPE_PAYMENT_LINKS.group25;
+                    break;
+                default:
+                    alert('Invalid package selection');
+                    return;
+            }
+            
+            if (paymentLink === 'YOUR_INDIVIDUAL_PAYMENT_LINK' || paymentLink.includes('YOUR_')) {
+                alert('Payment links not configured yet. Please contact april@aprilsabral.com');
+                return;
+            }
+            
+            // Redirect to Stripe Payment Link
+            window.location.href = paymentLink;
+        }
+
+        // Handle successful payments (called when user returns from Stripe)
+        function handlePaymentSuccess() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('session_id');
+            
+            if (sessionId) {
+                // Payment successful - trigger the appropriate success flow
+                const type = urlParams.get('type') || 'individual';
+                const teamSize = parseInt(urlParams.get('team_size')) || 1;
                 
-            } else {
-                console.error('PayPal SDK not loaded');
+                if (teamSize === 1) {
+                    onPaymentSuccess(type);
+                } else {
+                    onGroupPaymentSuccess(teamSize, 'customer@email.com', { id: sessionId });
+                }
             }
         }
 
-        // Create group PayPal buttons
-        function createGroupPayPalButton(containerId, price, description, codeCount) {
-            paypal.Buttons({
-                style: {
-                    layout: 'vertical',
-                    color: 'gold',
-                    shape: 'rect',
-                    height: 50
-                },
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                value: price,
-                                currency_code: 'USD'
-                            },
-                            description: description
-                        }]
-                    });
-                },
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        console.log('Group payment completed by:', details.payer.name.given_name);
-                        onGroupPaymentSuccess(codeCount, details.payer.email_address, details);
-                    });
-                },
-                onError: function(err) {
-                    console.error('PayPal error:', err);
-                    alert('Payment failed. Please try again or contact support.');
-                }
-            }).render('#' + containerId);
-        }
-
-        // Initialize PayPal when page loads
+        // Check for payment success on page load
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Loading PayPal SDK...');
-            // Load PayPal SDK
-            const script = document.createElement('script');
-            script.src = 'https://www.paypal.com/sdk/js?client-id=AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R&currency=USD&disable-funding=paylater';
-            script.onload = function() {
-                console.log('PayPal SDK loaded, initializing buttons...');
-                initializePayPal();
-            };
-            script.onerror = function() {
-                console.error('Failed to load PayPal SDK');
-            };
-            document.head.appendChild(script);
+            handlePaymentSuccess();
+        });
+
+        // Stripe Configuration
+        const stripe = Stripe('pk_live_51RQZCKG4liszaBokKp9g8TR5MK0fuYx2GwQTIDyovzPLSuNq9MvoZVIpmKg1pwyp3K7IbCFBGVAX9EsH6E3EeIhk00mVQlIfCK');
+
+        // Initialize Stripe when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Initializing Stripe payments...');
+            initializeStripePayments();
         });
 
         // Initialize
@@ -3613,6 +4060,791 @@ For support: support@thepositiveeffectindex.com`;
                 button.disabled = false;
                 
                 alert('Sorry, there was an issue sending your email. Please try the PDF download option instead.');
+            }
+        }
+
+        // Executive Team Aggregation Functions
+        let executiveTeamData = {
+            teamMembers: [],
+            completedAssessments: {},
+            teamSize: 0,
+            completionStatus: {}
+        };
+
+        function initializeExecutiveTeam(teamMemberNames, teamSize) {
+            executiveTeamData.teamMembers = teamMemberNames;
+            executiveTeamData.teamSize = teamSize;
+            
+            // Initialize completion status
+            teamMemberNames.forEach(name => {
+                executiveTeamData.completionStatus[name] = false;
+            });
+        }
+
+        function saveExecutiveAssessment(executiveName, scores, personalizationData, responseData) {
+            // Store individual executive's assessment results
+            executiveTeamData.completedAssessments[executiveName] = {
+                name: executiveName,
+                scores: scores,
+                personalization: personalizationData,
+                responses: responseData,
+                completedAt: new Date(),
+                overallScore: calculateOverallScore(scores)
+            };
+            
+            // Mark as completed
+            executiveTeamData.completionStatus[executiveName] = true;
+            
+            // Check if all team members have completed
+            const completedCount = Object.keys(executiveTeamData.completedAssessments).length;
+            
+            if (completedCount === executiveTeamData.teamSize) {
+                // All executives completed - generate team dashboard
+                generateExecutiveTeamDashboard();
+            } else {
+                // Show progress update
+                showTeamProgressUpdate(completedCount, executiveTeamData.teamSize);
+            }
+        }
+
+        function calculateOverallScore(scores) {
+            const totalScore = Object.values(scores).reduce((sum, score) => sum + score, 0);
+            return Math.round(totalScore / Object.keys(scores).length);
+        }
+
+        function generateExecutiveTeamDashboard() {
+            const assessments = Object.values(executiveTeamData.completedAssessments);
+            
+            // Calculate team statistics
+            const teamStats = calculateTeamStatistics(assessments);
+            
+            // Generate team heat map
+            generateTeamHeatMap(assessments);
+            
+            // Create individual executive profiles
+            generateExecutiveProfiles(assessments);
+            
+            // Identify development priorities
+            generateTeamPriorities(assessments, teamStats);
+            
+            // Create succession planning matrix
+            generateSuccessionMatrix(assessments);
+            
+            // Generate board executive summary
+            generateBoardSummary(assessments, teamStats);
+            
+            // Show the dashboard
+            document.getElementById('executiveDashboard').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+            
+            // Update banner
+            document.querySelector('.demo-banner').innerHTML = '📊 EXECUTIVE TEAM DASHBOARD - Complete Analysis';
+            
+            // Scroll to dashboard
+            document.getElementById('executiveDashboard').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function calculateTeamStatistics(assessments) {
+            const dimensions = ['relationship', 'communication', 'mindset', 'ownership', 'coaching', 'performance'];
+            const teamStats = {
+                averageScores: {},
+                overallAverage: 0,
+                strongest: '',
+                weakest: '',
+                standardDeviations: {}
+            };
+
+            // Calculate average scores for each dimension
+            dimensions.forEach(dim => {
+                const scores = assessments.map(exec => exec.scores[dim] || 0);
+                teamStats.averageScores[dim] = Math.round(scores.reduce((sum, score) => sum + score, 0) / scores.length);
+            });
+
+            // Find strongest and weakest dimensions
+            const avgScores = Object.entries(teamStats.averageScores);
+            teamStats.strongest = avgScores.reduce((max, current) => current[1] > max[1] ? current : max)[0];
+            teamStats.weakest = avgScores.reduce((min, current) => current[1] < min[1] ? current : min)[0];
+            
+            // Calculate overall team average
+            teamStats.overallAverage = Math.round(
+                Object.values(teamStats.averageScores).reduce((sum, score) => sum + score, 0) / dimensions.length
+            );
+
+            return teamStats;
+        }
+
+        function generateTeamHeatMap(assessments) {
+            const dimensions = {
+                'relationship': 'Relationship Builder',
+                'communication': 'Positive Intent Communicator',
+                'mindset': 'Mindset & Energy Steward',
+                'ownership': 'Ownership & Accountability Driver',
+                'coaching': 'Coach & People Developer',
+                'performance': 'Performance & Growth Manager'
+            };
+
+            let heatMapHTML = `
+                <div style="display: grid; grid-template-columns: 200px repeat(${assessments.length}, 1fr); gap: 10px; align-items: center;">
+                    <div style="font-weight: bold; color: #1e3a8a;">Leadership Dimension</div>
+                    ${assessments.map(exec => `<div style="font-weight: bold; color: #1e3a8a; text-align: center; font-size: 0.9rem;">${exec.name}</div>`).join('')}
+            `;
+
+            Object.entries(dimensions).forEach(([key, label]) => {
+                heatMapHTML += `<div style="font-size: 0.9rem; color: #1e3a8a; font-weight: 500;">${label}</div>`;
+                
+                assessments.forEach(exec => {
+                    const score = exec.scores[key] || 0;
+                    const color = getHeatMapColor(score);
+                    heatMapHTML += `
+                        <div style="background: ${color}; padding: 10px; text-align: center; border-radius: 6px; font-weight: bold; color: ${score > 70 ? 'white' : '#1e3a8a'};">
+                            ${score}
+                        </div>
+                    `;
+                });
+            });
+
+            heatMapHTML += '</div>';
+            document.getElementById('teamHeatmap').innerHTML = heatMapHTML;
+        }
+
+        function getHeatMapColor(score) {
+            if (score >= 85) return '#22c55e'; // Green
+            if (score >= 75) return '#84cc16'; // Light green  
+            if (score >= 65) return '#eab308'; // Yellow
+            if (score >= 50) return '#f97316'; // Orange
+            return '#ef4444'; // Red
+        }
+
+        function generateExecutiveProfiles(assessments) {
+            let profilesHTML = '';
+            
+            assessments.forEach(exec => {
+                const topStrength = Object.entries(exec.scores).reduce((max, current) => 
+                    current[1] > max[1] ? current : max
+                )[0];
+                
+                const developmentArea = Object.entries(exec.scores).reduce((min, current) => 
+                    current[1] < min[1] ? current : min
+                )[0];
+
+                profilesHTML += `
+                    <div style="background: #ffffff; padding: 25px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);">
+                        <h4 style="color: #1e3a8a; margin-bottom: 15px; font-size: 1.2rem;">${exec.name}</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                            <div>
+                                <div style="font-size: 0.9rem; color: #6b7280; margin-bottom: 5px;">Overall Score</div>
+                                <div style="font-size: 1.5rem; font-weight: bold; color: #1e3a8a;">${exec.overallScore}</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.9rem; color: #6b7280; margin-bottom: 5px;">Top Strength</div>
+                                <div style="font-size: 1rem; font-weight: bold; color: #22c55e;">${getDimensionLabel(topStrength)}</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.9rem; color: #6b7280; margin-bottom: 5px;">Development Focus</div>
+                                <div style="font-size: 1rem; font-weight: bold; color: #f59e0b;">${getDimensionLabel(developmentArea)}</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.9rem; color: #1e3a8a;">
+                            ${getExecutiveSummary(exec)}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('executiveProfiles').innerHTML = profilesHTML;
+        }
+
+        function getDimensionLabel(dimensionKey) {
+            const labels = {
+                'relationship': 'Relationship Builder',
+                'communication': 'Positive Intent Communicator', 
+                'mindset': 'Mindset & Energy Steward',
+                'ownership': 'Ownership & Accountability Driver',
+                'coaching': 'Coach & People Developer',
+                'performance': 'Performance & Growth Manager'
+            };
+            return labels[dimensionKey] || dimensionKey;
+        }
+
+        function getExecutiveSummary(exec) {
+            const role = exec.personalization?.role || 'senior leader';
+            const experience = exec.personalization?.experience || 'experienced';
+            const topScore = Math.max(...Object.values(exec.scores));
+            
+            if (topScore >= 85) {
+                return `Strong ${role} with ${experience} background. Demonstrates exceptional leadership capabilities with particular strength in ${getDimensionLabel(Object.entries(exec.scores).find(([k, v]) => v === topScore)[0])}.`;
+            } else if (topScore >= 75) {
+                return `Solid ${role} with ${experience} background. Shows strong leadership foundation with development opportunities to reach full potential.`;
+            } else {
+                return `Developing ${role} with ${experience} background. Would benefit from focused leadership development in key areas.`;
+            }
+        }
+
+        function showTeamProgressUpdate(completed, total) {
+            const progressHTML = `
+                <div style="background: linear-gradient(135deg, #fffbeb, #fef3c7); padding: 25px; border-radius: 15px; margin: 30px auto; max-width: 600px; text-align: center; border: 2px solid #fbbf24;">
+                    <h3 style="color: #1e3a8a; margin-bottom: 15px;">Team Assessment Progress</h3>
+                    <div style="font-size: 2rem; font-weight: bold; color: #1e3a8a; margin-bottom: 10px;">${completed} of ${total}</div>
+                    <p style="color: #1e3a8a; margin-bottom: 20px;">Executives have completed their leadership assessment</p>
+                    <div style="background: #e5e7eb; height: 10px; border-radius: 5px; overflow: hidden;">
+                        <div style="background: linear-gradient(90deg, #fbbf24, #f59e0b); height: 100%; width: ${(completed/total)*100}%; transition: width 0.5s ease;"></div>
+                    </div>
+                    <p style="color: #6b7280; margin-top: 15px; font-size: 0.9rem;">
+                        Executive team dashboard will be available when all members complete their assessment.
+                    </p>
+                </div>
+            `;
+            
+            // Show progress instead of full results
+            document.getElementById('results').innerHTML = progressHTML;
+        }
+
+        function generateTeamPriorities(assessments, teamStats) {
+            const prioritiesHTML = `
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #ef4444; margin-bottom: 15px;">🎯 Immediate Development Priorities</h4>
+                    <div style="background: #fef2f2; padding: 20px; border-radius: 10px; border-left: 4px solid #ef4444; margin-bottom: 20px;">
+                        <strong>1. ${getDimensionLabel(teamStats.weakest)}</strong> - Team Average: ${teamStats.averageScores[teamStats.weakest]}
+                        <p style="margin: 10px 0 0 0; color: #6b7280; font-size: 0.9rem;">
+                            This dimension shows the largest opportunity for team-wide improvement. Consider group development sessions and peer mentoring.
+                        </p>
+                    </div>
+                    <div style="background: #fffbeb; padding: 20px; border-radius: 10px; border-left: 4px solid #f59e0b;">
+                        <strong>2. Individual Coaching Priorities</strong>
+                        <p style="margin: 10px 0 0 0; color: #6b7280; font-size: 0.9rem;">
+                            ${assessments.filter(exec => exec.overallScore < 70).length} executives would benefit from targeted individual coaching.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color: #22c55e; margin-bottom: 15px;">💪 Leverage Team Strengths</h4>
+                    <div style="background: #f0fdf4; padding: 20px; border-radius: 10px; border-left: 4px solid #22c55e;">
+                        <strong>${getDimensionLabel(teamStats.strongest)}</strong> - Team Average: ${teamStats.averageScores[teamStats.strongest]}
+                        <p style="margin: 10px 0 0 0; color: #6b7280; font-size: 0.9rem;">
+                            Use this collective strength to mentor other teams and drive organizational initiatives.
+                        </p>
+                    </div>
+                </div>
+            `;
+            document.getElementById('teamPriorities').innerHTML = prioritiesHTML;
+        }
+
+        function generateSuccessionMatrix(assessments) {
+            const successionHTML = `
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    ${assessments.map(exec => `
+                        <div style="background: ${getSuccessionColor(exec.overallScore)}; padding: 20px; border-radius: 10px;">
+                            <h4 style="color: #1e3a8a; margin-bottom: 10px;">${exec.name}</h4>
+                            <div style="font-size: 0.9rem; color: #1e3a8a; margin-bottom: 10px;">
+                                <strong>Readiness Level:</strong> ${getSuccessionReadiness(exec.overallScore)}
+                            </div>
+                            <div style="font-size: 0.9rem; color: #6b7280;">
+                                ${getSuccessionRecommendation(exec)}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            document.getElementById('successionMatrix').innerHTML = successionHTML;
+        }
+
+        function getSuccessionColor(score) {
+            if (score >= 85) return '#f0fdf4'; // Light green - ready now
+            if (score >= 75) return '#fffbeb'; // Light yellow - ready with development
+            return '#fef2f2'; // Light red - needs significant development
+        }
+
+        function getSuccessionReadiness(score) {
+            if (score >= 85) return 'Ready Now';
+            if (score >= 75) return 'Ready with Development'; 
+            return 'Needs Development';
+        }
+
+        function getSuccessionRecommendation(exec) {
+            if (exec.overallScore >= 85) {
+                return 'Strong candidate for promotion or expanded responsibilities. Consider stretch assignments and board exposure.';
+            } else if (exec.overallScore >= 75) {
+                return 'Solid performer who would benefit from targeted development in 1-2 key areas before next-level advancement.';
+            } else {
+                return 'Focus on foundational leadership development and coaching before considering for advancement.';
+            }
+        }
+
+        function generateBoardSummary(assessments, teamStats) {
+            const highPerformers = assessments.filter(exec => exec.overallScore >= 85).length;
+            const readyForPromotion = assessments.filter(exec => exec.overallScore >= 80).length;
+            
+            const summaryHTML = `
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #1e3a8a; margin-bottom: 15px;">📈 Executive Summary</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; font-weight: bold; color: #1e3a8a;">${teamStats.overallAverage}</div>
+                            <div style="font-size: 0.9rem; color: #6b7280;">Team Average Score</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; font-weight: bold; color: #22c55e;">${highPerformers}</div>
+                            <div style="font-size: 0.9rem; color: #6b7280;">High Performers (85+)</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 2rem; font-weight: bold; color: #f59e0b;">${readyForPromotion}</div>
+                            <div style="font-size: 0.9rem; color: #6b7280;">Promotion Ready (80+)</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #1e3a8a; margin-bottom: 15px;">🎯 Strategic Recommendations</h3>
+                    <div style="background: #ffffff; padding: 20px; border-radius: 10px; margin-bottom: 15px;">
+                        <h4 style="color: #1e3a8a; margin-bottom: 10px;">Leadership Development Investment</h4>
+                        <p style="color: #1e3a8a; font-size: 0.95rem; line-height: 1.5; margin: 0;">
+                            Focus development resources on <strong>${getDimensionLabel(teamStats.weakest)}</strong> to achieve maximum ROI. 
+                            Estimated 12-month improvement potential: ${Math.min(15, 85 - teamStats.averageScores[teamStats.weakest])} points team-wide.
+                        </p>
+                    </div>
+                    <div style="background: #ffffff; padding: 20px; border-radius: 10px;">
+                        <h4 style="color: #1e3a8a; margin-bottom: 10px;">Succession Planning Status</h4>
+                        <p style="color: #1e3a8a; font-size: 0.95rem; line-height: 1.5; margin: 0;">
+                            ${readyForPromotion} executives demonstrate readiness for expanded responsibilities. 
+                            Recommend accelerated development programs for the remaining ${assessments.length - readyForPromotion} leaders.
+                        </p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: #1e3a8a; margin-bottom: 15px;">⏰ Recommended Timeline</h3>
+                    <div style="background: #ffffff; padding: 20px; border-radius: 10px;">
+                        <div style="margin-bottom: 10px;"><strong>Q1:</strong> Begin team development program focusing on ${getDimensionLabel(teamStats.weakest)}</div>
+                        <div style="margin-bottom: 10px;"><strong>Q2:</strong> Implement individual coaching plans for executives scoring below 75</div>
+                        <div style="margin-bottom: 10px;"><strong>Q3:</strong> Mid-year leadership assessment to track progress</div>
+                        <div><strong>Q4:</strong> Succession planning review and next-year development strategy</div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('boardSummary').innerHTML = summaryHTML;
+            
+            // Update dashboard statistics
+            document.getElementById('teamAverageScore').textContent = teamStats.overallAverage;
+            document.getElementById('strongestDimension').textContent = getDimensionLabel(teamStats.strongest);
+            document.getElementById('developmentPriority').textContent = getDimensionLabel(teamStats.weakest);
+        }
+
+        function downloadExecutiveReport() {
+            // This would generate a comprehensive PDF report
+            alert('Executive team report download functionality would be implemented here. Report includes:\n\n• Team heat map and statistics\n• Individual executive profiles\n• Succession planning matrix\n• Development recommendations\n• Board presentation slides');
+        }
+
+        // Update the showResults function to integrate with team tracking
+        function showResultsWithTeamTracking() {
+            // Get executive name (you'll need to collect this during assessment)
+            const executiveName = prompt("Please enter your name for the executive team report:") || "Executive " + Date.now();
+            
+            // Calculate scores
+            const scores = calculateDemoScores();
+            
+            // Save to team data
+            saveExecutiveAssessment(executiveName, scores, personalizationData, responses);
+            
+            // Show individual results first
+            showResults();
+        }
+
+        // 360-Degree Organizational Feedback Functions
+        let currentOrgQuestion = 1;
+        const totalOrgQuestions = 10;
+        let orgResponses = {};
+        
+        const orgQuestionMapping = {
+            1: 'collaboration',
+            2: 'psychological_safety', 
+            3: 'decision_making',
+            4: 'change_adaptability',
+            5: 'performance_standards',
+            6: 'learning_development',
+            7: 'communication',
+            8: 'resource_allocation',
+            9: 'recognition',
+            10: 'strategic_clarity'
+        };
+
+        function selectOrgAnswer(questionNum, value, element) {
+            // Remove selection from all options in this question
+            const questionDiv = document.querySelector(`[data-org-question="${questionNum}"]`);
+            const options = questionDiv.querySelectorAll('.answer-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            
+            // Add selection to clicked option
+            element.classList.add('selected');
+            
+            // Store response
+            orgResponses[questionNum] = value;
+            
+            // Show next button if this is the current question
+            if (questionNum === currentOrgQuestion) {
+                document.getElementById('orgNextButton').style.display = 'inline-block';
+                if (currentOrgQuestion === totalOrgQuestions) {
+                    document.getElementById('orgCompleteButton').style.display = 'inline-block';
+                    document.getElementById('orgNextButton').style.display = 'none';
+                }
+            }
+        }
+
+        function nextOrgQuestion() {
+            if (currentOrgQuestion < totalOrgQuestions) {
+                // Hide current question
+                document.querySelector(`[data-org-question="${currentOrgQuestion}"]`).style.display = 'none';
+                
+                // Show next question
+                currentOrgQuestion++;
+                document.querySelector(`[data-org-question="${currentOrgQuestion}"]`).style.display = 'block';
+                
+                // Update progress
+                updateOrgProgress();
+                
+                // Update navigation
+                document.getElementById('orgPrevButton').style.display = 'inline-block';
+                
+                // Check if answer already selected for this question
+                if (orgResponses[currentOrgQuestion]) {
+                    document.getElementById('orgNextButton').style.display = 'inline-block';
+                    if (currentOrgQuestion === totalOrgQuestions) {
+                        document.getElementById('orgCompleteButton').style.display = 'inline-block';
+                        document.getElementById('orgNextButton').style.display = 'none';
+                    }
+                } else {
+                    document.getElementById('orgNextButton').style.display = 'none';
+                    document.getElementById('orgCompleteButton').style.display = 'none';
+                }
+            }
+        }
+
+        function previousOrgQuestion() {
+            if (currentOrgQuestion > 1) {
+                // Hide current question
+                document.querySelector(`[data-org-question="${currentOrgQuestion}"]`).style.display = 'none';
+                
+                // Show previous question
+                currentOrgQuestion--;
+                document.querySelector(`[data-org-question="${currentOrgQuestion}"]`).style.display = 'block';
+                
+                // Update progress
+                updateOrgProgress();
+                
+                // Update navigation
+                if (currentOrgQuestion === 1) {
+                    document.getElementById('orgPrevButton').style.display = 'none';
+                }
+                
+                document.getElementById('orgNextButton').style.display = 'inline-block';
+                document.getElementById('orgCompleteButton').style.display = 'none';
+            }
+        }
+
+        function updateOrgProgress() {
+            const progressPercentage = (currentOrgQuestion / totalOrgQuestions) * 100;
+            document.getElementById('orgProgressFill').style.width = progressPercentage + '%';
+            document.getElementById('orgCurrentQuestion').textContent = currentOrgQuestion;
+        }
+
+        function completeOrgFeedback() {
+            // Calculate organizational scores
+            const orgScores = calculateOrgScores();
+            
+            // Display organizational results
+            displayOrgResults(orgScores);
+            
+            // Hide organizational feedback section and show results
+            document.getElementById('organizationalFeedback').style.display = 'none';
+            document.getElementById('organizationalResults').style.display = 'block';
+            
+            // Scroll to results
+            document.getElementById('organizationalResults').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        function calculateOrgScores() {
+            const orgFrameworks = {
+                collaboration: [],
+                psychological_safety: [],
+                decision_making: [],
+                change_adaptability: [],
+                performance_standards: [],
+                learning_development: [],
+                communication: [],
+                resource_allocation: [],
+                recognition: [],
+                strategic_clarity: []
+            };
+
+            // Map responses to frameworks
+            for (let i = 1; i <= totalOrgQuestions; i++) {
+                if (orgResponses[i]) {
+                    const framework = orgQuestionMapping[i];
+                    orgFrameworks[framework].push(orgResponses[i]);
+                }
+            }
+
+            // Calculate average scores for each framework
+            const scores = {};
+            for (const [framework, responses] of Object.entries(orgFrameworks)) {
+                if (responses.length > 0) {
+                    const sum = responses.reduce((a, b) => a + b, 0);
+                    scores[framework] = Math.round((sum / responses.length / 5) * 100); // Convert to percentage
+                }
+            }
+
+            return scores;
+        }
+
+        function displayOrgResults(scores) {
+            displayOrgRadar(scores);
+            displayOrgFrameworkScores(scores);
+            displayOrgStrengthsAndChallenges(scores);
+            displayOrgRecommendations(scores);
+            displayLeadershipImpactComparison(scores);
+        }
+
+        function displayOrgRadar(scores) {
+            const radarElement = document.getElementById('organizationalRadar');
+            const frameworkNames = {
+                collaboration: 'Team Collaboration',
+                psychological_safety: 'Psychological Safety',
+                decision_making: 'Decision Making',
+                change_adaptability: 'Change Adaptability',
+                performance_standards: 'Performance Standards',
+                learning_development: 'Learning & Development',
+                communication: 'Communication',
+                resource_allocation: 'Resource Management',
+                recognition: 'Recognition Culture',
+                strategic_clarity: 'Strategic Clarity'
+            };
+
+            let radarHTML = '<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">';
+            
+            for (const [key, name] of Object.entries(frameworkNames)) {
+                const score = scores[key] || 0;
+                const color = score >= 80 ? '#059669' : score >= 60 ? '#fbbf24' : '#dc2626';
+                
+                radarHTML += `
+                    <div style="text-align: center; min-width: 120px;">
+                        <div style="color: ${color}; font-weight: bold; font-size: 1.5rem;">${score}%</div>
+                        <div style="font-size: 0.8rem; color: #64748b; margin-top: 5px;">${name}</div>
+                    </div>
+                `;
+            }
+            
+            radarHTML += '</div>';
+            radarElement.innerHTML = radarHTML;
+        }
+
+        function displayOrgFrameworkScores(scores) {
+            const container = document.getElementById('organizationalScores');
+            const frameworkNames = {
+                collaboration: 'Team Collaboration',
+                psychological_safety: 'Psychological Safety', 
+                decision_making: 'Decision Making',
+                change_adaptability: 'Change Adaptability',
+                performance_standards: 'Performance Standards',
+                learning_development: 'Learning & Development',
+                communication: 'Communication Effectiveness',
+                resource_allocation: 'Resource Management',
+                recognition: 'Recognition Culture',
+                strategic_clarity: 'Strategic Clarity'
+            };
+
+            let scoresHTML = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;">';
+            
+            for (const [key, name] of Object.entries(frameworkNames)) {
+                const score = scores[key] || 0;
+                const barColor = score >= 80 ? '#059669' : score >= 60 ? '#fbbf24' : '#dc2626';
+                const bgColor = score >= 80 ? '#d1fae5' : score >= 60 ? '#fef3c7' : '#fee2e2';
+                
+                scoresHTML += `
+                    <div style="background: ${bgColor}; padding: 15px; border-radius: 8px; border-left: 4px solid ${barColor};">
+                        <div style="font-weight: 600; color: #1f2937; margin-bottom: 8px; font-size: 0.9rem;">${name}</div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="flex: 1; background: #e5e7eb; height: 8px; border-radius: 4px;">
+                                <div style="background: ${barColor}; height: 100%; width: ${score}%; border-radius: 4px;"></div>
+                            </div>
+                            <span style="font-weight: bold; color: ${barColor}; font-size: 1.1rem;">${score}%</span>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            scoresHTML += '</div>';
+            container.innerHTML = scoresHTML;
+        }
+
+        function displayOrgStrengthsAndChallenges(scores) {
+            const strengthsElement = document.getElementById('orgStrengths');
+            const challengesElement = document.getElementById('orgChallenges');
+            
+            const frameworkNames = {
+                collaboration: 'Team Collaboration',
+                psychological_safety: 'Psychological Safety',
+                decision_making: 'Decision Making', 
+                change_adaptability: 'Change Adaptability',
+                performance_standards: 'Performance Standards',
+                learning_development: 'Learning & Development',
+                communication: 'Communication Effectiveness',
+                resource_allocation: 'Resource Management',
+                recognition: 'Recognition Culture',
+                strategic_clarity: 'Strategic Clarity'
+            };
+
+            // Sort by scores to identify strengths and challenges
+            const sortedScores = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+            const strengths = sortedScores.slice(0, 3); // Top 3
+            const challenges = sortedScores.slice(-3).reverse(); // Bottom 3
+
+            // Display strengths
+            let strengthsHTML = '';
+            strengths.forEach(([key, score]) => {
+                strengthsHTML += `
+                    <div style="margin-bottom: 12px; padding: 12px; background: #f0fdf4; border-left: 3px solid #22c55e; border-radius: 6px;">
+                        <div style="font-weight: 600; color: #059669;">${frameworkNames[key]}</div>
+                        <div style="font-size: 0.9rem; color: #16a34a; margin-top: 4px;">${score}% effectiveness</div>
+                    </div>
+                `;
+            });
+            strengthsElement.innerHTML = strengthsHTML;
+
+            // Display challenges  
+            let challengesHTML = '';
+            challenges.forEach(([key, score]) => {
+                challengesHTML += `
+                    <div style="margin-bottom: 12px; padding: 12px; background: #fef2f2; border-left: 3px solid #ef4444; border-radius: 6px;">
+                        <div style="font-weight: 600; color: #dc2626;">${frameworkNames[key]}</div>
+                        <div style="font-size: 0.9rem; color: #dc2626; margin-top: 4px;">${score}% effectiveness - Priority for improvement</div>
+                    </div>
+                `;
+            });
+            challengesElement.innerHTML = challengesHTML;
+        }
+
+        function displayOrgRecommendations(scores) {
+            const container = document.getElementById('orgRecommendations');
+            
+            const recommendations = {
+                collaboration: {
+                    low: "Implement cross-functional project teams and regular interdepartmental meetings to break down silos.",
+                    medium: "Establish clear communication protocols and shared project management tools to improve information flow.",
+                    high: "Leverage your strong collaborative culture as a competitive advantage and share best practices across the organization."
+                },
+                psychological_safety: {
+                    low: "Create 'failure celebration' sessions where teams share learnings from mistakes without blame.",
+                    medium: "Implement regular pulse surveys and anonymous feedback mechanisms to gauge psychological safety levels.",
+                    high: "Your culture of trust is a significant asset - consider mentoring other organizations in building psychological safety."
+                },
+                decision_making: {
+                    low: "Establish clear decision-making frameworks (like RACI) and delegate authority to appropriate levels.",
+                    medium: "Streamline decision processes by identifying bottlenecks and creating faster approval pathways for routine decisions.",
+                    high: "Your effective decision-making process is enabling rapid execution - document and replicate across all areas."
+                },
+                change_adaptability: {
+                    low: "Create a change management office and provide change leadership training for managers.",
+                    medium: "Develop better change communication strategies and involve employees more in the change planning process.",
+                    high: "Your adaptability is a key strength - consider becoming a change leader in your industry."
+                },
+                performance_standards: {
+                    low: "Implement clear performance metrics and regular check-ins to ensure accountability and clarity.",
+                    medium: "Align individual goals more closely with organizational objectives and provide clearer success criteria.",
+                    high: "Your high performance standards drive excellence - ensure they remain motivating rather than overwhelming."
+                }
+            };
+
+            // Find the lowest scoring areas for targeted recommendations
+            const sortedScores = Object.entries(scores).sort((a, b) => a[1] - b[1]);
+            let recommendationsHTML = '<div>';
+            
+            sortedScores.slice(0, 3).forEach(([key, score]) => {
+                if (recommendations[key]) {
+                    let level = score < 50 ? 'low' : score < 75 ? 'medium' : 'high';
+                    recommendationsHTML += `
+                        <div style="margin-bottom: 15px; padding: 15px; background: #ffffff; border-radius: 6px; border: 1px solid #e5e7eb;">
+                            <div style="font-weight: 600; color: #1e3a8a; margin-bottom: 8px;">
+                                ${key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())} (${score}%)
+                            </div>
+                            <div style="color: #374151; line-height: 1.5;">
+                                ${recommendations[key][level]}
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            
+            recommendationsHTML += '</div>';
+            container.innerHTML = recommendationsHTML;
+        }
+
+        function displayLeadershipImpactComparison(orgScores) {
+            const container = document.getElementById('leadershipImpactComparison');
+            
+            // This would ideally compare individual leadership scores with organizational scores
+            // For now, we'll provide general insights about organizational effectiveness
+            
+            const avgOrgScore = Object.values(orgScores).reduce((a, b) => a + b, 0) / Object.values(orgScores).length;
+            let impactInsight = '';
+            
+            if (avgOrgScore >= 80) {
+                impactInsight = `
+                    <div style="color: #059669; font-weight: 600; margin-bottom: 10px;">🌟 High-Performing Organization</div>
+                    <p style="margin-bottom: 10px;">Your organization demonstrates strong effectiveness across most dimensions (${Math.round(avgOrgScore)}% average). This creates an excellent environment for leadership development and high performance.</p>
+                    <p><strong>Leadership Opportunity:</strong> Focus on sustaining excellence and helping other organizations learn from your success.</p>
+                `;
+            } else if (avgOrgScore >= 60) {
+                impactInsight = `
+                    <div style="color: #f59e0b; font-weight: 600; margin-bottom: 10px;">⚡ Growing Organization</div>
+                    <p style="margin-bottom: 10px;">Your organization shows solid performance with opportunities for improvement (${Math.round(avgOrgScore)}% average). There are clear pathways to enhance effectiveness.</p>
+                    <p><strong>Leadership Opportunity:</strong> Your individual leadership skills can significantly impact organizational performance by addressing key improvement areas.</p>
+                `;
+            } else {
+                impactInsight = `
+                    <div style="color: #dc2626; font-weight: 600; margin-bottom: 10px;">🎯 Transformation Opportunity</div>
+                    <p style="margin-bottom: 10px;">Your organization has significant opportunities for improvement (${Math.round(avgOrgScore)}% average). This presents a tremendous leadership challenge and growth opportunity.</p>
+                    <p><strong>Leadership Opportunity:</strong> Your leadership development is critical for driving organizational transformation and culture change.</p>
+                `;
+            }
+            
+            container.innerHTML = impactInsight;
+        }
+
+        // Modify the existing complete assessment function to transition to organizational feedback
+        function completeAssessmentWithOrgFeedback() {
+            // First complete the individual assessment normally
+            if (demoMode || isExecutiveMode) {
+                if (isExecutiveMode) {
+                    // Get executive name for team tracking
+                    const executiveName = prompt("Please enter your name for the executive team report:") || "Executive " + Date.now();
+                    
+                    // Calculate scores
+                    const scores = calculateDemoScores();
+                    
+                    // Save to team data
+                    saveExecutiveAssessment(executiveName, scores, personalizationData, responses);
+                }
+                
+                // Show individual results first
+                showResults();
+                
+                // After a brief delay, transition to organizational feedback
+                setTimeout(() => {
+                    // Hide individual results
+                    document.getElementById('results').style.display = 'none';
+                    
+                    // Show organizational feedback section
+                    document.getElementById('organizationalFeedback').style.display = 'block';
+                    
+                    // Scroll to organizational feedback
+                    document.getElementById('organizationalFeedback').scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }, 2000); // 2 second delay to let user see their individual results first
             }
         }
     </script>

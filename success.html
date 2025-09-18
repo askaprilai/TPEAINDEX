@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Success - Positive Effect Leaders Assessment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .success-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: #10b981;
+            margin-bottom: 20px;
+        }
+
+        .success-title {
+            font-size: 2rem;
+            color: #1e3a8a;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .success-message {
+            color: #4b5563;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .next-steps {
+            background: #f0f9ff;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #3b82f6;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .next-steps h3 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .next-steps ul {
+            color: #4b5563;
+            padding-left: 20px;
+        }
+
+        .next-steps li {
+            margin-bottom: 8px;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            transform: translateY(-2px);
+        }
+
+        .support-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 8px;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-icon">✅</div>
+        <h1 class="success-title">Payment Successful!</h1>
+        
+        <p class="success-message">
+            Thank you for your purchase! Your payment has been processed successfully and your access codes are being generated.
+        </p>
+
+        <div class="next-steps">
+            <h3>What Happens Next:</h3>
+            <ul>
+                <li><strong>Email Delivery:</strong> You'll receive an email within 5 minutes with your access codes and instructions</li>
+                <li><strong>Assessment Access:</strong> Use your unique code(s) to access the comprehensive leadership assessment</li>
+                <li><strong>Team Distribution:</strong> For group packages, share the codes with your team members</li>
+                <li><strong>Results:</strong> Complete analysis and development plans will be available immediately after assessment completion</li>
+            </ul>
+        </div>
+
+        <a href="/" class="cta-button">
+            Access Your Assessment
+        </a>
+
+        <div class="support-info">
+            <strong>Need Support?</strong><br>
+            If you don't receive your email within 10 minutes, please contact us at april@aprilsabral.com<br>
+            We're here to ensure you have a smooth experience with your leadership assessment.
+        </div>
+    </div>
+
+    <script>
+        // Handle URL parameters for different purchase types
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id');
+        
+        if (sessionId) {
+            console.log('Payment session ID:', sessionId);
+            // You could make an API call here to retrieve purchase details
+            // and customize the success message based on the package purchased
+        }
+
+        // Auto-redirect to main site after 30 seconds
+        setTimeout(() => {
+            if (confirm('Would you like to go to your assessment now?')) {
+                window.location.href = '/';
+            }
+        }, 30000);
+    </script>
+</body>
+</html>
