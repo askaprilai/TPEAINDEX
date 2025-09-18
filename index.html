@@ -832,8 +832,8 @@
                     </div>
                 </div>
                 
-                <!-- Payment Buttons (initially hidden) -->
-                <div id="paymentButtons" style="display: none;">
+                <!-- Payment Buttons (always visible) -->
+                <div id="paymentButtons">
                 
                 <!-- Individual Option -->
                 <div style="max-width: 400px; margin: 0 auto 40px auto;">
@@ -3195,9 +3195,7 @@
         updateNavigation();
         updateProgress();
         // PayPal and Company Code Functions
-        function validateCompanyCode() {
-            alert('Function called!');
-            
+        async function validateCompanyCode() {
             const codeInput = document.getElementById('companyCode');
             if (!codeInput) {
                 alert('Code input not found');
@@ -3205,47 +3203,105 @@
             }
             
             const code = codeInput.value.trim().toUpperCase();
-            alert('Code: ' + code);
             
             if (!code) {
                 alert('Please enter a company code.');
                 return;
             }
             
-            const validCodes = ['DEMO2024', 'CORPORATE', 'LEADERSHIP', 'TEAM2024', 'COMPANY', 'TEST123', 'SAMPLE99', 'TRIAL2024'];
+            // Show loading state
+            const originalButtonText = document.querySelector('button[onclick*="validateCompanyCode"]').textContent;
+            const button = document.querySelector('button[onclick*="validateCompanyCode"]');
+            button.textContent = 'Validating...';
+            button.disabled = true;
             
-            if (validCodes.includes(code)) {
-                alert('Code is valid!');
-                
-                // First test - just hide payment gateway
-                const paymentGateway = document.getElementById('paymentGateway');
-                if (paymentGateway) {
-                    paymentGateway.style.display = 'none';
-                    alert('Payment gateway hidden');
-                } else {
-                    alert('Payment gateway not found');
+            try {
+                // Check database first for purchased access codes
+                if (supabaseClient) {
+                    console.log('Checking database for code:', code);
+                    
+                    const { data, error } = await supabaseClient
+                        .rpc('use_access_code', {
+                            code_to_use: code,
+                            user_email: 'assessment@example.com', // Will be updated when we have user registration
+                            user_name: 'Assessment User'
+                        });
+                    
+                    if (data === true) {
+                        // Valid database code - grant access
+                        console.log('Valid database code found');
+                        grantAssessmentAccess(code, 'database');
+                        return;
+                    } else if (error) {
+                        console.log('Database error:', error.message);
+                    } else {
+                        console.log('Code not found in database or already used');
+                    }
                 }
                 
-                // Second test - show assessment content
-                const assessmentContent = document.getElementById('assessmentContent');
-                if (assessmentContent) {
-                    assessmentContent.style.display = 'block';
-                    alert('Assessment content shown');
-                } else {
-                    alert('Assessment content not found');
+                // Fallback to demo codes for testing
+                const demoCodes = ['DEMO2024', 'CORPORATE', 'LEADERSHIP', 'TEAM2024', 'COMPANY', 'TEST123', 'SAMPLE99', 'TRIAL2024'];
+                
+                if (demoCodes.includes(code)) {
+                    console.log('Valid demo code found');
+                    grantAssessmentAccess(code, 'demo');
+                    return;
                 }
                 
-                // Third test - update banner
-                const banner = document.querySelector('.demo-banner');
-                if (banner) {
-                    banner.innerHTML = '🎯 TEST WORKING - CODE VALIDATED';
-                    alert('Banner updated');
-                } else {
-                    alert('Banner not found');
-                }
+                // Code not found anywhere
+                alert('Invalid access code. Please check your code or contact support at april@aprilsabral.com');
                 
+            } catch (error) {
+                console.error('Error validating code:', error);
+                alert('Error validating code. Please try again or contact support.');
+            } finally {
+                // Restore button state
+                button.textContent = originalButtonText;
+                button.disabled = false;
+            }
+        }
+        
+        function grantAssessmentAccess(code, source) {
+            console.log(`Access granted via ${source} code: ${code}`);
+            
+            // Hide payment gateway
+            const paymentGateway = document.getElementById('paymentGateway');
+            if (paymentGateway) {
+                paymentGateway.style.display = 'none';
+            }
+            
+            // Show assessment content
+            const assessmentContent = document.getElementById('assessmentContent');
+            if (assessmentContent) {
+                assessmentContent.style.display = 'block';
+            }
+            
+            // Update banner to show success
+            const banner = document.querySelector('.demo-banner');
+            if (banner) {
+                if (source === 'database') {
+                    banner.innerHTML = '✅ ACCESS GRANTED - Ready for Assessment';
+                    banner.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                } else {
+                    banner.innerHTML = '🎯 DEMO MODE - Assessment Access Granted';
+                    banner.style.background = 'linear-gradient(135deg, #fbbf24, #f59e0b)';
+                }
+            }
+            
+            // Add assessment mode class for mobile styling
+            document.querySelector('.container').classList.add('assessment-mode');
+            
+            // Start personalization questions
+            document.getElementById('personalizationContent').style.display = 'block';
+            
+            // Scroll to assessment
+            document.getElementById('assessmentContent').scrollIntoView({ behavior: 'smooth' });
+            
+            // Success message
+            if (source === 'database') {
+                alert('✅ Access code validated! Your premium assessment is now ready.');
             } else {
-                alert('Invalid company code. Please check your code or contact your administrator.');
+                alert('🎯 Demo access granted! You can now explore the assessment.');
             }
         }
 
@@ -3481,10 +3537,10 @@
             validateAndShowPayments();
         }
         
-        // Initialize email validation when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            setupEmailValidation();
-        });
+        // Initialize email validation when page loads (disabled for now)
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     setupEmailValidation();
+        // });
 
         // Initialize
         updateNavigation();
