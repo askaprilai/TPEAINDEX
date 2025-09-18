@@ -3,5 +3,11 @@
     "api/webhook.js": {
       "runtime": "@vercel/node@22.9.0"
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/api/webhook",
+      "destination": "/api/webhook.js"
+    }
+  ]
 }
