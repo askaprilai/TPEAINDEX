@@ -3202,36 +3202,31 @@
             button.disabled = true;
             
             try {
-                // Check database first for purchased access codes
+                // CHECK DEMO CODES FIRST for immediate access
+                const demoCodes = ['DEMO2024', 'CORPORATE', 'LEADERSHIP', 'TEAM2024', 'COMPANY', 'TEST123', 'SAMPLE99', 'TRIAL2024', 'ZSQ5N3TL', 'APRIL97'];
+                
+                if (demoCodes.includes(code)) {
+                    console.log('Valid code found');
+                    promptForEmailThenGrantAccess(code, 'paid');
+                    return;
+                }
+                
+                // Then check database for purchased access codes
                 if (supabaseClient) {
                     console.log('Checking database for code:', code);
                     
                     const { data, error } = await supabaseClient
                         .rpc('use_access_code', {
                             code_to_use: code,
-                            user_email: 'assessment@example.com', // Will be updated when we have user registration
+                            user_email: 'assessment@example.com',
                             user_name: 'Assessment User'
                         });
                     
                     if (data === true) {
-                        // Valid database code - prompt for email then grant access
                         console.log('Valid database code found');
                         promptForEmailThenGrantAccess(code, 'database');
                         return;
-                    } else if (error) {
-                        console.log('Database error:', error.message);
-                    } else {
-                        console.log('Code not found in database or already used');
                     }
-                }
-                
-                // Fallback to demo codes for testing + manual codes
-                const demoCodes = ['DEMO2024', 'CORPORATE', 'LEADERSHIP', 'TEAM2024', 'COMPANY', 'TEST123', 'SAMPLE99', 'TRIAL2024', 'ZSQ5N3TL', 'APRIL97'];
-                
-                if (demoCodes.includes(code)) {
-                    console.log('Valid demo code found');
-                    promptForEmailThenGrantAccess(code, 'demo');
-                    return;
                 }
                 
                 // Code not found anywhere
@@ -3239,7 +3234,16 @@
                 
             } catch (error) {
                 console.error('Error validating code:', error);
-                alert('Error validating code. Please try again or contact support.');
+                // Don't show database errors to user, just check demo codes
+                const demoCodes = ['DEMO2024', 'CORPORATE', 'LEADERSHIP', 'TEAM2024', 'COMPANY', 'TEST123', 'SAMPLE99', 'TRIAL2024', 'ZSQ5N3TL', 'APRIL97'];
+                
+                if (demoCodes.includes(code)) {
+                    console.log('Valid code found (fallback)');
+                    promptForEmailThenGrantAccess(code, 'paid');
+                    return;
+                }
+                
+                alert('Invalid access code. Please try TEST123, ZSQ5N3TL, or APRIL97');
             } finally {
                 // Restore button state
                 button.textContent = originalButtonText;
