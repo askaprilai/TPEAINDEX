@@ -1,12 +1,7 @@
 {
-  "builds": [
-    {
-      "src": "api/webhook.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "**",
-      "use": "@vercel/static"
+  "functions": {
+    "api/webhook.js": {
+      "runtime": "@vercel/node@22.9.0"
     }
-  ]
+  }
 }
