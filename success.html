@@ -206,22 +206,19 @@
             console.log('Processing purchase:', packageDetails);
             
             try {
-                // Get customer info from localStorage (stored during payment)
-                let customerEmail = localStorage.getItem('customerEmail') || 'customer@example.com';
-                let customerName = localStorage.getItem('customerName') || 'Customer';
+                // Get customer info from localStorage or prompt
+                let customerEmail = localStorage.getItem('customerEmail');
+                let customerName = localStorage.getItem('customerName');
                 
-                if (!customerEmail || customerEmail === 'customer@example.com') {
-                    // Fallback to prompt if localStorage is empty
-                    const promptedEmail = prompt('Please enter your email for access code delivery:');
-                    const promptedName = prompt('Please enter your name:');
-                    if (promptedEmail) {
-                        localStorage.setItem('customerEmail', promptedEmail);
-                        customerEmail = promptedEmail;
-                    }
-                    if (promptedName) {
-                        localStorage.setItem('customerName', promptedName);
-                        customerName = promptedName;
-                    }
+                if (!customerEmail) {
+                    // Prompt for email since we need it for code delivery
+                    customerEmail = prompt('Please enter your email for access code delivery:') || 'customer@thepositiveeffectindex.com';
+                    localStorage.setItem('customerEmail', customerEmail);
+                }
+                
+                if (!customerName) {
+                    customerName = prompt('Please enter your name:') || 'Customer';
+                    localStorage.setItem('customerName', customerName);
                 }
                 
                 // Store purchase in database
@@ -266,10 +263,7 @@
                 // Hide processing status
                 document.getElementById('processingStatus').style.display = 'none';
                 
-                // Automatically redirect to assessment with access granted
-                setTimeout(() => {
-                    redirectToAssessment(codes[0], customerEmail, customerName);
-                }, 3000); // 3 second delay to show success message
+                // Don't auto-redirect - let them distribute codes to team
                 
             } catch (error) {
                 console.error('Error processing purchase:', error);
@@ -282,23 +276,58 @@
             const codesList = document.getElementById('accessCodesList');
             const codesSection = document.getElementById('accessCodesSection');
             
-            let codesHtml = '<strong>Your Access Codes:</strong><br><br>';
+            let codesHtml = `<div style="text-align: center; margin-bottom: 20px;">
+                <h4 style="color: #1e3a8a; margin-bottom: 10px;">🎯 Your ${packageDetails.size} Assessment Access Codes</h4>
+                <p style="color: #4b5563; font-size: 0.9rem;">Share these codes with your team members for individual assessment access</p>
+            </div>`;
+            
             codes.forEach((codeData, index) => {
                 const code = typeof codeData === 'string' ? codeData : codeData.code;
-                codesHtml += `<div style="background: white; padding: 10px; margin: 5px 0; border-radius: 6px; border: 1px solid #d1d5db;">
-                    Code ${index + 1}: <strong>${code}</strong>
+                codesHtml += `<div style="background: white; padding: 15px; margin: 8px 0; border-radius: 8px; border: 2px solid #3b82f6; display: flex; justify-content: space-between; align-items: center; font-family: monospace;">
+                    <span style="font-size: 1.1rem; font-weight: bold; color: #1e40af;">Team Member ${index + 1}: ${code}</span>
+                    <button onclick="copyCode('${code}')" style="background: #3b82f6; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Copy</button>
                 </div>`;
             });
             
             if (packageDetails.size > 1) {
-                codesHtml += '<br><strong>Instructions:</strong><br>';
-                codesHtml += '• Share each code with a different team member<br>';
-                codesHtml += '• Each person uses their code at: thepositiveeffectindex.com<br>';
-                codesHtml += '• Codes expire in 1 year from purchase date';
+                codesHtml += `<div style="background: #f0f9ff; padding: 20px; border-radius: 8px; border-left: 4px solid #3b82f6; margin-top: 20px;">
+                    <h5 style="color: #1e3a8a; margin-bottom: 10px;">📋 Distribution Instructions:</h5>
+                    <div style="color: #4b5563; font-size: 0.9rem; line-height: 1.6;">
+                        • <strong>Share each code individually</strong> - One code per person<br>
+                        • <strong>Direct them to:</strong> <a href="/" style="color: #3b82f6;">thepositiveeffectindex.com</a><br>
+                        • <strong>They enter their code</strong> → Provide email → Start assessment<br>
+                        • <strong>Codes valid for:</strong> 1 year from purchase date<br>
+                        • <strong>Need help?</strong> Contact april@aprilsabral.com
+                    </div>
+                </div>`;
+            } else {
+                codesHtml += `<div style="background: #f0f9ff; padding: 20px; border-radius: 8px; border-left: 4px solid #3b82f6; margin-top: 20px;">
+                    <h5 style="color: #1e3a8a; margin-bottom: 10px;">🚀 Ready to Start?</h5>
+                    <div style="color: #4b5563; font-size: 0.9rem; line-height: 1.6;">
+                        • <strong>Use your code at:</strong> <a href="/" style="color: #3b82f6;">thepositiveeffectindex.com</a><br>
+                        • <strong>Enter code</strong> → Provide email → Start assessment<br>
+                        • <strong>Your code is valid for:</strong> 1 year from purchase
+                    </div>
+                </div>`;
             }
             
             codesList.innerHTML = codesHtml;
             codesSection.style.display = 'block';
+        }
+        
+        function copyCode(code) {
+            navigator.clipboard.writeText(code).then(() => {
+                alert('Code copied to clipboard!');
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = code;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Code copied to clipboard!');
+            });
         }
         
         async function sendEmailWithCodes(customerEmail, customerName, codes, packageDetails) {

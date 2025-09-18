@@ -817,20 +817,6 @@
                     Get immediate access to your comprehensive leadership assessment and personalized development plan.
                 </p>
                 
-                <!-- Email Collection for Seamless Code Delivery -->
-                <div id="emailCollection" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); padding: 25px; border-radius: 12px; border: 2px solid #3b82f6; margin-bottom: 30px; max-width: 500px; margin-left: auto; margin-right: auto; margin-bottom: 30px;">
-                    <h3 style="color: #1e3a8a; margin-bottom: 15px; font-size: 1.3rem;">📧 Access Code Delivery</h3>
-                    <p style="color: #4b5563; margin-bottom: 20px; font-size: 0.95rem;">Enter your email to receive instant access codes after purchase</p>
-                    <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
-                        <input type="email" id="customerEmail" placeholder="Enter your email address" required 
-                               style="width: 100%; max-width: 350px; padding: 12px 15px; border: 2px solid #d1d5db; border-radius: 8px; font-size: 1rem; background: white; color: #1f2937;" />
-                        <input type="text" id="customerName" placeholder="Enter your full name" required 
-                               style="width: 100%; max-width: 350px; padding: 12px 15px; border: 2px solid #d1d5db; border-radius: 8px; font-size: 1rem; background: white; color: #1f2937;" />
-                        <div style="color: #10b981; font-size: 0.85rem; text-align: center; margin-top: 5px;">
-                            ✓ Secure delivery ✓ No spam ✓ Instant access codes
-                        </div>
-                    </div>
-                </div>
                 
                 <!-- Payment Buttons (always visible) -->
                 <div id="paymentButtons">
@@ -3228,9 +3214,9 @@
                         });
                     
                     if (data === true) {
-                        // Valid database code - grant access
+                        // Valid database code - prompt for email then grant access
                         console.log('Valid database code found');
-                        grantAssessmentAccess(code, 'database');
+                        promptForEmailThenGrantAccess(code, 'database');
                         return;
                     } else if (error) {
                         console.log('Database error:', error.message);
@@ -3244,7 +3230,7 @@
                 
                 if (demoCodes.includes(code)) {
                     console.log('Valid demo code found');
-                    grantAssessmentAccess(code, 'demo');
+                    promptForEmailThenGrantAccess(code, 'demo');
                     return;
                 }
                 
@@ -3261,7 +3247,94 @@
             }
         }
         
-        function grantAssessmentAccess(code, source) {
+        function promptForEmailThenGrantAccess(code, source) {
+            // Hide the code validation section
+            document.getElementById('paymentGateway').style.display = 'none';
+            
+            // Show email collection form
+            showEmailCollectionForm(code, source);
+        }
+        
+        function showEmailCollectionForm(code, source) {
+            const container = document.querySelector('.container');
+            
+            // Create email collection section
+            const emailSection = document.createElement('div');
+            emailSection.id = 'emailCollectionSection';
+            emailSection.style.cssText = 'background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin: 20px 0; text-align: center;';
+            
+            emailSection.innerHTML = `
+                <div style="max-width: 500px; margin: 0 auto;">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">✅</div>
+                    <h2 style="color: #1e3a8a; margin-bottom: 15px;">Access Code Validated!</h2>
+                    <p style="color: #4b5563; margin-bottom: 30px;">Please provide your email to access your leadership assessment</p>
+                    
+                    <div style="background: #f0f9ff; padding: 20px; border-radius: 8px; border-left: 4px solid #3b82f6; margin-bottom: 25px;">
+                        <p style="color: #1e40af; font-weight: 500;">Code: <span style="font-family: monospace; font-size: 1.1rem;">${code}</span></p>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <input type="email" id="userEmail" placeholder="Enter your email address" required 
+                               style="width: 100%; padding: 12px 15px; border: 2px solid #d1d5db; border-radius: 8px; font-size: 1rem; margin-bottom: 15px;" />
+                        <input type="text" id="userName" placeholder="Enter your full name" required 
+                               style="width: 100%; padding: 12px 15px; border: 2px solid #d1d5db; border-radius: 8px; font-size: 1rem; margin-bottom: 20px;" />
+                        <button onclick="proceedToAssessment('${code}', '${source}')" 
+                                style="background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; width: 100%;">
+                            Access My Assessment
+                        </button>
+                    </div>
+                    
+                    <div style="color: #10b981; font-size: 0.9rem;">
+                        ✓ Secure ✓ Privacy protected ✓ No spam
+                    </div>
+                </div>
+            `;
+            
+            // Insert after the header
+            const header = container.querySelector('.header');
+            header.insertAdjacentElement('afterend', emailSection);
+            
+            // Focus on email input
+            setTimeout(() => {
+                document.getElementById('userEmail').focus();
+            }, 100);
+        }
+        
+        function proceedToAssessment(code, source) {
+            const email = document.getElementById('userEmail').value.trim();
+            const name = document.getElementById('userName').value.trim();
+            
+            if (!email || !name) {
+                alert('Please enter both your email and name to continue.');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // Store user info
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userName', name);
+            localStorage.setItem('accessCode', code);
+            
+            // Remove email collection section
+            const emailSection = document.getElementById('emailCollectionSection');
+            if (emailSection) {
+                emailSection.remove();
+            }
+            
+            // Grant access to assessment
+            grantAssessmentAccess(code, source, email, name);
+        }
+        
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+        function grantAssessmentAccess(code, source, email = null, name = null) {
             console.log(`Access granted via ${source} code: ${code}`);
             
             // Hide payment gateway
@@ -3502,71 +3575,8 @@
             initializeStripePayments();
         });
 
-        // ====== EMAIL COLLECTION FOR SEAMLESS PAYMENT ======
-        function setupEmailValidation() {
-            const emailInput = document.getElementById('customerEmail');
-            const nameInput = document.getElementById('customerName');
-            const paymentButtons = document.getElementById('paymentButtons');
-            
-            function validateAndShowPayments() {
-                const email = emailInput.value.trim();
-                const name = nameInput.value.trim();
-                
-                if (email && name && isValidEmail(email)) {
-                    // Store customer info for later use
-                    localStorage.setItem('customerEmail', email);
-                    localStorage.setItem('customerName', name);
-                    
-                    // Show payment buttons
-                    paymentButtons.style.display = 'block';
-                    
-                    // Scroll to payment options
-                    paymentButtons.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                } else {
-                    paymentButtons.style.display = 'none';
-                }
-            }
-            
-            function isValidEmail(email) {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return emailRegex.test(email);
-            }
-            
-            // Add event listeners
-            emailInput.addEventListener('input', validateAndShowPayments);
-            nameInput.addEventListener('input', validateAndShowPayments);
-            emailInput.addEventListener('blur', validateAndShowPayments);
-            nameInput.addEventListener('blur', validateAndShowPayments);
-            
-            // Check on page load if values already exist
-            validateAndShowPayments();
-        }
         
-        // ====== SEAMLESS PAYMENT ACCESS ======
-        function checkForPaidAccess() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const accessParam = urlParams.get('access');
-            const hasValidAccess = localStorage.getItem('hasValidAccess');
-            const paidAccessCode = localStorage.getItem('paidAccessCode');
-            
-            if (accessParam === 'paid' && hasValidAccess === 'true' && paidAccessCode) {
-                console.log('Paid access detected, granting immediate access');
-                
-                // Grant immediate access without code validation
-                grantAssessmentAccess(paidAccessCode, 'paid');
-                
-                // Clean URL
-                window.history.replaceState({}, document.title, window.location.pathname);
-                
-                return true;
-            }
-            return false;
-        }
-        
-        // Initialize paid access check when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            checkForPaidAccess();
-        });
+        // Removed automatic paid access - users now enter codes manually
         
         // Initialize email validation when page loads (disabled for now)
         // document.addEventListener('DOMContentLoaded', function() {
