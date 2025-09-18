@@ -738,28 +738,38 @@
                 padding: 20px 15px !important;
             }
             
-            /* Stripe button styling */
+            /* Payment button styling */
             .stripe-button,
             .stripe-group-button {
-                background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
-                color: white;
-                border: none;
-                padding: 15px 30px;
-                border-radius: 8px;
-                font-size: 1.1rem;
-                font-weight: 600;
-                cursor: pointer;
-                width: 100%;
-                max-width: 300px;
-                margin: 10px auto;
-                display: block;
-                transition: all 0.3s ease;
+                background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%) !important;
+                color: white !important;
+                border: none !important;
+                padding: 18px 35px !important;
+                border-radius: 12px !important;
+                font-size: 1.1rem !important;
+                font-weight: 700 !important;
+                cursor: pointer !important;
+                width: 100% !important;
+                max-width: 320px !important;
+                margin: 15px auto !important;
+                display: block !important;
+                transition: all 0.3s ease !important;
+                box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3) !important;
+                text-align: center !important;
+                font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
             }
             
             .stripe-button:hover,
             .stripe-group-button:hover {
-                background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-                transform: translateY(-2px);
+                background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%) !important;
+                transform: translateY(-3px) !important;
+                box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4) !important;
+                color: white !important;
+            }
+            
+            .stripe-button:active,
+            .stripe-group-button:active {
+                transform: translateY(-1px) !important;
             }
         }
     </style>
@@ -3298,22 +3308,38 @@
             console.log('Initializing Stripe payment buttons...');
             
             // Individual payment button
-            document.getElementById('individual-payment-btn').addEventListener('click', function() {
-                handleStripePayment('individual', 9700, 'Positive Effect Leaders Assessment - Individual Access');
-            });
+            const individualBtn = document.getElementById('individual-payment-btn');
+            if (individualBtn) {
+                individualBtn.addEventListener('click', function() {
+                    console.log('Individual payment clicked');
+                    handleStripePayment('individual', 9700, 'Positive Effect Leaders Assessment - Individual Access', 1);
+                });
+            }
             
             // Group payment buttons
-            document.getElementById('group-5-payment-btn').addEventListener('click', function() {
-                handleStripePayment('group', 35000, 'Positive Effect Leaders Assessment - 5 Team Members', 5);
-            });
+            const group5Btn = document.getElementById('group-5-payment-btn');
+            if (group5Btn) {
+                group5Btn.addEventListener('click', function() {
+                    console.log('Group 5 payment clicked');
+                    handleStripePayment('group', 35000, 'Positive Effect Leaders Assessment - 5 Team Members', 5);
+                });
+            }
             
-            document.getElementById('group-10-payment-btn').addEventListener('click', function() {
-                handleStripePayment('group', 65000, 'Positive Effect Leaders Assessment - 10 Team Members', 10);
-            });
+            const group10Btn = document.getElementById('group-10-payment-btn');
+            if (group10Btn) {
+                group10Btn.addEventListener('click', function() {
+                    console.log('Group 10 payment clicked');
+                    handleStripePayment('group', 65000, 'Positive Effect Leaders Assessment - 10 Team Members', 10);
+                });
+            }
             
-            document.getElementById('group-25-payment-btn').addEventListener('click', function() {
-                handleStripePayment('group', 140000, 'Positive Effect Leaders Assessment - 25 Team Members', 25);
-            });
+            const group25Btn = document.getElementById('group-25-payment-btn');
+            if (group25Btn) {
+                group25Btn.addEventListener('click', function() {
+                    console.log('Group 25 payment clicked');
+                    handleStripePayment('group', 140000, 'Positive Effect Leaders Assessment - 25 Team Members', 25);
+                });
+            }
         }
 
         // Stripe Payment Links
@@ -3326,33 +3352,42 @@
 
         // Handle Stripe payments via Payment Links
         function handleStripePayment(type, amount, description, teamSize = 1) {
+            console.log(`Payment initiated: ${type}, team size: ${teamSize}`);
+            
             let paymentLink;
             
             switch(teamSize) {
                 case 1:
                     paymentLink = STRIPE_PAYMENT_LINKS.individual;
+                    console.log('Using individual payment link:', paymentLink);
                     break;
                 case 5:
                     paymentLink = STRIPE_PAYMENT_LINKS.group5;
+                    console.log('Using group 5 payment link:', paymentLink);
                     break;
                 case 10:
                     paymentLink = STRIPE_PAYMENT_LINKS.group10;
+                    console.log('Using group 10 payment link:', paymentLink);
                     break;
                 case 25:
                     paymentLink = STRIPE_PAYMENT_LINKS.group25;
+                    console.log('Using group 25 payment link:', paymentLink);
                     break;
                 default:
+                    console.error('Invalid team size:', teamSize);
                     alert('Invalid package selection');
                     return;
             }
             
-            if (paymentLink === 'YOUR_INDIVIDUAL_PAYMENT_LINK' || paymentLink.includes('YOUR_')) {
+            if (!paymentLink || paymentLink.includes('YOUR_')) {
+                console.error('Payment link not configured:', paymentLink);
                 alert('Payment links not configured yet. Please contact april@aprilsabral.com');
                 return;
             }
             
+            console.log('Redirecting to payment link:', paymentLink);
             // Redirect to Stripe Payment Link
-            window.location.href = paymentLink;
+            window.open(paymentLink, '_self');
         }
 
         // Handle successful payments (called when user returns from Stripe)
