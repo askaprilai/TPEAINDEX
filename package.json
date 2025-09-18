@@ -1,0 +1,19 @@
+{
+  "name": "positive-effect-assessment",
+  "version": "1.0.0",
+  "description": "Leadership assessment platform with Stripe webhook fulfillment",
+  "main": "index.js",
+  "scripts": {
+    "build": "next build",
+    "start": "next start",
+    "dev": "next dev"
+  },
+  "dependencies": {
+    "stripe": "^14.0.0",
+    "@supabase/supabase-js": "^2.39.0",
+    "micro": "^10.0.1"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}

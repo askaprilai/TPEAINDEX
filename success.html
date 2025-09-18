@@ -112,31 +112,31 @@
         <h1 class="success-title">Payment Successful!</h1>
         
         <p class="success-message">
-            Thank you for your purchase! Your payment has been processed successfully and your access codes are being generated.
+            Thank you for your purchase! Your payment has been processed successfully.
         </p>
 
         <div class="next-steps">
-            <h3>What Happens Next:</h3>
-            <ul>
-                <li><strong>Email Delivery:</strong> You'll receive an email within 5 minutes with your access codes and instructions</li>
-                <li><strong>Assessment Access:</strong> Use your unique code(s) to access the comprehensive leadership assessment</li>
-                <li><strong>Team Distribution:</strong> For group packages, share the codes with your team members</li>
-                <li><strong>Results:</strong> Complete analysis and development plans will be available immediately after assessment completion</li>
-            </ul>
-        </div>
-        
-        <!-- Access Codes Display -->
-        <div id="accessCodesSection" style="display: none;">
+            <h3>📧 Check Your Email!</h3>
             <div style="background: #f0f9ff; padding: 25px; border-radius: 12px; border-left: 4px solid #3b82f6; margin: 20px 0;">
-                <h3 style="color: #1e3a8a; margin-bottom: 15px;">🎯 Your Access Codes</h3>
-                <div id="accessCodesList" style="font-family: monospace; font-size: 1.1rem; color: #1e40af; line-height: 1.6;"></div>
-                <p style="color: #4b5563; font-size: 0.9rem; margin-top: 15px;">Save these codes! Each person needs their own unique code to access the assessment.</p>
+                <p style="color: #1e40af; font-size: 1.1rem; margin-bottom: 15px;"><strong>Your access codes are being sent now!</strong></p>
+                <ul style="color: #4b5563; line-height: 1.8;">
+                    <li><strong>Email Delivery:</strong> You'll receive an email within 2-3 minutes with your access codes</li>
+                    <li><strong>Team Distribution:</strong> For group packages, share the individual codes with your team members</li>
+                    <li><strong>How to Access:</strong> Each person goes to thepositiveeffectindex.com → Enter their code → Provide email → Start assessment</li>
+                    <li><strong>Support:</strong> Email april@aprilsabral.com if you need help</li>
+                </ul>
             </div>
         </div>
         
-        <!-- Processing Status -->
-        <div id="processingStatus" style="background: #fffbeb; padding: 20px; border-radius: 8px; border-left: 4px solid #fbbf24; margin: 20px 0;">
-            <p style="color: #92400e;">🔄 Processing your purchase and generating access codes...</p>
+        <!-- Email Check Reminder -->
+        <div style="background: #fef3c7; padding: 20px; border-radius: 8px; border-left: 4px solid #fbbf24; margin: 20px 0;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="font-size: 2rem;">📧</div>
+                <div>
+                    <h4 style="color: #92400e; margin-bottom: 5px;">Don't see the email?</h4>
+                    <p style="color: #78350f; font-size: 0.9rem; margin: 0;">Check your spam folder • Wait 5 minutes • Contact april@aprilsabral.com</p>
+                </div>
+            </div>
         </div>
 
         <a href="/" class="cta-button">
@@ -151,271 +151,22 @@
     </div>
 
     <script>
-        // Configuration - same as index.html
-        const SUPABASE_URL = 'https://lfvsexynfvbtveuejeeq.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmdnNleHluZnZidHZldWVqZWVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc1MDEyNDYsImV4cCI6MjA3MzA3NzI0Nn0.Ho0qn87zZDGi2dl-q1QOae6UfUjnxb7znVX3A517qhQ';
+        // Simple success page - webhook handles all fulfillment
         
-        const EMAILJS_SERVICE_ID = 'service_vntq4ai';
-        const EMAILJS_TEMPLATE_ID = 'template_s1qs194'; 
-        const EMAILJS_PUBLIC_KEY = 'SAU17WFhPmeQLrng7';
-        
-        let supabaseClient;
-        
-        // Initialize services
-        if (typeof window.supabase !== 'undefined') {
-            supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        }
-        
-        if (typeof emailjs !== 'undefined') {
-            emailjs.init(EMAILJS_PUBLIC_KEY);
-        }
-        
-        // Package pricing and details
-        const PACKAGE_DETAILS = {
-            'bJe5kD1Et4AX3QX7VVenS03': { size: 1, amount: 97, name: 'Individual Assessment' },
-            '4gM6oHbf3ffBgDJccbenS02': { size: 5, amount: 400, name: '5-Person Team Package' },
-            '4gMdR93MBebx0EL2BBenS01': { size: 10, amount: 750, name: '10-Person Team Package' },
-            'fZucN53MBffBdrxdgfenS00': { size: 25, amount: 1400, name: '25-Person Team Package' }
-        };
-        
-        async function processPurchase() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const sessionId = urlParams.get('session_id');
-            
-            if (!sessionId) {
-                console.log('No session ID found');
-                document.getElementById('processingStatus').innerHTML = 
-                    '<p style="color: #dc2626;">❌ No payment session found. Please contact support.</p>';
-                return;
-            }
-            
-            // Try to determine package from session ID (last part before session identifier)
-            let packageDetails = null;
-            for (const [key, details] of Object.entries(PACKAGE_DETAILS)) {
-                if (sessionId.includes(key.substring(0, 8))) {
-                    packageDetails = details;
-                    break;
-                }
-            }
-            
-            if (!packageDetails) {
-                // Default to individual if we can't determine
-                packageDetails = PACKAGE_DETAILS['bJe5kD1Et4AX3QX7VVenS03'];
-            }
-            
-            console.log('Processing purchase:', packageDetails);
-            
-            try {
-                // Get customer info from localStorage or prompt
-                let customerEmail = localStorage.getItem('customerEmail');
-                let customerName = localStorage.getItem('customerName');
-                
-                if (!customerEmail) {
-                    // Prompt for email since we need it for code delivery
-                    customerEmail = prompt('Please enter your email for access code delivery:') || 'customer@thepositiveeffectindex.com';
-                    localStorage.setItem('customerEmail', customerEmail);
-                }
-                
-                if (!customerName) {
-                    customerName = prompt('Please enter your name:') || 'Customer';
-                    localStorage.setItem('customerName', customerName);
-                }
-                
-                // Store purchase in database
-                const { data: purchase, error: purchaseError } = await supabaseClient
-                    .from('purchases')
-                    .insert({
-                        customer_email: customerEmail,
-                        customer_name: customerName,
-                        package_size: packageDetails.size,
-                        amount_paid: packageDetails.amount,
-                        paypal_transaction_id: sessionId, // Using session_id as transaction ID
-                        status: 'completed'
-                    })
-                    .select()
-                    .single();
-                
-                if (purchaseError) {
-                    throw new Error('Failed to store purchase: ' + purchaseError.message);
-                }
-                
-                console.log('Purchase stored:', purchase);
-                
-                // Generate access codes
-                const { data: codes, error: codesError } = await supabaseClient
-                    .rpc('create_access_codes', {
-                        purchase_uuid: purchase.id,
-                        code_count: packageDetails.size
-                    });
-                
-                if (codesError) {
-                    throw new Error('Failed to generate codes: ' + codesError.message);
-                }
-                
-                console.log('Codes generated:', codes);
-                
-                // Display codes on page
-                displayAccessCodes(codes, packageDetails);
-                
-                // Send email with codes
-                await sendEmailWithCodes(customerEmail, customerName, codes, packageDetails);
-                
-                // Hide processing status
-                document.getElementById('processingStatus').style.display = 'none';
-                
-                // Don't auto-redirect - let them distribute codes to team
-                
-            } catch (error) {
-                console.error('Error processing purchase:', error);
-                document.getElementById('processingStatus').innerHTML = 
-                    '<p style="color: #dc2626;">❌ Error processing purchase: ' + error.message + '</p>';
-            }
-        }
-        
-        function displayAccessCodes(codes, packageDetails) {
-            const codesList = document.getElementById('accessCodesList');
-            const codesSection = document.getElementById('accessCodesSection');
-            
-            let codesHtml = `<div style="text-align: center; margin-bottom: 20px;">
-                <h4 style="color: #1e3a8a; margin-bottom: 10px;">🎯 Your ${packageDetails.size} Assessment Access Codes</h4>
-                <p style="color: #4b5563; font-size: 0.9rem;">Share these codes with your team members for individual assessment access</p>
-            </div>`;
-            
-            codes.forEach((codeData, index) => {
-                const code = typeof codeData === 'string' ? codeData : codeData.code;
-                codesHtml += `<div style="background: white; padding: 15px; margin: 8px 0; border-radius: 8px; border: 2px solid #3b82f6; display: flex; justify-content: space-between; align-items: center; font-family: monospace;">
-                    <span style="font-size: 1.1rem; font-weight: bold; color: #1e40af;">Team Member ${index + 1}: ${code}</span>
-                    <button onclick="copyCode('${code}')" style="background: #3b82f6; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Copy</button>
-                </div>`;
-            });
-            
-            if (packageDetails.size > 1) {
-                codesHtml += `<div style="background: #f0f9ff; padding: 20px; border-radius: 8px; border-left: 4px solid #3b82f6; margin-top: 20px;">
-                    <h5 style="color: #1e3a8a; margin-bottom: 10px;">📋 Distribution Instructions:</h5>
-                    <div style="color: #4b5563; font-size: 0.9rem; line-height: 1.6;">
-                        • <strong>Share each code individually</strong> - One code per person<br>
-                        • <strong>Direct them to:</strong> <a href="/" style="color: #3b82f6;">thepositiveeffectindex.com</a><br>
-                        • <strong>They enter their code</strong> → Provide email → Start assessment<br>
-                        • <strong>Codes valid for:</strong> 1 year from purchase date<br>
-                        • <strong>Need help?</strong> Contact april@aprilsabral.com
-                    </div>
-                </div>`;
-            } else {
-                codesHtml += `<div style="background: #f0f9ff; padding: 20px; border-radius: 8px; border-left: 4px solid #3b82f6; margin-top: 20px;">
-                    <h5 style="color: #1e3a8a; margin-bottom: 10px;">🚀 Ready to Start?</h5>
-                    <div style="color: #4b5563; font-size: 0.9rem; line-height: 1.6;">
-                        • <strong>Use your code at:</strong> <a href="/" style="color: #3b82f6;">thepositiveeffectindex.com</a><br>
-                        • <strong>Enter code</strong> → Provide email → Start assessment<br>
-                        • <strong>Your code is valid for:</strong> 1 year from purchase
-                    </div>
-                </div>`;
-            }
-            
-            codesList.innerHTML = codesHtml;
-            codesSection.style.display = 'block';
-        }
-        
-        function copyCode(code) {
-            navigator.clipboard.writeText(code).then(() => {
-                alert('Code copied to clipboard!');
-            }).catch(() => {
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = code;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                alert('Code copied to clipboard!');
-            });
-        }
-        
-        async function sendEmailWithCodes(customerEmail, customerName, codes, packageDetails) {
-            if (typeof emailjs === 'undefined') {
-                console.log('EmailJS not available, skipping email');
-                return;
-            }
-            
-            try {
-                const codesList = codes.map((codeData, index) => {
-                    const code = typeof codeData === 'string' ? codeData : codeData.code;
-                    return `Code ${index + 1}: ${code}`;
-                }).join('\n');
-                
-                const templateParams = {
-                    to_name: customerName,
-                    to_email: customerEmail,
-                    package_size: packageDetails.size,
-                    amount_paid: packageDetails.amount,
-                    codes_list: codesList,
-                    purchase_date: new Date().toLocaleDateString(),
-                    portal_link: 'https://www.thepositiveeffectindex.com/'
-                };
-                
-                const response = await emailjs.send(
-                    EMAILJS_SERVICE_ID,
-                    EMAILJS_TEMPLATE_ID,
-                    templateParams
-                );
-                
-                console.log('Email sent successfully:', response);
-                
-                // Log email delivery
-                if (supabaseClient) {
-                    await supabaseClient
-                        .from('email_logs')
-                        .insert({
-                            recipient_email: customerEmail,
-                            email_type: 'purchase_confirmation',
-                            status: 'sent'
-                        });
-                }
-                
-            } catch (error) {
-                console.error('Failed to send email:', error);
-                // Don't fail the whole process if email fails
-            }
-        }
-        
-        function redirectToAssessment(accessCode, email, name) {
-            // Store access info for main page
-            localStorage.setItem('paidAccessCode', accessCode);
-            localStorage.setItem('paidUserEmail', email);
-            localStorage.setItem('paidUserName', name);
-            localStorage.setItem('hasValidAccess', 'true');
-            localStorage.setItem('accessGranted', Date.now().toString());
-            
-            // Show redirect message
-            document.body.innerHTML = `
-                <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);">
-                    <div style="background: white; padding: 40px; border-radius: 20px; text-align: center; max-width: 500px;">
-                        <div style="font-size: 3rem; margin-bottom: 20px;">🚀</div>
-                        <h2 style="color: #1e3a8a; margin-bottom: 15px;">Redirecting to Your Assessment...</h2>
-                        <p style="color: #4b5563; margin-bottom: 25px;">Get ready for your comprehensive leadership analysis!</p>
-                        <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; color: #1e40af;">
-                            <strong>Access Code:</strong> ${accessCode}
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            // Redirect after 2 seconds
-            setTimeout(() => {
-                window.location.href = '/?access=paid';
-            }, 2000);
-        }
-        
-        // Start processing when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            processPurchase();
-        });
-        
-        // Auto-redirect after 2 minutes if user doesn't manually navigate
+        // Auto-redirect to main site after 60 seconds
         setTimeout(() => {
-            if (confirm('Would you like to go to your assessment now?')) {
+            if (confirm('Would you like to return to the main page?')) {
                 window.location.href = '/';
             }
-        }, 120000); // 2 minutes
+        }, 60000);
+        
+        // Show current time for user reference
+        document.addEventListener('DOMContentLoaded', function() {
+            const timeElement = document.createElement('div');
+            timeElement.style.cssText = 'text-align: center; color: #6b7280; font-size: 0.9rem; margin-top: 20px;';
+            timeElement.textContent = 'Purchase completed at: ' + new Date().toLocaleTimeString();
+            document.querySelector('.success-container').appendChild(timeElement);
+        });
     </script>
 </body>
 </html>
