@@ -3279,8 +3279,8 @@
             // Update banner to show success
             const banner = document.querySelector('.demo-banner');
             if (banner) {
-                if (source === 'database') {
-                    banner.innerHTML = '✅ ACCESS GRANTED - Ready for Assessment';
+                if (source === 'database' || source === 'paid') {
+                    banner.innerHTML = '✅ PREMIUM ACCESS - Your Leadership Assessment';
                     banner.style.background = 'linear-gradient(135deg, #10b981, #059669)';
                 } else {
                     banner.innerHTML = '🎯 DEMO MODE - Assessment Access Granted';
@@ -3300,6 +3300,11 @@
             // Success message
             if (source === 'database') {
                 alert('✅ Access code validated! Your premium assessment is now ready.');
+            } else if (source === 'paid') {
+                // Show welcome message for paid users
+                setTimeout(() => {
+                    alert('🎉 Welcome to your Premium Leadership Assessment! Thank you for your purchase.');
+                }, 1000);
             } else {
                 alert('🎯 Demo access granted! You can now explore the assessment.');
             }
@@ -3536,6 +3541,32 @@
             // Check on page load if values already exist
             validateAndShowPayments();
         }
+        
+        // ====== SEAMLESS PAYMENT ACCESS ======
+        function checkForPaidAccess() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const accessParam = urlParams.get('access');
+            const hasValidAccess = localStorage.getItem('hasValidAccess');
+            const paidAccessCode = localStorage.getItem('paidAccessCode');
+            
+            if (accessParam === 'paid' && hasValidAccess === 'true' && paidAccessCode) {
+                console.log('Paid access detected, granting immediate access');
+                
+                // Grant immediate access without code validation
+                grantAssessmentAccess(paidAccessCode, 'paid');
+                
+                // Clean URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+                
+                return true;
+            }
+            return false;
+        }
+        
+        // Initialize paid access check when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            checkForPaidAccess();
+        });
         
         // Initialize email validation when page loads (disabled for now)
         // document.addEventListener('DOMContentLoaded', function() {
