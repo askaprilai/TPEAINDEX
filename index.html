@@ -3180,7 +3180,7 @@
         // Initialize
         updateNavigation();
         updateProgress();
-        // PayPal and Company Code Functions
+        // Company Code Functions
         async function validateCompanyCode() {
             const codeInput = document.getElementById('companyCode');
             if (!codeInput) {
@@ -3625,7 +3625,7 @@
                             customer_name: purchaseData.name,
                             package_size: purchaseData.codeCount,
                             amount_paid: purchaseData.amount,
-                            paypal_transaction_id: purchaseData.transactionId
+                            stripe_transaction_id: purchaseData.transactionId
                         }])
                         .select()
                         .single();

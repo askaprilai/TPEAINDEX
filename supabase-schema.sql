@@ -12,7 +12,7 @@ CREATE TABLE purchases (
     package_size INTEGER NOT NULL, -- 5, 10, or 25
     amount_paid DECIMAL(10,2) NOT NULL,
     purchase_date TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-    paypal_transaction_id VARCHAR(255) UNIQUE,
+    stripe_transaction_id VARCHAR(255) UNIQUE,
     status VARCHAR(50) DEFAULT 'completed',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()

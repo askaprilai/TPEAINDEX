@@ -789,7 +789,6 @@
         }
     </style>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
 </head>
 <body>
     <div class="container">
@@ -824,29 +823,29 @@
                         <h4>Individual</h4>
                         <div class="price">$29</div>
                         <p>Single assessment with full report</p>
-                        <div id="paypal-individual"></div>
+                        <button class="cta-button" onclick="purchaseIndividual()">Start Assessment - $97</button>
                     </div>
                     
                     <div class="pricing-card popular">
                         <div class="popular-badge">Most Popular</div>
                         <h4>Team Pack</h4>
-                        <div class="price">$99</div>
-                        <p>5 assessments • $20 each</p>
-                        <div id="paypal-team"></div>
+                        <div class="price">$350</div>
+                        <p>5 assessments • $70 each</p>
+                        <button class="cta-button" onclick="purchaseTeam()">Buy Team Pack - $350</button>
                     </div>
                     
                     <div class="pricing-card">
                         <h4>Company Pack</h4>
-                        <div class="price">$249</div>
-                        <p>15 assessments • $16.60 each</p>
-                        <div id="paypal-company"></div>
+                        <div class="price">$650</div>
+                        <p>10 assessments • $65 each</p>
+                        <button class="cta-button" onclick="purchaseCompany()">Buy Company Pack - $650</button>
                     </div>
                     
                     <div class="pricing-card">
                         <h4>Enterprise</h4>
-                        <div class="price">$699</div>
-                        <p>50 assessments • $14 each</p>
-                        <div id="paypal-enterprise"></div>
+                        <div class="price">$1400</div>
+                        <p>25 assessments • $56 each</p>
+                        <button class="cta-button" onclick="purchaseEnterprise()">Buy Enterprise - $1400</button>
                     </div>
                 </div>
                 
@@ -2210,113 +2209,25 @@
         let accessGranted = false;
         let purchaseData = {};
 
-        // PayPal Integration
-        function initPayPal() {
-            // Individual Purchase - $29
-            paypal.Buttons({
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                value: '29.00'
-                            },
-                            description: 'Individual Leadership Assessment'
-                        }]
-                    });
-                },
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        purchaseData = {
-                            type: 'individual',
-                            transactionId: details.id,
-                            amount: '29.00',
-                            payerEmail: details.payer.email_address
-                        };
-                        grantAccess();
-                    });
-                }
-            }).render('#paypal-individual');
+        // Stripe Purchase Functions
+        function purchaseIndividual() {
+            // Redirect to Stripe checkout for individual assessment
+            window.location.href = 'https://buy.stripe.com/fZucN53MBffBdrxdgfenS00';
+        }
 
-            // Team Pack - $99 (5 assessments)
-            paypal.Buttons({
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                value: '99.00'
-                            },
-                            description: 'Team Pack - 5 Leadership Assessments'
-                        }]
-                    });
-                },
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        purchaseData = {
-                            type: 'team',
-                            transactionId: details.id,
-                            amount: '99.00',
-                            payerEmail: details.payer.email_address,
-                            licenses: 5
-                        };
-                        generateCompanyCode();
-                        grantAccess();
-                    });
-                }
-            }).render('#paypal-team');
+        function purchaseTeam() {
+            // Redirect to Stripe checkout for team pack
+            window.location.href = 'https://buy.stripe.com/4gMdR93MBebx0EL2BBenS01';
+        }
 
-            // Company Pack - $249 (15 assessments)
-            paypal.Buttons({
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                value: '249.00'
-                            },
-                            description: 'Company Pack - 15 Leadership Assessments'
-                        }]
-                    });
-                },
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        purchaseData = {
-                            type: 'company',
-                            transactionId: details.id,
-                            amount: '249.00',
-                            payerEmail: details.payer.email_address,
-                            licenses: 15
-                        };
-                        generateCompanyCode();
-                        grantAccess();
-                    });
-                }
-            }).render('#paypal-company');
+        function purchaseCompany() {
+            // Redirect to Stripe checkout for company pack  
+            window.location.href = 'https://buy.stripe.com/4gM6oHbf3ffBgDJccbenS02';
+        }
 
-            // Enterprise Pack - $699 (50 assessments)
-            paypal.Buttons({
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                value: '699.00'
-                            },
-                            description: 'Enterprise Pack - 50 Leadership Assessments'
-                        }]
-                    });
-                },
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        purchaseData = {
-                            type: 'enterprise',
-                            transactionId: details.id,
-                            amount: '699.00',
-                            payerEmail: details.payer.email_address,
-                            licenses: 50
-                        };
-                        generateCompanyCode();
-                        grantAccess();
-                    });
-                }
-            }).render('#paypal-enterprise');
+        function purchaseEnterprise() {
+            // Redirect to Stripe checkout for enterprise pack
+            window.location.href = 'https://buy.stripe.com/bJe5kD1Et4AX3QX7VVenS03';
         }
 
         function generateCompanyCode() {
@@ -2379,13 +2290,9 @@
             }
         }
 
-        // Initialize PayPal when page loads
+        // Page initialization
         document.addEventListener('DOMContentLoaded', function() {
-            if (typeof paypal !== 'undefined') {
-                initPayPal();
-            } else {
-                console.error('PayPal SDK not loaded');
-            }
+            console.log('Assessment page loaded - Stripe payment integration ready');
         });
 
         // Email form submission

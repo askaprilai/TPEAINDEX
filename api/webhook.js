@@ -77,7 +77,7 @@ async function handleSuccessfulPayment(session) {
       customer_name: customerName,
       package_size: packageDetails.size,
       amount_paid: amountPaid,
-      paypal_transaction_id: sessionId, // Using session_id as transaction ID
+      stripe_transaction_id: sessionId, // Using session_id as transaction ID
       status: 'completed'
     })
     .select()
@@ -118,9 +118,9 @@ async function handleSuccessfulPayment(session) {
 
 function getPackageDetails(amountPaid) {
   // Map amounts to package sizes
-  if (amountPaid >= 1400) return { size: 25, name: '25-Person Team Package' };
-  if (amountPaid >= 750) return { size: 10, name: '10-Person Team Package' };
-  if (amountPaid >= 400) return { size: 5, name: '5-Person Team Package' };
+  if (amountPaid >= 1400) return { size: 25, name: '25-Person Enterprise Package' };
+  if (amountPaid >= 650) return { size: 10, name: '10-Person Company Package' };
+  if (amountPaid >= 350) return { size: 5, name: '5-Person Team Package' };
   return { size: 1, name: 'Individual Assessment' };
 }
 
