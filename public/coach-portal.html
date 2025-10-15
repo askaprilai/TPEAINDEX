@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Portal - TPEAINDEX Partner Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .portal-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+        }
+
+        .portal-header {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ea580c 100%);
+            color: #0f172a;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .portal-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .portal-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px;
+        }
+
+        .dashboard-card {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+
+        .card-title {
+            color: #1e3a8a;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-top: 5px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ea580c 100%);
+            color: #0f172a;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+        }
+
+        .client-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .client-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .client-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-completed {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .referral-link {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            font-family: monospace;
+            word-break: break-all;
+            margin-bottom: 15px;
+        }
+
+        .copy-btn {
+            background: #1e3a8a;
+            color: white;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+        }
+
+        .earnings-summary {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #22c55e;
+            margin-bottom: 20px;
+        }
+
+        .login-form {
+            max-width: 400px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #fbbf24;
+        }
+    </style>
+</head>
+<body>
+    <div class="portal-container">
+        <!-- Portal Header -->
+        <div class="portal-header">
+            <h1>🚀 Coach Portal</h1>
+            <p>Scale your coaching business with TPEAINDEX Leadership Assessments</p>
+        </div>
+
+        <!-- Login Section (shown initially) -->
+        <div id="loginSection">
+            <div class="login-form">
+                <h2 style="text-align: center; color: #1e3a8a; margin-bottom: 30px;">Coach Login</h2>
+                <form id="coachLoginForm">
+                    <div class="form-group">
+                        <label for="coachEmail">Email Address</label>
+                        <input type="email" id="coachEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="coachCode">Coach Access Code</label>
+                        <input type="text" id="coachCode" name="code" placeholder="Enter your coach code" required>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Access Portal</button>
+                </form>
+                
+                <div style="text-align: center; margin-top: 30px; padding-top: 30px; border-top: 1px solid #e5e7eb;">
+                    <p style="color: #64748b; margin-bottom: 15px;">New coach? Join our partner program</p>
+                    <a href="mailto:april@aprilsabral.com?subject=Coach Partnership Inquiry" class="btn">Apply to Become a Partner</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Section (hidden initially) -->
+        <div id="dashboardSection" style="display: none;">
+            <div class="dashboard-grid">
+                <!-- Earnings Card -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <div class="card-icon">💰</div>
+                        <div class="card-title">Earnings & Performance</div>
+                    </div>
+                    
+                    <div class="earnings-summary">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-size: 0.9rem; color: #059669; margin-bottom: 5px;">This Month</div>
+                                <div style="font-size: 2rem; font-weight: bold; color: #059669;" id="monthlyEarnings">$0</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.9rem; color: #059669; margin-bottom: 5px;">Total Earned</div>
+                                <div style="font-size: 1.5rem; font-weight: bold; color: #059669;" id="totalEarnings">$0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="assessmentsSold">0</div>
+                            <div class="stat-label">Assessments Sold</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="conversionRate">0%</div>
+                            <div class="stat-label">Conversion Rate</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Client Management Card -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <div class="card-icon">👥</div>
+                        <div class="card-title">Client Management</div>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="activeClients">0</div>
+                            <div class="stat-label">Active Clients</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="completedAssessments">0</div>
+                            <div class="stat-label">Completed</div>
+                        </div>
+                    </div>
+
+                    <div class="client-list" id="clientList">
+                        <!-- Clients will be populated here -->
+                    </div>
+
+                    <button class="btn" style="width: 100%; margin-top: 15px;" onclick="addNewClient()">
+                        ➕ Add New Client
+                    </button>
+                </div>
+
+                <!-- Referral Links Card -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <div class="card-icon">🔗</div>
+                        <div class="card-title">Your Referral Links</div>
+                    </div>
+                    
+                    <p style="color: #64748b; margin-bottom: 20px;">Share these links with your clients to earn 30% commission on all sales.</p>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label style="font-weight: 600; color: #1e3a8a; display: block; margin-bottom: 8px;">Individual Assessment ($97)</label>
+                        <div class="referral-link" id="individualLink">Loading...</div>
+                        <button class="copy-btn" onclick="copyLink('individual')">Copy Link</button>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label style="font-weight: 600; color: #1e3a8a; display: block; margin-bottom: 8px;">Team Package ($350)</label>
+                        <div class="referral-link" id="teamLink">Loading...</div>
+                        <button class="copy-btn" onclick="copyLink('team')">Copy Link</button>
+                    </div>
+                </div>
+
+                <!-- Resources Card -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <div class="card-icon">📚</div>
+                        <div class="card-title">Coach Resources</div>
+                    </div>
+                    
+                    <div style="space-y: 15px;">
+                        <a href="#" class="btn" style="display: block; margin-bottom: 10px;">📊 Assessment Overview PDF</a>
+                        <a href="#" class="btn" style="display: block; margin-bottom: 10px;">🎯 Client Conversation Guide</a>
+                        <a href="#" class="btn" style="display: block; margin-bottom: 10px;">💼 Sales Templates</a>
+                        <a href="mailto:april@aprilsabral.com" class="btn" style="display: block;">📞 Get Support</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let coachData = null;
+        
+        // Demo coach credentials for testing
+        const demoCoaches = {
+            'coach@example.com': {
+                code: 'COACH2024',
+                name: 'Demo Coach',
+                id: 'COACH001',
+                earnings: {
+                    monthly: 485,
+                    total: 2340
+                },
+                stats: {
+                    assessmentsSold: 24,
+                    conversionRate: 32,
+                    activeClients: 8,
+                    completedAssessments: 16
+                },
+                clients: [
+                    { name: 'John Smith', email: 'john@company.com', status: 'completed', date: '2024-01-15' },
+                    { name: 'Sarah Johnson', email: 'sarah@startup.com', status: 'pending', date: '2024-01-14' },
+                    { name: 'Mike Chen', email: 'mike@tech.com', status: 'completed', date: '2024-01-12' }
+                ]
+            }
+        };
+
+        // Handle coach login
+        document.getElementById('coachLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('coachEmail').value;
+            const code = document.getElementById('coachCode').value;
+            
+            // Check demo credentials
+            if (demoCoaches[email] && demoCoaches[email].code === code) {
+                coachData = demoCoaches[email];
+                showDashboard();
+            } else {
+                alert('Invalid credentials. Try: coach@example.com / COACH2024');
+            }
+        });
+
+        function showDashboard() {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('dashboardSection').style.display = 'block';
+            
+            // Populate dashboard data
+            populateDashboard();
+            generateReferralLinks();
+        }
+
+        function populateDashboard() {
+            if (!coachData) return;
+            
+            // Update earnings
+            document.getElementById('monthlyEarnings').textContent = '$' + coachData.earnings.monthly;
+            document.getElementById('totalEarnings').textContent = '$' + coachData.earnings.total;
+            
+            // Update stats
+            document.getElementById('assessmentsSold').textContent = coachData.stats.assessmentsSold;
+            document.getElementById('conversionRate').textContent = coachData.stats.conversionRate + '%';
+            document.getElementById('activeClients').textContent = coachData.stats.activeClients;
+            document.getElementById('completedAssessments').textContent = coachData.stats.completedAssessments;
+            
+            // Populate client list
+            const clientList = document.getElementById('clientList');
+            clientList.innerHTML = '';
+            
+            coachData.clients.forEach(client => {
+                const clientDiv = document.createElement('div');
+                clientDiv.className = 'client-item';
+                clientDiv.innerHTML = `
+                    <div>
+                        <div style="font-weight: 600; color: #1e3a8a;">${client.name}</div>
+                        <div style="font-size: 0.9rem; color: #64748b;">${client.email}</div>
+                    </div>
+                    <div class="client-status ${client.status === 'completed' ? 'status-completed' : 'status-pending'}">
+                        ${client.status === 'completed' ? '✅ Completed' : '⏳ Pending'}
+                    </div>
+                `;
+                clientList.appendChild(clientDiv);
+            });
+        }
+
+        function generateReferralLinks() {
+            if (!coachData) return;
+            
+            const baseUrl = 'https://www.thepositiveeffectindex.com';
+            const coachId = coachData.id;
+            
+            const individualLink = `${baseUrl}/?ref=${coachId}&type=individual`;
+            const teamLink = `${baseUrl}/?ref=${coachId}&type=team`;
+            
+            document.getElementById('individualLink').textContent = individualLink;
+            document.getElementById('teamLink').textContent = teamLink;
+        }
+
+        function copyLink(type) {
+            const linkElement = document.getElementById(type + 'Link');
+            const link = linkElement.textContent;
+            
+            navigator.clipboard.writeText(link).then(() => {
+                alert('Link copied to clipboard!');
+            });
+        }
+
+        function addNewClient() {
+            const clientName = prompt('Enter client name:');
+            if (clientName) {
+                const clientEmail = prompt('Enter client email:');
+                if (clientEmail) {
+                    // Add client to list (in real app, this would save to database)
+                    coachData.clients.push({
+                        name: clientName,
+                        email: clientEmail,
+                        status: 'pending',
+                        date: new Date().toISOString().split('T')[0]
+                    });
+                    
+                    populateDashboard();
+                    alert('Client added! Share your referral link with them to start earning commissions.');
+                }
+            }
+        }
+    </script>
+</body>
+</html>

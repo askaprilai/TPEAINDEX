@@ -2301,6 +2301,14 @@
                 </a>
             </div>
             
+            <div style="margin-bottom: 20px;">
+                <a href="coach-portal.html" style="color: #fbbf24; text-decoration: none; font-weight: 600; margin-right: 20px;">
+                    🚀 Coach Portal
+                </a>
+                <a href="coach-signup.html" style="color: #fbbf24; text-decoration: none; font-weight: 600;">
+                    🤝 Become a Partner
+                </a>
+            </div>
             <p style="font-size: 0.9rem; opacity: 0.8; margin: 0;">
                 © 2024 April Sabral - Proprietary Leadership Assessment Tool
             </p>
@@ -2308,6 +2316,37 @@
     </div>
 
     <script>
+        // Affiliate Tracking System
+        let affiliateRef = null;
+        let affiliateType = null;
+        
+        // Check for affiliate parameters on page load
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            affiliateRef = urlParams.get('ref');
+            affiliateType = urlParams.get('type');
+            
+            if (affiliateRef) {
+                // Store affiliate info in session/local storage
+                sessionStorage.setItem('affiliateRef', affiliateRef);
+                sessionStorage.setItem('affiliateType', affiliateType || 'individual');
+                
+                // Add visual indicator for referred visitors
+                const affiliateBanner = document.createElement('div');
+                affiliateBanner.style.cssText = `
+                    background: linear-gradient(135deg, #10b981, #059669);
+                    color: white;
+                    text-align: center;
+                    padding: 12px;
+                    font-weight: 600;
+                    position: relative;
+                    z-index: 1000;
+                `;
+                affiliateBanner.innerHTML = '🤝 Welcome! You\'ve been referred by one of our certified coaches';
+                document.body.insertBefore(affiliateBanner, document.body.firstChild);
+            }
+        })();
+        
         // Personalization variables
         let currentPersonalizationQ = 1;
         let totalPersonalizationQ = 7;

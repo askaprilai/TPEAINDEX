@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the TPEAINDEX Coach Partner Program</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .signup-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ea580c 100%);
+            color: #0f172a;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .commission-highlight {
+            background: rgba(15, 23, 42, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+
+        .commission-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .content-section {
+            padding: 50px 40px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .benefit-card {
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .benefit-card h3 {
+            color: #1e3a8a;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .benefit-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .signup-form {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border: 2px solid #22c55e;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #22c55e;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ea580c 100%);
+            color: #0f172a;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+        }
+
+        .pricing-table {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #e5e7eb;
+            margin: 30px 0;
+        }
+
+        .pricing-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .pricing-row:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            background: #fef3c7;
+            margin: 15px -15px -15px -15px;
+            padding: 20px 15px;
+            border-radius: 10px;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            color: #059669;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #22c55e;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+            
+            .content-section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1>🚀 Join Our Coach Partner Program</h1>
+            <p>Scale your coaching business with our proven leadership assessment tool</p>
+            
+            <div class="commission-highlight">
+                <div class="commission-amount">30% Commission</div>
+                <div>On every assessment sold through your referral</div>
+            </div>
+        </div>
+
+        <!-- Content Section -->
+        <div class="content-section">
+            <h2 style="text-align: center; color: #1e3a8a; font-size: 2.2rem; margin-bottom: 20px;">Why Partner With TPEAINDEX?</h2>
+            <p style="text-align: center; color: #64748b; font-size: 1.1rem; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Join hundreds of coaches who are already earning passive income while providing incredible value to their clients.
+            </p>
+
+            <!-- Benefits Grid -->
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">💰</div>
+                    <h3>High Commission Rates</h3>
+                    <p>Earn 30% on individual assessments ($29 per sale) and 25% on team packages (up to $350 per sale)</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Proven Assessment Tool</h3>
+                    <p>Science-backed leadership assessment used by Fortune 500 companies with 95% client satisfaction rate</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">📊</div>
+                    <h3>Real-Time Dashboard</h3>
+                    <p>Track client progress, earnings, and performance with our comprehensive coach portal</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🤝</div>
+                    <h3>Full Support</h3>
+                    <p>Complete sales materials, training resources, and ongoing support to help you succeed</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔄</div>
+                    <h3>Recurring Revenue</h3>
+                    <p>Clients often purchase follow-up assessments and team packages, creating ongoing income</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>Easy Integration</h3>
+                    <p>White-labeled links that seamlessly integrate with your existing coaching practice</p>
+                </div>
+            </div>
+
+            <!-- Commission Structure -->
+            <h3 style="color: #1e3a8a; font-size: 1.8rem; margin-bottom: 20px; text-align: center;">Commission Structure</h3>
+            
+            <div class="pricing-table">
+                <div class="pricing-row">
+                    <span>Individual Assessment ($97)</span>
+                    <span style="font-weight: 600; color: #059669;">$29 commission (30%)</span>
+                </div>
+                <div class="pricing-row">
+                    <span>5-Person Team Package ($350)</span>
+                    <span style="font-weight: 600; color: #059669;">$87.50 commission (25%)</span>
+                </div>
+                <div class="pricing-row">
+                    <span>10-Person Team Package ($650)</span>
+                    <span style="font-weight: 600; color: #059669;">$162.50 commission (25%)</span>
+                </div>
+                <div class="pricing-row">
+                    <span>25-Person Enterprise Package ($1,400)</span>
+                    <span style="font-weight: 600; color: #059669;">$350 commission (25%)</span>
+                </div>
+                <div class="pricing-row">
+                    <span style="color: #1e3a8a;">Average Monthly Partner Earnings</span>
+                    <span style="color: #059669;">$500 - $2,500</span>
+                </div>
+            </div>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                <h3 style="margin-bottom: 15px;">🎉 Application Submitted Successfully!</h3>
+                <p>Thank you for your interest in joining our coach partner program. We'll review your application and get back to you within 24-48 hours with your coach portal access.</p>
+                <p style="margin-top: 15px; font-weight: 600;">Check your email for next steps!</p>
+            </div>
+
+            <!-- Signup Form -->
+            <div class="signup-form" id="signupForm">
+                <h3 style="color: #1e3a8a; font-size: 1.8rem; margin-bottom: 30px; text-align: center;">Apply to Become a Partner</h3>
+                
+                <form id="coachApplicationForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company">Company/Organization</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="website">Website URL</label>
+                        <input type="url" id="website" name="website" placeholder="https://">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="experience">Coaching Experience *</label>
+                        <select id="experience" name="experience" required>
+                            <option value="">Select your experience level</option>
+                            <option value="new">New to coaching (0-1 years)</option>
+                            <option value="emerging">Emerging coach (2-3 years)</option>
+                            <option value="experienced">Experienced coach (4-7 years)</option>
+                            <option value="seasoned">Seasoned coach (8+ years)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clientBase">Current Client Base Size</label>
+                        <select id="clientBase" name="clientBase">
+                            <option value="">Select client base size</option>
+                            <option value="1-5">1-5 clients</option>
+                            <option value="6-15">6-15 clients</option>
+                            <option value="16-30">16-30 clients</option>
+                            <option value="31-50">31-50 clients</option>
+                            <option value="50+">50+ clients</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="specialization">Coaching Specialization</label>
+                        <input type="text" id="specialization" name="specialization" placeholder="e.g., Executive Coaching, Leadership Development, Team Building">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="motivation">Why do you want to partner with TPEAINDEX? *</label>
+                        <textarea id="motivation" name="motivation" rows="4" placeholder="Tell us about your goals and how this partnership would benefit your coaching practice..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="referralSource">How did you hear about us?</label>
+                        <select id="referralSource" name="referralSource">
+                            <option value="">Select source</option>
+                            <option value="website">Website</option>
+                            <option value="social-media">Social Media</option>
+                            <option value="referral">Referral from another coach</option>
+                            <option value="conference">Conference/Event</option>
+                            <option value="email">Email Marketing</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">
+                        🚀 Submit Application
+                    </button>
+                </form>
+            </div>
+
+            <!-- Contact Info -->
+            <div style="text-align: center; margin-top: 40px; padding-top: 40px; border-top: 1px solid #e5e7eb;">
+                <h3 style="color: #1e3a8a; margin-bottom: 15px;">Questions About Our Partner Program?</h3>
+                <p style="color: #64748b; margin-bottom: 20px;">We're here to help you succeed. Reach out anytime!</p>
+                <a href="mailto:april@aprilsabral.com?subject=Coach Partnership Questions" class="btn">
+                    📧 Contact Our Team
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('coachApplicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            
+            // Simulate form submission (in real app, this would go to your backend)
+            console.log('Coach application submitted:', data);
+            
+            // Show success message
+            document.getElementById('signupForm').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // In real app, send email notification to admin
+            // and set up coach account in database
+            
+            // Scroll to success message
+            document.getElementById('successMessage').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        });
+    </script>
+</body>
+</html>
