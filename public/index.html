@@ -162,13 +162,12 @@
         }
 
         .demo-banner {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ea580c 100%);
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
             color: #0f172a;
             text-align: center;
             padding: 15px;
             font-weight: bold;
             font-size: 1.1rem;
-            box-shadow: 0 4px 20px rgba(251, 191, 36, 0.3);
             box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
             margin-bottom: 20px;
             border-radius: 12px;
@@ -260,12 +259,12 @@
         }
 
         .progress-fill {
-            background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 50%, #ea580c 100%);
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
             height: 100%;
             width: 4%;
             transition: width 0.3s ease;
             border-radius: 4px;
-            box-shadow: 0 0 15px rgba(251, 191, 36, 0.5);
+            box-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
         }
 
         .question {
@@ -341,11 +340,10 @@
         }
 
         .answer-option.selected {
-            background: linear-gradient(145deg, #fbbf24 0%, #f59e0b 50%, #ea580c 100%);
+            background: linear-gradient(145deg, #fbbf24, #f59e0b);
             border-color: #d97706;
-            color: #0f172a;
-            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.5);
-            transform: translateY(-2px);
+            color: #1e3a8a;
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
         }
 
         .answer-text {
@@ -366,11 +364,11 @@
         }
 
         .nav-btn {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ea580c 100%);
-            color: #0f172a;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #1e3a8a;
             border: none;
             padding: 14px 28px;
-            border-radius: 12px;
+            border-radius: 10px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
@@ -380,10 +378,10 @@
         }
 
         .nav-btn:hover:not(:disabled) {
-            background: linear-gradient(135deg, #f59e0b 0%, #ea580c 50%, #dc2626 100%);
+            background: linear-gradient(135deg, #f59e0b, #d97706);
             color: #ffffff;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
         }
 
         .nav-btn:disabled {
@@ -842,7 +840,7 @@
                 
                 <!-- Group Options -->
                 <div style="max-width: 800px; margin: 0 auto 40px auto;">
-                    <div style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ea580c 100%); padding: 30px; border-radius: 20px; border: 2px solid transparent; box-shadow: 0 8px 30px rgba(251, 191, 36, 0.3);">
+                    <div style="background: linear-gradient(135deg, #fbbf24, #f59e0b); padding: 30px; border-radius: 15px; border: 2px solid #fbbf24;">
                         <div style="text-align: center; margin-bottom: 25px;">
                             <h3 style="color: #0f172a; margin-bottom: 10px;">Team & Company Packages</h3>
                             <p style="color: #0f172a; opacity: 0.9; font-size: 1rem; margin-bottom: 15px;">Save up to 42% with group pricing • Instant access codes delivered</p>
@@ -2289,7 +2287,19 @@
 
         <!-- Footer -->
         <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; text-align: center; padding: 30px; margin-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-            <!-- Results Only - No Coach/Consultant Section on Assessment Pages -->
+            <!-- Coach/Consultant Contact Section -->
+            <div style="background: rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 15px; margin-bottom: 25px; border: 1px solid rgba(255, 255, 255, 0.15);">
+                <h3 style="color: #fbbf24; font-size: 1.2rem; margin-bottom: 15px; font-weight: 600;">
+                    Are you a coach or consultant?
+                </h3>
+                <p style="color: #ffffff !important; font-size: 1rem; margin-bottom: 20px; opacity: 0.9; line-height: 1.5;">
+                    Want to use this assessment tool with your clients? Get in touch to learn about licensing and partnership opportunities.
+                </p>
+                <a href="mailto:april@aprilsabral.com" 
+                   style="display: inline-block; background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #0f172a; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);">
+                    ✉️ Contact Us
+                </a>
+            </div>
             
             <p style="font-size: 0.9rem; opacity: 0.8; margin: 0;">
                 © 2024 April Sabral - Proprietary Leadership Assessment Tool
@@ -2489,13 +2499,8 @@
                 updateNavigation();
                 updateProgress();
                 
-                // Scroll to assessment header for better UX
-                const assessmentHeader = document.querySelector('.assessment-header');
-                if (assessmentHeader) {
-                    assessmentHeader.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                } else {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
+                // Scroll to top on mobile
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 // Show results
                 showResults();
@@ -2514,13 +2519,8 @@
                 updateNavigation();
                 updateProgress();
                 
-                // Scroll to assessment header for better UX
-                const assessmentHeader = document.querySelector('.assessment-header');
-                if (assessmentHeader) {
-                    assessmentHeader.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                } else {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
+                // Scroll to top on mobile
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
@@ -3364,7 +3364,7 @@
                     banner.style.background = 'linear-gradient(135deg, #10b981, #059669)';
                 } else {
                     banner.innerHTML = '🎯 DEMO MODE - Assessment Access Granted';
-                    banner.style.background = 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ea580c 100%)';
+                    banner.style.background = 'linear-gradient(135deg, #fbbf24, #f59e0b)';
                 }
             }
             
