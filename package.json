@@ -2,11 +2,11 @@
   "name": "positive-effect-assessment",
   "version": "1.0.0",
   "description": "Leadership assessment platform with Stripe webhook fulfillment",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
-    "build": "next build",
-    "start": "next start",
-    "dev": "next dev"
+    "build": "echo 'Static HTML project - no build needed'",
+    "start": "echo 'Static HTML project'",
+    "dev": "echo 'Static HTML project'"
   },
   "dependencies": {
     "stripe": "^14.0.0",
@@ -14,6 +14,6 @@
     "micro": "^10.0.1"
   },
   "engines": {
-    "node": "22.x"
+    "node": "20.x"
   }
 }
