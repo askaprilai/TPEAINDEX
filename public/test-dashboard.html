@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leadership Assessment Dashboard Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .dashboard-content {
+            padding: 40px;
+        }
+
+        .test-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .test-button {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #92400e;
+            border: none;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .test-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(251, 191, 36, 0.3);
+        }
+
+        .dashboard-section {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .dashboard-section.active {
+            display: block;
+        }
+
+        .org-health-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .health-card {
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+
+        .health-card.excellent {
+            background: #d1fae5;
+            border-color: #059669;
+        }
+
+        .health-card.good {
+            background: #fef3c7;
+            border-color: #fbbf24;
+        }
+
+        .health-card.needs-improvement {
+            background: #fee2e2;
+            border-color: #dc2626;
+        }
+
+        .score-bar {
+            background: #e5e7eb;
+            height: 8px;
+            border-radius: 4px;
+            margin: 8px 0;
+            overflow: hidden;
+        }
+
+        .score-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .team-heatmap {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 1px solid #e5e7eb;
+        }
+
+        .exec-profile {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .recommendations {
+            background: #f0f9ff;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+            margin: 15px 0;
+        }
+
+        .strength {
+            background: #f0fdf4;
+            border-left: 3px solid #22c55e;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+
+        .challenge {
+            background: #fef2f2;
+            border-left: 3px solid #ef4444;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .section-title {
+            color: #1e3a8a;
+            font-size: 1.5rem;
+            margin: 25px 0 15px 0;
+            font-weight: bold;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Leadership Assessment Dashboards</h1>
+            <p class="subtitle">Test the Individual Assessment + 360° Organizational Feedback + Executive Team Dashboard</p>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="test-buttons">
+                <button class="test-button" onclick="showIndividualResults()">
+                    📊 Individual Leadership Results
+                </button>
+                <button class="test-button" onclick="showOrgFeedback()">
+                    🏢 360° Organizational Health
+                </button>
+                <button class="test-button" onclick="showExecutiveDashboard()">
+                    👥 Executive Team Dashboard
+                </button>
+            </div>
+
+            <!-- Individual Leadership Results -->
+            <div class="dashboard-section" id="individualResults">
+                <h2 class="section-title">Individual Leadership Assessment Results</h2>
+                
+                <div class="org-health-grid">
+                    <div class="health-card excellent">
+                        <div class="metric-value" style="color: #059669;">85%</div>
+                        <div class="metric-label">Relationship Builder</div>
+                        <div class="score-bar">
+                            <div class="score-fill" style="background: #059669; width: 85%;"></div>
+                        </div>
+                    </div>
+                    <div class="health-card good">
+                        <div class="metric-value" style="color: #f59e0b;">72%</div>
+                        <div class="metric-label">Coach & People Developer</div>
+                        <div class="score-bar">
+                            <div class="score-fill" style="background: #f59e0b; width: 72%;"></div>
+                        </div>
+                    </div>
+                    <div class="health-card excellent">
+                        <div class="metric-value" style="color: #059669;">88%</div>
+                        <div class="metric-label">Mindset & Energy Steward</div>
+                        <div class="score-bar">
+                            <div class="score-fill" style="background: #059669; width: 88%;"></div>
+                        </div>
+                    </div>
+                    <div class="health-card good">
+                        <div class="metric-value" style="color: #f59e0b;">68%</div>
+                        <div class="metric-label">Performance & Growth Manager</div>
+                        <div class="score-bar">
+                            <div class="score-fill" style="background: #f59e0b; width: 68%;"></div>
+                        </div>
+                    </div>
+                    <div class="health-card excellent">
+                        <div class="metric-value" style="color: #059669;">82%</div>
+                        <div class="metric-label">Positive Intent Communicator</div>
+                        <div class="score-bar">
+                            <div class="score-fill" style="background: #059669; width: 82%;"></div>
+                        </div>
+                    </div>
+                    <div class="health-card needs-improvement">
+                        <div class="metric-value" style="color: #dc2626;">55%</div>
+                        <div class="metric-label">Ownership & Accountability Driver</div>
+                        <div class="score-bar">
+                            <div class="score-fill" style="background: #dc2626; width: 55%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div>
+                        <h3 style="color: #059669; margin-bottom: 15px;">🎯 Top Leadership Strengths</h3>
+                        <div class="strength">
+                            <strong>Mindset & Energy Steward (88%)</strong><br>
+                            Exceptional ability to maintain positive outlook and energize teams during challenges
+                        </div>
+                        <div class="strength">
+                            <strong>Relationship Builder (85%)</strong><br>
+                            Strong interpersonal skills and ability to build trust across all levels
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="color: #dc2626; margin-bottom: 15px;">⚡ Growth Opportunities</h3>
+                        <div class="challenge">
+                            <strong>Ownership & Accountability (55%)</strong><br>
+                            Focus on driving accountability and taking ownership of difficult decisions
+                        </div>
+                        <div class="challenge">
+                            <strong>Performance Management (68%)</strong><br>
+                            Enhance skills in setting clear expectations and managing performance
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recommendations">
+                    <h3 style="color: #1e3a8a; margin-bottom: 15px;">🚀 Development Recommendations</h3>
+                    <div style="margin-bottom: 15px;">
+                        <strong>Immediate Action:</strong> Implement weekly accountability check-ins with direct reports to strengthen ownership culture
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <strong>30-Day Goal:</strong> Establish clear performance metrics and regular feedback cycles
+                    </div>
+                    <div>
+                        <strong>90-Day Vision:</strong> Develop advanced performance coaching skills through targeted training
+                    </div>
+                </div>
+            </div>
+
+            <!-- 360° Organizational Health -->
+            <div class="dashboard-section" id="orgFeedback">
+                <h2 class="section-title">360° Organizational Health Assessment</h2>
+                
+                <div style="background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%); padding: 25px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #e1f5fe;">
+                    <h3 style="color: #1e3a8a; text-align: center; margin-bottom: 20px;">Organizational Health Radar</h3>
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+                        <div style="text-align: center; min-width: 120px;">
+                            <div style="color: #059669; font-weight: bold; font-size: 1.5rem;">82%</div>
+                            <div style="font-size: 0.8rem; color: #64748b; margin-top: 5px;">Team Collaboration</div>
+                        </div>
+                        <div style="text-align: center; min-width: 120px;">
+                            <div style="color: #fbbf24; font-weight: bold; font-size: 1.5rem;">65%</div>
+                            <div style="font-size: 0.8rem; color: #64748b; margin-top: 5px;">Psychological Safety</div>
+                        </div>
+                        <div style="text-align: center; min-width: 120px;">
+                            <div style="color: #dc2626; font-weight: bold; font-size: 1.5rem;">48%</div>
+                            <div style="font-size: 0.8rem; color: #64748b; margin-top: 5px;">Decision Making</div>
+                        </div>
+                        <div style="text-align: center; min-width: 120px;">
+                            <div style="color: #fbbf24; font-weight: bold; font-size: 1.5rem;">71%</div>
+                            <div style="font-size: 0.8rem; color: #64748b; margin-top: 5px;">Change Adaptability</div>
+                        </div>
+                        <div style="text-align: center; min-width: 120px;">
+                            <div style="color: #059669; font-weight: bold; font-size: 1.5rem;">78%</div>
+                            <div style="font-size: 0.8rem; color: #64748b; margin-top: 5px;">Performance Standards</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div>
+                        <h3 style="color: #059669; margin-bottom: 15px;">🏆 Organizational Strengths</h3>
+                        <div class="strength">
+                            <strong>Team Collaboration (82%)</strong><br>
+                            Excellent cross-functional teamwork and information sharing
+                        </div>
+                        <div class="strength">
+                            <strong>Performance Standards (78%)</strong><br>
+                            Clear expectations with strong accountability systems
+                        </div>
+                        <div class="strength">
+                            <strong>Change Adaptability (71%)</strong><br>
+                            Good ability to adapt to new challenges and opportunities
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="color: #dc2626; margin-bottom: 15px;">🎯 Improvement Opportunities</h3>
+                        <div class="challenge">
+                            <strong>Decision Making (48%)</strong><br>
+                            Slow, unclear decision-making creates bottlenecks - Priority for improvement
+                        </div>
+                        <div class="challenge">
+                            <strong>Psychological Safety (65%)</strong><br>
+                            Mixed environment where some feel safe to speak up while others remain guarded
+                        </div>
+                        <div class="challenge">
+                            <strong>Communication (58%)</strong><br>
+                            Inconsistent communication affecting transparency and clarity
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recommendations">
+                    <h3 style="color: #1e3a8a; margin-bottom: 15px;">🚀 Organizational Improvement Recommendations</h3>
+                    <div style="margin-bottom: 15px; padding: 15px; background: #ffffff; border-radius: 6px; border: 1px solid #e5e7eb;">
+                        <div style="font-weight: 600; color: #1e3a8a; margin-bottom: 8px;">Decision Making (48%)</div>
+                        <div>Establish clear decision-making frameworks (like RACI) and delegate authority to appropriate levels.</div>
+                    </div>
+                    <div style="margin-bottom: 15px; padding: 15px; background: #ffffff; border-radius: 6px; border: 1px solid #e5e7eb;">
+                        <div style="font-weight: 600; color: #1e3a8a; margin-bottom: 8px;">Psychological Safety (65%)</div>
+                        <div>Implement regular pulse surveys and anonymous feedback mechanisms to gauge psychological safety levels.</div>
+                    </div>
+                </div>
+
+                <div style="background: #fffbeb; padding: 20px; border-radius: 12px; border-left: 4px solid #fbbf24;">
+                    <h3 style="color: #92400e; margin-bottom: 15px;">💡 Leadership Impact Insights</h3>
+                    <div style="color: #f59e0b; font-weight: 600; margin-bottom: 10px;">⚡ Growing Organization</div>
+                    <p style="margin-bottom: 10px;">Your organization shows solid performance with opportunities for improvement (67% average). There are clear pathways to enhance effectiveness.</p>
+                    <p><strong>Leadership Opportunity:</strong> Your individual leadership skills can significantly impact organizational performance by addressing key improvement areas like decision-making and communication.</p>
+                </div>
+            </div>
+
+            <!-- Executive Team Dashboard -->
+            <div class="dashboard-section" id="executiveDashboard">
+                <h2 class="section-title">Executive Team Leadership Dashboard</h2>
+                
+                <div style="background: #f0f9ff; padding: 25px; border-radius: 12px; margin-bottom: 25px;">
+                    <h3 style="color: #1e3a8a; margin-bottom: 15px;">Team Overview</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; text-align: center;">
+                        <div>
+                            <div style="font-size: 2rem; font-weight: bold; color: #3b82f6;">5</div>
+                            <div style="color: #64748b;">Team Members</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 2rem; font-weight: bold; color: #059669;">4</div>
+                            <div style="color: #64748b;">Completed</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 2rem; font-weight: bold; color: #f59e0b;">75%</div>
+                            <div style="color: #64748b;">Avg Score</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 2rem; font-weight: bold; color: #dc2626;">1</div>
+                            <div style="color: #64748b;">Pending</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-heatmap">
+                    <h3 style="color: #1e3a8a; margin-bottom: 20px;">Leadership Competency Heat Map</h3>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: #f8fafc;">
+                                    <th style="padding: 12px; text-align: left; border: 1px solid #e5e7eb;">Executive</th>
+                                    <th style="padding: 12px; text-align: center; border: 1px solid #e5e7eb;">Relationship</th>
+                                    <th style="padding: 12px; text-align: center; border: 1px solid #e5e7eb;">Communication</th>
+                                    <th style="padding: 12px; text-align: center; border: 1px solid #e5e7eb;">Coaching</th>
+                                    <th style="padding: 12px; text-align: center; border: 1px solid #e5e7eb;">Performance</th>
+                                    <th style="padding: 12px; text-align: center; border: 1px solid #e5e7eb;">Mindset</th>
+                                    <th style="padding: 12px; text-align: center; border: 1px solid #e5e7eb;">Ownership</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; font-weight: 600;">Sarah Chen (CEO)</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #d1fae5; color: #059669; font-weight: bold;">92%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #d1fae5; color: #059669; font-weight: bold;">88%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #fef3c7; color: #f59e0b; font-weight: bold;">76%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #d1fae5; color: #059669; font-weight: bold;">85%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #d1fae5; color: #059669; font-weight: bold;">95%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #fef3c7; color: #f59e0b; font-weight: bold;">72%</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; font-weight: 600;">Mike Rodriguez (COO)</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #fef3c7; color: #f59e0b; font-weight: bold;">68%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #fef3c7; color: #f59e0b; font-weight: bold;">71%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #fee2e2; color: #dc2626; font-weight: bold;">52%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #d1fae5; color: #059669; font-weight: bold;">91%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #fef3c7; color: #f59e0b; font-weight: bold;">74%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #d1fae5; color: #059669; font-weight: bold;">89%</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; font-weight: 600;">Lisa Thompson (CFO)</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #d1fae5; color: #059669; font-weight: bold;">83%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #d1fae5; color: #059669; font-weight: bold;">86%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #fef3c7; color: #f59e0b; font-weight: bold;">69%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #d1fae5; color: #059669; font-weight: bold;">88%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #fef3c7; color: #f59e0b; font-weight: bold;">77%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #d1fae5; color: #059669; font-weight: bold;">82%</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; font-weight: 600;">David Park (CTO)</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #fee2e2; color: #dc2626; font-weight: bold;">58%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #fef3c7; color: #f59e0b; font-weight: bold;">65%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #fee2e2; color: #dc2626; font-weight: bold;">45%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #fef3c7; color: #f59e0b; font-weight: bold;">79%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #d1fae5; color: #059669; font-weight: bold;">92%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; background: #fef3c7; color: #f59e0b; font-weight: bold;">71%</td>
+                                </tr>
+                                <tr style="background: #f8fafc;">
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; font-weight: 600;">Team Average</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; font-weight: bold; color: #3b82f6;">75%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; font-weight: bold; color: #3b82f6;">78%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; font-weight: bold; color: #3b82f6;">61%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; font-weight: bold; color: #3b82f6;">86%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; font-weight: bold; color: #3b82f6;">85%</td>
+                                    <td style="padding: 12px; border: 1px solid #e5e7eb; text-align: center; font-weight: bold; color: #3b82f6;">79%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div>
+                        <h3 style="color: #059669; margin-bottom: 15px;">🌟 Team Strengths</h3>
+                        <div class="exec-profile">
+                            <strong>Performance Management (86%)</strong><br>
+                            Strong across all executives with excellent results delivery
+                        </div>
+                        <div class="exec-profile">
+                            <strong>Mindset & Energy (85%)</strong><br>
+                            Leadership team maintains positive outlook and resilience
+                        </div>
+                        <div class="exec-profile">
+                            <strong>Ownership & Accountability (79%)</strong><br>
+                            Good accountability culture with clear ownership
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="color: #dc2626; margin-bottom: 15px;">🎯 Development Priorities</h3>
+                        <div class="exec-profile" style="border-left-color: #dc2626;">
+                            <strong>Coaching & Development (61%)</strong><br>
+                            Critical gap - focus on developing people leadership skills
+                        </div>
+                        <div class="exec-profile" style="border-left-color: #f59e0b;">
+                            <strong>Relationship Building (75%)</strong><br>
+                            Varies by executive - David needs focused development
+                        </div>
+                        <div class="exec-profile" style="border-left-color: #f59e0b;">
+                            <strong>Communication (78%)</strong><br>
+                            Good overall but opportunity to strengthen further
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #f0f9ff; padding: 25px; border-radius: 12px; margin: 25px 0;">
+                    <h3 style="color: #1e3a8a; margin-bottom: 15px;">📊 Board-Level Executive Summary</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                        <div style="text-align: center; padding: 15px; background: #ffffff; border-radius: 8px;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #3b82f6;">77%</div>
+                            <div style="color: #64748b;">Overall Team Effectiveness</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: #ffffff; border-radius: 8px;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #059669;">3</div>
+                            <div style="color: #64748b;">High Performers (80%+)</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: #ffffff; border-radius: 8px;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #f59e0b;">1</div>
+                            <div style="color: #64748b;">Development Focus</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: #ffffff; border-radius: 8px;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: #3b82f6;">2</div>
+                            <div style="color: #64748b;">Succession Ready</div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #ffffff; padding: 20px; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                        <h4 style="color: #1e3a8a; margin-bottom: 10px;">Strategic Recommendations</h4>
+                        <div style="margin-bottom: 10px;">• <strong>Immediate Priority:</strong> Implement executive coaching program focused on people development skills</div>
+                        <div style="margin-bottom: 10px;">• <strong>Succession Planning:</strong> Sarah Chen and Lisa Thompson are succession-ready for expanded roles</div>
+                        <div style="margin-bottom: 10px;">• <strong>Development Focus:</strong> David Park requires targeted leadership development support</div>
+                        <div>• <strong>Team Strength:</strong> Leverage exceptional performance management capabilities across organization</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showIndividualResults() {
+            hideAllDashboards();
+            document.getElementById('individualResults').classList.add('active');
+        }
+
+        function showOrgFeedback() {
+            hideAllDashboards();
+            document.getElementById('orgFeedback').classList.add('active');
+        }
+
+        function showExecutiveDashboard() {
+            hideAllDashboards();
+            document.getElementById('executiveDashboard').classList.add('active');
+        }
+
+        function hideAllDashboards() {
+            document.querySelectorAll('.dashboard-section').forEach(section => {
+                section.classList.remove('active');
+            });
+        }
+
+        // Show individual results by default
+        window.addEventListener('load', function() {
+            showIndividualResults();
+        });
+    </script>
+</body>
+</html>

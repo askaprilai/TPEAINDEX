@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Success - Positive Effect Leaders Assessment</title>
+    
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .success-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: #10b981;
+            margin-bottom: 20px;
+        }
+
+        .success-title {
+            font-size: 2rem;
+            color: #1e3a8a;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .success-message {
+            color: #4b5563;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .next-steps {
+            background: #f0f9ff;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #3b82f6;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .next-steps h3 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .next-steps ul {
+            color: #4b5563;
+            padding-left: 20px;
+        }
+
+        .next-steps li {
+            margin-bottom: 8px;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            transform: translateY(-2px);
+        }
+
+        .support-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 8px;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-icon">✅</div>
+        <h1 class="success-title">Payment Successful!</h1>
+        
+        <p class="success-message">
+            Thank you for your purchase! Your payment has been processed successfully.
+        </p>
+
+        <div class="next-steps">
+            <h3>📧 Check Your Email!</h3>
+            <div style="background: #f0f9ff; padding: 25px; border-radius: 12px; border-left: 4px solid #3b82f6; margin: 20px 0;">
+                <p style="color: #1e40af; font-size: 1.1rem; margin-bottom: 15px;"><strong>Your access codes are being sent now!</strong></p>
+                <ul style="color: #4b5563; line-height: 1.8;">
+                    <li><strong>Email Delivery:</strong> You'll receive an email within 2-3 minutes with your access codes</li>
+                    <li><strong>Team Distribution:</strong> For group packages, share the individual codes with your team members</li>
+                    <li><strong>How to Access:</strong> Each person goes to thepositiveeffectindex.com → Enter their code → Provide email → Start assessment</li>
+                    <li><strong>Support:</strong> Email april@aprilsabral.com if you need help</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Email Check Reminder -->
+        <div style="background: #fef3c7; padding: 20px; border-radius: 8px; border-left: 4px solid #fbbf24; margin: 20px 0;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="font-size: 2rem;">📧</div>
+                <div>
+                    <h4 style="color: #92400e; margin-bottom: 5px;">Don't see the email?</h4>
+                    <p style="color: #78350f; font-size: 0.9rem; margin: 0;">Check your spam folder • Wait 5 minutes • Contact april@aprilsabral.com</p>
+                </div>
+            </div>
+        </div>
+
+        <a href="/" class="cta-button">
+            Access Your Assessment
+        </a>
+
+        <div class="support-info">
+            <strong>Need Support?</strong><br>
+            If you don't receive your email within 10 minutes, please contact us at april@aprilsabral.com<br>
+            We're here to ensure you have a smooth experience with your leadership assessment.
+        </div>
+    </div>
+
+    <script>
+        // Simple success page - webhook handles all fulfillment
+        
+        // Auto-redirect to main site after 60 seconds
+        setTimeout(() => {
+            if (confirm('Would you like to return to the main page?')) {
+                window.location.href = '/';
+            }
+        }, 60000);
+        
+        // Show current time for user reference
+        document.addEventListener('DOMContentLoaded', function() {
+            const timeElement = document.createElement('div');
+            timeElement.style.cssText = 'text-align: center; color: #6b7280; font-size: 0.9rem; margin-top: 20px;';
+            timeElement.textContent = 'Purchase completed at: ' + new Date().toLocaleTimeString();
+            document.querySelector('.success-container').appendChild(timeElement);
+        });
+    </script>
+</body>
+</html>

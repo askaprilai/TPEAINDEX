@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leadership Behavior Assessment - TPEAINDEX</title>
+    <style>
+        /* Base styles - keeping existing design */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
+            min-height: 100vh;
+            padding: 15px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: clamp(1.5rem, 5vw, 2.1rem);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .quiz-content {
+            padding: clamp(20px, 5vw, 35px);
+        }
+
+        .question {
+            display: none;
+            margin-bottom: 30px;
+        }
+
+        .question.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question h3 {
+            color: #1e3a8a;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .scenario-context {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-style: italic;
+            color: #6b7280;
+            border-left: 4px solid #fbbf24;
+        }
+
+        .choice-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .choice-option {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .choice-option:hover {
+            border-color: #fbbf24;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .choice-option.selected {
+            border-color: #1e3a8a;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .choice-text {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .choice-description {
+            color: #6b7280;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .nav-btn {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #1e40af;
+            transform: translateY(-1px);
+        }
+
+        .nav-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .progress-indicator {
+            text-align: center;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .framework-badge {
+            display: inline-block;
+            background: #fbbf24;
+            color: #1e3a8a;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Leadership Behavior Assessment</h1>
+            <p class="subtitle">Choose the response that sounds most like you</p>
+        </div>
+
+        <div class="quiz-content">
+            <!-- Question 1: SUPPORT -->
+            <div class="question active" data-question="1">
+                <div class="framework-badge">SUPPORT</div>
+                <h3>When a team member seems frustrated or upset, which approach sounds more like you?</h3>
+                <div class="scenario-context">
+                    You notice someone on your team appears stressed during a meeting
+                </div>
+                <div class="choice-options">
+                    <label class="choice-option" onclick="selectChoice(this, 'q1', 'supportive')">
+                        <input type="radio" name="q1" value="supportive" style="display: none;">
+                        <div class="choice-text">I make a mental note to check in with them privately later</div>
+                        <div class="choice-description">I want to understand what's happening and see how I can help</div>
+                    </label>
+                    <label class="choice-option" onclick="selectChoice(this, 'q1', 'task_focused')">
+                        <input type="radio" name="q1" value="task_focused" style="display: none;">
+                        <div class="choice-text">I focus on keeping the meeting productive and moving forward</div>
+                        <div class="choice-description">I believe it's best to address personal issues outside of team time</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 2: SUPPORT -->
+            <div class="question" data-question="2">
+                <div class="framework-badge">SUPPORT</div>
+                <h3>When someone makes a mistake that affects the team, which response sounds more like you?</h3>
+                <div class="scenario-context">
+                    A team member's error caused a delay in project delivery
+                </div>
+                <div class="choice-options">
+                    <label class="choice-option" onclick="selectChoice(this, 'q2', 'solution_focused')">
+                        <input type="radio" name="q2" value="solution_focused" style="display: none;">
+                        <div class="choice-text">"Let's figure out how to fix this and prevent it next time"</div>
+                        <div class="choice-description">I focus on learning from the situation and moving forward together</div>
+                    </label>
+                    <label class="choice-option" onclick="selectChoice(this, 'q2', 'accountability_focused')">
+                        <input type="radio" name="q2" value="accountability_focused" style="display: none;">
+                        <div class="choice-text">"We need to understand why this happened and ensure it doesn't repeat"</div>
+                        <div class="choice-description">I believe in clear accountability and understanding root causes</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 3: SUPPORT -->
+            <div class="question" data-question="3">
+                <div class="framework-badge">SUPPORT</div>
+                <h3>When you hear someone criticizing a colleague's work style, which sounds more like you?</h3>
+                <div class="scenario-context">
+                    "Sarah's desk is always messy - I don't know how she gets anything done"
+                </div>
+                <div class="choice-options">
+                    <label class="choice-option" onclick="selectChoice(this, 'q3', 'redirect_positive')">
+                        <input type="radio" name="q3" value="redirect_positive" style="display: none;">
+                        <div class="choice-text">"Everyone has different work styles - what matters is that Sarah delivers great results"</div>
+                        <div class="choice-description">I tend to redirect focus to what people do well</div>
+                    </label>
+                    <label class="choice-option" onclick="selectChoice(this, 'q3', 'stay_neutral')">
+                        <input type="radio" name="q3" value="stay_neutral" style="display: none;">
+                        <div class="choice-text">I listen but don't engage in the criticism</div>
+                        <div class="choice-description">I prefer to stay out of conversations about others' personal habits</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 4: RESPONSIBLE -->
+            <div class="question" data-question="4">
+                <div class="framework-badge">RESPONSIBLE</div>
+                <h3>When making a decision that affects multiple departments, which approach sounds more like you?</h3>
+                <div class="scenario-context">
+                    You need to implement a new process that will change how several teams work
+                </div>
+                <div class="choice-options">
+                    <label class="choice-option" onclick="selectChoice(this, 'q4', 'collaborative')">
+                        <input type="radio" name="q4" value="collaborative" style="display: none;">
+                        <div class="choice-text">I gather input from all affected teams before deciding</div>
+                        <div class="choice-description">I want to understand the impact on everyone involved</div>
+                    </label>
+                    <label class="choice-option" onclick="selectChoice(this, 'q4', 'efficient')">
+                        <input type="radio" name="q4" value="efficient" style="display: none;">
+                        <div class="choice-text">I make the decision based on what's best for the overall goal</div>
+                        <div class="choice-description">I focus on what will drive the best results for the organization</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 5: RESPONSIBLE -->
+            <div class="question" data-question="5">
+                <div class="framework-badge">RESPONSIBLE</div>
+                <h3>When you realize you made an error in judgment, which sounds more like you?</h3>
+                <div class="scenario-context">
+                    You discover that a decision you made last week wasn't the best choice
+                </div>
+                <div class="choice-options">
+                    <label class="choice-option" onclick="selectChoice(this, 'q5', 'own_it')">
+                        <input type="radio" name="q5" value="own_it" style="display: none;">
+                        <div class="choice-text">I address it directly with the team and explain what I learned</div>
+                        <div class="choice-description">I believe owning mistakes builds trust and shows growth</div>
+                    </label>
+                    <label class="choice-option" onclick="selectChoice(this, 'q5', 'course_correct')">
+                        <input type="radio" name="q5" value="course_correct" style="display: none;">
+                        <div class="choice-text">I quietly adjust course and implement the better approach</div>
+                        <div class="choice-description">I focus on fixing the issue without creating unnecessary drama</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Continue with more questions following this pattern... -->
+            <!-- This is just the beginning structure to show the new format -->
+
+            <div class="navigation">
+                <button class="nav-btn" id="prevBtn" onclick="previousQuestion()" disabled>Previous</button>
+                <div class="progress-indicator">
+                    <span id="currentQ">1</span> of <span id="totalQ">25</span>
+                </div>
+                <button class="nav-btn" id="nextBtn" onclick="nextQuestion()" disabled>Next</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = 1;
+        let totalQuestions = 25; // Reduced from 35 for better user experience
+        let answers = {};
+
+        function selectChoice(element, questionName, value) {
+            // Remove selection from all options for this question
+            const allOptions = element.closest('.choice-options').querySelectorAll('.choice-option');
+            allOptions.forEach(option => option.classList.remove('selected'));
+            
+            // Select this option
+            element.classList.add('selected');
+            element.querySelector('input').checked = true;
+            
+            // Store answer
+            answers[questionName] = value;
+            
+            // Enable next button
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions) {
+                // Hide current question
+                document.querySelector(`.question[data-question="${currentQuestion}"]`).classList.remove('active');
+                
+                // Show next question
+                currentQuestion++;
+                const nextQ = document.querySelector(`.question[data-question="${currentQuestion}"]`);
+                if (nextQ) {
+                    nextQ.classList.add('active');
+                }
+                
+                // Update navigation
+                updateNavigation();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 1) {
+                // Hide current question
+                document.querySelector(`.question[data-question="${currentQuestion}"]`).classList.remove('active');
+                
+                // Show previous question
+                currentQuestion--;
+                document.querySelector(`.question[data-question="${currentQuestion}"]`).classList.add('active');
+                
+                // Update navigation
+                updateNavigation();
+            }
+        }
+
+        function updateNavigation() {
+            // Update progress indicator
+            document.getElementById('currentQ').textContent = currentQuestion;
+            
+            // Update button states
+            document.getElementById('prevBtn').disabled = (currentQuestion === 1);
+            
+            // Check if current question is answered
+            const currentAnswer = answers[`q${currentQuestion}`];
+            document.getElementById('nextBtn').disabled = !currentAnswer;
+            
+            // Change to "Finish" on last question
+            if (currentQuestion === totalQuestions) {
+                document.getElementById('nextBtn').textContent = 'Complete Assessment';
+                document.getElementById('nextBtn').onclick = completeAssessment;
+            }
+        }
+
+        function completeAssessment() {
+            // Process results and show feedback
+            alert('Assessment complete! Results processing would happen here.');
+        }
+
+        // Initialize
+        updateNavigation();
+    </script>
+</body>
+</html>

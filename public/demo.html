@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positive Effect Leaders Assessment - FREE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            min-height: 100vh;
+            padding: 15px;
+            line-height: 1.6;
+        }
+
+        .demo-banner {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #1e3a8a;
+            text-align: center;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+            margin-bottom: 20px;
+            border-radius: 12px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: clamp(1.8rem, 5vw, 2.3rem);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .header .subtitle {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .value-prop {
+            background: rgba(251, 191, 36, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .framework-overview {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .framework-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .quiz-content {
+            padding: 30px;
+        }
+
+        .progress-bar {
+            background: #e5e7eb;
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            height: 100%;
+            width: 4%;
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .question {
+            display: none;
+            margin-bottom: 30px;
+        }
+
+        .question.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question h3 {
+            color: #1e3a8a;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .question-number {
+            color: #fbbf24;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .question-category {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 15px;
+            margin-bottom: 10px;
+        }
+
+        .category-support { background: #fce7f3; color: #be185d; }
+        .category-responsible { background: #ddd6fe; color: #7c3aed; }
+        .category-selfless { background: #dbeafe; color: #1d4ed8; }
+        .category-accountability { background: #fef3c7; color: #d97706; }
+
+        .scenario-context {
+            display: none;
+        }
+
+        .answers {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .answer-option {
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: left;
+        }
+
+        .answer-option:hover {
+            border-color: #fbbf24;
+            background: #fefbf3;
+        }
+
+        .answer-option.selected {
+            border-color: #1e3a8a;
+            background: #eff6ff;
+            box-shadow: 0 2px 8px rgba(30, 58, 138, 0.15);
+        }
+
+        .answer-text {
+            font-weight: 500;
+            color: #374151;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e5e7eb;
+        }
+
+        .nav-btn {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 110px;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #1e40af;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .progress-indicator {
+            text-align: center;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .current {
+            color: #1e3a8a;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .results {
+            display: none;
+            padding: 30px;
+        }
+
+        .results.active {
+            display: block;
+        }
+
+        .results h2 {
+            color: #1e3a8a;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .score-display {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border: 2px solid #fbbf24;
+            text-align: center;
+        }
+
+        .framework-scores {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .framework-score {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid;
+            text-align: center;
+        }
+
+        .framework-score.support { border-top-color: #be185d; }
+        .framework-score.responsible { border-top-color: #7c3aed; }
+        .framework-score.selfless { border-top-color: #1d4ed8; }
+        .framework-score.accountability { border-top-color: #d97706; }
+
+        .framework-score h3 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .score-value {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .score-description {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .response-summary {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border-left: 4px solid #fbbf24;
+        }
+
+        .response-summary h3 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .response-category {
+            margin-bottom: 25px;
+        }
+
+        .response-category h4 {
+            color: #374151;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .response-list {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid;
+        }
+
+        .response-list.support { border-left-color: #be185d; }
+        .response-list.responsible { border-left-color: #7c3aed; }
+        .response-list.selfless { border-left-color: #1d4ed8; }
+        .response-list.accountability { border-left-color: #d97706; }
+
+        .response-item {
+            margin-bottom: 8px;
+            color: #4b5563;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .response-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .demo-cta {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            text-align: center;
+            color: #1e3a8a;
+        }
+
+        .demo-cta h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .demo-cta p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #1e3a8a;
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #1e40af;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .quiz-content {
+                padding: 20px;
+            }
+            
+            .answers {
+                gap: 6px;
+            }
+            
+            .answer-option {
+                padding: 15px;
+            }
+            
+            .nav-btn {
+                padding: 12px 20px;
+                min-width: 90px;
+            }
+
+            /* Make strengths/opportunities stack on mobile */
+            .response-summary div[style*="grid-template-columns"] {
+                display: block !important;
+            }
+            .response-summary div[style*="grid-template-columns"] > div {
+                margin-bottom: 20px;
+            }
+
+            /* Logo responsive design */
+            .header div[style*="flex"] {
+                flex-direction: row !important;
+                flex-wrap: wrap;
+            }
+            .header img {
+                height: 50px !important;
+                margin-right: 15px !important;
+                margin-bottom: 10px;
+            }
+            .header h1 {
+                font-size: 1.5rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-banner">
+        🎯 FREE COMPLETE ASSESSMENT - Full 25-Question Leadership Analysis
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                <img src="logo (1).png" alt="Company Logo" style="height: 60px; margin-right: 20px;">
+                <h1 style="margin: 0;">Positive Effect Leaders Assessment</h1>
+            </div>
+            <p class="subtitle">Select the response that best describes how you actually behave</p>
+            <div class="value-prop">
+                <div style="color: rgba(255,255,255,0.9); margin-bottom: 15px;">
+                    A comprehensive 25-question assessment measuring leadership effectiveness across six key dimensions
+                </div>
+                <div class="framework-overview">
+                    <div class="framework-item">PERFORMANCE</div>
+                    <div class="framework-item">RELATIONSHIP</div>
+                    <div class="framework-item">COMMUNICATION</div>
+                    <div class="framework-item">COACHING</div>
+                    <div class="framework-item">OWNERSHIP</div>
+                    <div class="framework-item">MINDSET</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quiz-content">
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <!-- All 25 Questions - Demo version without framework labels -->
+            <div class="question active" data-question="1">
+                <h3>
+                    <span class="question-number">1</span>
+                    <span class="question-text">When a team member appears stressed during a meeting, what's your typical response?</span>
+                </h3>
+                <div class="scenario-context">
+                    You notice someone seems overwhelmed and is unusually quiet
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(1, 5, this)">
+                        <div class="answer-text">I pause the meeting to check if they're okay and need support</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(1, 4, this)">
+                        <div class="answer-text">I make a mental note to speak with them privately after the meeting</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(1, 3, this)">
+                        <div class="answer-text">I continue the meeting but keep an eye on them</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(1, 2, this)">
+                        <div class="answer-text">I focus on keeping the meeting productive and moving forward</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="2">
+                <h3>
+                    <span class="question-number">2</span>
+                    <span class="question-text">When someone makes a mistake that impacts team deliverables, how do you typically respond?</span>
+                </h3>
+                <div class="scenario-context">
+                    A team member's error has caused a project delay
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(2, 5, this)">
+                        <div class="answer-text">Let me work together with them to fix this and learn from it</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(2, 4, this)">
+                        <div class="answer-text">I ask what support they need to prevent this in the future</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(2, 3, this)">
+                        <div class="answer-text">I focus on fixing it now and discussing prevention later</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(2, 2, this)">
+                        <div class="answer-text">I focus on understanding why this happened and ensuring accountability</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="3">
+                <h3>
+                    <span class="question-number">3</span>
+                    <span class="question-text">When you hear someone criticizing a colleague's work style, what do you typically do?</span>
+                </h3>
+                <div class="scenario-context">
+                    "Sarah's always disorganized - I don't know how she gets anything done"
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(3, 5, this)">
+                        <div class="answer-text">I defend Sarah by highlighting her different strengths and results</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(3, 4, this)">
+                        <div class="answer-text">I redirect the conversation to focus on work style differences being normal</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(3, 3, this)">
+                        <div class="answer-text">I listen but don't engage in the criticism</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(3, 2, this)">
+                        <div class="answer-text">I agree with them - it's easier than challenging their perspective</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="4">
+                <h3>
+                    <span class="question-number">4</span>
+                    <span class="question-text">When giving feedback about a recurring issue, what's your usual approach?</span>
+                </h3>
+                <div class="scenario-context">
+                    You need to address a pattern you've noticed with a team member
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(4, 5, this)">
+                        <div class="answer-text">I ask them to help me understand what challenges they're facing</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(4, 4, this)">
+                        <div class="answer-text">I share what I've noticed and ask for their perspective</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(4, 3, this)">
+                        <div class="answer-text">I address what needs to change and share what I've observed</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(4, 2, this)">
+                        <div class="answer-text">I tell them this pattern needs to change and what must happen</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="5">
+                <h3>
+                    <span class="question-number">5</span>
+                    <span class="question-text">When someone disagrees with your idea in a meeting, how do you typically respond?</span>
+                </h3>
+                <div class="scenario-context">
+                    A colleague openly challenges your proposed solution
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(5, 5, this)">
+                        <div class="answer-text">I express interest and ask them to tell me more about their thinking</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(5, 4, this)">
+                        <div class="answer-text">I ask them to elaborate so I can understand their concerns</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(5, 3, this)">
+                        <div class="answer-text">I explain my reasoning and then ask to hear theirs</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(5, 2, this)">
+                        <div class="answer-text">I explain my reasoning and why I believe my approach is best</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="6">
+                <h3>
+                    <span class="question-number">6</span>
+                    <span class="question-text">When a team member is struggling with their workload, what do you typically do?</span>
+                </h3>
+                <div class="scenario-context">
+                    Someone mentions feeling overwhelmed with their current projects
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(6, 5, this)">
+                        <div class="answer-text">I ask what specific support they need and how I can help</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(6, 4, this)">
+                        <div class="answer-text">I suggest reviewing their priorities to see what we can adjust</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(6, 3, this)">
+                        <div class="answer-text">I let them know they can ask for help with prioritizing or delegating</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(6, 2, this)">
+                        <div class="answer-text">I suggest time management strategies and prioritization techniques</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="7">
+                <h3>
+                    <span class="question-number">7</span>
+                    <span class="question-text">When you notice tension between two team members, what's your approach?</span>
+                </h3>
+                <div class="scenario-context">
+                    Two colleagues are avoiding each other and communication has become strained
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(7, 5, this)">
+                        <div class="answer-text">I speak with each person privately to understand both perspectives</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(7, 4, this)">
+                        <div class="answer-text">I bring them together for a facilitated conversation</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(7, 3, this)">
+                        <div class="answer-text">I watch to see if it affects work before intervening</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(7, 2, this)">
+                        <div class="answer-text">I address it directly and establish ground rules for professional behavior</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="8">
+                <h3>
+                    <span class="question-number">8</span>
+                    <span class="question-text">When making a decision that affects multiple departments, what's your typical process?</span>
+                </h3>
+                <div class="scenario-context">
+                    You need to implement a new process that will change how several teams work
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(8, 5, this)">
+                        <div class="answer-text">I gather input from all affected teams before deciding</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(8, 4, this)">
+                        <div class="answer-text">I consult with key representatives from each affected area</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(8, 3, this)">
+                        <div class="answer-text">I research the impacts and make the decision based on overall needs</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(8, 2, this)">
+                        <div class="answer-text">I make the decision based on what's best for the overall goal</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="9">
+                <h3>
+                    <span class="question-number">9</span>
+                    <span class="question-text">When you realize you made an error in judgment, what's your typical response?</span>
+                </h3>
+                <div class="scenario-context">
+                    You discover that a decision you made last week wasn't the best choice
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(9, 5, this)">
+                        <div class="answer-text">I address it directly with the team and explain what I learned</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(9, 4, this)">
+                        <div class="answer-text">I acknowledge the mistake and involve others in finding a better solution</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(9, 3, this)">
+                        <div class="answer-text">I quietly adjust course and implement the better approach</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(9, 2, this)">
+                        <div class="answer-text">I focus on fixing the issue without drawing unnecessary attention</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="10">
+                <h3>
+                    <span class="question-number">10</span>
+                    <span class="question-text">When team members come to you with concerns about workload or stress, how do you help them reframe their mindset?</span>
+                </h3>
+                <div class="scenario-context">
+                    Several team members are feeling overwhelmed and losing confidence
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(10, 5, this)">
+                        <div class="answer-text">I help them see challenges as growth opportunities and celebrate their progress</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(10, 4, this)">
+                        <div class="answer-text">I remind them of past successes and build their confidence in their abilities</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(10, 3, this)">
+                        <div class="answer-text">I acknowledge their feelings and help them focus on solutions</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(10, 2, this)">
+                        <div class="answer-text">I tell them this is normal and they need to push through it</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="11">
+                <h3>
+                    <span class="question-number">11</span>
+                    <span class="question-text">When someone challenges your decision in a meeting, what's your typical response?</span>
+                </h3>
+                <div class="scenario-context">
+                    A team member openly questions a choice you made
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(11, 5, this)">
+                        <div class="answer-text">I welcome their perspective and explore their concerns</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(11, 4, this)">
+                        <div class="answer-text">I ask them to explain their thinking and consider alternatives</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(11, 3, this)">
+                        <div class="answer-text">I explain my reasoning and remain open to discussion</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(11, 2, this)">
+                        <div class="answer-text">I stand by my decision and explain why it's the right choice</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="12">
+                <h3>
+                    <span class="question-number">12</span>
+                    <span class="question-text">When communicating bad news to your team, how do you typically approach it?</span>
+                </h3>
+                <div class="scenario-context">
+                    You need to tell the team about budget cuts that will affect their projects
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(12, 5, this)">
+                        <div class="answer-text">I present the facts clearly and invite questions and concerns</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(12, 4, this)">
+                        <div class="answer-text">I explain the situation and work with them on solutions</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(12, 3, this)">
+                        <div class="answer-text">I deliver the message directly and focus on moving forward</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(12, 2, this)">
+                        <div class="answer-text">I present the decision and outline the next steps</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="13">
+                <h3>
+                    <span class="question-number">13</span>
+                    <span class="question-text">When someone asks for career advice, what's your typical approach?</span>
+                </h3>
+                <div class="scenario-context">
+                    A team member wants guidance on their professional development
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(13, 5, this)">
+                        <div class="answer-text">I ask about their goals and help them explore their own path</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(13, 4, this)">
+                        <div class="answer-text">I help them identify their strengths and development areas</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(13, 3, this)">
+                        <div class="answer-text">I share resources and connections that might help them</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(13, 2, this)">
+                        <div class="answer-text">I share my experience and suggest specific steps they could take</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="14">
+                <h3>
+                    <span class="question-number">14</span>
+                    <span class="question-text">When you don't know the answer to someone's question, what's your typical response?</span>
+                </h3>
+                <div class="scenario-context">
+                    Someone asks you something you're not sure about
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(14, 5, this)">
+                        <div class="answer-text">I admit I don't know and suggest we figure it out together</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(14, 4, this)">
+                        <div class="answer-text">I tell them I'll find out and get back to them with a good answer</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(14, 3, this)">
+                        <div class="answer-text">I offer what I do know and suggest where they might find more</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(14, 2, this)">
+                        <div class="answer-text">I connect them with someone who would know better</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="15">
+                <h3>
+                    <span class="question-number">15</span>
+                    <span class="question-text">When training someone new, what's your typical approach?</span>
+                </h3>
+                <div class="scenario-context">
+                    A new team member needs to learn a complex process
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(15, 5, this)">
+                        <div class="answer-text">I guide them through it step by step, letting them do the work</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(15, 4, this)">
+                        <div class="answer-text">I show them once, then watch as they try it themselves</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(15, 3, this)">
+                        <div class="answer-text">I demonstrate the process and provide detailed documentation</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(15, 2, this)">
+                        <div class="answer-text">I explain the key points and let them practice on their own</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="16">
+                <h3>
+                    <span class="question-number">16</span>
+                    <span class="question-text">When someone is struggling with a skill they need to develop, how do you typically help?</span>
+                </h3>
+                <div class="scenario-context">
+                    A team member is having difficulty with presentation skills
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(16, 5, this)">
+                        <div class="answer-text">I offer to practice with them and provide constructive feedback</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(16, 4, this)">
+                        <div class="answer-text">I help them break down what they want to improve and create a plan</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(16, 3, this)">
+                        <div class="answer-text">I recommend training resources and check in on their progress</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(16, 2, this)">
+                        <div class="answer-text">I share tips that have worked for me in similar situations</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="17">
+                <h3>
+                    <span class="question-number">17</span>
+                    <span class="question-text">When you see someone with potential who isn't being recognized, what's your typical response?</span>
+                </h3>
+                <div class="scenario-context">
+                    You notice a talented person whose contributions are being overlooked
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(17, 5, this)">
+                        <div class="answer-text">I look for opportunities to showcase their work to others</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(17, 4, this)">
+                        <div class="answer-text">I speak with them about their goals and how to increase visibility</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(17, 3, this)">
+                        <div class="answer-text">I mention their contributions in appropriate settings</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(17, 2, this)">
+                        <div class="answer-text">I encourage them to speak up more about their achievements</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="18">
+                <h3>
+                    <span class="question-number">18</span>
+                    <span class="question-text">When following up on commitments, what's your typical approach?</span>
+                </h3>
+                <div class="scenario-context">
+                    Someone said they'd have something done by today, but you haven't heard from them
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(18, 5, this)">
+                        <div class="answer-text">I check in to see how things are going and if they need support</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(18, 4, this)">
+                        <div class="answer-text">I ask about the status and if there are any obstacles</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(18, 3, this)">
+                        <div class="answer-text">I send a friendly reminder about the deadline</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(18, 2, this)">
+                        <div class="answer-text">I ask for a status update and new timeline if needed</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="19">
+                <h3>
+                    <span class="question-number">19</span>
+                    <span class="question-text">When recognizing team achievements, what's your typical approach?</span>
+                </h3>
+                <div class="scenario-context">
+                    Your team just delivered an important project successfully
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(19, 5, this)">
+                        <div class="answer-text">I highlight specific contributions and celebrate individual strengths</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(19, 4, this)">
+                        <div class="answer-text">I acknowledge both individual efforts and team collaboration</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(19, 3, this)">
+                        <div class="answer-text">I celebrate the team's collective achievement and shared success</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(19, 2, this)">
+                        <div class="answer-text">I focus on the results achieved and lessons learned</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="20">
+                <h3>
+                    <span class="question-number">20</span>
+                    <span class="question-text">When your team faces a significant setback, what's your first instinct?</span>
+                </h3>
+                <div class="scenario-context">
+                    A major project has failed to meet its deadline despite everyone's best efforts
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(20, 5, this)">
+                        <div class="answer-text">I focus on what we learned and how this makes us stronger for next time</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(20, 4, this)">
+                        <div class="answer-text">I look for the silver lining and help the team see new opportunities</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(20, 3, this)">
+                        <div class="answer-text">I acknowledge the disappointment but keep us focused on moving forward</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(20, 2, this)">
+                        <div class="answer-text">I feel frustrated and worry about how this affects our team's reputation</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="21">
+                <h3>
+                    <span class="question-number">21</span>
+                    <span class="question-text">When you're feeling overwhelmed by multiple priorities, how do you typically reframe the situation?</span>
+                </h3>
+                <div class="scenario-context">
+                    Everything feels urgent and you're not sure how you'll get it all done
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(21, 5, this)">
+                        <div class="answer-text">I see it as an opportunity to practice prioritization and build resilience</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(21, 4, this)">
+                        <div class="answer-text">I remind myself that I've handled tough situations before and can do it again</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(21, 3, this)">
+                        <div class="answer-text">I focus on what I can control and take things one step at a time</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(21, 2, this)">
+                        <div class="answer-text">I feel stressed and worry that I'm letting people down</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="22">
+                <h3>
+                    <span class="question-number">22</span>
+                    <span class="question-text">When unexpected problems arise during important projects, what's your first mental reaction?</span>
+                </h3>
+                <div class="scenario-context">
+                    Things are not going according to plan and stakeholders are asking questions
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(22, 5, this)">
+                        <div class="answer-text">I see it as a challenge that will make us stronger and smarter</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(22, 4, this)">
+                        <div class="answer-text">I focus on the solutions and opportunities this might create</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(22, 3, this)">
+                        <div class="answer-text">I acknowledge the problem but stay focused on what we can control</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(22, 2, this)">
+                        <div class="answer-text">I feel frustrated and worry about how this reflects on my leadership</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="23">
+                <h3>
+                    <span class="question-number">23</span>
+                    <span class="question-text">When someone is facing a personal challenge that affects their work, how do you typically respond?</span>
+                </h3>
+                <div class="scenario-context">
+                    A team member mentions they're dealing with a difficult family situation
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(23, 5, this)">
+                        <div class="answer-text">I ask how I can support them and what flexibility they might need</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(23, 4, this)">
+                        <div class="answer-text">I express concern and offer to adjust their workload temporarily</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(23, 3, this)">
+                        <div class="answer-text">I acknowledge their situation and remind them of available resources</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(23, 2, this)">
+                        <div class="answer-text">I thank them for letting me know and ask what adjustments we need to make</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="24">
+                <h3>
+                    <span class="question-number">24</span>
+                    <span class="question-text">When facing tight deadlines with multiple competing priorities, what's your mindset?</span>
+                </h3>
+                <div class="scenario-context">
+                    Everything seems urgent and there's not enough time to do it all perfectly
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(24, 5, this)">
+                        <div class="answer-text">I focus on what we can accomplish and find creative ways to make it work</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(24, 4, this)">
+                        <div class="answer-text">I prioritize ruthlessly and stay confident we'll deliver what matters most</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(24, 3, this)">
+                        <div class="answer-text">I try to balance optimism with realistic expectations about what's possible</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(24, 2, this)">
+                        <div class="answer-text">I worry about disappointing people and stress about what might go wrong</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="25">
+                <h3>
+                    <span class="question-number">25</span>
+                    <span class="question-text">When facing a major organizational change, what's your first instinct?</span>
+                </h3>
+                <div class="scenario-context">
+                    Your company announces a significant restructuring that will affect everyone
+                </div>
+                <div class="answers">
+                    <label class="answer-option" onclick="selectAnswer(25, 5, this)">
+                        <div class="answer-text">I focus on the opportunities this change could create for the team</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(25, 4, this)">
+                        <div class="answer-text">I look for ways to help people adapt and find the positives</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(25, 3, this)">
+                        <div class="answer-text">I prepare for both the challenges and potential benefits ahead</div>
+                    </label>
+                    <label class="answer-option" onclick="selectAnswer(25, 2, this)">
+                        <div class="answer-text">I immediately think about what could go wrong and how to protect the team</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results" id="results">
+                <h2>Your Leadership Behavior Profile - Demo Results</h2>
+                <div class="score-display">
+                    <p style="font-size: 1.1rem; color: #374151; margin-bottom: 15px;">
+                        This demo shows how your leadership behavioral tendencies are analyzed.
+                    </p>
+                    <p style="color: #6b7280;">
+                        The full assessment includes 25 comprehensive questions across all four leadership dimensions.
+                    </p>
+                </div>
+                <div class="framework-scores" id="frameworkScores">
+                    <!-- Demo scores will be populated here -->
+                </div>
+                
+                <!-- Response Summary Section -->
+                <div class="response-summary">
+                    <h3>Your Response Summary (Demo)</h3>
+                    <p style="color: #6b7280; margin-bottom: 20px; font-size: 0.95rem;">
+                        Here's a summary of how you responded in each leadership dimension:
+                    </p>
+                    <div id="responseSummary">
+                        <!-- Response summaries will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Leadership Insights Section -->
+                <div class="response-summary">
+                    <h3>Your Leadership Profile Analysis</h3>
+                    <p style="color: #6b7280; margin-bottom: 20px; font-size: 0.95rem;">
+                        Based on your behavioral choices, here's what your responses reveal about your leadership approach:
+                    </p>
+                    <div id="leadershipInsights">
+                        <!-- Leadership insights will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Strengths & Development Areas -->
+                <div class="response-summary">
+                    <h3>Strengths & Development Opportunities</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                        <div>
+                            <h4 style="color: #059669; margin-bottom: 12px; font-size: 1.1rem;">🎯 Your Leadership Strengths</h4>
+                            <div id="leadershipStrengths" class="response-list support">
+                                <!-- Strengths will be populated here -->
+                            </div>
+                        </div>
+                        <div>
+                            <h4 style="color: #dc2626; margin-bottom: 12px; font-size: 1.1rem;">⚡ Growth Opportunities</h4>
+                            <div id="growthOpportunities" class="response-list responsible">
+                                <!-- Growth opportunities will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Development Recommendations Section -->
+                <div class="response-summary">
+                    <h3>Personalized Development Plan</h3>
+                    <p style="color: #6b7280; margin-bottom: 20px; font-size: 0.95rem;">
+                        Specific actions you can take immediately to enhance your leadership effectiveness:
+                    </p>
+                    <div id="developmentRecommendations">
+                        <!-- Development recommendations will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Demo CTA -->
+                <div class="demo-cta">
+                    <h3>Ready to Transform Your Leadership Impact?</h3>
+                    <p>
+                        You've just completed the full Positive Effect Leaders Assessment - 25 comprehensive questions that revealed key insights about your leadership style across all 6 dimensions of effective leadership.
+                    </p>
+                    <p style="margin-top: 15px; font-weight: 600;">
+                        Want to dive deeper into your results and create a personalized 90-day development plan?
+                    </p>
+                    <a href="https://calendly.com/aprilcoaching/askaprilcourses" class="cta-button" target="_blank">
+                        Schedule Your Leadership Development Consultation
+                    </a>
+                </div>
+
+                <div style="background: #f8fafc; padding: 25px; border-radius: 12px; margin-top: 30px; border-left: 4px solid #fbbf24;">
+                    <h3 style="color: #1e3a8a; margin-bottom: 15px;">About This Assessment</h3>
+                    <p style="color: #4b5563; line-height: 1.6;">
+                        This behavioral leadership assessment uses scenario-based questions to provide authentic insights into your natural leadership tendencies. 
+                        The full version includes deeper analysis, personalized development recommendations, and comprehensive skill development planning.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="navigation">
+                <button class="nav-btn" id="prevBtn" onclick="previousQuestion()" disabled>Previous</button>
+                <div class="progress-indicator">
+                    Question <span class="current" id="currentQ">1</span> of <span id="totalQ">25</span>
+                </div>
+                <button class="nav-btn" id="nextBtn" onclick="nextQuestion()" disabled>Next</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = 1;
+        let totalQuestions = 25; // Full demo version with all 25 questions
+        let answers = {};
+        let responseTexts = {}; // Store the actual response text for summary
+
+        function selectAnswer(questionNum, value, element) {
+            // Remove selection from other options in this question
+            const questionDiv = document.querySelector(`[data-question="${questionNum}"]`);
+            const allOptions = questionDiv.querySelectorAll('.answer-option');
+            allOptions.forEach(option => option.classList.remove('selected'));
+            
+            // Select this option
+            element.classList.add('selected');
+            
+            // Store answer value and response text - use the display text from the element
+            answers[questionNum] = value;
+            responseTexts[questionNum] = element.querySelector('.answer-text').textContent;
+            
+            // Enable next button
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions) {
+                // Hide current question
+                document.querySelector(`[data-question="${currentQuestion}"]`).classList.remove('active');
+                
+                // Show next question
+                currentQuestion++;
+                document.querySelector(`[data-question="${currentQuestion}"]`).classList.add('active');
+                
+                updateNavigation();
+                updateProgress();
+            } else {
+                // Show results
+                showResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 1) {
+                // Hide current question
+                document.querySelector(`[data-question="${currentQuestion}"]`).classList.remove('active');
+                
+                // Show previous question
+                currentQuestion--;
+                document.querySelector(`[data-question="${currentQuestion}"]`).classList.add('active');
+                
+                updateNavigation();
+                updateProgress();
+            }
+        }
+
+        function updateNavigation() {
+            // Update progress indicator
+            document.getElementById('currentQ').textContent = currentQuestion;
+            
+            // Update button states
+            document.getElementById('prevBtn').disabled = (currentQuestion === 1);
+            
+            // Check if current question is answered
+            const currentAnswer = answers[currentQuestion];
+            document.getElementById('nextBtn').disabled = !currentAnswer;
+            
+            // Change to "Complete" on last question
+            if (currentQuestion === totalQuestions) {
+                document.getElementById('nextBtn').textContent = 'Complete Demo';
+            } else {
+                document.getElementById('nextBtn').textContent = 'Next';
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentQuestion / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function showResults() {
+            // Hide all questions and navigation
+            document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
+            document.querySelector('.navigation').style.display = 'none';
+            document.querySelector('.progress-bar').style.display = 'none';
+            
+            // Calculate demo scores
+            const scores = calculateDemoScores();
+            
+            // Show results
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.classList.add('active');
+            
+            // Display framework scores and comprehensive analysis
+            displayFrameworkScores(scores);
+            displayResponseSummary();
+            displayLeadershipInsights(scores);
+            displayStrengthsAndOpportunities(scores);
+            displayDevelopmentRecommendations(scores);
+        }
+
+        function calculateDemoScores() {
+            const scores = {
+                performance: 0,
+                relationship: 0,
+                communication: 0,
+                coaching: 0,
+                ownership: 0,
+                mindset: 0
+            };
+
+            // Updated question mapping to new Positive Effect Leaders framework with enhanced mindset focus
+            const questionMapping = {
+                1: 'relationship', 2: 'relationship', 3: 'relationship', 4: 'communication', 5: 'communication',
+                6: 'relationship', 7: 'relationship', 8: 'ownership', 9: 'performance', 10: 'mindset',
+                11: 'communication', 12: 'communication', 13: 'coaching', 14: 'coaching', 15: 'coaching',
+                16: 'coaching', 17: 'coaching', 18: 'ownership', 19: 'performance', 20: 'mindset',
+                21: 'mindset', 22: 'mindset', 23: 'performance', 24: 'mindset', 25: 'mindset'
+            };
+
+            // Calculate raw scores
+            Object.keys(answers).forEach(questionNum => {
+                const framework = questionMapping[questionNum];
+                const score = answers[questionNum];
+                
+                if (framework && scores.hasOwnProperty(framework)) {
+                    scores[framework] += score;
+                }
+            });
+
+            // Convert to percentages - distribute questions with enhanced mindset focus
+            const questionCounts = { 
+                performance: 3, 
+                relationship: 5, 
+                communication: 4, 
+                coaching: 5, 
+                ownership: 2, 
+                mindset: 6 
+            };
+            Object.keys(scores).forEach(framework => {
+                const maxPossible = questionCounts[framework] * 5;
+                scores[framework] = Math.round((scores[framework] / maxPossible) * 100);
+            });
+
+            return scores;
+        }
+
+        function displayFrameworkScores(scores) {
+            const scoresContainer = document.getElementById('frameworkScores');
+            scoresContainer.innerHTML = '';
+
+            const frameworks = [
+                { key: 'performance', name: 'PERFORMANCE & GROWTH MANAGER', class: 'performance', desc: 'Aligns goals to KPIs, runs performance conversations' },
+                { key: 'relationship', name: 'RELATIONSHIP BUILDER', class: 'relationship', desc: 'Creates psychological safety and belonging' },
+                { key: 'communication', name: 'POSITIVE-INTENT COMMUNICATOR', class: 'communication', desc: 'Deepens connection skills with empathy' },
+                { key: 'coaching', name: 'COACH & PEOPLE DEVELOPER', class: 'coaching', desc: 'Listens to learn, asks profound questions' },
+                { key: 'ownership', name: 'OWNERSHIP & ACCOUNTABILITY DRIVER', class: 'ownership', desc: 'Sets crystal-clear expectations and standards' },
+                { key: 'mindset', name: 'MINDSET & ENERGY STEWARD', class: 'mindset', desc: 'Models calm under pressure, manages energy' }
+            ];
+
+            frameworks.forEach(framework => {
+                const scoreDiv = document.createElement('div');
+                scoreDiv.className = `framework-score ${framework.class}`;
+                scoreDiv.innerHTML = `
+                    <h3>${framework.name}</h3>
+                    <div class="score-value">${scores[framework.key] || 0}%</div>
+                    <div class="score-description">${framework.desc}</div>
+                `;
+                scoresContainer.appendChild(scoreDiv);
+            });
+        }
+
+        function displayResponseSummary() {
+            const summaryContainer = document.getElementById('responseSummary');
+            
+            // Updated question mapping to new framework
+            const questionMapping = {
+                1: 'relationship', 2: 'relationship', 3: 'relationship', 4: 'communication', 5: 'communication',
+                6: 'relationship', 7: 'relationship', 8: 'ownership', 9: 'ownership', 10: 'performance',
+                11: 'communication', 12: 'communication', 13: 'coaching', 14: 'coaching', 15: 'coaching',
+                16: 'coaching', 17: 'coaching', 18: 'ownership', 19: 'ownership', 20: 'performance',
+                21: 'performance', 22: 'mindset', 23: 'relationship', 24: 'mindset', 25: 'mindset'
+            };
+
+            // Group responses by framework
+            const responsesByFramework = {
+                performance: [],
+                relationship: [],
+                communication: [],
+                coaching: [],
+                ownership: [],
+                mindset: []
+            };
+
+            Object.keys(responseTexts).forEach(questionNum => {
+                const framework = questionMapping[questionNum];
+                if (framework && responsesByFramework[framework]) {
+                    responsesByFramework[framework].push(responseTexts[questionNum]);
+                }
+            });
+
+            // Display responses for each framework that has responses
+            const frameworkNames = {
+                performance: 'PERFORMANCE & GROWTH MANAGER',
+                relationship: 'RELATIONSHIP BUILDER',
+                communication: 'POSITIVE-INTENT COMMUNICATOR',
+                coaching: 'COACH & PEOPLE DEVELOPER',
+                ownership: 'OWNERSHIP & ACCOUNTABILITY DRIVER',
+                mindset: 'MINDSET & ENERGY STEWARD'
+            };
+
+            Object.keys(responsesByFramework).forEach(framework => {
+                if (responsesByFramework[framework].length > 0) {
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.className = 'response-category';
+                    
+                    const title = document.createElement('h4');
+                    title.textContent = frameworkNames[framework];
+                    categoryDiv.appendChild(title);
+                    
+                    const responseList = document.createElement('div');
+                    responseList.className = `response-list ${framework}`;
+                    
+                    responsesByFramework[framework].forEach(response => {
+                        const responseItem = document.createElement('div');
+                        responseItem.className = 'response-item';
+                        responseItem.textContent = `• ${response}`;
+                        responseList.appendChild(responseItem);
+                    });
+                    
+                    categoryDiv.appendChild(responseList);
+                    summaryContainer.appendChild(categoryDiv);
+                }
+            });
+        }
+
+        function displayLeadershipInsights(scores) {
+            const insightsContainer = document.getElementById('leadershipInsights');
+            
+            // Analyze the leadership profile based on scores
+            const sortedScores = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+            const dominant = sortedScores[0][0];
+            const secondary = sortedScores[1][0];
+            
+            const insights = {
+                performance: {
+                    high: "You excel as a Performance & Growth Manager, linking behavior to outcomes and building development plans. Your team knows how their work connects to bigger goals.",
+                    moderate: "You balance performance management with other leadership priorities, addressing development when needed."
+                },
+                relationship: {
+                    high: "You're a natural Relationship Builder who creates psychological safety and deep connections. Your team feels safe to take risks and share ideas.",
+                    moderate: "You build relationships while balancing other demands, creating connection when situations require it."
+                },
+                communication: {
+                    high: "You're a Positive-Intent Communicator who assumes best intentions and creates belonging. Your team feels heard and valued in interactions.",
+                    moderate: "You communicate with positive intent when possible, balancing directness with empathy based on the situation."
+                },
+                coaching: {
+                    high: "You're a skilled Coach & People Developer who asks profound questions and unlocks thinking. Your team develops strong problem-solving capabilities.",
+                    moderate: "You balance coaching with directing, knowing when to guide thinking and when to provide answers."
+                },
+                ownership: {
+                    high: "You're an Ownership & Accountability Driver who sets crystal-clear expectations and follows through reliably. Your team knows exactly what's expected.",
+                    moderate: "You drive ownership and accountability when needed, balancing clear expectations with flexibility."
+                },
+                mindset: {
+                    high: "You're a Mindset & Energy Steward who stays calm under pressure and reframes setbacks as learning. Your team stays resilient and future-focused.",
+                    moderate: "You manage mindset and energy reasonably well, staying relatively calm while working to maintain team morale."
+                }
+            };
+
+            // Create insight based on dominant style
+            const insight = insights[dominant]?.[scores[dominant] > 75 ? 'high' : 'moderate'] || 
+                           "Your leadership style shows a balanced approach across multiple dimensions.";
+            
+            const insightDiv = document.createElement('div');
+            insightDiv.className = 'response-item';
+            insightDiv.innerHTML = `
+                <div style="background: #f0f9ff; padding: 20px; border-radius: 10px; border-left: 4px solid #0284c7;">
+                    <h4 style="color: #0284c7; margin-bottom: 10px;">Your Leadership Signature</h4>
+                    <p style="color: #374151; line-height: 1.6; margin: 0;">${insight}</p>
+                </div>
+            `;
+            insightsContainer.appendChild(insightDiv);
+
+            // Add behavioral pattern insight
+            const mindsetScores = [22, 24, 25].map(q => answers[q]).filter(Boolean);
+            const avgMindset = mindsetScores.length > 0 ? 
+                mindsetScores.reduce((sum, score) => sum + score, 0) / mindsetScores.length : 3;
+
+            const mindsetInsight = avgMindset >= 4 ? 
+                "You demonstrate a growth mindset and optimistic approach to challenges, which helps your team stay resilient during difficult times." :
+                "You may tend toward caution or worry in challenging situations, which can sometimes limit your team's willingness to take risks or innovate.";
+
+            const mindsetDiv = document.createElement('div');
+            mindsetDiv.className = 'response-item';
+            mindsetDiv.innerHTML = `
+                <div style="background: #f9fafb; padding: 20px; border-radius: 10px; border-left: 4px solid #6b7280; margin-top: 15px;">
+                    <h4 style="color: #374151; margin-bottom: 10px;">Your Mindset Pattern</h4>
+                    <p style="color: #374151; line-height: 1.6; margin: 0;">${mindsetInsight}</p>
+                </div>
+            `;
+            insightsContainer.appendChild(mindsetDiv);
+        }
+
+        function displayStrengthsAndOpportunities(scores) {
+            const strengthsContainer = document.getElementById('leadershipStrengths');
+            const opportunitiesContainer = document.getElementById('growthOpportunities');
+            
+            // Sort scores to identify strengths (top 2) and opportunities (bottom 2)
+            const sortedScores = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+            const strengths = sortedScores.slice(0, 2);
+            const opportunities = sortedScores.slice(-2).reverse();
+
+            const strengthDescriptions = {
+                performance: "Aligning goals to KPIs and running effective performance conversations that drive growth",
+                relationship: "Creating psychological safety and building cross-functional alliances through genuine connection",
+                communication: "Communicating with positive intent and deepening connection through curiosity and empathy",
+                coaching: "Listening to learn and asking profound questions that unlock team members' thinking",
+                ownership: "Setting crystal-clear expectations and using systems to transfer ownership to the team",
+                mindset: "Modeling calm under pressure and reframing setbacks as learning opportunities"
+            };
+
+            const opportunityDescriptions = {
+                performance: "Strengthening the connection between individual goals and organizational KPIs",
+                relationship: "Building deeper psychological safety and cross-functional working relationships",
+                communication: "Developing stronger positive-intent communication and empathy skills",
+                coaching: "Enhancing coaching skills to better unlock team members' problem-solving abilities",
+                ownership: "Improving expectation-setting and accountability systems for better follow-through",
+                mindset: "Developing resilience and energy management skills for sustained high performance"
+            };
+
+            // Display strengths
+            strengths.forEach(([framework, score]) => {
+                if (score > 60) { // Only show as strength if reasonably high
+                    const strengthItem = document.createElement('div');
+                    strengthItem.className = 'response-item';
+                    strengthItem.innerHTML = `• ${strengthDescriptions[framework]} (${score}%)`;
+                    strengthsContainer.appendChild(strengthItem);
+                }
+            });
+
+            // Display opportunities
+            opportunities.forEach(([framework, score]) => {
+                if (score < 75) { // Only show as opportunity if there's room for growth
+                    const opportunityItem = document.createElement('div');
+                    opportunityItem.className = 'response-item';
+                    opportunityItem.innerHTML = `• ${opportunityDescriptions[framework]}`;
+                    opportunitiesContainer.appendChild(opportunityItem);
+                }
+            });
+        }
+
+        function displayDevelopmentRecommendations(scores) {
+            const recommendationsContainer = document.getElementById('developmentRecommendations');
+            
+            // Find the lowest scoring areas for development focus
+            const sortedScores = Object.entries(scores).sort((a, b) => a[1] - b[1]);
+            const lowestScore = sortedScores[0];
+            const secondLowest = sortedScores[1];
+            
+            // Development recommendations based on new Positive Effect Leaders framework
+            const recommendations = {
+                performance: {
+                    title: "Strengthen Performance & Growth Management",
+                    items: [
+                        "Connect individual goals more clearly to team and organizational KPIs",
+                        "Schedule regular performance conversations that focus on growth, not just evaluation",
+                        "Build development plans with clear succession pipelines for your team",
+                        "Document agreements and track progress against measurable outcomes"
+                    ]
+                },
+                relationship: {
+                    title: "Enhance Relationship Building Skills",
+                    items: [
+                        "Create more psychological safety by asking 'What haven't we considered?' in meetings",
+                        "Build cross-functional alliances by understanding other departments' challenges",
+                        "Deepen connection skills through curiosity, empathy, and genuine recognition",
+                        "Practice vulnerability - share your own learning experiences with the team"
+                    ]
+                },
+                communication: {
+                    title: "Develop Positive-Intent Communication",
+                    items: [
+                        "Assume positive intent in all interactions - ask 'What might they be trying to achieve?'",
+                        "Create more belonging by using 'we' language instead of 'you' when addressing issues",
+                        "Build empathy by reflecting back what you heard before responding",
+                        "Strengthen recognition skills - be specific about what behaviors you want to see more of"
+                    ]
+                },
+                coaching: {
+                    title: "Enhance Coaching & People Development",
+                    items: [
+                        "Ask more profound questions that unlock thinking instead of giving answers",
+                        "Use the 5-step coaching formula: Listen → Clarify → Explore → Plan → Commit",
+                        "Provide more feed-forward and stretch assignments that celebrate growth",
+                        "Focus on developing capabilities rather than just completing tasks"
+                    ]
+                },
+                ownership: {
+                    title: "Improve Ownership & Accountability Systems",
+                    items: [
+                        "Set crystal-clear expectations about who/what/when for all major decisions",
+                        "Delegate with guardrails - give autonomy within defined boundaries",
+                        "Build simple systems for accountability that team members can use reliably",
+                        "Transfer ownership gradually rather than dumping responsibility all at once"
+                    ]
+                },
+                mindset: {
+                    title: "Develop Mindset & Energy Stewardship",
+                    items: [
+                        "Practice calm under pressure - take 3 deep breaths before responding to stress",
+                        "Reframe setbacks as learning opportunities for the entire team",
+                        "Keep teams future-focused by discussing possibilities rather than dwelling on problems",
+                        "Manage your energy intentionally - model the energy you want to see"
+                    ]
+                }
+            };
+
+            // Show top 2 development areas
+            [lowestScore, secondLowest].forEach((scoreData, index) => {
+                const [framework, score] = scoreData;
+                const rec = recommendations[framework];
+                
+                if (rec && score < 80) { // Only show if there's room for improvement
+                    const recDiv = document.createElement('div');
+                    recDiv.className = 'response-category';
+                    
+                    const title = document.createElement('h4');
+                    title.textContent = `${index + 1}. ${rec.title}`;
+                    title.style.color = '#1e3a8a';
+                    title.style.marginBottom = '12px';
+                    recDiv.appendChild(title);
+                    
+                    const recList = document.createElement('div');
+                    recList.className = `response-list ${framework}`;
+                    
+                    rec.items.forEach(item => {
+                        const recItem = document.createElement('div');
+                        recItem.className = 'response-item';
+                        recItem.textContent = `• ${item}`;
+                        recList.appendChild(recItem);
+                    });
+                    
+                    recDiv.appendChild(recList);
+                    recommendationsContainer.appendChild(recDiv);
+                }
+            });
+
+            // Add mindset-specific recommendations based on responses
+            addMindsetRecommendations(recommendationsContainer);
+        }
+
+        function addMindsetRecommendations(container) {
+            // Check mindset responses (questions 22, 24, 25)
+            const mindsetResponses = [22, 24, 25].map(q => answers[q]).filter(Boolean);
+            const avgMindsetScore = mindsetResponses.length > 0 ? 
+                mindsetResponses.reduce((sum, score) => sum + score, 0) / mindsetResponses.length : 3;
+
+            if (avgMindsetScore < 4) {
+                const mindsetDiv = document.createElement('div');
+                mindsetDiv.className = 'response-category';
+                
+                const title = document.createElement('h4');
+                title.textContent = '3. Develop Growth Mindset and Resilience';
+                title.style.color = '#1e3a8a';
+                title.style.marginBottom = '12px';
+                mindsetDiv.appendChild(title);
+                
+                const mindsetList = document.createElement('div');
+                mindsetList.className = 'response-list support';
+                
+                const mindsetItems = [
+                    "Practice reframing challenges as opportunities for growth and learning",
+                    "Develop stress management techniques for high-pressure situations",
+                    "Focus on what you can control rather than worrying about uncertainties",
+                    "Build optimism by celebrating small wins and learning from setbacks"
+                ];
+
+                mindsetItems.forEach(item => {
+                    const mindsetItem = document.createElement('div');
+                    mindsetItem.className = 'response-item';
+                    mindsetItem.textContent = `• ${item}`;
+                    mindsetList.appendChild(mindsetItem);
+                });
+                
+                mindsetDiv.appendChild(mindsetList);
+                container.appendChild(mindsetDiv);
+            }
+        }
+
+        // Initialize
+        updateNavigation();
+        updateProgress();
+    </script>
+</body>
+</html>

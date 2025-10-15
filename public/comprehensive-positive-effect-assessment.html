@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Positive Effect Leadership Assessment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
+            min-height: 100vh;
+            padding: 15px;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(251, 191, 36, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(251, 191, 36, 0.2) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .header h1 {
+            font-size: clamp(1.6rem, 5vw, 2.2rem);
+            margin-bottom: 15px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .header .subtitle {
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .value-prop {
+            background: rgba(251, 191, 36, 0.25);
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 25px;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .value-prop-text {
+            font-size: clamp(0.85rem, 2.5vw, 1rem);
+            font-weight: 500;
+        }
+
+        .framework-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .framework-item {
+            padding: 12px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .accept-badge {
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            color: white;
+        }
+
+        .create-badge {
+            background: linear-gradient(135deg, #f472b6, #ec4899);
+            color: white;
+        }
+
+        .teach-badge {
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            color: white;
+        }
+
+        .be-badge {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #1e3a8a;
+        }
+
+        .quiz-content {
+            padding: 20px;
+        }
+
+        .email-capture {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.08) 0%, rgba(37, 99, 235, 0.08) 100%);
+            padding: 25px;
+            border-radius: 18px;
+            margin-bottom: 35px;
+            border-left: 5px solid #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        .email-capture h3 {
+            color: #4a5568;
+            margin-bottom: 15px;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+        }
+
+        .email-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .email-form input {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+            width: 100%;
+        }
+
+        .email-form input:focus {
+            border-color: #fbbf24;
+        }
+
+        .email-form button {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #1e3a8a;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+            align-self: stretch;
+        }
+
+        .email-form button:hover {
+            transform: translateY(-2px);
+        }
+
+        .question {
+            display: none;
+            margin-bottom: 30px;
+        }
+
+        .question.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .question h3 {
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-size: clamp(0.95rem, 3vw, 1.2rem);
+            line-height: 1.4;
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .question-number {
+            background: #1e3a8a;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85em;
+            flex-shrink: 0;
+        }
+
+        .question-category {
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .category-accept { background: #ec4899; color: white; }
+        .category-create { background: #f472b6; color: white; }
+        .category-teach { background: #60a5fa; color: white; }
+        .category-be { background: #fbbf24; color: #1e3a8a; }
+
+        .question-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .answers {
+            display: grid;
+            gap: 12px;
+        }
+
+        .answer-option {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(226, 232, 240, 0.8);
+            padding: 16px;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .answer-option:hover {
+            border-color: #fbbf24;
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 8px 20px rgba(251, 191, 36, 0.15), 0 0 0 1px rgba(251, 191, 36, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .answer-option.selected {
+            border-color: #fbbf24;
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.12) 0%, rgba(245, 158, 11, 0.12) 100%);
+            box-shadow: 0 8px 20px rgba(251, 191, 36, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .answer-option input[type="radio"] {
+            display: none;
+        }
+
+        .answer-text {
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 6px;
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+        }
+
+        .answer-description {
+            color: #718096;
+            font-size: clamp(0.75rem, 2vw, 0.85rem);
+            line-height: 1.4;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+            color: #1e3a8a;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            min-width: 120px;
+            box-shadow: 0 6px 15px rgba(251, 191, 36, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-button:hover:not(:disabled) {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(251, 191, 36, 0.4);
+        }
+
+        .nav-button:hover:not(:disabled)::before {
+            left: 100%;
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-button.secondary {
+            background: #f7fafc;
+            color: #4a5568;
+            border: 2px solid #e2e8f0;
+        }
+
+        #questionCounter {
+            color: #4a5568;
+            font-weight: 500;
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .progress-bar {
+            background: #e2e8f0;
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 0%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: progressShine 2s ease-in-out infinite;
+        }
+
+        @keyframes progressShine {
+            0% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .results {
+            display: none;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .results.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .score-display {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
+            color: white;
+            padding: 35px 25px;
+            border-radius: 24px;
+            margin: 25px 0;
+            box-shadow: 0 20px 40px rgba(30, 58, 138, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .score-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .score-number {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .score-label {
+            font-size: clamp(0.95rem, 3vw, 1.1rem);
+            opacity: 0.9;
+        }
+
+        .detailed-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .pillar-detailed-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 16px;
+            border-left: 5px solid;
+            text-align: left;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .pillar-detailed-card.accept {
+            border-left-color: #ec4899;
+        }
+
+        .pillar-detailed-card.create {
+            border-left-color: #f472b6;
+        }
+
+        .pillar-detailed-card.teach {
+            border-left-color: #3b82f6;
+        }
+
+        .pillar-detailed-card.be {
+            border-left-color: #fbbf24;
+        }
+
+        .pillar-detailed-card h4 {
+            color: #4a5568;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .pillar-score {
+            background: #f7fafc;
+            color: #4a5568;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .sub-skills {
+            margin-top: 15px;
+        }
+
+        .sub-skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 0.9em;
+        }
+
+        .sub-skill-name {
+            color: #6b7280;
+        }
+
+        .sub-skill-score {
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .error-message {
+            background: #fed7d7;
+            color: #9b2c2c;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 480px) {
+            .navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-button {
+                width: 100%;
+                padding: 15px;
+            }
+
+            #questionCounter {
+                order: -1;
+                margin-bottom: 10px;
+            }
+
+            .question h3 {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+
+            .question-number {
+                align-self: flex-start;
+            }
+
+            .detailed-breakdown {
+                grid-template-columns: 1fr;
+            }
+
+            .framework-overview {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .email-form {
+                gap: 12px;
+            }
+
+            .answer-option {
+                padding: 14px;
+            }
+        }
+
+        /* Medium screens */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .quiz-content {
+                padding: 30px 25px;
+            }
+            
+            .email-form {
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: stretch;
+            }
+
+            .email-form input {
+                flex: 1;
+                min-width: 200px;
+            }
+
+            .email-form button {
+                flex: 0 0 auto;
+                min-width: 150px;
+            }
+        }
+
+        /* Large screens */
+        @media (min-width: 769px) {
+            .quiz-content {
+                padding: 40px;
+            }
+            
+            .email-form {
+                flex-direction: row;
+                align-items: stretch;
+            }
+
+            .email-form input {
+                flex: 1;
+                min-width: 200px;
+            }
+
+            .email-form button {
+                flex: 0 0 auto;
+            }
+        }
+    </style>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌟 Comprehensive Positive Effect Leadership Assessment</h1>
+            <p class="subtitle">Deep-Dive Analysis Across All Leadership Dimensions</p>
+            <div class="value-prop">
+                <div class="value-prop-text">
+                    Complete 32-question assessment covering Accept, Create, Teach pillars plus the BE core behaviors. Identifies critical gaps in bias removal, connection skills, and emotional leadership.
+                </div>
+                <div class="framework-overview">
+                    <div class="framework-item accept-badge">ACCEPT (10)</div>
+                    <div class="framework-item create-badge">CREATE (10)</div>
+                    <div class="framework-item teach-badge">TEACH (8)</div>
+                    <div class="framework-item be-badge">BE CORE (4)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quiz-content">
+            <!-- Email Capture -->
+            <div class="email-capture" id="emailCapture">
+                <h3>Get Your Comprehensive Leadership Profile</h3>
+                <p>Receive detailed analysis across 15+ leadership sub-skills with specific development recommendations:</p>
+                <form class="email-form" id="emailForm">
+                    <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                    <input type="email" id="email" name="email" placeholder="Email Address" required>
+                    <button type="submit">Begin Deep Assessment →</button>
+                </form>
+                <div id="emailError" class="error-message hidden">Please fill in all fields correctly.</div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar hidden" id="progressBar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <!-- Quiz Questions -->
+            <div id="quizQuestions" class="hidden">
+                
+                <!-- ACCEPT Pillar Questions (10 questions) -->
+                <div class="question active" data-question="1">
+                    <h3>
+                        <span class="question-number">1</span>
+                        <span class="question-category category-accept">ACCEPT</span>
+                        <span class="question-text">How effectively do you identify and actively challenge your own biases when making leadership decisions?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q1" value="4">
+                            <div class="answer-text">Actively Challenge Biases</div>
+                            <div class="answer-description">I consistently recognize my biases, actively seek diverse perspectives, and adjust my decisions accordingly</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q1" value="3">
+                            <div class="answer-text">Usually Aware of Biases</div>
+                            <div class="answer-description">I'm generally aware of potential biases and make efforts to consider different viewpoints</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q1" value="2">
+                            <div class="answer-text">Sometimes Recognize Biases</div>
+                            <div class="answer-description">I occasionally recognize when my biases may be influencing decisions but not consistently</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q1" value="1">
+                            <div class="answer-text">Rarely Consider Biases</div>
+                            <div class="answer-description">I rarely consider how my personal biases might be affecting my leadership decisions</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="2">
+                    <h3>
+                        <span class="question-number">2</span>
+                        <span class="question-category category-accept">ACCEPT</span>
+                        <span class="question-text">How consistently do you avoid making judgments about team members' intentions or capabilities without clear evidence?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q2" value="4">
+                            <div class="answer-text">Evidence-Based Only</div>
+                            <div class="answer-description">I consistently base my assessments on observable behaviors and facts, not assumptions about intentions</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q2" value="3">
+                            <div class="answer-text">Usually Evidence-Based</div>
+                            <div class="answer-description">I generally seek evidence before forming opinions, though occasionally make assumptions</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q2" value="2">
+                            <div class="answer-text">Mixed Approach</div>
+                            <div class="answer-description">I sometimes make judgments based on assumptions rather than clear evidence</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q2" value="1">
+                            <div class="answer-text">Often Make Assumptions</div>
+                            <div class="answer-description">I frequently form judgments about team members based on assumptions rather than evidence</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="3">
+                    <h3>
+                        <span class="question-number">3</span>
+                        <span class="question-category category-accept">ACCEPT</span>
+                        <span class="question-text">When facing difficult conversations, how intentionally do you seek to understand the other person's perspective before responding?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q3" value="4">
+                            <div class="answer-text">Always Seek Understanding First</div>
+                            <div class="answer-description">I consistently listen to understand their perspective fully before formulating my response</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q3" value="3">
+                            <div class="answer-text">Usually Listen First</div>
+                            <div class="answer-description">I generally make an effort to understand their viewpoint before responding</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q3" value="2">
+                            <div class="answer-text">Sometimes Listen</div>
+                            <div class="answer-description">I occasionally pause to understand their perspective but often prepare my response while they talk</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q3" value="1">
+                            <div class="answer-text">Focus on My Response</div>
+                            <div class="answer-description">I typically focus on formulating my response rather than deeply understanding their perspective</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="4">
+                    <h3>
+                        <span class="question-number">4</span>
+                        <span class="question-category category-accept">ACCEPT</span>
+                        <span class="question-text">How effectively do you demonstrate "assuming positive intent" when team members make mistakes or poor decisions?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q4" value="4">
+                            <div class="answer-text">Consistently Assume Positive Intent</div>
+                            <div class="answer-description">I always start by assuming good intentions and explore what led to the mistake constructively</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q4" value="3">
+                            <div class="answer-text">Usually Assume Positive Intent</div>
+                            <div class="answer-description">I generally give people the benefit of the doubt and approach mistakes with curiosity</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q4" value="2">
+                            <div class="answer-text">Sometimes Assume Positive Intent</div>
+                            <div class="answer-description">My initial reaction varies - sometimes positive, sometimes I question their motives</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q4" value="1">
+                            <div class="answer-text">Often Question Intent</div>
+                            <div class="answer-description">I frequently wonder if mistakes are due to carelessness, lack of commitment, or poor judgment</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="5">
+                    <h3>
+                        <span class="question-number">5</span>
+                        <span class="question-category category-accept">ACCEPT</span>
+                        <span class="question-text">How intentional are you about creating genuine connections rather than just communicating information?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q5" value="4">
+                            <div class="answer-text">Always Focus on Connection</div>
+                            <div class="answer-description">I'm highly intentional about building relationships and emotional connections in every interaction</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q5" value="3">
+                            <div class="answer-text">Usually Prioritize Connection</div>
+                            <div class="answer-description">I generally balance relationship building with information sharing in my interactions</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q5" value="2">
+                            <div class="answer-text">Sometimes Focus on Connection</div>
+                            <div class="answer-description">I occasionally prioritize relationship building but often focus mainly on getting information across</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q5" value="1">
+                            <div class="answer-text">Primarily Communicate Information</div>
+                            <div class="answer-description">I typically focus on sharing information efficiently rather than building deeper connections</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="6">
+                    <h3>
+                        <span class="question-number">6</span>
+                        <span class="question-category category-accept">ACCEPT</span>
+                        <span class="question-text">How consistently do you ask questions to clarify understanding rather than making assumptions about what others mean?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q6" value="4">
+                            <div class="answer-text">Always Clarify Understanding</div>
+                            <div class="answer-description">I consistently ask clarifying questions to ensure I understand exactly what others mean</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q6" value="3">
+                            <div class="answer-text">Usually Ask for Clarification</div>
+                            <div class="answer-description">I regularly ask questions to confirm understanding, especially on important matters</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q6" value="2">
+                            <div class="answer-text">Sometimes Clarify</div>
+                            <div class="answer-description">I occasionally ask for clarification but often assume I understand what they mean</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q6" value="1">
+                            <div class="answer-text">Rarely Ask Questions</div>
+                            <div class="answer-description">I typically assume I understand what others mean without seeking clarification</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="7">
+                    <h3>
+                        <span class="question-number">7</span>
+                        <span class="question-category category-accept">ACCEPT</span>
+                        <span class="question-text">How fully present are you during conversations and meetings (not distracted by phone, email, or other thoughts)?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q7" value="4">
+                            <div class="answer-text">Completely Present</div>
+                            <div class="answer-description">I'm fully engaged, maintain eye contact, and give others my complete attention</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q7" value="3">
+                            <div class="answer-text">Usually Present</div>
+                            <div class="answer-description">I'm generally focused on the conversation with minimal distractions</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q7" value="2">
+                            <div class="answer-text">Sometimes Distracted</div>
+                            <div class="answer-description">My attention varies - sometimes fully engaged, sometimes distracted by other priorities</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q7" value="1">
+                            <div class="answer-text">Often Distracted</div>
+                            <div class="answer-description">I'm frequently thinking about other tasks, checking devices, or mentally preparing for what's next</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="8">
+                    <h3>
+                        <span class="question-number">8</span>
+                        <span class="question-category category-accept">ACCEPT</span>
+                        <span class="question-text">How effectively do you focus conversations on understanding others' needs and concerns rather than just solving problems?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q8" value="4">
+                            <div class="answer-text">Focus on Understanding First</div>
+                            <div class="answer-description">I prioritize deeply understanding their perspective and needs before offering solutions</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q8" value="3">
+                            <div class="answer-text">Usually Seek Understanding</div>
+                            <div class="answer-description">I generally explore their concerns before jumping to problem-solving mode</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q8" value="2">
+                            <div class="answer-text">Mixed Approach</div>
+                            <div class="answer-description">Sometimes I listen first, other times I quickly move to offering solutions</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q8" value="1">
+                            <div class="answer-text">Focus on Problem-Solving</div>
+                            <div class="answer-description">I typically jump quickly to offering solutions rather than deeply exploring their perspective</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="9">
+                    <h3>
+                        <span class="question-number">9</span>
+                        <span class="question-category category-accept">ACCEPT</span>
+                        <span class="question-text">How consistently do you maintain composure and emotional regulation during high-stress or conflict situations?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q9" value="4">
+                            <div class="answer-text">Always Maintain Composure</div>
+                            <div class="answer-description">I consistently stay calm and emotionally regulated, creating a safe space for others</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q9" value="3">
+                            <div class="answer-text">Usually Stay Calm</div>
+                            <div class="answer-description">I generally maintain composure though may show some stress in extreme situations</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q9" value="2">
+                            <div class="answer-text">Sometimes Reactive</div>
+                            <div class="answer-description">My emotional regulation varies depending on the situation and my stress levels</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q9" value="1">
+                            <div class="answer-text">Often Show Stress/Emotion</div>
+                            <div class="answer-description">I frequently show visible stress, frustration, or other emotions during difficult situations</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="10">
+                    <h3>
+                        <span class="question-number">10</span>
+                        <span class="question-category category-accept">ACCEPT</span>
+                        <span class="question-text">How effectively do you approach setbacks and failures as learning opportunities rather than dwelling on the problems?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q10" value="4">
+                            <div class="answer-text">Always Focus on Learning</div>
+                            <div class="answer-description">I consistently frame setbacks as growth opportunities and help others extract valuable lessons</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q10" value="3">
+                            <div class="answer-text">Usually Learn from Setbacks</div>
+                            <div class="answer-description">I generally look for lessons and growth opportunities when things don't go as planned</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q10" value="2">
+                            <div class="answer-text">Sometimes Learn, Sometimes Dwell</div>
+                            <div class="answer-description">My response varies - sometimes I focus on learning, other times I get stuck on what went wrong</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q10" value="1">
+                            <div class="answer-text">Often Dwell on Problems</div>
+                            <div class="answer-description">I tend to focus on what went wrong and who's to blame rather than extracting lessons</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- CREATE Pillar Questions (10 questions) -->
+                <div class="question" data-question="11">
+                    <h3>
+                        <span class="question-number">11</span>
+                        <span class="question-category category-create">CREATE</span>
+                        <span class="question-text">How effectively do you manage your time and energy to focus on your highest-impact leadership activities?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q11" value="4">
+                            <div class="answer-text">Exceptional Time Management</div>
+                            <div class="answer-description">I consistently prioritize high-impact activities and delegate effectively to maximize leadership impact</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q11" value="3">
+                            <div class="answer-text">Good Time Management</div>
+                            <div class="answer-description">I generally focus on important leadership activities though sometimes get pulled into less critical tasks</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q11" value="2">
+                            <div class="answer-text">Inconsistent Time Management</div>
+                            <div class="answer-description">My time allocation varies - sometimes strategic, sometimes reactive to urgent demands</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q11" value="1">
+                            <div class="answer-text">Poor Time Management</div>
+                            <div class="answer-description">I frequently get overwhelmed with tasks and struggle to focus on true leadership priorities</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="12">
+                    <h3>
+                        <span class="question-number">12</span>
+                        <span class="question-category category-create">CREATE</span>
+                        <span class="question-text">How consistently do you delegate meaningful work to others and follow up appropriately without micromanaging?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q12" value="4">
+                            <div class="answer-text">Excellent Delegation</div>
+                            <div class="answer-description">I delegate meaningful work with clear expectations and provide support while allowing autonomy</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q12" value="3">
+                            <div class="answer-text">Good Delegation</div>
+                            <div class="answer-description">I generally delegate well and follow up appropriately, with occasional tendency to over-monitor</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q12" value="2">
+                            <div class="answer-text">Inconsistent Delegation</div>
+                            <div class="answer-description">My delegation varies - sometimes effective, sometimes I micromanage or avoid delegating important work</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q12" value="1">
+                            <div class="answer-text">Poor Delegation</div>
+                            <div class="answer-description">I either avoid delegating important work or tend to micromanage when I do delegate</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="13">
+                    <h3>
+                        <span class="question-number">13</span>
+                        <span class="question-category category-create">CREATE</span>
+                        <span class="question-text">How effectively do you identify and challenge limiting beliefs (your own and others') that prevent growth and innovation?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q13" value="4">
+                            <div class="answer-text">Actively Challenge Limiting Beliefs</div>
+                            <div class="answer-description">I consistently identify and help overcome limiting beliefs that constrain performance and growth</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q13" value="3">
+                            <div class="answer-text">Usually Address Limiting Beliefs</div>
+                            <div class="answer-description">I generally recognize and work to overcome limiting beliefs when they become apparent</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q13" value="2">
+                            <div class="answer-text">Sometimes Notice Limiting Beliefs</div>
+                            <div class="answer-description">I occasionally recognize limiting beliefs but don't consistently address them</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q13" value="1">
+                            <div class="answer-text">Rarely Address Limiting Beliefs</div>
+                            <div class="answer-description">I rarely recognize or actively work to overcome limiting beliefs in myself or others</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="14">
+                    <h3>
+                        <span class="question-number">14</span>
+                        <span class="question-category category-create">CREATE</span>
+                        <span class="question-text">How consistently do you demonstrate energy and enthusiasm that positively influences your team's motivation and engagement?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q14" value="4">
+                            <div class="answer-text">Consistently High Energy</div>
+                            <div class="answer-description">I consistently bring positive energy and enthusiasm that visibly elevates team morale and engagement</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q14" value="3">
+                            <div class="answer-text">Usually Positive Energy</div>
+                            <div class="answer-description">I generally maintain good energy levels and help keep the team motivated</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q14" value="2">
+                            <div class="answer-text">Variable Energy</div>
+                            <div class="answer-description">My energy and enthusiasm fluctuate depending on circumstances and my personal state</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q14" value="1">
+                            <div class="answer-text">Often Low Energy</div>
+                            <div class="answer-description">I frequently display low energy or negativity that may drain team motivation</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="15">
+                    <h3>
+                        <span class="question-number">15</span>
+                        <span class="question-category category-create">CREATE</span>
+                        <span class="question-text">How effectively do you take complete ownership and responsibility for your decisions, actions, and their outcomes?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q15" value="4">
+                            <div class="answer-text">Complete Ownership</div>
+                            <div class="answer-description">I consistently take full responsibility for decisions and outcomes without making excuses or blaming others</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q15" value="3">
+                            <div class="answer-text">Usually Take Ownership</div>
+                            <div class="answer-description">I generally accept responsibility for my decisions and actions, with occasional defensiveness</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q15" value="2">
+                            <div class="answer-text">Inconsistent Ownership</div>
+                            <div class="answer-description">My accountability varies - sometimes I own outcomes, sometimes I focus on external factors</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q15" value="1">
+                            <div class="answer-text">Limited Ownership</div>
+                            <div class="answer-description">I often explain poor outcomes by focusing on external factors, constraints, or others' contributions</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="16">
+                    <h3>
+                        <span class="question-number">16</span>
+                        <span class="question-category category-create">CREATE</span>
+                        <span class="question-text">How effectively do you envision and communicate a compelling future vision that aligns with organizational objectives?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q16" value="4">
+                            <div class="answer-text">Visionary & Inspiring</div>
+                            <div class="answer-description">I consistently paint compelling visions that connect individual work to organizational purpose and inspire action</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q16" value="3">
+                            <div class="answer-text">Good Vision Communication</div>
+                            <div class="answer-description">I regularly share vision and help team members see how their work connects to larger goals</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q16" value="2">
+                            <div class="answer-text">Sometimes Share Vision</div>
+                            <div class="answer-description">I occasionally communicate vision but often focus more on immediate tasks and deliverables</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q16" value="1">
+                            <div class="answer-text">Rarely Communicate Vision</div>
+                            <div class="answer-description">I primarily focus on operational tasks without connecting work to broader organizational purpose</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="17">
+                    <h3>
+                        <span class="question-number">17</span>
+                        <span class="question-category category-create">CREATE</span>
+                        <span class="question-text">How consistently do you consider the impact of your decisions and actions on all stakeholders (not just immediate team)?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q17" value="4">
+                            <div class="answer-text">Always Consider All Stakeholders</div>
+                            <div class="answer-description">I consistently evaluate decisions based on impact to team, customers, organization, and other stakeholders</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q17" value="3">
+                            <div class="answer-text">Usually Consider Multiple Stakeholders</div>
+                            <div class="answer-description">I generally think about broader impacts though sometimes focus primarily on immediate team needs</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q17" value="2">
+                            <div class="answer-text">Sometimes Consider Broader Impact</div>
+                            <div class="answer-description">I occasionally think about wider implications but often focus on immediate or obvious consequences</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q17" value="1">
+                            <div class="answer-text">Focus Primarily on Immediate Team</div>
+                            <div class="answer-description">I typically make decisions based on immediate team needs without considering broader organizational impact</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="18">
+                    <h3>
+                        <span class="question-number">18</span>
+                        <span class="question-category category-create">CREATE</span>
+                        <span class="question-text">How effectively do you demonstrate strategic thinking by connecting daily activities to long-term organizational success?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q18" value="4">
+                            <div class="answer-text">Exceptional Strategic Thinking</div>
+                            <div class="answer-description">I consistently connect current work to strategic objectives and help others see the bigger picture</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q18" value="3">
+                            <div class="answer-text">Good Strategic Thinking</div>
+                            <div class="answer-description">I usually link current activities to strategic goals and communicate these connections</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q18" value="2">
+                            <div class="answer-text">Limited Strategic Thinking</div>
+                            <div class="answer-description">I sometimes think strategically but often get absorbed in day-to-day operational issues</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q18" value="1">
+                            <div class="answer-text">Primarily Tactical Focus</div>
+                            <div class="answer-description">I focus mainly on immediate tasks and deliverables without connecting to long-term strategy</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="19">
+                    <h3>
+                        <span class="question-number">19</span>
+                        <span class="question-category category-create">CREATE</span>
+                        <span class="question-text">How consistently do you demonstrate mindfulness and emotional intelligence in your interactions with others?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q19" value="4">
+                            <div class="answer-text">Highly Emotionally Intelligent</div>
+                            <div class="answer-description">I consistently demonstrate awareness of emotions (mine and others') and adapt my approach accordingly</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q19" value="3">
+                            <div class="answer-text">Good Emotional Awareness</div>
+                            <div class="answer-description">I generally pick up on emotional cues and adjust my communication and behavior appropriately</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q19" value="2">
+                            <div class="answer-text">Sometimes Emotionally Aware</div>
+                            <div class="answer-description">I occasionally notice and respond to emotional dynamics but often miss important cues</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q19" value="1">
+                            <div class="answer-text">Limited Emotional Awareness</div>
+                            <div class="answer-description">I rarely consider emotional factors and typically focus on logical/rational aspects of situations</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="20">
+                    <h3>
+                        <span class="question-number">20</span>
+                        <span class="question-category category-create">CREATE</span>
+                        <span class="question-text">How effectively do you create psychological safety where team members feel comfortable taking risks and sharing honest feedback?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q20" value="4">
+                            <div class="answer-text">Exceptional Psychological Safety</div>
+                            <div class="answer-description">Team members consistently feel safe to take risks, make mistakes, and share honest feedback without fear</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q20" value="3">
+                            <div class="answer-text">Good Psychological Safety</div>
+                            <div class="answer-description">Team generally feels comfortable speaking up and taking appropriate risks</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q20" value="2">
+                            <div class="answer-text">Moderate Psychological Safety</div>
+                            <div class="answer-description">Some team members feel safe while others are hesitant to speak up or take risks</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q20" value="1">
+                            <div class="answer-text">Limited Psychological Safety</div>
+                            <div class="answer-description">Team members frequently hesitate to share concerns, admit mistakes, or challenge ideas</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- TEACH Pillar Questions (8 questions) -->
+                <div class="question" data-question="21">
+                    <h3>
+                        <span class="question-number">21</span>
+                        <span class="question-category category-teach">TEACH</span>
+                        <span class="question-text">How effectively do you actively coach and develop others rather than just giving direction or solving problems for them?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q21" value="4">
+                            <div class="answer-text">Expert Coach & Developer</div>
+                            <div class="answer-description">I consistently use coaching questions and development opportunities to build others' capabilities</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q21" value="3">
+                            <div class="answer-text">Good Coaching Skills</div>
+                            <div class="answer-description">I regularly coach others and focus on developing their problem-solving abilities</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q21" value="2">
+                            <div class="answer-text">Limited Coaching</div>
+                            <div class="answer-description">I occasionally coach others but often default to giving answers or solving problems myself</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q21" value="1">
+                            <div class="answer-text">Primarily Give Direction</div>
+                            <div class="answer-description">I typically tell people what to do or solve problems for them rather than developing their skills</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="22">
+                    <h3>
+                        <span class="question-number">22</span>
+                        <span class="question-category category-teach">TEACH</span>
+                        <span class="question-text">How consistently do you create individualized development plans and growth opportunities for team members?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q22" value="4">
+                            <div class="answer-text">Comprehensive Development Planning</div>
+                            <div class="answer-description">I consistently create and actively manage personalized development plans for each team member</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q22" value="3">
+                            <div class="answer-text">Regular Development Focus</div>
+                            <div class="answer-description">I generally provide development opportunities and have growth conversations with team members</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q22" value="2">
+                            <div class="answer-text">Occasional Development Planning</div>
+                            <div class="answer-description">I sometimes discuss development but don't consistently create or follow formal development plans</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q22" value="1">
+                            <div class="answer-text">Limited Development Focus</div>
+                            <div class="answer-description">I rarely engage in formal development planning or growth conversations</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="23">
+                    <h3>
+                        <span class="question-number">23</span>
+                        <span class="question-category category-teach">TEACH</span>
+                        <span class="question-text">How effectively do you demonstrate openness to learning from others regardless of their position or experience level?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q23" value="4">
+                            <div class="answer-text">Exceptional Learning Mindset</div>
+                            <div class="answer-description">I actively seek to learn from everyone and regularly acknowledge when others teach me something valuable</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q23" value="3">
+                            <div class="answer-text">Generally Open to Learning</div>
+                            <div class="answer-description">I'm usually receptive to learning from others and value diverse perspectives</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q23" value="2">
+                            <div class="answer-text">Selectively Open</div>
+                            <div class="answer-description">I'm open to learning from some people but may dismiss input from those I view as less experienced</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q23" value="1">
+                            <div class="answer-text">Limited Learning Openness</div>
+                            <div class="answer-description">I typically assume I have more to teach than to learn and rarely seek input from others</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="24">
+                    <h3>
+                        <span class="question-number">24</span>
+                        <span class="question-category category-teach">TEACH</span>
+                        <span class="question-text">How effectively do you give specific, actionable feedback that helps others improve their performance?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q24" value="4">
+                            <div class="answer-text">Excellent Feedback Provider</div>
+                            <div class="answer-description">I consistently give timely, specific, and actionable feedback that clearly helps others improve</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q24" value="3">
+                            <div class="answer-text">Good Feedback Skills</div>
+                            <div class="answer-description">I regularly provide helpful feedback, though sometimes could be more specific or timely</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q24" value="2">
+                            <div class="answer-text">Inconsistent Feedback</div>
+                            <div class="answer-description">My feedback varies in quality - sometimes helpful and specific, sometimes vague or delayed</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q24" value="1">
+                            <div class="answer-text">Limited Feedback</div>
+                            <div class="answer-description">I rarely give detailed feedback or when I do, it's often vague, delayed, or not particularly helpful</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="25">
+                    <h3>
+                        <span class="question-number">25</span>
+                        <span class="question-category category-teach">TEACH</span>
+                        <span class="question-text">How consistently do you seek out and incorporate diverse perspectives and experiences into your decision-making?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q25" value="4">
+                            <div class="answer-text">Actively Seek Diverse Perspectives</div>
+                            <div class="answer-description">I consistently seek input from people with different backgrounds, experiences, and viewpoints</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q25" value="3">
+                            <div class="answer-text">Generally Include Different Views</div>
+                            <div class="answer-description">I usually consider multiple perspectives when making important decisions</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q25" value="2">
+                            <div class="answer-text">Sometimes Seek Different Views</div>
+                            <div class="answer-description">I occasionally seek diverse input but often rely on familiar or similar perspectives</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q25" value="1">
+                            <div class="answer-text">Limited Perspective Seeking</div>
+                            <div class="answer-description">I typically make decisions based on my own perspective or input from a few similar colleagues</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="26">
+                    <h3>
+                        <span class="question-number">26</span>
+                        <span class="question-category category-teach">TEACH</span>
+                        <span class="question-text">How effectively do you model continuous learning and professional development for your team?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q26" value="4">
+                            <div class="answer-text">Exemplary Learning Model</div>
+                            <div class="answer-description">I visibly pursue learning opportunities and share my growth journey to inspire others' development</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q26" value="3">
+                            <div class="answer-text">Good Learning Example</div>
+                            <div class="answer-description">I regularly engage in learning activities and generally share insights with the team</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q26" value="2">
+                            <div class="answer-text">Occasional Learning Modeling</div>
+                            <div class="answer-description">I sometimes pursue learning opportunities but don't consistently model continuous development</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q26" value="1">
+                            <div class="answer-text">Limited Learning Modeling</div>
+                            <div class="answer-description">I rarely engage in visible learning activities or share development experiences with the team</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="27">
+                    <h3>
+                        <span class="question-number">27</span>
+                        <span class="question-category category-teach">TEACH</span>
+                        <span class="question-text">How effectively do you assess and understand each team member's unique strengths, development needs, and career aspirations?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q27" value="4">
+                            <div class="answer-text">Deep Individual Understanding</div>
+                            <div class="answer-description">I have comprehensive knowledge of each person's strengths, growth areas, and career goals</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q27" value="3">
+                            <div class="answer-text">Good Individual Knowledge</div>
+                            <div class="answer-description">I generally understand team members' capabilities and aspirations for most individuals</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q27" value="2">
+                            <div class="answer-text">Basic Individual Understanding</div>
+                            <div class="answer-description">I know some strengths and development needs but lack depth of understanding for many team members</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q27" value="1">
+                            <div class="answer-text">Limited Individual Knowledge</div>
+                            <div class="answer-description">I have minimal understanding of individual strengths, development needs, or career aspirations</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="28">
+                    <h3>
+                        <span class="question-number">28</span>
+                        <span class="question-category category-teach">TEACH</span>
+                        <span class="question-text">How consistently do you create stretch opportunities and challenges that help team members grow beyond their current capabilities?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q28" value="4">
+                            <div class="answer-text">Consistently Create Stretch Opportunities</div>
+                            <div class="answer-description">I regularly identify and provide challenging assignments that expand team members' capabilities</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q28" value="3">
+                            <div class="answer-text">Often Provide Growth Challenges</div>
+                            <div class="answer-description">I generally look for opportunities to stretch team members and expand their skills</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q28" value="2">
+                            <div class="answer-text">Occasionally Provide Stretch Opportunities</div>
+                            <div class="answer-description">I sometimes give challenging assignments but often focus on keeping people in their comfort zones</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q28" value="1">
+                            <div class="answer-text">Rarely Create Growth Challenges</div>
+                            <div class="answer-description">I typically assign work within people's established capabilities rather than stretching them</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- BE CORE Questions (4 questions) -->
+                <div class="question" data-question="29">
+                    <h3>
+                        <span class="question-number">29</span>
+                        <span class="question-category category-be">BE CORE</span>
+                        <span class="question-text">How consistently do you demonstrate genuine care and support for team members as individuals (not just as employees)?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q29" value="4">
+                            <div class="answer-text">Deeply Supportive</div>
+                            <div class="answer-description">I consistently show genuine interest in team members' well-being, growth, and success as whole people</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q29" value="3">
+                            <div class="answer-text">Generally Supportive</div>
+                            <div class="answer-description">I usually demonstrate care for team members and consider their personal well-being</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q29" value="2">
+                            <div class="answer-text">Inconsistently Supportive</div>
+                            <div class="answer-description">My level of personal support varies depending on workload and circumstances</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q29" value="1">
+                            <div class="answer-text">Primarily Task-Focused</div>
+                            <div class="answer-description">I focus mainly on work performance rather than personal well-being or individual support</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="30">
+                    <h3>
+                        <span class="question-number">30</span>
+                        <span class="question-category category-be">BE CORE</span>
+                        <span class="question-text">How effectively do you take responsibility for creating positive outcomes and solving problems without blaming external factors?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q30" value="4">
+                            <div class="answer-text">Completely Responsible</div>
+                            <div class="answer-description">I consistently focus on what I can control and take full ownership for creating solutions</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q30" value="3">
+                            <div class="answer-text">Generally Responsible</div>
+                            <div class="answer-description">I usually take ownership and focus on solutions rather than external obstacles</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q30" value="2">
+                            <div class="answer-text">Sometimes Responsible</div>
+                            <div class="answer-description">My response varies - sometimes I own solutions, sometimes I focus on external constraints</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q30" value="1">
+                            <div class="answer-text">Often Focus on External Factors</div>
+                            <div class="answer-description">I frequently explain challenges by pointing to external factors, policies, or other people's actions</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="31">
+                    <h3>
+                        <span class="question-number">31</span>
+                        <span class="question-category category-be">BE CORE</span>
+                        <span class="question-text">How consistently do you prioritize team and organizational success over your own personal recognition or advancement?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q31" value="4">
+                            <div class="answer-text">Completely Selfless</div>
+                            <div class="answer-description">I consistently prioritize team and organizational success, often giving credit to others</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q31" value="3">
+                            <div class="answer-text">Usually Put Team First</div>
+                            <div class="answer-description">I generally focus on team success though occasionally consider personal recognition</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q31" value="2">
+                            <div class="answer-text">Balance Personal and Team Goals</div>
+                            <div class="answer-description">I try to balance team success with ensuring my contributions are recognized</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q31" value="1">
+                            <div class="answer-text">Often Prioritize Personal Success</div>
+                            <div class="answer-description">I frequently consider how decisions and outcomes will reflect on me personally</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question" data-question="32">
+                    <h3>
+                        <span class="question-number">32</span>
+                        <span class="question-category category-be">BE CORE</span>
+                        <span class="question-text">How effectively do you serve others' growth and success even when it requires significant time and energy investment from you?</span>
+                    </h3>
+                    <div class="answers">
+                        <label class="answer-option">
+                            <input type="radio" name="q32" value="4">
+                            <div class="answer-text">Dedicated to Serving Others</div>
+                            <div class="answer-description">I consistently invest time and energy in others' development even when it's personally demanding</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q32" value="3">
+                            <div class="answer-text">Usually Invest in Others</div>
+                            <div class="answer-description">I generally make time for developing others though sometimes competing priorities limit this</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q32" value="2">
+                            <div class="answer-text">Inconsistently Serve Others</div>
+                            <div class="answer-description">My investment in others varies significantly based on my workload and other pressures</div>
+                        </label>
+                        <label class="answer-option">
+                            <input type="radio" name="q32" value="1">
+                            <div class="answer-text">Limited Service to Others</div>
+                            <div class="answer-description">I rarely invest significant time or energy in others' development due to other priorities</div>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Navigation -->
+            <div class="navigation hidden" id="navigation">
+                <button type="button" class="nav-button secondary" id="prevButton" onclick="previousQuestion()" disabled>← Previous</button>
+                <span id="questionCounter">Question 1 of 32</span>
+                <button type="button" class="nav-button" id="nextButton" onclick="nextQuestion()" disabled>Next →</button>
+            </div>
+
+            <!-- Results -->
+            <div class="results" id="results">
+                <h2 style="color: #4a5568; margin-bottom: 20px; font-size: clamp(1.4rem, 4vw, 1.8rem);">Your Comprehensive Leadership Analysis</h2>
+                
+                <div class="score-display">
+                    <div class="score-number" id="totalScore">0</div>
+                    <div class="score-label">Overall Positive Effect Leadership Index</div>
+                    <p style="margin-top: 15px; font-size: 1em;" id="scoreDescription"></p>
+                </div>
+
+                <div class="detailed-breakdown" id="detailedBreakdown"></div>
+
+                <div style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%); border: 2px solid #fbbf24; border-radius: 16px; padding: 25px; margin: 25px 0; text-align: center;">
+                    <h3 style="color: #1e3a8a; font-size: 1.3em; margin-bottom: 15px; font-weight: 600;">📚 Essential Reading for Your Development</h3>
+                    <p style="color: #4a5568; margin-bottom: 20px; font-size: 1em; line-height: 1.6;">Master the complete Positive Effect methodology with these foundational books:</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                        <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;">
+                            <h4 style="color: #1e3a8a; margin-bottom: 10px; font-size: 1.1em;">"The Positive Effect"</h4>
+                            <p style="color: #6b7280; font-size: 0.9em;">Complete ACT methodology for transformational leadership</p>
+                        </div>
+                        <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;">
+                            <h4 style="color: #1e3a8a; margin-bottom: 10px; font-size: 1.1em;">"Positive Accountability"</h4>
+                            <p style="color: #6b7280; font-size: 0.9em;">Build accountability systems with positive relationships</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%); color: white; padding: 30px 20px; border-radius: 20px; margin: 20px 0; text-align: center;">
+                    <h3 style="font-size: clamp(1.2rem, 4vw, 1.6rem); margin-bottom: 15px; font-weight: 300;">Transform Your Leadership Impact</h3>
+                    <p style="font-size: clamp(0.9rem, 2.5vw, 1.1rem); margin-bottom: 25px; opacity: 0.9; line-height: 1.5;">Get your personalized 90-day development roadmap and join our leadership transformation program</p>
+                    <a href="https://askaprilai.newzenler.com/courses/monthly" target="_blank" style="background: #fbbf24; color: #1e3a8a; padding: 15px 30px; border: none; border-radius: 10px; font-size: clamp(0.9rem, 2.5vw, 1.1rem); font-weight: 600; cursor: pointer; transition: transform 0.2s ease; text-decoration: none; display: inline-block;">Get My Complete Leadership Plan</a>
+                    <p style="font-size: 0.9em; opacity: 0.8; margin-top: 15px;">Comprehensive analysis • Kirkpatrick tracking • Expert support</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize EmailJS
+        emailjs.init("SAU17WFhPmeQLrng7");
+
+        let currentQuestion = 1;
+        const totalQuestions = 32;
+        let userAnswers = {};
+        let userData = {};
+
+        // Email form submission
+        document.getElementById('emailForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            
+            if (!firstName || !email || !isValidEmail(email)) {
+                showError('Please fill in all fields correctly.');
+                return;
+            }
+            
+            userData = { firstName, email };
+            startAssessment();
+        });
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('emailError');
+            errorDiv.textContent = message;
+            errorDiv.classList.remove('hidden');
+            
+            setTimeout(() => {
+                errorDiv.classList.add('hidden');
+            }, 5000);
+        }
+
+        function startAssessment() {
+            // Hide email capture and show quiz
+            document.getElementById('emailCapture').classList.add('hidden');
+            document.getElementById('quizQuestions').classList.remove('hidden');
+            document.getElementById('navigation').classList.remove('hidden');
+            document.getElementById('progressBar').classList.remove('hidden');
+            
+            updateProgress();
+            updateNavigation();
+        }
+
+        // Answer option handling
+        document.addEventListener('change', function(e) {
+            if (e.target.type === 'radio') {
+                // Remove selected class from all options in this question
+                const questionDiv = e.target.closest('.question');
+                questionDiv.querySelectorAll('.answer-option').forEach(option => {
+                    option.classList.remove('selected');
+                });
+                
+                // Add selected class to chosen option
+                e.target.closest('.answer-option').classList.add('selected');
+                
+                // Store answer
+                userAnswers[e.target.name] = parseInt(e.target.value);
+                
+                // Enable next button
+                updateNavigation();
+            }
+        });
+
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions) {
+                // Hide current question
+                document.querySelector(`[data-question="${currentQuestion}"]`).classList.remove('active');
+                
+                currentQuestion++;
+                
+                // Show next question
+                document.querySelector(`[data-question="${currentQuestion}"]`).classList.add('active');
+                
+                updateNavigation();
+                updateProgress();
+            } else {
+                // Show results
+                showResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 1) {
+                // Hide current question
+                document.querySelector(`[data-question="${currentQuestion}"]`).classList.remove('active');
+                
+                currentQuestion--;
+                
+                // Show previous question
+                document.querySelector(`[data-question="${currentQuestion}"]`).classList.add('active');
+                
+                updateNavigation();
+                updateProgress();
+            }
+        }
+
+        function updateNavigation() {
+            const prevButton = document.getElementById('prevButton');
+            const nextButton = document.getElementById('nextButton');
+            const counter = document.getElementById('questionCounter');
+            
+            prevButton.disabled = currentQuestion === 1;
+            
+            if (currentQuestion === totalQuestions) {
+                nextButton.textContent = 'Get My Analysis →';
+            } else {
+                nextButton.textContent = 'Next →';
+            }
+            
+            // Check if current question is answered
+            const currentAnswer = userAnswers[`q${currentQuestion}`];
+            nextButton.disabled = currentAnswer === undefined;
+            
+            counter.textContent = `Question ${currentQuestion} of ${totalQuestions}`;
+        }
+
+        function updateProgress() {
+            const progress = (currentQuestion / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+        }
+
+        function showResults() {
+            // Calculate detailed scores
+            const acceptQuestions = [1,2,3,4,5,6,7,8,9,10];
+            const createQuestions = [11,12,13,14,15,16,17,18,19,20];
+            const teachQuestions = [21,22,23,24,25,26,27,28];
+            const beQuestions = [29,30,31,32];
+            
+            const acceptScore = acceptQuestions.reduce((sum, q) => sum + (userAnswers[`q${q}`] || 0), 0);
+            const createScore = createQuestions.reduce((sum, q) => sum + (userAnswers[`q${q}`] || 0), 0);
+            const teachScore = teachQuestions.reduce((sum, q) => sum + (userAnswers[`q${q}`] || 0), 0);
+            const beScore = beQuestions.reduce((sum, q) => sum + (userAnswers[`q${q}`] || 0), 0);
+            
+            const acceptPercent = Math.round((acceptScore / 40) * 100);
+            const createPercent = Math.round((createScore / 40) * 100);
+            const teachPercent = Math.round((teachScore / 32) * 100);
+            const bePercent = Math.round((beScore / 16) * 100);
+            
+            const totalScore = Object.values(userAnswers).reduce((sum, value) => sum + value, 0);
+            const maxScore = 128; // 32 questions × 4 max points each
+            const percentageScore = Math.round((totalScore / maxScore) * 100);
+            
+            // Hide quiz, show results
+            document.getElementById('quizQuestions').classList.add('hidden');
+            document.getElementById('navigation').classList.add('hidden');
+            document.getElementById('progressBar').classList.add('hidden');
+            document.getElementById('results').classList.add('active');
+            
+            // Display score
+            document.getElementById('totalScore').textContent = `${percentageScore}%`;
+            
+            // Score description
+            let scoreDescription;
+            if (percentageScore >= 90) {
+                scoreDescription = "Exceptional - World-class positive leadership across all dimensions with remarkable consistency.";
+            } else if (percentageScore >= 80) {
+                scoreDescription = "Excellent - Strong positive leadership foundation with high consistency across most areas.";
+            } else if (percentageScore >= 70) {
+                scoreDescription = "Strong - Solid positive leadership skills with opportunities for consistency improvement.";
+            } else if (percentageScore >= 60) {
+                scoreDescription = "Developing - Good foundation with significant growth opportunities in key areas.";
+            } else if (percentageScore >= 50) {
+                scoreDescription = "Emerging - Basic positive leadership behaviors with major development potential.";
+            } else {
+                scoreDescription = "Foundational - Significant opportunity to build comprehensive positive leadership capabilities.";
+            }
+            
+            document.getElementById('scoreDescription').textContent = scoreDescription;
+            
+            // Generate detailed breakdown
+            generateDetailedBreakdown(acceptPercent, createPercent, teachPercent, bePercent);
+            
+            // Send email with results
+            sendResults(totalScore, percentageScore);
+        }
+
+        function generateDetailedBreakdown(acceptPercent, createPercent, teachPercent, bePercent) {
+            const breakdown = document.getElementById('detailedBreakdown');
+            
+            const pillars = [
+                {
+                    name: 'ACCEPT Pillar',
+                    score: acceptPercent,
+                    class: 'accept',
+                    description: 'Bias removal, connection skills, presence, and positive assumptions',
+                    subSkills: [
+                        {name: 'Bias Recognition & Challenge', score: Math.round(((userAnswers.q1 || 0) / 4) * 100)},
+                        {name: 'Evidence-Based Judgments', score: Math.round(((userAnswers.q2 || 0) / 4) * 100)},
+                        {name: 'Seeking Understanding', score: Math.round(((userAnswers.q3 || 0) / 4) * 100)},
+                        {name: 'Assuming Positive Intent', score: Math.round(((userAnswers.q4 || 0) / 4) * 100)},
+                        {name: 'Connection vs Communication', score: Math.round(((userAnswers.q5 || 0) / 4) * 100)},
+                        {name: 'Clarification vs Assumptions', score: Math.round(((userAnswers.q6 || 0) / 4) * 100)},
+                        {name: 'Presence & Attention', score: Math.round(((userAnswers.q7 || 0) / 4) * 100)},
+                        {name: 'Understanding Others Focus', score: Math.round(((userAnswers.q8 || 0) / 4) * 100)},
+                        {name: 'Emotional Regulation', score: Math.round(((userAnswers.q9 || 0) / 4) * 100)},
+                        {name: 'Learning from Setbacks', score: Math.round(((userAnswers.q10 || 0) / 4) * 100)}
+                    ]
+                },
+                {
+                    name: 'CREATE Pillar',
+                    score: createPercent,
+                    class: 'create',
+                    description: 'Time management, delegation, mindset, vision, and psychological safety',
+                    subSkills: [
+                        {name: 'Time & Energy Management', score: Math.round(((userAnswers.q11 || 0) / 4) * 100)},
+                        {name: 'Delegation & Follow-up', score: Math.round(((userAnswers.q12 || 0) / 4) * 100)},
+                        {name: 'Limiting Belief Challenge', score: Math.round(((userAnswers.q13 || 0) / 4) * 100)},
+                        {name: 'Energy & Enthusiasm', score: Math.round(((userAnswers.q14 || 0) / 4) * 100)},
+                        {name: 'Ownership & Responsibility', score: Math.round(((userAnswers.q15 || 0) / 4) * 100)},
+                        {name: 'Vision Communication', score: Math.round(((userAnswers.q16 || 0) / 4) * 100)},
+                        {name: 'Stakeholder Mindfulness', score: Math.round(((userAnswers.q17 || 0) / 4) * 100)},
+                        {name: 'Strategic Thinking', score: Math.round(((userAnswers.q18 || 0) / 4) * 100)},
+                        {name: 'Emotional Intelligence', score: Math.round(((userAnswers.q19 || 0) / 4) * 100)},
+                        {name: 'Psychological Safety Creation', score: Math.round(((userAnswers.q20 || 0) / 4) * 100)}
+                    ]
+                },
+                {
+                    name: 'TEACH Pillar',
+                    score: teachPercent,
+                    class: 'teach',
+                    description: 'Coaching, development, learning openness, feedback, and growth opportunities',
+                    subSkills: [
+                        {name: 'Coaching vs Directing', score: Math.round(((userAnswers.q21 || 0) / 4) * 100)},
+                        {name: 'Development Planning', score: Math.round(((userAnswers.q22 || 0) / 4) * 100)},
+                        {name: 'Learning from Others', score: Math.round(((userAnswers.q23 || 0) / 4) * 100)},
+                        {name: 'Feedback Effectiveness', score: Math.round(((userAnswers.q24 || 0) / 4) * 100)},
+                        {name: 'Diverse Perspective Seeking', score: Math.round(((userAnswers.q25 || 0) / 4) * 100)},
+                        {name: 'Learning Modeling', score: Math.round(((userAnswers.q26 || 0) / 4) * 100)},
+                        {name: 'Individual Assessment', score: Math.round(((userAnswers.q27 || 0) / 4) * 100)},
+                        {name: 'Stretch Opportunity Creation', score: Math.round(((userAnswers.q28 || 0) / 4) * 100)}
+                    ]
+                },
+                {
+                    name: 'BE CORE',
+                    score: bePercent,
+                    class: 'be',
+                    description: 'Supportive care, responsibility, selflessness, and service to others',
+                    subSkills: [
+                        {name: 'Supportive Individual Care', score: Math.round(((userAnswers.q29 || 0) / 4) * 100)},
+                        {name: 'Solution-Focused Responsibility', score: Math.round(((userAnswers.q30 || 0) / 4) * 100)},
+                        {name: 'Selfless Team Priority', score: Math.round(((userAnswers.q31 || 0) / 4) * 100)},
+                        {name: 'Investment in Others Growth', score: Math.round(((userAnswers.q32 || 0) / 4) * 100)}
+                    ]
+                }
+            ];
+            
+            pillars.forEach(pillar => {
+                const pillarDiv = document.createElement('div');
+                pillarDiv.className = `pillar-detailed-card ${pillar.class}`;
+                
+                let subSkillsHTML = '<div class="sub-skills">';
+                pillar.subSkills.forEach(skill => {
+                    subSkillsHTML += `
+                        <div class="sub-skill-item">
+                            <span class="sub-skill-name">${skill.name}</span>
+                            <span class="sub-skill-score">${skill.score}%</span>
+                        </div>
+                    `;
+                });
+                subSkillsHTML += '</div>';
+                
+                pillarDiv.innerHTML = `
+                    <h4>${pillar.name} <span class="pillar-score">${pillar.score}%</span></h4>
+                    <p>${pillar.description}</p>
+                    ${subSkillsHTML}
+                `;
+                breakdown.appendChild(pillarDiv);
+            });
+        }
+
+        function sendResults(totalScore, percentageScore) {
+            // Prepare detailed sub-skill data
+            const emailParams = {
+                firstName: userData.firstName,
+                name: userData.firstName,
+                email: userData.email,
+                to_email: userData.email,
+                totalScore: totalScore,
+                percentageScore: percentageScore,
+                maxScore: 128,
+                totalQuestions: 32,
+                assessmentDate: new Date().toLocaleDateString(),
+                assessmentType: 'Comprehensive Positive Effect Leadership Assessment'
+            };
+
+            // Add all individual question scores
+            for (let i = 1; i <= 32; i++) {
+                emailParams[`q${i}_score`] = userAnswers[`q${i}`] || 0;
+            }
+            
+            emailjs.send('service_vntq4ai', 'template_j1dh6rf', emailParams)
+                .then(function(response) {
+                    console.log('Comprehensive assessment email sent successfully:', response);
+                }, function(error) {
+                    console.error('Email send failed:', error);
+                });
+        }
+
+        // Initialize
+        updateNavigation();
+    </script>
+</body>
+</html>

@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Positive Effect Leadership System - Executive Summary Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: #f7fafc;
+            padding: 20px;
+        }
+
+        .report-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .report-meta {
+            background: rgba(251, 191, 36, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: left;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+
+        .meta-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #1e3a8a;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #fbbf24;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #4a5568;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+
+        .executive-summary {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 5px solid #fbbf24;
+            margin-bottom: 30px;
+        }
+
+        .key-findings {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .finding-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .finding-card.accept {
+            border-left-color: #ec4899;
+        }
+
+        .finding-card.create {
+            border-left-color: #f472b6;
+        }
+
+        .finding-card.teach {
+            border-left-color: #3b82f6;
+        }
+
+        .finding-card.accountability {
+            border-left-color: #fbbf24;
+        }
+
+        .finding-card h4 {
+            color: #2d3748;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .score-badge {
+            background: #f7fafc;
+            color: #4a5568;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .score-badge.excellent {
+            background: #c6f6d5;
+            color: #276749;
+        }
+
+        .score-badge.good {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+
+        .score-badge.needs-improvement {
+            background: #fed7d7;
+            color: #9b2c2c;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid #fbbf24;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .progress-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .timeline-item {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            position: relative;
+        }
+
+        .timeline-item.current {
+            border-color: #fbbf24;
+            background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+        }
+
+        .timeline-phase {
+            color: #1e3a8a;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            color: #6b7280;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .recommendations {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .recommendation-item {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #fbbf24;
+        }
+
+        .recommendation-item h5 {
+            color: #1e3a8a;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .recommendation-item p {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .priority-high {
+            border-left-color: #ef4444;
+        }
+
+        .priority-medium {
+            border-left-color: #f59e0b;
+        }
+
+        .priority-low {
+            border-left-color: #10b981;
+        }
+
+        .organizational-overview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        .overview-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .chart-placeholder {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            height: 200px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-style: italic;
+            margin: 15px 0;
+        }
+
+        .action-items {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .action-items h3 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .action-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .action-card h4 {
+            color: #fbbf24;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .action-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .action-card li {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .action-card li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #fbbf24;
+            font-weight: bold;
+        }
+
+        .signature-section {
+            background: #f8fafc;
+            padding: 30px;
+            border-top: 3px solid #fbbf24;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .signature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .signature-block {
+            text-align: center;
+        }
+
+        .signature-line {
+            border-top: 2px solid #e2e8f0;
+            margin: 30px 20px 10px 20px;
+        }
+
+        .signature-title {
+            color: #6b7280;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .print-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .control-btn {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+
+        .control-btn:hover {
+            background: #1e40af;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .print-controls {
+                display: none;
+            }
+            
+            .report-container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .section {
+                break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .organizational-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .print-controls {
+                position: static;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="print-controls">
+        <button class="control-btn" onclick="window.print()">📄 Print Report</button>
+        <button class="control-btn" onclick="generatePDF()">📊 Export PDF</button>
+        <button class="control-btn" onclick="editReport()">✏️ Customize</button>
+    </div>
+
+    <div class="report-container">
+        <div class="header">
+            <h1>The Positive Effect Leaders Assessment</h1>
+            <p class="subtitle">Executive Summary Report - 6 Key Leadership Dimensions + 360° Organizational Health</p>
+            
+            <div class="report-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Organization</span>
+                    <span class="meta-value" id="organizationName">[Company Name]</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Assessment Period</span>
+                    <span class="meta-value" id="assessmentPeriod">Q1 2024</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Leaders Assessed</span>
+                    <span class="meta-value" id="leadersAssessed">24</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Report Date</span>
+                    <span class="meta-value" id="reportDate">January 15, 2024</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Executive Summary -->
+            <div class="section">
+                <h2>Executive Summary</h2>
+                <div class="executive-summary">
+                    <p><strong>The Positive Effect Leaders Assessment</strong> provides a comprehensive evaluation of leadership effectiveness across six critical dimensions: Relationship Builder, Positive Intent Communicator, Mindset & Energy Steward, Ownership & Accountability Driver, Coach & People Developer, and Performance & Growth Manager. This report summarizes the organizational leadership assessment results and provides strategic recommendations for enhancing positive leadership impact.</p>
+                    
+                    <p style="margin-top: 15px;"><strong>Key Insight:</strong> Organizations implementing the 6-dimensional leadership framework with 360° organizational feedback see an average 34% improvement in employee engagement, 28% increase in team productivity, and 42% reduction in leadership-related turnover within 90 days.</p>
+                    
+                    <p style="margin-top: 15px;"><strong>New Enhancement:</strong> This report now includes 360° Organizational Health Assessment data, providing both individual leadership insights and systemic organizational effectiveness metrics for a complete leadership development picture.</p>
+                </div>
+            </div>
+
+            <!-- Individual Leadership Metrics -->
+            <div class="section">
+                <h2>Individual Leadership Effectiveness - 6 Key Dimensions</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value" id="overallScore">75%</div>
+                        <div class="metric-label">Overall Leadership Index</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="relationshipScore">82%</div>
+                        <div class="metric-label">Relationship Builder</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="communicationScore">78%</div>
+                        <div class="metric-label">Positive Intent Communicator</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="mindsetScore">85%</div>
+                        <div class="metric-label">Mindset & Energy Steward</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="ownershipScore">68%</div>
+                        <div class="metric-label">Ownership & Accountability Driver</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="coachingScore">71%</div>
+                        <div class="metric-label">Coach & People Developer</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="performanceScore">76%</div>
+                        <div class="metric-label">Performance & Growth Manager</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 360° Organizational Health Metrics -->
+            <div class="section">
+                <h2>360° Organizational Health Assessment</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value" id="orgCollaboration">82%</div>
+                        <div class="metric-label">Team Collaboration</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="orgPsychSafety">65%</div>
+                        <div class="metric-label">Psychological Safety</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="orgDecisionMaking">48%</div>
+                        <div class="metric-label">Decision Making</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="orgChangeAdaptability">71%</div>
+                        <div class="metric-label">Change Adaptability</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="orgPerformanceStds">78%</div>
+                        <div class="metric-label">Performance Standards</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="orgOverallHealth">67%</div>
+                        <div class="metric-label">Overall Org Health</div>
+                    </div>
+                </div>
+                
+                <div class="organizational-overview">
+                    <div class="overview-section">
+                        <h3>🏆 Organizational Strengths</h3>
+                        <div style="padding: 20px; background: #f0fdf4; border-radius: 8px; border-left: 4px solid #22c55e;">
+                            <div style="font-weight: 600; color: #059669; margin-bottom: 8px;">Team Collaboration (82%)</div>
+                            <div>Excellent cross-functional teamwork and information sharing</div>
+                        </div>
+                        <div style="padding: 20px; background: #f0fdf4; border-radius: 8px; border-left: 4px solid #22c55e; margin-top: 15px;">
+                            <div style="font-weight: 600; color: #059669; margin-bottom: 8px;">Performance Standards (78%)</div>
+                            <div>Clear expectations with strong accountability systems</div>
+                        </div>
+                    </div>
+                    
+                    <div class="overview-section">
+                        <h3>🎯 Critical Improvement Areas</h3>
+                        <div style="padding: 20px; background: #fef2f2; border-radius: 8px; border-left: 4px solid #ef4444;">
+                            <div style="font-weight: 600; color: #dc2626; margin-bottom: 8px;">Decision Making (48%)</div>
+                            <div>Slow, unclear decision-making creates bottlenecks - Priority #1</div>
+                        </div>
+                        <div style="padding: 20px; background: #fef2f2; border-radius: 8px; border-left: 4px solid #ef4444; margin-top: 15px;">
+                            <div style="font-weight: 600; color: #dc2626; margin-bottom: 8px;">Psychological Safety (65%)</div>
+                            <div>Mixed environment affecting innovation and risk-taking</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="executive-summary" style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border-left-color: #f59e0b;">
+                    <p><strong>360° Insight:</strong> The organizational health assessment reveals that while individual leaders show strong capabilities (73% average), systemic organizational factors are creating barriers to full leadership effectiveness. The 19-point gap between individual leadership scores and organizational health metrics indicates significant opportunity for systems-level improvements.</p>
+                </div>
+            </div>
+
+            <!-- Key Findings by Leadership Dimension -->
+            <div class="section">
+                <h2>Key Findings by Leadership Dimension</h2>
+                <div class="key-findings">
+                    <div class="finding-card accept">
+                        <h4>MINDSET & ENERGY STEWARD <span class="score-badge excellent">85% - Leading Strength</span></h4>
+                        <p><strong>Strength:</strong> Exceptional ability to maintain positive outlook and energize teams during challenges.</p>
+                        <p><strong>Opportunity:</strong> Continue leveraging this strength to support other leaders during difficult periods.</p>
+                        <p><strong>Impact:</strong> Teams with highly resilient leaders show 31% better performance under pressure.</p>
+                    </div>
+                    
+                    <div class="finding-card create">
+                        <h4>RELATIONSHIP BUILDER <span class="score-badge excellent">82% - Strong Foundation</span></h4>
+                        <p><strong>Strength:</strong> Strong interpersonal skills and ability to build trust across all levels.</p>
+                        <p><strong>Opportunity:</strong> Use relationship strengths to support coaching and development efforts.</p>
+                        <p><strong>Impact:</strong> Leaders with strong relationships see 28% higher team engagement scores.</p>
+                    </div>
+                    
+                    <div class="finding-card teach">
+                        <h4>COACH & PEOPLE DEVELOPER <span class="score-badge good">71% - Developing Well</span></h4>
+                        <p><strong>Strength:</strong> Leaders demonstrate openness to learning and asking good questions.</p>
+                        <p><strong>Opportunity:</strong> Advanced coaching and mentoring skills need development (66% average).</p>
+                        <p><strong>Impact:</strong> Leaders with strong coaching skills see 45% faster team skill development.</p>
+                    </div>
+                    
+                    <div class="finding-card accountability">
+                        <h4>OWNERSHIP & ACCOUNTABILITY DRIVER <span class="score-badge needs-improvement">68% - Needs Focus</span></h4>
+                        <p><strong>Strength:</strong> Good follow-up systems and tracking capabilities.</p>
+                        <p><strong>Opportunity:</strong> Driving accountability and taking ownership of difficult decisions needs improvement.</p>
+                        <p><strong>Impact:</strong> Strong accountability systems correlate with 38% higher team performance.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Organizational Overview -->
+            <div class="section">
+                <h2>Organizational Leadership Distribution</h2>
+                <div class="organizational-overview">
+                    <div class="overview-section">
+                        <h3>Leadership Levels Performance</h3>
+                        <div class="chart-placeholder">
+                            [Leadership Distribution Chart]<br>
+                            Senior: 81% avg | Middle: 73% avg | Front-line: 67% avg
+                        </div>
+                        <p>Senior leaders demonstrate stronger positive leadership behaviors, indicating effective role modeling opportunities for development cascade.</p>
+                    </div>
+                    
+                    <div class="overview-section">
+                        <h3>Department Comparison</h3>
+                        <div class="chart-placeholder">
+                            [Department Performance Chart]<br>
+                            Sales: 79% | Operations: 72% | Tech: 68% | HR: 76%
+                        </div>
+                        <p>Sales department leads in positive leadership metrics, while Technology teams show the greatest improvement opportunity.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Timeline -->
+            <div class="section">
+                <h2>Kirkpatrick Method - Implementation Timeline</h2>
+                <div class="progress-timeline">
+                    <div class="timeline-item current">
+                        <div class="timeline-phase">Level 1: Reaction (Complete)</div>
+                        <div class="timeline-description">Assessment completed with 96% participation rate. Leaders report high engagement with the ACT methodology and commitment to development.</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-phase">Level 2: Learning (30 Days)</div>
+                        <div class="timeline-description">Targeted development programs launched. Focus on Accept pillar skills for 60% of leaders, coaching development for 40%.</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-phase">Level 3: Behavior (90 Days)</div>
+                        <div class="timeline-description">Behavior change measurement through 360 feedback, team surveys, and supervisor observations. Target: 25% improvement in lowest-scoring areas.</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-phase">Level 4: Results (6 Months)</div>
+                        <div class="timeline-description">Business impact assessment: employee engagement, retention rates, team productivity, and customer satisfaction metrics.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Strategic Recommendations -->
+            <div class="section">
+                <h2>Strategic Recommendations</h2>
+                <div class="recommendations">
+                    <div class="recommendation-item priority-high">
+                        <h5>🚨 Priority 1: Decision-Making Systems (Next 30 Days)</h5>
+                        <p>Establish clear decision-making frameworks (RACI) and delegate authority appropriately. Critical organizational bottleneck affecting all leadership effectiveness. Expected outcome: 25% improvement in decision speed and clarity.</p>
+                    </div>
+                    
+                    <div class="recommendation-item priority-high">
+                        <h5>🎯 Priority 2: Ownership & Accountability Enhancement (Next 60 Days)</h5>
+                        <p>Implement advanced accountability frameworks and "Courageous Leadership" training program. Focus on decision ownership, difficult conversations, and clear expectation setting. Expected outcome: 22% improvement in Ownership & Accountability scores.</p>
+                    </div>
+                    
+                    <div class="recommendation-item priority-medium">
+                        <h5>🛡️ Priority 3: Psychological Safety Enhancement (45-90 Days)</h5>
+                        <p>Implement regular pulse surveys and "failure celebration" sessions where teams share learnings without blame. Create anonymous feedback mechanisms and establish psychological safety training for all managers.</p>
+                    </div>
+                    
+                    <div class="recommendation-item priority-medium">
+                        <h5>📈 Priority 4: Coach & People Developer Enhancement (60-120 Days)</h5>
+                        <p>Launch internal coaching certification program focusing on the Coach & People Developer dimension. Pair high-performing coaches with developing leaders using proven mentoring frameworks. Expected outcome: 30% improvement in team development metrics.</p>
+                    </div>
+                    
+                    <div class="recommendation-item priority-medium">
+                        <h5>🏆 Priority 5: Performance & Growth Management Systems (90 Days)</h5>
+                        <p>Strengthen Performance & Growth Manager capabilities through enhanced recognition systems, goal alignment processes, and development planning tools. Create digital performance management platform with peer feedback mechanisms. Expected outcome: 25% improvement in performance management consistency.</p>
+                    </div>
+                    
+                    <div class="recommendation-item priority-low">
+                        <h5>📚 Priority 6: Continuous Leadership Development Culture (Ongoing)</h5>
+                        <p>Establish monthly leadership development sessions, quarterly leadership summits, and structured mentorship programs. Focus on reinforcing all 6 key leadership dimensions through peer learning, book studies, and best practice sharing.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Items -->
+            <div class="action-items">
+                <h3>30-60-90 Day Action Plan</h3>
+                <div class="action-grid">
+                    <div class="action-card">
+                        <h4>30 Days - Foundation</h4>
+                        <ul>
+                            <li>🚨 Implement RACI decision-making framework</li>
+                            <li>Launch Ownership & Accountability development workshops</li>
+                            <li>Establish coaching partnerships (Coach & People Developer focus)</li>
+                            <li>Begin psychological safety pulse surveys</li>
+                            <li>Assess Performance & Growth Management systems</li>
+                            <li>Distribute leadership development materials</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="action-card">
+                        <h4>60 Days - Implementation</h4>
+                        <ul>
+                            <li>🛡️ Launch psychological safety training for managers</li>
+                            <li>Complete Coach & People Developer skill assessments</li>
+                            <li>Launch peer feedback system (Relationship Builder support)</li>
+                            <li>Measure decision-making and accountability improvements</li>
+                            <li>Host first quarterly leadership summit (all 6 dimensions)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="action-card">
+                        <h4>90 Days - Measurement</h4>
+                        <ul>
+                            <li>📊 Re-assess 360° organizational health metrics</li>
+                            <li>Conduct follow-up 6-dimension leadership assessments</li>
+                            <li>Measure improvements across all leadership dimensions</li>
+                            <li>Analyze team performance, engagement, and retention metrics</li>
+                            <li>Plan next phase based on integrated leadership & organizational results</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expected ROI -->
+            <div class="section">
+                <h2>Expected Return on Investment</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">34%</div>
+                        <div class="metric-label">Employee Engagement ↑</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">28%</div>
+                        <div class="metric-label">Team Productivity ↑</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">42%</div>
+                        <div class="metric-label">Leadership Turnover ↓</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">$2.4M</div>
+                        <div class="metric-label">Annual Savings Projected</div>
+                    </div>
+                </div>
+                
+                <div class="executive-summary" style="margin-top: 25px;">
+                    <p><strong>Investment Summary:</strong> Based on similar organizational implementations, the total investment in The Positive Effect Leaders Assessment with 360° organizational feedback typically returns 4:1 ROI within the first year through improved retention, increased productivity, enhanced employee engagement, and systemic organizational improvements.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Signature Section -->
+        <div class="signature-section">
+            <h3>Report Prepared By</h3>
+            <div class="signature-grid">
+                <div class="signature-block">
+                    <div class="signature-line"></div>
+                    <div class="signature-title">AskApril AI Leadership Development</div>
+                </div>
+                <div class="signature-block">
+                    <div class="signature-line"></div>
+                    <div class="signature-title">Executive Sponsor</div>
+                </div>
+                <div class="signature-block">
+                    <div class="signature-line"></div>
+                    <div class="signature-title">HR Leadership</div>
+                </div>
+            </div>
+            <p style="margin-top: 30px; color: #6b7280; font-size: 0.9rem;">
+                This report is based on The Positive Effect Leaders Assessment measuring 6 key leadership dimensions combined with 360° organizational health metrics. 
+                For detailed individual reports and development plans, contact AskApril AI at april@aprilsabral.com
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Set current date
+        document.getElementById('reportDate').textContent = new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        function generatePDF() {
+            // In a real implementation, this would use a library like jsPDF or html2pdf
+            alert('PDF generation would be implemented with jsPDF library for production use.');
+        }
+
+        function editReport() {
+            const organizationName = prompt('Enter Organization Name:', '[Company Name]');
+            const period = prompt('Enter Assessment Period:', 'Q1 2024');
+            const leadersCount = prompt('Enter Number of Leaders Assessed:', '24');
+            
+            if (organizationName) document.getElementById('organizationName').textContent = organizationName;
+            if (period) document.getElementById('assessmentPeriod').textContent = period;
+            if (leadersCount) document.getElementById('leadersAssessed').textContent = leadersCount;
+        }
+
+        // Sample data population function
+        function populateWithSampleData() {
+            // This would typically be called with real assessment data
+            const sampleData = {
+                overallScore: 75,
+                relationshipScore: 82,
+                communicationScore: 78,
+                mindsetScore: 85,
+                ownershipScore: 68,
+                coachingScore: 71,
+                performanceScore: 76,
+                // Organizational Health
+                orgCollaboration: 82,
+                orgPsychSafety: 65,
+                orgDecisionMaking: 48,
+                orgChangeAdaptability: 71,
+                orgPerformanceStds: 78,
+                orgOverallHealth: 67
+            };
+
+            Object.keys(sampleData).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    if (key === 'engagementImprovement') {
+                        element.textContent = `+${sampleData[key]}%`;
+                    } else {
+                        element.textContent = `${sampleData[key]}%`;
+                    }
+                }
+            });
+        }
+
+        // Initialize with sample data
+        populateWithSampleData();
+    </script>
+</body>
+</html>
