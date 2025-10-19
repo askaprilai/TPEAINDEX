@@ -943,15 +943,36 @@
                                style="padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 16px; width: 250px;"
                                onkeypress="if(event.key==='Enter') validateCompanyCode()">
                         <button onclick="
-                            alert('Button clicked directly!'); 
                             const code = document.getElementById('companyCode').value.trim().toUpperCase();
                             if (code === 'TEST123') {
+                                // Hide payment gateway
                                 document.getElementById('paymentGateway').style.display = 'none';
+                                
+                                // Show assessment content
                                 document.getElementById('assessmentContent').style.display = 'block';
-                                document.querySelector('.demo-banner').innerHTML = '🎯 WORKING - TEST123 VALIDATED';
-                                alert('Should be working now!');
+                                
+                                // Update banner
+                                document.querySelector('.demo-banner').innerHTML = '🎯 TEST MODE - Question 1 of 25';
+                                
+                                // Initialize assessment state
+                                currentQuestion = 1;
+                                answers = {};
+                                responseTexts = {};
+                                
+                                // Make sure first question is active
+                                document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+                                document.querySelector('[data-question=\"1\"]').classList.add('active');
+                                
+                                // Initialize navigation
+                                updateNavigation();
+                                updateProgress();
+                                
+                                // Scroll to assessment
+                                document.getElementById('assessmentContent').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                
+                                console.log('TEST123 activated - assessment ready');
                             } else {
-                                alert('Enter TEST123');
+                                alert('Enter TEST123 for test access');
                             }
                         " 
                                 style="background: #0284c7; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;"
