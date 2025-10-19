@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Resources - TPEAINDEX Partner Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .resources-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ea580c 100%);
+            color: #0f172a;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #f8fafc;
+            border-bottom: 1px solid #e5e7eb;
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            color: #64748b;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-tab.active {
+            color: #1e3a8a;
+            background: #ffffff;
+            border-bottom-color: #fbbf24;
+        }
+
+        .nav-tab:hover {
+            color: #1e3a8a;
+            background: #ffffff;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 40px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .resource-card {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .resource-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .resource-icon {
+            font-size: 2.5rem;
+            margin-right: 15px;
+        }
+
+        .resource-title {
+            color: #1e3a8a;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .resource-description {
+            color: #64748b;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ea580c 100%);
+            color: #0f172a;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+        }
+
+        .download-area {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px dashed #e5e7eb;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: #ffffff;
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #64748b;
+        }
+
+        .close:hover {
+            color: #1e3a8a;
+        }
+
+        .conversation-guide {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #22c55e;
+            margin: 20px 0;
+        }
+
+        .script-section {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            margin: 15px 0;
+        }
+
+        .script-label {
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .email-template {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            font-family: monospace;
+            margin: 15px 0;
+            white-space: pre-wrap;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resources-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📚 Coach Resource Hub</h1>
+            <p>Everything you need to successfully sell and deliver TPEAINDEX assessments</p>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('overview')">📊 Assessment Overview</button>
+            <button class="nav-tab" onclick="showTab('sales')">💼 Sales Materials</button>
+            <button class="nav-tab" onclick="showTab('conversations')">🎯 Client Conversations</button>
+            <button class="nav-tab" onclick="showTab('email')">📧 Email Templates</button>
+            <button class="nav-tab" onclick="showTab('presentations')">🎪 Presentations</button>
+            <button class="nav-tab" onclick="showTab('training')">🎓 Training Videos</button>
+        </div>
+
+        <!-- Assessment Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <h2 style="color: #1e3a8a; margin-bottom: 30px;">Assessment Overview & Benefits</h2>
+            
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">📋</div>
+                        <div class="resource-title">Assessment Summary PDF</div>
+                    </div>
+                    <div class="resource-description">
+                        Complete overview of the TPEAINDEX assessment, including methodology, benefits, and sample reports.
+                    </div>
+                    <button class="btn" onclick="downloadResource('assessment-overview')">📥 Download PDF</button>
+                    <div class="download-area" id="assessment-overview-download" style="display: none;">
+                        <p><strong>Assessment Overview Features:</strong></p>
+                        <ul style="text-align: left; margin: 15px 0;">
+                            <li>25-question leadership behavioral assessment</li>
+                            <li>Measures 6 key leadership dimensions</li>
+                            <li>Personalized development recommendations</li>
+                            <li>Archetype classification system</li>
+                            <li>Used by Fortune 500 companies</li>
+                        </ul>
+                        <a href="#" class="btn">📄 Download Full PDF (2.3MB)</a>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">📈</div>
+                        <div class="resource-title">ROI Calculator</div>
+                    </div>
+                    <div class="resource-description">
+                        Help clients understand the return on investment for leadership development through assessments.
+                    </div>
+                    <button class="btn" onclick="openModal('roi-calculator')">🧮 Open Calculator</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">🎯</div>
+                        <div class="resource-title">Case Studies</div>
+                    </div>
+                    <div class="resource-description">
+                        Real client success stories and transformations from using TPEAINDEX assessments.
+                    </div>
+                    <button class="btn" onclick="openModal('case-studies')">📖 View Case Studies</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sales Materials Tab -->
+        <div id="sales" class="tab-content">
+            <h2 style="color: #1e3a8a; margin-bottom: 30px;">Sales Materials & Proposals</h2>
+            
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">📊</div>
+                        <div class="resource-title">Sales Deck Template</div>
+                    </div>
+                    <div class="resource-description">
+                        Professional PowerPoint presentation template for client meetings and proposals.
+                    </div>
+                    <button class="btn" onclick="downloadResource('sales-deck')">📥 Download PowerPoint</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">📄</div>
+                        <div class="resource-title">Proposal Templates</div>
+                    </div>
+                    <div class="resource-description">
+                        Ready-to-use proposal templates for individual and team assessment packages.
+                    </div>
+                    <button class="btn" onclick="downloadResource('proposals')">📥 Download Templates</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">💰</div>
+                        <div class="resource-title">Pricing Guide</div>
+                    </div>
+                    <div class="resource-description">
+                        Comprehensive pricing strategies and positioning for different client types.
+                    </div>
+                    <button class="btn" onclick="openModal('pricing-guide')">💡 View Guide</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Client Conversations Tab -->
+        <div id="conversations" class="tab-content">
+            <h2 style="color: #1e3a8a; margin-bottom: 30px;">Client Conversation Guides</h2>
+            
+            <div class="conversation-guide">
+                <h3 style="color: #059669; margin-bottom: 15px;">🎯 Initial Client Discovery</h3>
+                <div class="script-section">
+                    <div class="script-label">Opening Questions:</div>
+                    <p>"Tell me about your current leadership challenges..."</p>
+                    <p>"How do you currently measure leadership effectiveness in your organization?"</p>
+                    <p>"What would success look like if we could improve leadership performance by 20%?"</p>
+                </div>
+            </div>
+
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">🗣️</div>
+                        <div class="resource-title">Discovery Questions</div>
+                    </div>
+                    <div class="resource-description">
+                        25 powerful questions to uncover client needs and position the assessment as the solution.
+                    </div>
+                    <button class="btn" onclick="openModal('discovery-questions')">❓ View Questions</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">🔄</div>
+                        <div class="resource-title">Objection Handling</div>
+                    </div>
+                    <div class="resource-description">
+                        Common objections and proven responses to help you close more sales confidently.
+                    </div>
+                    <button class="btn" onclick="openModal('objection-handling')">🛡️ Handle Objections</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">✅</div>
+                        <div class="resource-title">Closing Scripts</div>
+                    </div>
+                    <div class="resource-description">
+                        Proven closing techniques and scripts to confidently ask for the sale.
+                    </div>
+                    <button class="btn" onclick="openModal('closing-scripts')">🎯 Close the Sale</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Email Templates Tab -->
+        <div id="email" class="tab-content">
+            <h2 style="color: #1e3a8a; margin-bottom: 30px;">Email Templates</h2>
+            
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">📧</div>
+                        <div class="resource-title">Initial Outreach</div>
+                    </div>
+                    <div class="resource-description">
+                        Cold outreach templates for introducing the assessment to potential clients.
+                    </div>
+                    <button class="btn" onclick="openModal('outreach-emails')">📮 View Templates</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">🔄</div>
+                        <div class="resource-title">Follow-up Sequences</div>
+                    </div>
+                    <div class="resource-description">
+                        7-email nurture sequence to convert prospects into assessment clients.
+                    </div>
+                    <button class="btn" onclick="openModal('followup-emails')">📬 View Sequence</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">🎉</div>
+                        <div class="resource-title">Post-Assessment</div>
+                    </div>
+                    <div class="resource-description">
+                        Templates for delivering results and upselling additional services.
+                    </div>
+                    <button class="btn" onclick="openModal('post-assessment-emails')">📋 View Templates</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Presentations Tab -->
+        <div id="presentations" class="tab-content">
+            <h2 style="color: #1e3a8a; margin-bottom: 30px;">Presentation Materials</h2>
+            
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">🎪</div>
+                        <div class="resource-title">Webinar Template</div>
+                    </div>
+                    <div class="resource-description">
+                        45-minute webinar presentation: "Unlocking Leadership Potential with Data-Driven Assessments"
+                    </div>
+                    <button class="btn" onclick="downloadResource('webinar-template')">🎥 Download Template</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">📊</div>
+                        <div class="resource-title">Executive Briefing</div>
+                    </div>
+                    <div class="resource-description">
+                        15-minute executive presentation for C-suite audiences focused on ROI and business impact.
+                    </div>
+                    <button class="btn" onclick="downloadResource('executive-briefing')">👔 Download Briefing</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">🎯</div>
+                        <div class="resource-title">Workshop Outline</div>
+                    </div>
+                    <div class="resource-description">
+                        Half-day workshop format combining assessment delivery with leadership development.
+                    </div>
+                    <button class="btn" onclick="downloadResource('workshop-outline')">🏆 Download Outline</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Training Videos Tab -->
+        <div id="training" class="tab-content">
+            <h2 style="color: #1e3a8a; margin-bottom: 30px;">Training & Certification</h2>
+            
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">🎓</div>
+                        <div class="resource-title">Coach Certification</div>
+                    </div>
+                    <div class="resource-description">
+                        Complete certification program to become a certified TPEAINDEX coach (2 hours).
+                    </div>
+                    <button class="btn" onclick="openModal('certification-training')">🎓 Start Training</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">📹</div>
+                        <div class="resource-title">Sales Training Videos</div>
+                    </div>
+                    <div class="resource-description">
+                        6-part video series on selling leadership assessments effectively (90 minutes total).
+                    </div>
+                    <button class="btn" onclick="openModal('sales-training')">📺 Watch Videos</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <div class="resource-icon">💬</div>
+                        <div class="resource-title">Monthly Coaching Calls</div>
+                    </div>
+                    <div class="resource-description">
+                        Live monthly group coaching calls with April Sabral for ongoing support and Q&A.
+                    </div>
+                    <button class="btn" onclick="openModal('coaching-calls')">📞 Join Next Call</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modal-body">
+                <!-- Content will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all nav tabs
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked nav tab
+            event.target.classList.add('active');
+        }
+
+        function downloadResource(resourceType) {
+            const downloadArea = document.getElementById(resourceType + '-download');
+            if (downloadArea) {
+                downloadArea.style.display = downloadArea.style.display === 'none' ? 'block' : 'none';
+            } else {
+                // Simulate download
+                alert(`📥 ${resourceType.replace('-', ' ')} download starting...`);
+            }
+        }
+
+        function openModal(contentType) {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modal-body');
+            
+            const content = getModalContent(contentType);
+            modalBody.innerHTML = content;
+            
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function getModalContent(type) {
+            const contents = {
+                'roi-calculator': `
+                    <h2 style="color: #1e3a8a; margin-bottom: 20px;">📈 Leadership Assessment ROI Calculator</h2>
+                    <div style="background: #f8fafc; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <h3>Input Your Numbers:</h3>
+                        <div style="margin: 15px 0;">
+                            <label>Number of Leaders: <input type="number" id="leaders" value="10" style="margin-left: 10px; padding: 5px;"></label>
+                        </div>
+                        <div style="margin: 15px 0;">
+                            <label>Average Salary: $<input type="number" id="salary" value="120000" style="margin-left: 10px; padding: 5px;"></label>
+                        </div>
+                        <div style="margin: 15px 0;">
+                            <label>Performance Improvement: <input type="number" id="improvement" value="15" style="margin-left: 10px; padding: 5px;">%</label>
+                        </div>
+                        <button onclick="calculateROI()" class="btn">Calculate ROI</button>
+                        <div id="roi-result" style="margin-top: 20px; font-size: 1.2rem; font-weight: bold;"></div>
+                    </div>
+                `,
+                'case-studies': `
+                    <h2 style="color: #1e3a8a; margin-bottom: 20px;">📖 Success Stories</h2>
+                    <div style="background: #f0fdf4; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #22c55e;">
+                        <h3>TechCorp Global - 25 Executives</h3>
+                        <p><strong>Challenge:</strong> Poor cross-departmental collaboration</p>
+                        <p><strong>Solution:</strong> TPEAINDEX assessment + coaching</p>
+                        <p><strong>Result:</strong> 40% improvement in team effectiveness scores</p>
+                        <p><strong>ROI:</strong> $2.1M in productivity gains</p>
+                    </div>
+                    <div style="background: #fef3c7; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #fbbf24;">
+                        <h3>Healthcare Partners - 15 Department Heads</h3>
+                        <p><strong>Challenge:</strong> High turnover in leadership roles</p>
+                        <p><strong>Solution:</strong> Leadership assessment + development plan</p>
+                        <p><strong>Result:</strong> 60% reduction in leadership turnover</p>
+                        <p><strong>ROI:</strong> $890K saved in recruitment costs</p>
+                    </div>
+                `,
+                'discovery-questions': `
+                    <h2 style="color: #1e3a8a; margin-bottom: 20px;">❓ Discovery Questions</h2>
+                    <div style="background: #f8fafc; padding: 20px; border-radius: 10px;">
+                        <h3>Current State Questions:</h3>
+                        <ul>
+                            <li>How do you currently measure leadership effectiveness?</li>
+                            <li>What's your biggest leadership challenge right now?</li>
+                            <li>How much time do you spend on leadership development annually?</li>
+                            <li>What's the cost of poor leadership decisions in your organization?</li>
+                        </ul>
+                        <h3>Future State Questions:</h3>
+                        <ul>
+                            <li>What would a 20% improvement in leadership effectiveness mean for your business?</li>
+                            <li>How would better leaders impact your team's performance?</li>
+                            <li>What's the value of reducing leadership-related conflicts?</li>
+                        </ul>
+                    </div>
+                `,
+                'certification-training': `
+                    <h2 style="color: #1e3a8a; margin-bottom: 20px;">🎓 TPEAINDEX Coach Certification</h2>
+                    <div style="background: #f0fdf4; padding: 20px; border-radius: 10px; border-left: 4px solid #22c55e;">
+                        <h3>Module 1: Assessment Science (30 min)</h3>
+                        <p>Understanding the methodology and research behind TPEAINDEX</p>
+                        <button class="btn" style="margin: 10px 0;">▶️ Start Module 1</button>
+                        
+                        <h3>Module 2: Results Interpretation (45 min)</h3>
+                        <p>How to read and explain results to clients effectively</p>
+                        <button class="btn" style="margin: 10px 0;">▶️ Start Module 2</button>
+                        
+                        <h3>Module 3: Client Conversations (30 min)</h3>
+                        <p>Best practices for delivering feedback and development planning</p>
+                        <button class="btn" style="margin: 10px 0;">▶️ Start Module 3</button>
+                        
+                        <h3>Final Assessment</h3>
+                        <p>Complete the certification exam to receive your certificate</p>
+                        <button class="btn" style="margin: 10px 0;">📝 Take Exam</button>
+                    </div>
+                `
+            };
+            
+            return contents[type] || '<p>Content coming soon...</p>';
+        }
+
+        function calculateROI() {
+            const leaders = document.getElementById('leaders').value;
+            const salary = document.getElementById('salary').value;
+            const improvement = document.getElementById('improvement').value;
+            
+            const annualValue = leaders * salary * (improvement / 100);
+            const assessmentCost = leaders * 97; // $97 per assessment
+            const roi = ((annualValue - assessmentCost) / assessmentCost * 100).toFixed(0);
+            
+            document.getElementById('roi-result').innerHTML = `
+                <div style="color: #059669;">
+                    Annual Value: $${annualValue.toLocaleString()}<br>
+                    Assessment Investment: $${assessmentCost.toLocaleString()}<br>
+                    ROI: ${roi}%
+                </div>
+            `;
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
