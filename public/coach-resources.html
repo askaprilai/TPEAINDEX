@@ -285,7 +285,7 @@
                             <li>Archetype classification system</li>
                             <li>Used by Fortune 500 companies</li>
                         </ul>
-                        <button onclick="window.print()" class="btn">🖨️ Print/Save as PDF</button>
+                        <button onclick="printAssessmentOverview()" class="btn">🖨️ Print/Save as PDF</button>
                     </div>
                 </div>
 
@@ -678,6 +678,14 @@
             if (event.target == modal) {
                 closeModal();
             }
+        }
+
+        function printAssessmentOverview() {
+            // Open the assessment overview in a new window and print it
+            const printWindow = window.open('resources/assessment-overview.html', '_blank');
+            printWindow.onload = function() {
+                printWindow.print();
+            };
         }
     </script>
 </body>
