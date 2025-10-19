@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TPEAINDEX Email Templates Library</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px;
+            background: #ffffff;
+            color: #333;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #fbbf24;
+            padding-bottom: 20px;
+        }
+        
+        .email-section {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 4px solid #fbbf24;
+        }
+        
+        .email-template {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid #e5e7eb;
+            font-family: 'Georgia', serif;
+        }
+        
+        .email-header {
+            background: #1e3a8a;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px 5px 0 0;
+            margin: -20px -20px 20px -20px;
+            font-weight: bold;
+        }
+        
+        .subject-line {
+            background: #fef3c7;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 3px solid #f59e0b;
+        }
+        
+        .variable-highlight {
+            background: #dbeafe;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #1e40af;
+            font-weight: bold;
+        }
+        
+        .tip-box {
+            background: #e0f2fe;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 3px solid #0284c7;
+        }
+        
+        .copy-btn {
+            background: #1e3a8a;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        @media print {
+            body { margin: 0; padding: 20px; }
+            .email-section { break-inside: avoid; }
+            .copy-btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>TPEAINDEX Email Templates Library</h1>
+        <h2>Ready-to-Use Email Templates for Every Situation</h2>
+        <p style="color: #64748b;">Copy, customize, and send - complete email sequences for coach success</p>
+    </div>
+
+    <div class="email-section">
+        <h3>📧 Initial Outreach Templates</h3>
+        
+        <div class="email-template">
+            <div class="email-header">Cold Outreach - Executive Focus</div>
+            <div class="subject-line"><strong>Subject:</strong> Quick question about leadership effectiveness at <span class="variable-highlight">[Company Name]</span></div>
+            
+            <p>Hi <span class="variable-highlight">[First Name]</span>,</p>
+            
+            <p>I noticed that <span class="variable-highlight">[Company Name]</span> has been <span class="variable-highlight">[recent achievement/news]</span> - congratulations!</p>
+            
+            <p>I'm reaching out because I work with executives who want to maximize their leadership effectiveness and drive measurable team performance improvements.</p>
+            
+            <p>Quick question: How do you currently measure leadership effectiveness within your organization?</p>
+            
+            <p>I ask because many successful companies like yours are discovering that traditional leadership development misses the mark because it's based on assumptions rather than data.</p>
+            
+            <p>I'd love to share how other <span class="variable-highlight">[industry]</span> leaders are using behavioral assessments to achieve 20-40% improvements in team performance.</p>
+            
+            <p>Would you be open to a brief 15-minute conversation this week?</p>
+            
+            <p>Best regards,<br>
+            <span class="variable-highlight">[Your Name]</span></p>
+            
+            <button class="copy-btn" onclick="copyTemplate(this)">📋 Copy Template</button>
+        </div>
+
+        <div class="email-template">
+            <div class="email-header">LinkedIn Connection Follow-up</div>
+            <div class="subject-line"><strong>Subject:</strong> Following up on LinkedIn connection</div>
+            
+            <p>Hi <span class="variable-highlight">[First Name]</span>,</p>
+            
+            <p>Thanks for connecting on LinkedIn! I see you're focused on <span class="variable-highlight">[their role/industry]</span> at <span class="variable-highlight">[Company Name]</span>.</p>
+            
+            <p>I'm curious - what's your biggest leadership challenge right now? In my work with <span class="variable-highlight">[similar companies/roles]</span>, I often hear about <span class="variable-highlight">[common challenge]</span>.</p>
+            
+            <p>I specialize in helping leaders get clear, objective data about their leadership effectiveness through science-backed behavioral assessments.</p>
+            
+            <p>Would you be interested in seeing how this works? I can show you a sample assessment that takes 10 minutes but provides insights that transform leadership teams.</p>
+            
+            <p>Let me know if you'd like to explore this!</p>
+            
+            <p>Best,<br>
+            <span class="variable-highlight">[Your Name]</span></p>
+            
+            <button class="copy-btn" onclick="copyTemplate(this)">📋 Copy Template</button>
+        </div>
+    </div>
+
+    <div class="email-section">
+        <h3>🔄 Follow-up Sequence Templates</h3>
+        
+        <div class="email-template">
+            <div class="email-header">Follow-up #1 (Day 3) - Value Add</div>
+            <div class="subject-line"><strong>Subject:</strong> Leadership insight I thought you'd appreciate</div>
+            
+            <p>Hi <span class="variable-highlight">[First Name]</span>,</p>
+            
+            <p>I came across this Harvard Business Review article about leadership effectiveness and thought of our conversation.</p>
+            
+            <p>The research shows that companies with the most effective leaders are 13x more likely to outperform their competition.</p>
+            
+            <p>This aligns perfectly with what I see in my work with leadership assessments - organizations that measure and develop leadership effectiveness consistently outperform those that don't.</p>
+            
+            <p>Have you had a chance to think about our discussion regarding leadership measurement at <span class="variable-highlight">[Company Name]</span>?</p>
+            
+            <p>I'd love to show you how some of my clients are achieving similar results.</p>
+            
+            <p>When would be good for a brief call?</p>
+            
+            <p>Best,<br>
+            <span class="variable-highlight">[Your Name]</span></p>
+            
+            <button class="copy-btn" onclick="copyTemplate(this)">📋 Copy Template</button>
+        </div>
+
+        <div class="email-template">
+            <div class="email-header">Follow-up #2 (Day 7) - Case Study</div>
+            <div class="subject-line"><strong>Subject:</strong> How <span class="variable-highlight">[Similar Company]</span> improved leadership effectiveness by 35%</div>
+            
+            <p>Hi <span class="variable-highlight">[First Name]</span>,</p>
+            
+            <p>I wanted to share a quick success story that reminded me of <span class="variable-highlight">[Company Name]</span>.</p>
+            
+            <p><span class="variable-highlight">[Similar Company]</span> was struggling with <span class="variable-highlight">[similar challenge]</span> when they decided to implement leadership assessments across their team.</p>
+            
+            <p><strong>The results after 6 months:</strong></p>
+            <ul>
+                <li>35% improvement in leadership effectiveness scores</li>
+                <li>22% increase in team productivity</li>
+                <li>40% reduction in leadership-related conflicts</li>
+                <li>$2.1M in productivity gains</li>
+            </ul>
+            
+            <p>The key was having objective data about each leader's strengths and development areas, rather than guessing.</p>
+            
+            <p>Would you like to see how this assessment process works? I can walk you through it in 15 minutes.</p>
+            
+            <p>What does your calendar look like this week?</p>
+            
+            <p>Best regards,<br>
+            <span class="variable-highlight">[Your Name]</span></p>
+            
+            <button class="copy-btn" onclick="copyTemplate(this)">📋 Copy Template</button>
+        </div>
+    </div>
+
+    <div class="email-section">
+        <h3>💰 Proposal & Pricing Templates</h3>
+        
+        <div class="email-template">
+            <div class="email-header">Assessment Proposal Email</div>
+            <div class="subject-line"><strong>Subject:</strong> Leadership Assessment Proposal for <span class="variable-highlight">[Company Name]</span></div>
+            
+            <p>Hi <span class="variable-highlight">[First Name]</span>,</p>
+            
+            <p>Thank you for our conversation yesterday about leadership development at <span class="variable-highlight">[Company Name]</span>.</p>
+            
+            <p>Based on what you shared about <span class="variable-highlight">[specific challenges discussed]</span>, I believe a leadership assessment would provide valuable insights for your team.</p>
+            
+            <p><strong>Here's what I recommend:</strong></p>
+            
+            <p><strong>Option 1: Individual Leadership Assessment</strong><br>
+            • Comprehensive leadership behavioral assessment<br>
+            • Detailed results interpretation session (1 hour)<br>
+            • Personalized development plan<br>
+            • Investment: $497</p>
+            
+            <p><strong>Option 2: Team Leadership Assessment Package</strong><br>
+            • Assessment for your <span class="variable-highlight">[number]</span> team members<br>
+            • Team dynamics analysis<br>
+            • Group results workshop (2 hours)<br>
+            • Individual follow-up sessions<br>
+            • Investment: $<span class="variable-highlight">[calculated price]</span></p>
+            
+            <p>Given your goal of <span class="variable-highlight">[their stated goal]</span>, I recommend Option 2 as it will give you the complete picture of your team's leadership dynamics.</p>
+            
+            <p>The ROI typically shows within 60-90 days through improved team performance and reduced leadership conflicts.</p>
+            
+            <p>Would you like to move forward with this, or do you have questions about the process?</p>
+            
+            <p>Best regards,<br>
+            <span class="variable-highlight">[Your Name]</span></p>
+            
+            <button class="copy-btn" onclick="copyTemplate(this)">📋 Copy Template</button>
+        </div>
+    </div>
+
+    <div class="email-section">
+        <h3>✅ Post-Assessment Templates</h3>
+        
+        <div class="email-template">
+            <div class="email-header">Results Delivery Email</div>
+            <div class="subject-line"><strong>Subject:</strong> Your TPEAINDEX leadership assessment results are ready</div>
+            
+            <p>Hi <span class="variable-highlight">[First Name]</span>,</p>
+            
+            <p>Great news! Your TPEAINDEX leadership assessment results are ready, and I'm excited to share some fascinating insights about your leadership effectiveness.</p>
+            
+            <p><strong>Here's a preview of what we discovered:</strong></p>
+            <ul>
+                <li>Your leadership archetype: <span class="variable-highlight">[Archetype]</span></li>
+                <li>Top leadership strength: <span class="variable-highlight">[Top Strength]</span></li>
+                <li>Key development opportunity: <span class="variable-highlight">[Development Area]</span></li>
+            </ul>
+            
+            <p>I've scheduled our results interpretation session for <span class="variable-highlight">[Date/Time]</span>. During this 60-minute session, we'll dive deep into:</p>
+            <ul>
+                <li>Your complete leadership effectiveness profile</li>
+                <li>Specific strategies to leverage your strengths</li>
+                <li>A personalized 90-day development plan</li>
+                <li>How to apply these insights with your team</li>
+            </ul>
+            
+            <p>I'm looking forward to helping you transform these insights into measurable leadership improvements!</p>
+            
+            <p>See you <span class="variable-highlight">[Date/Time]</span>!</p>
+            
+            <p>Best,<br>
+            <span class="variable-highlight">[Your Name]</span></p>
+            
+            <button class="copy-btn" onclick="copyTemplate(this)">📋 Copy Template</button>
+        </div>
+
+        <div class="email-template">
+            <div class="email-header">Upsell - Team Assessment</div>
+            <div class="subject-line"><strong>Subject:</strong> Extending your leadership insights to your entire team</div>
+            
+            <p>Hi <span class="variable-highlight">[First Name]</span>,</p>
+            
+            <p>It's been <span class="variable-highlight">[timeframe]</span> since we completed your leadership assessment, and I hope you're seeing the impact of implementing your development plan!</p>
+            
+            <p>Based on the insights from your individual assessment, I think your entire team would benefit tremendously from the same process.</p>
+            
+            <p><strong>Here's why this makes sense now:</strong></p>
+            <ul>
+                <li>You understand the value and impact of the assessment</li>
+                <li>Your team would benefit from the same clarity about their leadership styles</li>
+                <li>You could optimize team dynamics based on everyone's results</li>
+                <li>It creates a common language for leadership development</li>
+            </ul>
+            
+            <p>I'm offering a special package for your team of <span class="variable-highlight">[number]</span> that includes:</p>
+            <ul>
+                <li>Individual assessments for each team member</li>
+                <li>Team dynamics analysis report</li>
+                <li>Group workshop to review results</li>
+                <li>Team development action plan</li>
+            </ul>
+            
+            <p>Given your positive experience, I can offer this package at a 15% discount: $<span class="variable-highlight">[discounted price]</span> (regular price $<span class="variable-highlight">[regular price]</span>).</p>
+            
+            <p>Would you like to discuss how this could accelerate your team's development?</p>
+            
+            <p>Best,<br>
+            <span class="variable-highlight">[Your Name]</span></p>
+            
+            <button class="copy-btn" onclick="copyTemplate(this)">📋 Copy Template</button>
+        </div>
+    </div>
+
+    <div class="email-section">
+        <h3>🎯 Objection Handling Templates</h3>
+        
+        <div class="email-template">
+            <div class="email-header">Response to "We need to think about it"</div>
+            <div class="subject-line"><strong>Subject:</strong> Addressing your questions about the leadership assessment</div>
+            
+            <p>Hi <span class="variable-highlight">[First Name]</span>,</p>
+            
+            <p>I completely understand wanting to think through the leadership assessment decision.</p>
+            
+            <p>In my experience, when leaders say they need to think about it, they usually have one of three concerns:</p>
+            
+            <p><strong>1. Is this the right methodology?</strong><br>
+            TPEAINDEX is science-backed and used by Fortune 500 companies with 95% satisfaction rate.</p>
+            
+            <p><strong>2. Is this the right time?</strong><br>
+            The cost of waiting often exceeds the investment - leadership issues compound daily.</p>
+            
+            <p><strong>3. Is this the right investment?</strong><br>
+            Most clients see 10-50x ROI within the first year through improved team performance.</p>
+            
+            <p>Which of these resonates with your situation? I'd be happy to address any specific concerns.</p>
+            
+            <p>What questions can I answer to help you move forward confidently?</p>
+            
+            <p>Best,<br>
+            <span class="variable-highlight">[Your Name]</span></p>
+            
+            <button class="copy-btn" onclick="copyTemplate(this)">📋 Copy Template</button>
+        </div>
+    </div>
+
+    <div class="tip-box">
+        <h3>📝 Email Template Best Practices</h3>
+        <ul>
+            <li><strong>Personalization:</strong> Always replace variables with specific details</li>
+            <li><strong>Subject Lines:</strong> Keep under 50 characters for mobile optimization</li>
+            <li><strong>Call to Action:</strong> Each email should have one clear next step</li>
+            <li><strong>Timing:</strong> Send during business hours (Tuesday-Thursday, 10 AM - 2 PM best)</li>
+            <li><strong>Follow-up:</strong> Wait 3-4 days between follow-ups</li>
+            <li><strong>Value First:</strong> Always provide value before asking for anything</li>
+        </ul>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px; padding: 30px; background: linear-gradient(135deg, #f0fdf4, #dcfce7); border-radius: 15px;">
+        <h3 style="color: #059669;">Email Success Formula</h3>
+        <p style="font-size: 1.1rem; margin-bottom: 20px;"><strong>Personalization + Value + Clear CTA = Response</strong></p>
+        <p style="font-weight: 600;">Customize every email and focus on client value, not assessment features.</p>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; font-size: 0.9rem; color: #64748b;">
+        <p>© 2024 April Sabral - TPEAINDEX Coach Resource</p>
+        <p>For support: april@aprilsabral.com | Coach Portal: www.thepositiveeffectindex.com/coach-portal.html</p>
+    </div>
+
+    <script>
+        function copyTemplate(btn) {
+            const template = btn.parentElement;
+            const text = template.textContent.replace('📋 Copy Template', '').trim();
+            
+            navigator.clipboard.writeText(text).then(() => {
+                btn.textContent = '✅ Copied!';
+                btn.style.background = '#059669';
+                setTimeout(() => {
+                    btn.textContent = '📋 Copy Template';
+                    btn.style.background = '#1e3a8a';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
