@@ -408,9 +408,21 @@
         </div>
     </div>
 
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("tBM0CdaS-E8HdBCVq");
+        })();
+
         document.getElementById('coachApplicationForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = document.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = '📤 Sending Application...';
+            submitBtn.disabled = true;
             
             // Collect form data
             const formData = new FormData(this);
@@ -419,21 +431,87 @@
                 data[key] = value;
             }
             
-            // Simulate form submission (in real app, this would go to your backend)
-            console.log('Coach application submitted:', data);
+            // Add timestamp
+            data.submittedAt = new Date().toLocaleString();
             
-            // Show success message
-            document.getElementById('signupForm').style.display = 'none';
-            document.getElementById('successMessage').style.display = 'block';
+            // Prepare email template parameters
+            const templateParams = {
+                to_email: 'april@aprilsabral.com',
+                from_name: `${data.firstName} ${data.lastName}`,
+                from_email: data.email,
+                subject: 'New TPEAINDEX Coach Partnership Application',
+                
+                // Application details
+                applicant_name: `${data.firstName} ${data.lastName}`,
+                applicant_email: data.email,
+                applicant_phone: data.phone || 'Not provided',
+                company: data.company || 'Not provided',
+                website: data.website || 'Not provided',
+                experience: data.experience,
+                client_base: data.clientBase || 'Not provided',
+                specialization: data.specialization || 'Not provided',
+                motivation: data.motivation,
+                referral_source: data.referralSource || 'Not provided',
+                submitted_at: data.submittedAt,
+                
+                // Formatted message
+                message: `
+NEW COACH PARTNERSHIP APPLICATION
+
+Applicant Information:
+• Name: ${data.firstName} ${data.lastName}
+• Email: ${data.email}
+• Phone: ${data.phone || 'Not provided'}
+• Company: ${data.company || 'Not provided'}
+• Website: ${data.website || 'Not provided'}
+
+Coaching Background:
+• Experience Level: ${data.experience}
+• Client Base Size: ${data.clientBase || 'Not provided'}
+• Specialization: ${data.specialization || 'Not provided'}
+
+Application Details:
+• Motivation: ${data.motivation}
+• How they heard about us: ${data.referralSource || 'Not provided'}
+• Submitted: ${data.submittedAt}
+
+Next Steps:
+1. Review application within 24-48 hours
+2. Send coach portal access credentials
+3. Schedule onboarding call if approved
+
+This application was submitted through the TPEAINDEX coach signup page.
+                `
+            };
             
-            // In real app, send email notification to admin
-            // and set up coach account in database
-            
-            // Scroll to success message
-            document.getElementById('successMessage').scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'start' 
-            });
+            // Send email via EmailJS
+            emailjs.send('service_h3bx47r', 'template_bsv45dp', templateParams)
+                .then(function(response) {
+                    console.log('Coach application sent successfully:', response);
+                    
+                    // Show success message
+                    document.getElementById('signupForm').style.display = 'none';
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Scroll to success message
+                    document.getElementById('successMessage').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                    
+                    // Log application data for debugging
+                    console.log('Coach application data:', data);
+                    
+                }, function(error) {
+                    console.error('Failed to send coach application:', error);
+                    
+                    // Reset button
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Show error message
+                    alert('There was an error submitting your application. Please try again or email april@aprilsabral.com directly.');
+                });
         });
     </script>
 </body>
