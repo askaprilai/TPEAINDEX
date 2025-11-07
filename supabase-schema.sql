@@ -101,6 +101,86 @@ CREATE TABLE email_logs (
     email_content TEXT
 );
 
+-- Coach profiles table - stores coach/affiliate information
+CREATE TABLE coach_profiles (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    email VARCHAR(255) UNIQUE NOT NULL,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    company VARCHAR(255),
+    phone VARCHAR(50),
+    website VARCHAR(500),
+    experience_level VARCHAR(50), -- 'new', 'emerging', 'experienced', 'seasoned'
+    client_base_size VARCHAR(20), -- '1-5', '6-15', '16-30', '31-50', '50+'
+    specialization VARCHAR(500),
+    motivation TEXT,
+    referral_source VARCHAR(100),
+    
+    -- Payment & Stripe Connect Info
+    stripe_account_id VARCHAR(255) UNIQUE,
+    payment_status VARCHAR(50) DEFAULT 'pending', -- 'pending', 'connected', 'restricted', 'rejected'
+    onboarding_completed BOOLEAN DEFAULT FALSE,
+    charges_enabled BOOLEAN DEFAULT FALSE,
+    payouts_enabled BOOLEAN DEFAULT FALSE,
+    
+    -- Commission Settings
+    commission_rate DECIMAL(5,2) DEFAULT 25.00, -- 25% default
+    minimum_payout DECIMAL(10,2) DEFAULT 50.00, -- $50 minimum
+    payout_schedule VARCHAR(20) DEFAULT 'weekly', -- 'weekly', 'monthly'
+    
+    -- Status & Tracking
+    status VARCHAR(50) DEFAULT 'pending', -- 'pending', 'approved', 'active', 'suspended'
+    approved_at TIMESTAMP WITH TIME ZONE,
+    approved_by VARCHAR(255),
+    
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Commission transactions table - tracks all commission earnings
+CREATE TABLE commission_transactions (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    coach_profile_id UUID REFERENCES coach_profiles(id) ON DELETE CASCADE,
+    purchase_id UUID REFERENCES purchases(id) ON DELETE CASCADE,
+    
+    -- Transaction Details
+    gross_amount DECIMAL(10,2) NOT NULL, -- Original purchase amount
+    commission_rate DECIMAL(5,2) NOT NULL, -- Rate applied (25%, 30%, etc.)
+    commission_amount DECIMAL(10,2) NOT NULL, -- Calculated commission
+    
+    -- Status Tracking
+    status VARCHAR(50) DEFAULT 'pending', -- 'pending', 'approved', 'paid', 'disputed'
+    approved_at TIMESTAMP WITH TIME ZONE,
+    paid_at TIMESTAMP WITH TIME ZONE,
+    
+    -- Payout Information
+    payout_batch_id VARCHAR(255), -- Stripe payout batch reference
+    stripe_transfer_id VARCHAR(255), -- Individual transfer ID
+    
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Payout batches table - tracks batch payouts to coaches
+CREATE TABLE payout_batches (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    batch_date DATE NOT NULL,
+    status VARCHAR(50) DEFAULT 'pending', -- 'pending', 'processing', 'completed', 'failed'
+    total_amount DECIMAL(12,2) NOT NULL,
+    total_coaches INTEGER NOT NULL,
+    total_transactions INTEGER NOT NULL,
+    
+    -- Stripe Information
+    stripe_batch_id VARCHAR(255),
+    
+    -- Processing Details
+    processed_at TIMESTAMP WITH TIME ZONE,
+    completed_at TIMESTAMP WITH TIME ZONE,
+    error_message TEXT,
+    
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
 -- Indexes for better performance
 CREATE INDEX idx_purchases_email ON purchases(customer_email);
 CREATE INDEX idx_purchases_transaction ON purchases(stripe_transaction_id);
@@ -117,6 +197,14 @@ CREATE INDEX idx_assessment_progression_dimension ON assessment_progression(dime
 CREATE INDEX idx_development_recommendations_client ON development_recommendations(client_profile_id);
 CREATE INDEX idx_development_recommendations_status ON development_recommendations(status);
 CREATE INDEX idx_email_logs_purchase ON email_logs(purchase_id);
+CREATE INDEX idx_coach_profiles_email ON coach_profiles(email);
+CREATE INDEX idx_coach_profiles_stripe_account ON coach_profiles(stripe_account_id);
+CREATE INDEX idx_coach_profiles_status ON coach_profiles(status);
+CREATE INDEX idx_commission_transactions_coach ON commission_transactions(coach_profile_id);
+CREATE INDEX idx_commission_transactions_purchase ON commission_transactions(purchase_id);
+CREATE INDEX idx_commission_transactions_status ON commission_transactions(status);
+CREATE INDEX idx_payout_batches_date ON payout_batches(batch_date);
+CREATE INDEX idx_payout_batches_status ON payout_batches(status);
 
 -- Row Level Security (RLS) policies
 ALTER TABLE purchases ENABLE ROW LEVEL SECURITY;
@@ -126,6 +214,9 @@ ALTER TABLE assessment_results ENABLE ROW LEVEL SECURITY;
 ALTER TABLE assessment_progression ENABLE ROW LEVEL SECURITY;
 ALTER TABLE development_recommendations ENABLE ROW LEVEL SECURITY;
 ALTER TABLE email_logs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE coach_profiles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE commission_transactions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE payout_batches ENABLE ROW LEVEL SECURITY;
 
 -- Policy: Users can only see their own purchases
 CREATE POLICY "Users can view own purchases" ON purchases
@@ -166,6 +257,25 @@ CREATE POLICY "Users can view own recommendations" ON development_recommendation
             SELECT id FROM client_profiles WHERE email = auth.jwt() ->> 'email'
         )
     );
+
+-- Policy: Coaches can view and update their own profile
+CREATE POLICY "Coaches can view own profile" ON coach_profiles
+    FOR SELECT USING (email = auth.jwt() ->> 'email');
+
+CREATE POLICY "Coaches can update own profile" ON coach_profiles
+    FOR UPDATE USING (email = auth.jwt() ->> 'email');
+
+-- Policy: Coaches can view their own commission transactions
+CREATE POLICY "Coaches can view own commissions" ON commission_transactions
+    FOR SELECT USING (
+        coach_profile_id IN (
+            SELECT id FROM coach_profiles WHERE email = auth.jwt() ->> 'email'
+        )
+    );
+
+-- Policy: Only admin can view payout batches
+CREATE POLICY "Admin can view payout batches" ON payout_batches
+    FOR SELECT USING (auth.jwt() ->> 'role' = 'admin');
 
 -- Functions for code generation and validation
 CREATE OR REPLACE FUNCTION generate_unique_code()
@@ -447,6 +557,178 @@ BEGIN
             priority_level
         );
     END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Function to create or update coach profile from application
+CREATE OR REPLACE FUNCTION create_coach_profile(
+    coach_email VARCHAR(255),
+    coach_first_name VARCHAR(255),
+    coach_last_name VARCHAR(255),
+    coach_phone VARCHAR(50) DEFAULT NULL,
+    coach_company VARCHAR(255) DEFAULT NULL,
+    coach_website VARCHAR(500) DEFAULT NULL,
+    coach_experience VARCHAR(50) DEFAULT NULL,
+    coach_client_base VARCHAR(20) DEFAULT NULL,
+    coach_specialization VARCHAR(500) DEFAULT NULL,
+    coach_motivation TEXT DEFAULT NULL,
+    coach_referral_source VARCHAR(100) DEFAULT NULL
+)
+RETURNS UUID AS $$
+DECLARE
+    coach_id UUID;
+BEGIN
+    -- Insert new coach profile
+    INSERT INTO coach_profiles (
+        email, first_name, last_name, phone, company, website,
+        experience_level, client_base_size, specialization, 
+        motivation, referral_source, status
+    )
+    VALUES (
+        coach_email, coach_first_name, coach_last_name, coach_phone, 
+        coach_company, coach_website, coach_experience, coach_client_base,
+        coach_specialization, coach_motivation, coach_referral_source, 'pending'
+    )
+    ON CONFLICT (email) 
+    DO UPDATE SET 
+        first_name = EXCLUDED.first_name,
+        last_name = EXCLUDED.last_name,
+        phone = COALESCE(EXCLUDED.phone, coach_profiles.phone),
+        company = COALESCE(EXCLUDED.company, coach_profiles.company),
+        website = COALESCE(EXCLUDED.website, coach_profiles.website),
+        experience_level = COALESCE(EXCLUDED.experience_level, coach_profiles.experience_level),
+        client_base_size = COALESCE(EXCLUDED.client_base_size, coach_profiles.client_base_size),
+        specialization = COALESCE(EXCLUDED.specialization, coach_profiles.specialization),
+        motivation = COALESCE(EXCLUDED.motivation, coach_profiles.motivation),
+        referral_source = COALESCE(EXCLUDED.referral_source, coach_profiles.referral_source),
+        updated_at = NOW()
+    RETURNING id INTO coach_id;
+    
+    RETURN coach_id;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Function to update coach Stripe Connect status
+CREATE OR REPLACE FUNCTION update_coach_stripe_status(
+    coach_id UUID,
+    stripe_account_id VARCHAR(255),
+    payment_status VARCHAR(50),
+    onboarding_completed BOOLEAN DEFAULT FALSE,
+    charges_enabled BOOLEAN DEFAULT FALSE,
+    payouts_enabled BOOLEAN DEFAULT FALSE
+)
+RETURNS BOOLEAN AS $$
+BEGIN
+    UPDATE coach_profiles 
+    SET 
+        stripe_account_id = update_coach_stripe_status.stripe_account_id,
+        payment_status = update_coach_stripe_status.payment_status,
+        onboarding_completed = update_coach_stripe_status.onboarding_completed,
+        charges_enabled = update_coach_stripe_status.charges_enabled,
+        payouts_enabled = update_coach_stripe_status.payouts_enabled,
+        updated_at = NOW()
+    WHERE id = update_coach_stripe_status.coach_id;
+    
+    RETURN FOUND;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Function to calculate and record commission transaction
+CREATE OR REPLACE FUNCTION record_commission_transaction(
+    coach_email VARCHAR(255),
+    purchase_uuid UUID,
+    gross_amount DECIMAL(10,2),
+    commission_rate DECIMAL(5,2) DEFAULT 25.00
+)
+RETURNS UUID AS $$
+DECLARE
+    coach_id UUID;
+    commission_amount DECIMAL(10,2);
+    transaction_id UUID;
+BEGIN
+    -- Get coach ID
+    SELECT id INTO coach_id FROM coach_profiles WHERE email = coach_email AND status = 'active';
+    
+    IF coach_id IS NULL THEN
+        RETURN NULL; -- Coach not found or not active
+    END IF;
+    
+    -- Calculate commission
+    commission_amount := (gross_amount * commission_rate / 100);
+    
+    -- Insert commission transaction
+    INSERT INTO commission_transactions (
+        coach_profile_id,
+        purchase_id,
+        gross_amount,
+        commission_rate,
+        commission_amount,
+        status
+    )
+    VALUES (
+        coach_id,
+        purchase_uuid,
+        gross_amount,
+        commission_rate,
+        commission_amount,
+        'pending'
+    )
+    RETURNING id INTO transaction_id;
+    
+    RETURN transaction_id;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Function to process weekly payouts
+CREATE OR REPLACE FUNCTION create_weekly_payout_batch()
+RETURNS UUID AS $$
+DECLARE
+    batch_id UUID;
+    batch_total DECIMAL(12,2);
+    coach_count INTEGER;
+    transaction_count INTEGER;
+BEGIN
+    -- Calculate totals for pending commissions
+    SELECT 
+        COALESCE(SUM(commission_amount), 0),
+        COUNT(DISTINCT coach_profile_id),
+        COUNT(*)
+    INTO batch_total, coach_count, transaction_count
+    FROM commission_transactions ct
+    JOIN coach_profiles cp ON ct.coach_profile_id = cp.id
+    WHERE ct.status = 'approved' 
+    AND cp.payouts_enabled = TRUE
+    AND ct.commission_amount >= cp.minimum_payout;
+    
+    IF batch_total > 0 THEN
+        -- Create payout batch
+        INSERT INTO payout_batches (
+            batch_date,
+            total_amount,
+            total_coaches,
+            total_transactions,
+            status
+        )
+        VALUES (
+            CURRENT_DATE,
+            batch_total,
+            coach_count,
+            transaction_count,
+            'pending'
+        )
+        RETURNING id INTO batch_id;
+        
+        -- Update commission transactions to reference this batch
+        UPDATE commission_transactions 
+        SET payout_batch_id = batch_id::VARCHAR
+        WHERE status = 'approved'
+        AND coach_profile_id IN (
+            SELECT cp.id FROM coach_profiles cp 
+            WHERE cp.payouts_enabled = TRUE
+        );
+    END IF;
+    
+    RETURN batch_id;
 END;
 $$ LANGUAGE plpgsql;
 

@@ -951,8 +951,24 @@
                                 // Show assessment content
                                 document.getElementById('assessmentContent').style.display = 'block';
                                 
+                                // Clean up header for assessment mode
+                                const header = document.querySelector('.header');
+                                const valuePropsSection = document.querySelector('.value-prop');
+                                const frameworkSection = document.querySelector('.framework-overview');
+                                
+                                // Hide non-essential header content during assessment
+                                if (valuePropsSection) valuePropsSection.style.display = 'none';
+                                if (frameworkSection) frameworkSection.style.display = 'none';
+                                
+                                // Simplify header to focus on assessment
+                                if (header) {
+                                    header.innerHTML = '<h1 style=\"color: white; margin-bottom: 10px; font-size: 2rem;\">TPEAINDEX Leadership Assessment</h1><p style=\"color: white; opacity: 0.9; font-size: 1rem;\">Question 1 of 25</p>';
+                                    header.style.padding = '30px 40px';
+                                    header.style.textAlign = 'center';
+                                }
+                                
                                 // Update banner
-                                document.querySelector('.demo-banner').innerHTML = '🎯 TEST MODE - Question 1 of 25';
+                                document.querySelector('.demo-banner').innerHTML = '🎯 TEST MODE ACTIVE';
                                 
                                 // Initialize assessment state
                                 currentQuestion = 1;
@@ -2587,6 +2603,12 @@
         function updateNavigation() {
             // Update progress indicator
             document.getElementById('currentQ').textContent = currentQuestion;
+            
+            // Update dynamic header if in assessment mode
+            const header = document.querySelector('.header');
+            if (header && header.innerHTML.includes('TPEAINDEX Leadership Assessment')) {
+                header.innerHTML = `<h1 style="color: white; margin-bottom: 10px; font-size: 2rem;">TPEAINDEX Leadership Assessment</h1><p style="color: white; opacity: 0.9; font-size: 1rem;">Question ${currentQuestion} of ${totalQuestions}</p>`;
+            }
             
             // Update button states
             document.getElementById('prevBtn').disabled = (currentQuestion === 1);

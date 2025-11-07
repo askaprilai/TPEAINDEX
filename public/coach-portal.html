@@ -228,8 +228,18 @@
             <p>Scale your coaching business with TPEAINDEX Leadership Assessments</p>
         </div>
 
+        <!-- Quick Access Section -->
+        <div id="quickAccessSection" class="login-form">
+            <h2 style="text-align: center; color: #1e3a8a; margin-bottom: 20px;">Quick Access</h2>
+            <div style="text-align: center; margin-bottom: 30px;">
+                <input type="text" id="quickAccessCode" placeholder="Enter access code" style="padding: 12px; font-size: 1rem; border-radius: 8px; border: 2px solid #e5e7eb; margin-right: 10px; width: 200px;">
+                <button onclick="checkQuickAccess()" style="background: #fbbf24; color: #0f172a; padding: 12px 20px; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; font-weight: 600;">Access Portal</button>
+            </div>
+            <p style="text-align: center; color: #64748b; font-size: 0.9rem;">Use: <strong>COACH123</strong> or <strong>TEST123</strong></p>
+        </div>
+
         <!-- Login Section (shown initially) -->
-        <div id="loginSection">
+        <div id="loginSection" style="display: none;">
             <div class="login-form">
                 <h2 style="text-align: center; color: #1e3a8a; margin-bottom: 30px;">Coach Login</h2>
                 <form id="coachLoginForm">
@@ -397,6 +407,13 @@
             }
         });
 
+        // Make sure only quick access shows on load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('quickAccessSection').style.display = 'block';
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('dashboardSection').style.display = 'none';
+        });
+
         function showDashboard() {
             document.getElementById('loginSection').style.display = 'none';
             document.getElementById('dashboardSection').style.display = 'block';
@@ -479,6 +496,46 @@
                 }
             }
         }
+
+        // Quick access function
+        function checkQuickAccess() {
+            const code = document.getElementById('quickAccessCode').value.trim().toUpperCase();
+            
+            if (code === 'COACH123' || code === 'TEST123') {
+                // Hide access section, show dashboard
+                document.getElementById('quickAccessSection').style.display = 'none';
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('dashboardSection').style.display = 'block';
+                
+                // Set demo coach data
+                coachData = {
+                    name: 'Test Coach',
+                    email: 'coach@test.com',
+                    commissionRate: 25,
+                    totalEarnings: 2847.50,
+                    pendingPayouts: 425.75,
+                    referralLink: 'https://thepositiveeffectindex.com/?ref=COACH123',
+                    clients: [
+                        { name: 'John Smith', email: 'john@company.com', status: 'completed', date: '2024-01-15' },
+                        { name: 'Sarah Johnson', email: 'sarah@business.com', status: 'pending', date: '2024-01-20' },
+                        { name: 'Tech Startup Team', email: 'team@startup.com', status: 'completed', date: '2024-01-18' }
+                    ]
+                };
+                
+                populateDashboard();
+            } else {
+                alert('Invalid access code. Please use COACH123 or TEST123');
+            }
+        }
+
+        // Allow Enter key to submit
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('quickAccessCode').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkQuickAccess();
+                }
+            });
+        });
     </script>
 </body>
 </html>

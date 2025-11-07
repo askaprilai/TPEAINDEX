@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Portal Login - TPEAINDEX</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ea580c 100%);
+            color: #0f172a;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .login-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .login-header p {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .login-form {
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #fbbf24;
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ea580c 100%);
+            color: #0f172a;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+        }
+
+        .demo-credentials {
+            background: #f0f9ff;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #0284c7;
+            margin-top: 20px;
+        }
+
+        .demo-credentials h4 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .demo-credentials p {
+            color: #374151;
+            font-size: 0.9rem;
+            margin: 5px 0;
+        }
+
+        .demo-credentials strong {
+            color: #1e3a8a;
+        }
+
+        .quick-login-btns {
+            display: grid;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .quick-login-btn {
+            background: #e5e7eb;
+            color: #374151;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-login-btn:hover {
+            background: #d1d5db;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .success-message {
+            background: #dcfce7;
+            color: #059669;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .login-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .login-form {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>🚀 Coach Portal</h1>
+            <p>Access your dashboard and resources</p>
+        </div>
+
+        <div class="login-form">
+            <div id="errorMessage" class="error-message"></div>
+            <div id="successMessage" class="success-message"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">
+                    🔑 Access Coach Portal
+                </button>
+            </form>
+
+            <!-- Demo Credentials -->
+            <div class="demo-credentials">
+                <h4>🧪 Test Credentials</h4>
+                <p><strong>Demo Coach:</strong> coach@demo.com</p>
+                <p><strong>Password:</strong> coach123</p>
+                <p><strong>Senior Coach:</strong> april@coach.com</p>
+                <p><strong>Password:</strong> april123</p>
+
+                <div class="quick-login-btns">
+                    <button class="quick-login-btn" onclick="quickLogin('coach@demo.com', 'coach123')">
+                        🎯 Login as Demo Coach
+                    </button>
+                    <button class="quick-login-btn" onclick="quickLogin('april@coach.com', 'april123')">
+                        👑 Login as Senior Coach
+                    </button>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                <p style="color: #64748b; font-size: 0.9rem;">
+                    Don't have an account? 
+                    <a href="coach-signup.html" style="color: #f59e0b; font-weight: 600;">Apply to become a coach</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Demo coach accounts for testing
+        const demoAccounts = {
+            'coach@demo.com': {
+                password: 'coach123',
+                name: 'Demo Coach',
+                id: 'demo-coach-001',
+                status: 'active',
+                commission_rate: 25,
+                stripe_connected: false
+            },
+            'april@coach.com': {
+                password: 'april123',
+                name: 'April Sabral',
+                id: 'april-coach-001',
+                status: 'active',
+                commission_rate: 30,
+                stripe_connected: true
+            }
+        };
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value.trim().toLowerCase();
+            const password = document.getElementById('password').value;
+            
+            loginUser(email, password);
+        });
+
+        function quickLogin(email, password) {
+            document.getElementById('email').value = email;
+            document.getElementById('password').value = password;
+            loginUser(email, password);
+        }
+
+        function loginUser(email, password) {
+            const loginBtn = document.getElementById('loginBtn');
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            
+            // Reset messages
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
+            // Show loading state
+            loginBtn.textContent = '🔄 Logging in...';
+            loginBtn.disabled = true;
+            
+            // Simulate authentication delay
+            setTimeout(() => {
+                const account = demoAccounts[email];
+                
+                if (account && account.password === password) {
+                    // Successful login
+                    successDiv.textContent = `Welcome back, ${account.name}!`;
+                    successDiv.style.display = 'block';
+                    
+                    // Store session data
+                    localStorage.setItem('coachSession', JSON.stringify({
+                        email: email,
+                        name: account.name,
+                        id: account.id,
+                        status: account.status,
+                        commission_rate: account.commission_rate,
+                        stripe_connected: account.stripe_connected,
+                        loginTime: new Date().toISOString()
+                    }));
+                    
+                    // Redirect to coach portal
+                    setTimeout(() => {
+                        window.location.href = 'coach-portal.html';
+                    }, 1500);
+                    
+                } else {
+                    // Failed login
+                    errorDiv.textContent = 'Invalid email or password. Please try again.';
+                    errorDiv.style.display = 'block';
+                    
+                    loginBtn.textContent = '🔑 Access Coach Portal';
+                    loginBtn.disabled = false;
+                }
+            }, 1000);
+        }
+
+        // Check if already logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const session = localStorage.getItem('coachSession');
+            if (session) {
+                const sessionData = JSON.parse(session);
+                const loginTime = new Date(sessionData.loginTime);
+                const now = new Date();
+                const hoursSinceLogin = (now - loginTime) / (1000 * 60 * 60);
+                
+                // Auto-redirect if logged in within last 24 hours
+                if (hoursSinceLogin < 24) {
+                    window.location.href = 'coach-portal.html';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
