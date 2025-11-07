@@ -1093,41 +1093,24 @@
 
         // Individual purchase
         function purchaseIndividual() {
-            stripe.redirectToCheckout({
-                lineItems: [{
-                    price: 'price_individual_97',
-                    quantity: 1
-                }],
-                mode: 'payment',
-                successUrl: window.location.origin + '/success.html',
-                cancelUrl: window.location.origin + '/cancel.html'
-            });
+            window.location.href = 'https://buy.stripe.com/fZucN53MBffBdrxdgfenS00';
         }
 
         // Team purchases
         function purchaseTeam(size) {
-            let priceId;
+            let paymentLink;
             switch(size) {
                 case 5:
-                    priceId = 'price_team5_350';
+                    paymentLink = 'https://buy.stripe.com/4gMdR93MBebx0EL2BBenS01';
                     break;
                 case 10:
-                    priceId = 'price_team10_650';
+                    paymentLink = 'https://buy.stripe.com/4gM6oHbf3ffBgDJccbenS02';
                     break;
                 case 25:
-                    priceId = 'price_team25_1400';
+                    paymentLink = 'https://buy.stripe.com/bJe5kD1Et4AX3QX7VVenS03';
                     break;
             }
-            
-            stripe.redirectToCheckout({
-                lineItems: [{
-                    price: priceId,
-                    quantity: 1
-                }],
-                mode: 'payment',
-                successUrl: window.location.origin + '/success.html',
-                cancelUrl: window.location.origin + '/cancel.html'
-            });
+            window.location.href = paymentLink;
         }
 
         // Company code validation
