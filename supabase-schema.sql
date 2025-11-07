@@ -124,7 +124,7 @@ CREATE TABLE coach_profiles (
     payouts_enabled BOOLEAN DEFAULT FALSE,
     
     -- Commission Settings
-    commission_rate DECIMAL(5,2) DEFAULT 25.00, -- 25% default
+    commission_rate DECIMAL(5,2) DEFAULT 50.00, -- 50% default
     minimum_payout DECIMAL(10,2) DEFAULT 50.00, -- $50 minimum
     payout_schedule VARCHAR(20) DEFAULT 'weekly', -- 'weekly', 'monthly'
     
@@ -638,7 +638,7 @@ CREATE OR REPLACE FUNCTION record_commission_transaction(
     coach_email VARCHAR(255),
     purchase_uuid UUID,
     gross_amount DECIMAL(10,2),
-    commission_rate DECIMAL(5,2) DEFAULT 25.00
+    commission_rate DECIMAL(5,2) DEFAULT 50.00
 )
 RETURNS UUID AS $$
 DECLARE
